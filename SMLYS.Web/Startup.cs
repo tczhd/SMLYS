@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SMLYS.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SMLYS.Infrastructure.Data;
+using SMLYS.Infrastructure.Identity;
 
 namespace SMLYS.Web
 {
@@ -34,9 +35,16 @@ namespace SMLYS.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<SMLYSContext>(options =>
+           options.UseSqlServer(
+               Configuration.GetConnectionString("DefaultConnection")
+               , b => b.MigrationsAssembly("SMLYS.Infrastructure")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")
+                    , b => b.MigrationsAssembly("SMLYS.Infrastructure")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
