@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1FA8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{216E3C95-5A4A-4965-8C92-A173B6D2723D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.Web", "SMLYS.Web\SMLYS.Web.csproj", "{CCF160AF-0177-40E0-891F-463BF26D6E01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.Web", "SMLYS.Web\SMLYS.Web.csproj", "{CCF160AF-0177-40E0-891F-463BF26D6E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.Infrastructure", "SMLYS.Infrastructure\SMLYS.Infrastructure.csproj", "{084EABDF-3D44-492E-9D5D-5CF9C307A078}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.Infrastructure", "SMLYS.Infrastructure\SMLYS.Infrastructure.csproj", "{084EABDF-3D44-492E-9D5D-5CF9C307A078}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.ApplicationCore", "SMLYS.ApplicationCore\SMLYS.ApplicationCore.csproj", "{F0C800F9-5387-496B-9F7A-DA644E071766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.ApplicationCore", "SMLYS.ApplicationCore\SMLYS.ApplicationCore.csproj", "{F0C800F9-5387-496B-9F7A-DA644E071766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.FunctionalTests", "SMLYS.FunctionalTests\SMLYS.FunctionalTests.csproj", "{17219861-1AB4-479C-9783-D1E790F3C56B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.FunctionalTests", "SMLYS.FunctionalTests\SMLYS.FunctionalTests.csproj", "{17219861-1AB4-479C-9783-D1E790F3C56B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.IntegrationTests", "SMLYS.IntegrationTests\SMLYS.IntegrationTests.csproj", "{798C2C5B-B6E4-47F4-A3D1-77534B018826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.IntegrationTests", "SMLYS.IntegrationTests\SMLYS.IntegrationTests.csproj", "{798C2C5B-B6E4-47F4-A3D1-77534B018826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.UnitTests", "SMLYS.UnitTests\SMLYS.UnitTests.csproj", "{45E313D3-1708-4A92-B2D7-D87E2254DC90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.UnitTests", "SMLYS.UnitTests\SMLYS.UnitTests.csproj", "{45E313D3-1708-4A92-B2D7-D87E2254DC90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SMLYS.Infrastructure.Identity
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

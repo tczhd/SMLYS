@@ -1,0 +1,37 @@
+﻿@using SMLYS.Infrastructure.Identity
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> UserManager
+
+<!-- *APP-HEADER* -->
+<header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><img src="~/img/FZBS_Logo.jpg" width="30" height="30" /> 方舟标识</a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item px-3">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">主页</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">关于</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">系统支持</a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav ml-auto">
+        @Html.Partial("_UserNav")
+    </ul>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <button class="navbar-toggler aside-menu-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    }
+</header>
+<!-- /*APP-HEADER* -->

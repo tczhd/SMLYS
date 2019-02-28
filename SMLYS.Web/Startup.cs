@@ -45,8 +45,9 @@ namespace SMLYS.Web
                     Configuration.GetConnectionString("DefaultConnection")
                     , b => b.MigrationsAssembly("SMLYS.Infrastructure")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                  .AddEntityFrameworkStores<ApplicationDbContext>()
+                  .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

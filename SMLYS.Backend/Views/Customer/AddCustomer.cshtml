@@ -1,0 +1,97 @@
+﻿@model SMLYS.ApplicationCore.Models.ViewModels.Customer.RegisterCustomerViewModel
+
+@{
+    ViewData["Title"] = "新客户";
+}
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>用户信息</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="输入用户名" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input type="password" asp-for="Password" class="form-control" placeholder="输入密码" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> 提交</button>
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>重置</button>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>公司信息</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Customer.Company"></label>
+                            <input asp-for="Customer.Company" class="form-control" placeholder="输入公司名称" />
+                            <span asp-validation-for="Customer.Company" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.FirstName"></label>
+                            <input asp-for="Customer.FirstName" class="form-control" placeholder="输入联系人" />
+                            <span asp-validation-for="Customer.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.Address"></label>
+                            <input asp-for="Customer.Address" class="form-control" placeholder="输入地址" />
+                            <span asp-validation-for="Customer.Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.City"></label>
+                            <input asp-for="Customer.City" class="form-control" placeholder="输入城市" />
+                            <span asp-validation-for="Customer.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.StateName"></label>
+                            <input asp-for="Customer.StateName" class="form-control" placeholder="输入省" />
+                            <span asp-validation-for="Customer.StateName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.PhoneNumber"></label>
+                            <input asp-for="Customer.PhoneNumber" class="form-control" placeholder="输入电话" />
+                            <span asp-validation-for="Customer.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Customer.Zip"></label>
+                            <input asp-for="Customer.Zip" class="form-control" placeholder="输入邮编" />
+                            <span asp-validation-for="Customer.Zip" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

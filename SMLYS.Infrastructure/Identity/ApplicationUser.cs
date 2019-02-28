@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace SMLYS.Infrastructure.Identity
 {
-    class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
     }
 }
