@@ -7,8 +7,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="~/images/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" src="~/images/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        <div style="font-size:18px;font-weight:bold;">SMLYS</div>
+        @*<img class="navbar-brand-full" src="~/images/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+        <img class="navbar-brand-minimized" src="~/images/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">*@
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -18,27 +19,20 @@
     <!-- /APP-HEADER-NAV -->
     @if (SignInManager.IsSignedIn(User))
     {
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-list"></i>
-                </a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-location-pin"></i>
-                </a>
-            </li>
-            <!-- USER-NAV -->
-            <partial name="_user-nav" />
-            <!-- /USER-NAV -->
-        </ul>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-md-down-none">
+            <a asp-area="" asp-controller="Home" asp-action="About">BroadWay Clinic</a>
+        </li>
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link" href="#">
+                <i class="icon-bell"></i>
+                <span class="badge badge-pill badge-danger">0</span>
+            </a>
+        </li>
+        <!-- USER-NAV -->
+        <partial name="_user-nav" />
+        <!-- /USER-NAV -->
+    </ul>
 
         <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
             <span class="navbar-toggler-icon"></span>
