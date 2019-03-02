@@ -2,9 +2,8 @@
 
 namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
 {
-    public partial class InvoiceReOccouring
+    public partial class InvoiceReOccouring : BaseEntity
     {
-        public int Id { get; set; }
         public int InvoiceId { get; set; }
         public int InvoiceReOccouringTypeId { get; set; }
         public DateTime StartDateUtc { get; set; }

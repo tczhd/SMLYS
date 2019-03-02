@@ -7,7 +7,7 @@ using SMLYS.ApplicationCore.Entities.UserAggregate;
 
 namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
 {
-    public partial class Invoice
+    public partial class Invoice : BaseEntity
     {
         public Invoice()
         {
@@ -15,7 +15,6 @@ namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
             InvoiceReOccouring = new HashSet<InvoiceReOccouring>();
         }
 
-        public int Id { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
         public DateTime InvoiceDate { get; set; }

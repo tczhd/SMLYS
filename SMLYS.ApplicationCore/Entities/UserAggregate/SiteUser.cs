@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SMLYS.ApplicationCore.Entities.UserAggregate
 {
-    public partial class SiteUser
+    public partial class SiteUser : BaseEntity
     {
         public SiteUser()
         {
@@ -25,7 +25,6 @@ namespace SMLYS.ApplicationCore.Entities.UserAggregate
             PatientUpdatedByNavigation = new HashSet<Patient>();
         }
 
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

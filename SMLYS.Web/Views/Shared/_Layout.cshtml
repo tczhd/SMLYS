@@ -14,19 +14,23 @@
   <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
   <environment include="Development">
-    <!-- Template styles -->
-    <link href="~/css/style.css" rel="stylesheet">
-    <link href="~/vendors/pace-progress/css/pace.css" rel="stylesheet">
-    <!-- styles tweaks -->
-    <link rel="stylesheet" href="~/css/site.css">
+      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+      <!-- Template styles -->
+      <link href="~/css/style.css" rel="stylesheet">
+      <link href="~/vendors/pace-progress/css/pace.css" rel="stylesheet">
+      <!-- styles tweaks -->
+      <link rel="stylesheet" href="~/css/site.css">
   </environment>
 
   <environment exclude="Development">
-    <!-- Template styles -->
-    <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true">
-    <link href="~/vendors/pace-progress/css/pace.min.css" rel="stylesheet" asp-append-version="true">
-    <!-- styles tweaks -->
-    <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true">
+      <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+            asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+      <!-- Template styles -->
+      <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true">
+      <link href="~/vendors/pace-progress/css/pace.min.css" rel="stylesheet" asp-append-version="true">
+      <!-- styles tweaks -->
+      <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true">
   </environment>
 
 </head>

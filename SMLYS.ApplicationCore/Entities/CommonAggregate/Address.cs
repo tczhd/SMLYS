@@ -8,14 +8,13 @@ using SMLYS.ApplicationCore.Entities.UserAggregate;
 
 namespace SMLYS.ApplicationCore.Entities.CommonAggregate
 {
-    public partial class Address
+    public partial class Address : BaseEntity
     {
         public Address()
         {
             Patient = new HashSet<Patient>();
         }
 
-        public int Id { get; set; }
         public int AddressTypeId { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

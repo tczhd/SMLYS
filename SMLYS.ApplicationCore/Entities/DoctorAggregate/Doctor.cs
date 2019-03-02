@@ -7,7 +7,7 @@ using SMLYS.ApplicationCore.Entities.UserAggregate;
 
 namespace SMLYS.ApplicationCore.Entities.DoctorAggregate
 {
-    public partial class Doctor
+    public partial class Doctor : BaseEntity
     {
         public Doctor()
         {
@@ -17,7 +17,6 @@ namespace SMLYS.ApplicationCore.Entities.DoctorAggregate
             SiteUser = new HashSet<SiteUser>();
         }
 
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Title { get; set; }

@@ -3,9 +3,8 @@
 
 namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
 {
-    public partial class InvoiceItem
+    public partial class InvoiceItem : BaseEntity
     {
-        public int Id { get; set; }
         public int InvoiceId { get; set; }
         public int ItemId { get; set; }
         public int Quantity { get; set; }
