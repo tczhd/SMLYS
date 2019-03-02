@@ -13,5 +13,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Repository
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         Task<int> CountAsync(ISpecification<T> spec);
+        void AddOnlyAsync(T entity);
+        Task SaveAllAsync();
     }
 }

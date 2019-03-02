@@ -6,10 +6,13 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Patients\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Services\" />
-    <Folder Include="Specifications\" />
+    <Folder Include="Services\Doctors\" />
+    <Folder Include="Services\Invoices\" />
+    <Folder Include="Specifications\Doctors\" />
+    <Folder Include="Specifications\Invoices\" />
+    <Folder Include="Specifications\Patients\" />
     <Folder Include="ValueObjects\" />
   </ItemGroup>
 
