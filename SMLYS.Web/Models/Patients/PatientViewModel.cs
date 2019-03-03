@@ -9,6 +9,8 @@ namespace SMLYS.Web.Models.Patients
 {
     public class PatientViewModel
     {
+        [Display(Name = "Company")]
+        public string Company { get; set; }
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

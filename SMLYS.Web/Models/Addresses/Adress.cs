@@ -29,6 +29,9 @@ namespace SMLYS.Web.Models.Adresses
         [Required]
         [Display(Name = "Country")]
         public int CountryId { get; set; }
+        [Required]
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
 
         [Display(Name = "Attention To")]
         public string AttentionTo { get; set; }
