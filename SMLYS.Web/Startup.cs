@@ -15,10 +15,10 @@ using SMLYS.Infrastructure.Data;
 using SMLYS.Infrastructure.Identity;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.Infrastructure.Data.Repository.Base;
-//using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Services.Patients;
-using SMLYS.ApplicationCore.Interfaces.Base;
+//using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.Infrastructure.Services.Email;
 
 namespace SMLYS.Web
@@ -72,6 +72,7 @@ namespace SMLYS.Web
 
             services.AddScoped<IPatientService, PatientService>();
             // Add application services.
+
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
