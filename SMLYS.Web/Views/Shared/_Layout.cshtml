@@ -1,12 +1,16 @@
-﻿<!DOCTYPE html>
-
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>SMLYS</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="FZBS">
+    <meta name="author" content="David">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <title>@ViewData["Title"] - SMLYS</title>
+    <!-- Icons -->
     <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/vendors/css/simple-line-icons.min.css" rel="stylesheet">
     <!-- Main styles for this application -->
@@ -19,81 +23,40 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
     <!-- Styles required by this view -->
-    @*@RenderSection("Styles", required: false)*@
-
+    @RenderSection("Styles", required: false)
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden sidebar-lg-show bg-gray-200">
-
-    <!-- APP-HEADER-->
-    <partial name="_app-header" />
-    <!-- /APP-HEADER-->
-
-    <partial name="_CookieConsentPartial" />
-
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+    <!-- *APP-HEADER* -->
+    @Html.Partial("_AppHeader")
+    <!-- /*APP-HEADER* -->
     <div class="app-body">
         <div class="sidebar">
-
-            <!-- SIDEBAR-NAV -->
-            <partial name="_sidebar-nav" />
-            <!-- /SIDEBAR-NAV -->
-
+            <!-- *SIDEBAR-NAV* -->
+            @Html.Partial("_SidebarNav")
+            <!-- /*SIDEBAR-NAV* -->
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
+        <!-- *MAIN CONTENT* -->
         <main class="main">
-
-            <!-- VIEW-BREADCRUMBS -->
-            @RenderSection("Breadcrumbs", required: false)
-            <!-- /VIEW-BREADCRUMBS -->
-
+            <!-- *BREADCRUMB* -->
+            @Html.Partial("_BreadCrumb")
+            <!-- /*BREADCRUMB* -->
+            <!-- *CONTAINER-FLUID* -->
             <div class="container-fluid">
-
-                <!-- VIEW-STYLES -->
-                @RenderSection("Styles", required: false)
-                <!-- /VIEW-STYLES -->
-
-                <div class="animated fadeIn">
-
-                    <!-- VIEW-CONTENT -->
-                    @RenderBody()
-                    <!-- /VIEW-CONTENT -->
-
-                </div>
-
-                <!-- VIEW-MODALS -->
-                @RenderSection("Modals", required: false)
-                <!-- /VIEW-MODALS -->
-
+                <!-- *PAGE* -->
+                @RenderBody()
+                <!-- /*PAGE* -->
             </div>
+            <!-- /*CONTAINER-FLUID* -->
         </main>
-
-        <!-- ASIDE-MENU -->
-        <partial name="_aside-menu" />
-        <!-- /ASIDE-MENU -->
-
+        <!-- /*MAIN CONTENT* -->
+        <!-- *ASIDE-MENU* -->
+        @Html.Partial("_AsideMenu")
+        <!-- /*ASIDE-MENU* -->
     </div>
     <footer class="app-footer">
-        <div>
-            <a href="https://SMLYS.com">SMLYS</a>
-            <span>&copy; 2019 SMLYS Inc.</span>
-        </div>
-        <div class="ml-auto">
-            <span>Powered by</span>
-            <a href="https://SMLYS.com">SMLYS</a>
-        </div>
+        <span><a href="http://www.smlys.com"></a> © 2019 SMLYS.</span>
     </footer>
-
-    @*<environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-    </environment>*@
-
     <!-- Bootstrap and necessary plugins -->
     <script src="~/vendors/js/jquery.min.js"></script>
     <script src="~/vendors/js/popper.min.js"></script>

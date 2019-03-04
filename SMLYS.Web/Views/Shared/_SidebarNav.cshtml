@@ -1,0 +1,108 @@
+﻿<!-- *SIDEBAR-NAV* -->
+<nav class="sidebar-nav">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="index">
+                <i class="nav-icon icon-speedometer"></i> Dashboard
+                <span class="badge badge-primary">NEW</span>
+            </a>
+        </li>
+        <li class="nav-title">Menu</li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-puzzle"></i> Patients
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="NewPatient">
+                        <i class="nav-icon icon-puzzle"></i> New Patient
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Patient" asp-action="Index" asp-route-view="Index">
+                        <i class="nav-icon icon-puzzle"></i> View Patient
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-cursor"></i> Invoices
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="buttons-buttons">
+                        <i class="nav-icon icon-cursor"></i> New Invoice
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="buttons-button-group">
+                        <i class="nav-icon icon-cursor"></i> View Invoice
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-star"></i>  Documents
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="icons-coreui-icons">
+                        <i class="nav-icon icon-star"></i> New Document
+                        <span class="badge badge-success">NEW</span>
+                    </a>
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="icons-flags">
+                        <i class="nav-icon icon-star"></i> Flags
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-bell"></i> Reports
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="notifications-alerts">
+                        <i class="nav-icon icon-bell"></i> Patient Payment Report
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="notifications-badge">
+                        <i class="nav-icon icon-bell"></i> Aged Report
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="nav-title">Settings</li>
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-star"></i> Clinic Info
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="CoreUI" asp-action="Index" asp-route-view="login" target="_top">
+                        <i class="nav-icon icon-star"></i> Other Settings
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item mt-auto">
+            <a class="nav-link nav-link-success" href="https://smlys.com" target="_top">
+                <i class="nav-icon icon-cloud-download"></i> SMLYS Info
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-danger" href="https://smlys.com" target="_top">
+                <i class="nav-icon icon-layers"></i> Try
+                <strong>SMLYS</strong>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- /*SIDEBAR-NAV* -->
