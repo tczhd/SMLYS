@@ -1,5 +1,24 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
 
+h2 {
+    margin-top: 10px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
@@ -19,7 +38,6 @@
     }
 }
 
-.container-fluid > .animated {
-    margin-top: 24px !important;
+.nav-pills .nav-link.active > a {
+    color: whitesmoke !important;
 }
-

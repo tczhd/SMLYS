@@ -2,126 +2,109 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>@ViewData["Title"] - SMLYS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SMLYS</title>
 
-  <!-- Icons-->
-  <link href="~/lib/@@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-  <link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-  <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-
-  <environment include="Development">
-      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-      <!-- Template styles -->
-      <link href="~/css/style.css" rel="stylesheet">
-      <link href="~/vendors/pace-progress/css/pace.css" rel="stylesheet">
-      <!-- styles tweaks -->
-      <link rel="stylesheet" href="~/css/site.css">
-  </environment>
-
-  <environment exclude="Development">
-      <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-            asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-      <!-- Template styles -->
-      <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true">
-      <link href="~/vendors/pace-progress/css/pace.min.css" rel="stylesheet" asp-append-version="true">
-      <!-- styles tweaks -->
-      <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true">
-  </environment>
+    <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/vendors/css/simple-line-icons.min.css" rel="stylesheet">
+    <!-- Main styles for this application -->
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/style.css">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </environment>
+    <!-- Styles required by this view -->
+    @*@RenderSection("Styles", required: false)*@
 
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show bg-gray-200">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden sidebar-lg-show bg-gray-200">
 
-  <!-- APP-HEADER-->
-  <partial name="_app-header" />
-  <!-- /APP-HEADER-->
+    <!-- APP-HEADER-->
+    <partial name="_app-header" />
+    <!-- /APP-HEADER-->
 
-  <partial name="_CookieConsentPartial" />
+    <partial name="_CookieConsentPartial" />
 
-  <div class="app-body">
-    <div class="sidebar">
+    <div class="app-body">
+        <div class="sidebar">
 
-      <!-- SIDEBAR-NAV -->
-      <partial name="_sidebar-nav" />
-      <!-- /SIDEBAR-NAV -->
+            <!-- SIDEBAR-NAV -->
+            <partial name="_sidebar-nav" />
+            <!-- /SIDEBAR-NAV -->
 
-      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-    </div>
-    <main class="main">
-
-      <!-- VIEW-BREADCRUMBS -->
-      @RenderSection("Breadcrumbs", required: false)
-      <!-- /VIEW-BREADCRUMBS -->
-
-      <div class="container-fluid">
-
-        <!-- VIEW-STYLES -->
-        @RenderSection("Styles", required: false)
-        <!-- /VIEW-STYLES -->
-
-        <div class="animated fadeIn">
-
-          <!-- VIEW-CONTENT -->
-          @RenderBody()
-          <!-- /VIEW-CONTENT -->
-
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
+        <main class="main">
 
-        <!-- VIEW-MODALS -->
-        @RenderSection("Modals", required: false)
-        <!-- /VIEW-MODALS -->
+            <!-- VIEW-BREADCRUMBS -->
+            @RenderSection("Breadcrumbs", required: false)
+            <!-- /VIEW-BREADCRUMBS -->
 
-      </div>
-    </main>
+            <div class="container-fluid">
 
-    <!-- ASIDE-MENU -->
-    <partial name="_aside-menu" />
-    <!-- /ASIDE-MENU -->
+                <!-- VIEW-STYLES -->
+                @RenderSection("Styles", required: false)
+                <!-- /VIEW-STYLES -->
 
-  </div>
-  <footer class="app-footer">
-    <div>
-      <a href="https://SMLYS.com">SMLYS</a>
-      <span>&copy; 2019 SMLYS Inc.</span>
+                <div class="animated fadeIn">
+
+                    <!-- VIEW-CONTENT -->
+                    @RenderBody()
+                    <!-- /VIEW-CONTENT -->
+
+                </div>
+
+                <!-- VIEW-MODALS -->
+                @RenderSection("Modals", required: false)
+                <!-- /VIEW-MODALS -->
+
+            </div>
+        </main>
+
+        <!-- ASIDE-MENU -->
+        <partial name="_aside-menu" />
+        <!-- /ASIDE-MENU -->
+
     </div>
-    <div class="ml-auto">
-        <span>Powered by</span>
-        <a href="https://SMLYS.com">SMLYS</a>
-    </div>
-  </footer>
+    <footer class="app-footer">
+        <div>
+            <a href="https://SMLYS.com">SMLYS</a>
+            <span>&copy; 2019 SMLYS Inc.</span>
+        </div>
+        <div class="ml-auto">
+            <span>Powered by</span>
+            <a href="https://SMLYS.com">SMLYS</a>
+        </div>
+    </footer>
 
-  <environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-  </environment>
-  <environment exclude="Development">
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery"
-            crossorigin="anonymous"
-            integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-    </script>
-  </environment>
+    @*<environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+    </environment>*@
 
-  <script src="~/lib/popper.js/dist/umd/popper.min.js"></script>
-  <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="~/lib/pace-progress/pace.min.js"></script>
-  <script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-  <script src="~/lib/@@coreui/coreui/dist/js/coreui.min.js"></script>
-
-  <environment include="Development">
-    <script src="~/js/site.js" asp-append-version="true"></script>
-  </environment>
-  <environment exclude="Development">
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-  </environment>
-
-  <!-- VIEW-SCRIPTS -->
-  @RenderSection("Scripts", required: false)
-  <!-- /VIEW-SCRIPTS -->
-
+    <!-- Bootstrap and necessary plugins -->
+    <script src="~/vendors/js/jquery.min.js"></script>
+    <script src="~/vendors/js/popper.min.js"></script>
+    <script src="~/vendors/js/bootstrap.min.js"></script>
+    <script src="~/vendors/js/pace.min.js"></script>
+    <!-- Plugins and scripts required by all views -->
+    <script src="~/vendors/js/Chart.min.js"></script>
+    <!-- CoreUI main scripts -->
+    <script src="~/js/app.js"></script>
+    <!-- Plugins and scripts required by this views -->
+    <!-- Custom scripts required by this view -->
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
