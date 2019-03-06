@@ -8,8 +8,8 @@
 
 <div class="animated fadeIn">
     <form method="post" class="form-horizontal">
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="row patients">
+            <div class="col-sm-6 patient">
                 <div class="card">
                     <div class="card-header">
                         <strong>Add Patient</strong>
@@ -118,16 +118,14 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" onclick="PopulateAddModal()" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-dot-circle-o"></i> Submit
-                        </button>
-                        @*<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>*@
+                        <button type="button" class="btn btn-sm btn-primary" onclick="PopulateAddModal()" data-toggle="modal" data-target="#primaryModal">
+                            <i class="fa fa-dot-circle-o"></i> Submit </button>
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            @*<div class="col-sm-6 patient">
                 <div class="card">
                     <div class="card-header">
                         <strong>Family Member / Dependent</strong>
@@ -168,7 +166,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </form>
 </div>
