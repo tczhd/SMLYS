@@ -21,11 +21,13 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.Clinic", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
-                    b.Property<int>("CreatedBy");
+                    b.Property<int?>("CreatedBy");
 
                     b.Property<DateTime>("CreatedDateUtc")
                         .HasColumnName("CreatedDateUTC")
@@ -64,7 +66,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.CommonAggregate.Address", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address1")
                         .IsRequired()
@@ -118,7 +122,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.CommonAggregate.AddressType", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddressType1")
                         .IsRequired()
@@ -132,7 +138,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.DoctorAggregate.Doctor", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -191,7 +199,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.DoctorAggregate.DoctorSpecality", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DoctorId");
 
@@ -208,7 +218,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.InvoiceAggregate.Invoice", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("AmountPaid")
                         .HasColumnType("decimal(18, 6)");
@@ -268,7 +280,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.InvoiceAggregate.InvoiceItem", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("InvoiceId");
 
@@ -302,7 +316,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.InvoiceAggregate.InvoiceReOccouring", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -329,7 +345,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.InvoiceAggregate.InvoiceReOccouringType", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ReOccouringName")
                         .IsRequired()
@@ -342,7 +360,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.Item", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -375,7 +395,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.PatientAggregate.Family", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -388,7 +410,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.PatientAggregate.Patient", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AddressId");
 
@@ -509,7 +533,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.SettingsAggregate.Specality", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -522,7 +548,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.SettingsAggregate.Tax", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -582,7 +610,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SMLYS.ApplicationCore.Entities.UserAggregate.SiteUser", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Active")
                         .IsRequired()

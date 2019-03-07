@@ -60,69 +60,66 @@ function PopulateAddModal() {
 
     var x = 1;
 
-    //var jsonData = JSON.stringify({
-    //    ProductId: productId,
-    //    Quantity: productQuantity,
-    //    QuoteRequestProductCustomFieldData: quoteRequestProductCustomFieldData
-    //});
+    var jsonData = JSON.stringify(jsonPatients);
 
-    //$.ajax({
-    //    type: "POST",
-    //    url: "/api/Quote",
-    //    contentType: dataType,
-    //    dataType: "json",
-    //    data: jsonData,
-    //    success: function (data) {
+    $.ajax({
+        type: "POST",
+        url: "/api/Quote",
+        contentType: dataType,
+        dataType: "json",
+        data: jsonData,
+        success: function (data) {
 
-    //        var bodyContent = GetQuoteDetail(data);
-    //        modalBody.html(bodyContent);
+            alert('OK');
+            //var bodyContent = GetQuoteDetail(data);
+            //modalBody.html(bodyContent);
 
-    //        var printQuote = modalBody.find("button[name='PrintQuote']");
-    //        $(printQuote).click(function () {
-    //            var buttonSection = modalBody.find('div.button-section');
-    //            buttonSection.hide();
-    //            printData(modalBody.html());
-    //            buttonSection.show();
-    //        });
+            //var printQuote = modalBody.find("button[name='PrintQuote']");
+            //$(printQuote).click(function () {
+            //    var buttonSection = modalBody.find('div.button-section');
+            //    buttonSection.hide();
+            //    printData(modalBody.html());
+            //    buttonSection.show();
+            //});
 
-    //        var addToCart = modalBody.find("button[name='AddToCart']");
-    //        $(addToCart).click(function () {
-    //            $.ajax({
-    //                type: "POST",
-    //                url: "/Basket/AddToBasket",
-    //                contentType: dataType,
-    //                dataType: "json",
-    //                data: JSON.stringify(data),
-    //                success: function (resultData) {
-    //                    window.location.href = "/Basket";
-    //                }, //End of AJAX Success function  
-    //                failure: function (resultData) {
-    //                    alert(resultData.message);
-    //                }, //End of AJAX failure function  
-    //                error: function (resultData) {
-    //                    alert(resultData.message);
-    //                } //End of AJAX error function  
-    //            });
-    //        });
+            //var addToCart = modalBody.find("button[name='AddToCart']");
+            //$(addToCart).click(function () {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Basket/AddToBasket",
+            //        contentType: dataType,
+            //        dataType: "json",
+            //        data: JSON.stringify(data),
+            //        success: function (resultData) {
+            //            window.location.href = "/Basket";
+            //        }, //End of AJAX Success function  
+            //        failure: function (resultData) {
+            //            alert(resultData.message);
+            //        }, //End of AJAX failure function  
+            //        error: function (resultData) {
+            //            alert(resultData.message);
+            //        } //End of AJAX error function  
+            //    });
+            //});
 
 
-    //        var checkOut = modalBody.find("button[name='CheckOut']");
-    //        checkOut.hide();
-    //        $(checkOut).click(function () {
-    //            alert("建设中...");
-    //        });
+            //var checkOut = modalBody.find("button[name='CheckOut']");
+            //checkOut.hide();
+            //$(checkOut).click(function () {
+            //    alert("建设中...");
+            //});
 
-    //        console.log(data);
-    //    }, //End of AJAX Success function  
+            //console.log(data);
+        }, //End of AJAX Success function  
 
-    //    failure: function (data) {
-    //        alert(data.responseText);
-    //    }, //End of AJAX failure function  
-    //    error: function (data) {
-    //        alert(data.responseText);
-    //    } //End of AJAX error function  
+        failure: function (data) {
+            alert(data.responseText);
+        }, //End of AJAX failure function  
+        error: function (data) {
+            alert(data.responseText);
+        } //End of AJAX error function  
 
-    //});
+    });
 }
 
 

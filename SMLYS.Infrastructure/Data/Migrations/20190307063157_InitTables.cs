@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SMLYS.Infrastructure.Data.Migrations
@@ -11,13 +12,39 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "AddressType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddressType = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddressType", x => x.Id);
                 });
+
+            //migrationBuilder.CreateTable(
+            //    name: "AspNetUsers",
+            //    columns: table => new
+            //    {
+            //        Id = table.Column<string>(nullable: false),
+            //        UserName = table.Column<string>(nullable: true),
+            //        NormalizedUserName = table.Column<string>(nullable: true),
+            //        Email = table.Column<string>(nullable: true),
+            //        NormalizedEmail = table.Column<string>(nullable: true),
+            //        EmailConfirmed = table.Column<bool>(nullable: false),
+            //        PasswordHash = table.Column<string>(nullable: true),
+            //        SecurityStamp = table.Column<string>(nullable: true),
+            //        ConcurrencyStamp = table.Column<string>(nullable: true),
+            //        PhoneNumber = table.Column<string>(nullable: true),
+            //        PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+            //        TwoFactorEnabled = table.Column<bool>(nullable: false),
+            //        LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+            //        LockoutEnabled = table.Column<bool>(nullable: false),
+            //        AccessFailedCount = table.Column<int>(nullable: false)
+            //    },
+            //    constraints: table =>
+            //    {
+            //        table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+            //    });
 
             migrationBuilder.CreateTable(
                 name: "Country",
@@ -37,7 +64,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Family",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -49,7 +77,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "InvoiceReOccouringType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ReOccouringName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -97,7 +126,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Specality",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -109,7 +139,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Tax",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TaxName = table.Column<string>(maxLength: 30, nullable: false),
                     TaxRate = table.Column<decimal>(type: "decimal(18, 6)", nullable: false),
                     RegionId = table.Column<int>(nullable: true),
@@ -125,7 +156,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Patient",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
@@ -167,7 +199,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Address",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddressTypeId = table.Column<int>(nullable: false),
                     Address1 = table.Column<string>(maxLength: 150, nullable: false),
                     Address2 = table.Column<string>(maxLength: 50, nullable: true),
@@ -205,10 +238,77 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SiteUser",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 250, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", fixedLength: true, maxLength: 450, nullable: false),
+                    SiteUserLevelId = table.Column<int>(nullable: false),
+                    Active = table.Column<string>(fixedLength: true, maxLength: 10, nullable: false),
+                    Note = table.Column<string>(maxLength: 300, nullable: true),
+                    ClinicId = table.Column<int>(nullable: false),
+                    DoctorId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SiteUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SiteUser_SiteUserLevel",
+                        column: x => x.SiteUserLevelId,
+                        principalTable: "SiteUserLevel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SiteUser_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clinic",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    Email = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    Active = table.Column<bool>(nullable: false),
+                    CreatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CreatedBy = table.Column<int>(nullable: true),
+                    UpdatedBy = table.Column<int>(nullable: true),
+                    Note = table.Column<string>(unicode: false, maxLength: 500, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clinic", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clinic_SiteUser_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Clinic_SiteUser_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
@@ -227,13 +327,63 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctor", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Doctor_Clinic",
+                        column: x => x.ClinicId,
+                        principalTable: "Clinic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Doctor_SiteUser_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Doctor_SiteUser_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 150, nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: true),
+                    Cost = table.Column<decimal>(type: "decimal(18, 6)", nullable: false),
+                    Active = table.Column<bool>(nullable: false),
+                    UpdatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    ClinicId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Item_Clinic",
+                        column: x => x.ClinicId,
+                        principalTable: "Clinic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Item_SiteUser_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DoctorSpecality",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     SpecalityId = table.Column<int>(nullable: false)
                 },
@@ -258,7 +408,8 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 name: "Invoice",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PatientId = table.Column<int>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false),
                     InvoiceDate = table.Column<DateTime>(type: "datetime", nullable: false),
@@ -280,6 +431,18 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_Invoice", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Invoice_Clinic",
+                        column: x => x.ClinicId,
+                        principalTable: "Clinic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Invoice_SiteUser_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "SiteUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Invoice_Doctor",
                         column: x => x.DoctorId,
                         principalTable: "Doctor",
@@ -291,59 +454,20 @@ namespace SMLYS.Infrastructure.Data.Migrations
                         principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InvoiceReOccouring",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    InvoiceId = table.Column<int>(nullable: false),
-                    InvoiceReOccouringTypeId = table.Column<int>(nullable: false),
-                    StartDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
-                    EndDateUTC = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Active = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InvoiceReOccouring", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceReOccouring_Invoice",
-                        column: x => x.InvoiceId,
-                        principalTable: "Invoice",
+                        name: "FK_Invoice_SiteUser_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "SiteUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_InvoiceReOccouring_InvoiceReOccouringType",
-                        column: x => x.InvoiceReOccouringTypeId,
-                        principalTable: "InvoiceReOccouringType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Item",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 150, nullable: false),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Cost = table.Column<decimal>(type: "decimal(18, 6)", nullable: false),
-                    Active = table.Column<bool>(nullable: false),
-                    UpdatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedBy = table.Column<int>(nullable: false),
-                    ClinicId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Item", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "InvoiceItem",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     InvoiceId = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
@@ -371,65 +495,30 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SiteUser",
+                name: "InvoiceReOccouring",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(maxLength: 250, nullable: true),
-                    UserId = table.Column<string>(fixedLength: true, maxLength: 128, nullable: false),
-                    SiteUserLevelId = table.Column<int>(nullable: false),
-                    Active = table.Column<string>(fixedLength: true, maxLength: 10, nullable: false),
-                    Note = table.Column<string>(maxLength: 300, nullable: true),
-                    ClinicId = table.Column<int>(nullable: false),
-                    DoctorId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    InvoiceId = table.Column<int>(nullable: false),
+                    InvoiceReOccouringTypeId = table.Column<int>(nullable: false),
+                    StartDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
+                    EndDateUTC = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Active = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SiteUser", x => x.Id);
+                    table.PrimaryKey("PK_InvoiceReOccouring", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SiteUser_Doctor",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctor",
+                        name: "FK_InvoiceReOccouring_Invoice",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoice",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SiteUser_SiteUserLevel",
-                        column: x => x.SiteUserLevelId,
-                        principalTable: "SiteUserLevel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clinic",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    Email = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
-                    Active = table.Column<bool>(nullable: false),
-                    CreatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UpdatedDateUTC = table.Column<DateTime>(type: "datetime", nullable: true),
-                    CreatedBy = table.Column<int>(nullable: false),
-                    UpdatedBy = table.Column<int>(nullable: true),
-                    Note = table.Column<string>(unicode: false, maxLength: 500, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clinic", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clinic_SiteUser_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "SiteUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Clinic_SiteUser_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "SiteUser",
+                        name: "FK_InvoiceReOccouring_InvoiceReOccouringType",
+                        column: x => x.InvoiceReOccouringTypeId,
+                        principalTable: "InvoiceReOccouringType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -599,6 +688,11 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 table: "SiteUser",
                 column: "SiteUserLevelId");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_SiteUser_UserId",
+                table: "SiteUser",
+                column: "UserId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Patient_SiteUser_CreatedBy",
                 table: "Patient",
@@ -656,74 +750,18 @@ namespace SMLYS.Infrastructure.Data.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Doctor_SiteUser_CreatedBy",
-                table: "Doctor",
-                column: "CreatedBy",
-                principalTable: "SiteUser",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Doctor_SiteUser_UpdatedBy",
-                table: "Doctor",
-                column: "UpdatedBy",
-                principalTable: "SiteUser",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Doctor_Clinic",
-                table: "Doctor",
-                column: "ClinicId",
-                principalTable: "Clinic",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Invoice_SiteUser_CreatedBy",
-                table: "Invoice",
-                column: "CreatedBy",
-                principalTable: "SiteUser",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Invoice_SiteUser_UpdatedBy",
-                table: "Invoice",
-                column: "UpdatedBy",
-                principalTable: "SiteUser",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Invoice_Clinic",
-                table: "Invoice",
-                column: "ClinicId",
-                principalTable: "Clinic",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Item_SiteUser_UpdatedBy",
-                table: "Item",
-                column: "UpdatedBy",
-                principalTable: "SiteUser",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Item_Clinic",
-                table: "Item",
-                column: "ClinicId",
-                principalTable: "Clinic",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_SiteUser_Clinic",
                 table: "SiteUser",
                 column: "ClinicId",
                 principalTable: "Clinic",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_SiteUser_Doctor",
+                table: "SiteUser",
+                column: "DoctorId",
+                principalTable: "Doctor",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -799,6 +837,9 @@ namespace SMLYS.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "SiteUserLevel");
+
+            //migrationBuilder.DropTable(
+            //    name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Clinic");

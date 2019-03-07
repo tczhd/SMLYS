@@ -53,6 +53,7 @@ namespace SMLYS.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.HasAnnotation("ProductVersion", "3.0.0-preview.19074.3");
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.SiteUsers)
@@ -63,7 +64,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Address>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Address1)
                     .IsRequired()
@@ -116,7 +118,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<AddressType>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AddressType1)
                     .IsRequired()
@@ -126,7 +129,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Clinic>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedDateUtc)
                     .HasColumnName("CreatedDateUTC")
@@ -164,6 +168,7 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Country>(entity =>
             {
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Iso2)
@@ -176,7 +181,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Doctor>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedDateUtc)
                     .HasColumnName("CreatedDateUTC")
@@ -228,7 +234,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<DoctorSpecality>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.DoctorSpecality)
@@ -245,7 +252,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Family>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -254,7 +262,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Invoice>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AmountPaid).HasColumnType("decimal(18, 6)");
 
@@ -304,7 +313,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<InvoiceItem>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Note).HasMaxLength(500);
 
@@ -331,7 +341,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<InvoiceReOccouring>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.EndDateUtc)
                     .HasColumnName("EndDateUTC")
@@ -356,7 +367,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<InvoiceReOccouringType>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ReOccouringName)
                     .IsRequired()
@@ -365,7 +377,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Item>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Cost).HasColumnType("decimal(18, 6)");
 
@@ -393,7 +406,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Patient>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedDateUtc)
                     .HasColumnName("CreatedDateUTC")
@@ -485,7 +499,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<SiteUser>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Active)
                     .IsRequired()
@@ -539,7 +554,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Specality>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -548,7 +564,8 @@ namespace SMLYS.Infrastructure.Data
 
             modelBuilder.Entity<Tax>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.TaxName)
                     .IsRequired()
