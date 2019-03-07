@@ -24,18 +24,18 @@ function PopulateAddModal() {
 
     var jsonPatients = [];
 
-    var patients = $('div.patients');
-    var patientArray = patients.children('.patient');
+    var patients = $('div.patients > div.patient'); 
 
-    $.each(patientArray, function (index, patient) {
+    patients.each( function () {
 
-        var email = patient.find('input[id=Email]').val();
+        var patient = $(this);
+        var email = patient.find("input[id=Email]").val();
         var firstName = patient.find('input[id=FirstName]').val();
         var lastName = patient.find('input[id=LastName]').val();
         var company = patient.find('input[id=Company]').val();
         var address1 = patient.find('input[id=Address_Address1]').val();
         var address2 = patient.find('input[id=Address_Address2]').val();
-        var city = patient.find('input[id=City]').val();
+        var city = patient.find('input[id=Address_City]').val();
         var countryId = patient.find('select[id=selectCountry]').val();
         var stateId = patient.find('select[id=selectState]').val();
         var postalCode = patient.find('input[id=Address_PostalCode]').val();
