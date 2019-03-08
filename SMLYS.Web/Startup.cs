@@ -20,6 +20,8 @@ using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Services.Patients;
 //using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.Infrastructure.Services.Email;
+using SMLYS.Web.Interfaces.Api;
+using SMLYS.Web.Services.Api;
 
 namespace SMLYS.Web
 {
@@ -69,11 +71,10 @@ namespace SMLYS.Web
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
-
-            services.AddScoped<IPatientService, PatientService>();
-            // Add application services.
-
             services.AddTransient<IEmailSender, EmailSender>();
+
+            ConfigureApplicationService(services);
+            // Add application services.
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -104,6 +105,11 @@ namespace SMLYS.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void ConfigureApplicationService(IServiceCollection services)
+        {
+            services.AddScoped<IPatientApiService, PatientApiService>();
         }
     }
 }

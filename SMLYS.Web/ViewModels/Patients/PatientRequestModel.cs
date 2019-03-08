@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace SMLYS.Web.Models.Patients
+namespace SMLYS.Web.ViewModels.Patients
 {
     [DataContract(Name ="patient")]
     public class PatientRequestModel
@@ -33,3 +33,5 @@ namespace SMLYS.Web.Models.Patients
         public string Phone { get; set; }
     }
 }
+
+

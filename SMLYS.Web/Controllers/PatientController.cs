@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SMLYS.Web.Models.Patients;
 
 namespace SMLYS.Web.Controllers
 {
@@ -20,14 +16,5 @@ namespace SMLYS.Web.Controllers
             return View(view);
         }
 
-        [Route("api/NewPatient")]
-        [HttpPost]
-        public IActionResult Post([FromBody]PatientRequestModel request)
-        {
-            //var quoteResult = _quoteService.Quote(quoteRequest);
-            //var data = Json(quoteResult);
-
-            return Json("");
-        }
     }
 }

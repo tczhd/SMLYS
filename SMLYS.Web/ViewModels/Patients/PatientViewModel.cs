@@ -1,11 +1,11 @@
-﻿using SMLYS.Web.Models.Adresses;
+﻿using SMLYS.Web.ViewModels.Adresses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMLYS.Web.Models.Patients
+namespace SMLYS.Web.ViewModels.Patients
 {
     public class PatientViewModel
     {
