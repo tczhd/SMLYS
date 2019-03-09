@@ -16,7 +16,12 @@ namespace SMLYS.Web.Controllers.Api
     [Route("api/[controller]")]
     public class PatientController : Controller
     {
-        private readonly IPatientApiService PatientApiService;
+        private readonly IPatientApiService _patientApiService;
+
+        public PatientController(IPatientApiService patientApiService)
+        {
+            _patientApiService = patientApiService;
+        }
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -33,9 +38,10 @@ namespace SMLYS.Web.Controllers.Api
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]List<PatientRequestModel> requests)
+        public IActionResult Post([FromBody]List<PatientRequestModel> patients)
         {
-            return Json("");
+            var result = _patientApiService.CreateNewPatient(patients);
+            return Json(result);
         }
 
         // PUT api/<controller>/5

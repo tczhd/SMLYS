@@ -119,7 +119,6 @@ namespace SMLYS.Infrastructure.Data
             modelBuilder.Entity<AddressType>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AddressType1)
                     .IsRequired()

@@ -10,18 +10,32 @@ namespace SMLYS.ApplicationCore.Services.Patients
 {
     public class PatientService : IPatientService
     {
-        private readonly IAsyncRepository<Patient> _patientRepository;
+        private readonly IRepository<Patient> _patientRepository;
 
-        public PatientService(IAsyncRepository<Patient> patientRepository)
+        public PatientService(IRepository<Patient> patientRepository)
         {
             _patientRepository = patientRepository;
         }
 
-        public async Task<Patient> CreatePatientAsync(Patient patient)
+        public List<Patient> CreatePatientAsync(List<Patient> patients)
         {
-            patient.Address = new Entities.CommonAggregate.Address();
+            try
+            {
+                foreach (Patient patient in patients)
+                {
+                    _patientRepository.Add(patient);
+                }
 
-            throw new NotImplementedException();
+               // await _patientRepository.SaveAllAsync();
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message;
+            }
+
+            return patients;
         }
+
+
     }
 }

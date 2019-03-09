@@ -73,7 +73,8 @@ namespace SMLYS.Web
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddTransient<IEmailSender, EmailSender>();
 
-            ConfigureApplicationService(services);
+            ConfigureApplicatiojnService(services);
+            ConfigureWebService(services);
             // Add application services.
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -107,9 +108,14 @@ namespace SMLYS.Web
             });
         }
 
-        private void ConfigureApplicationService(IServiceCollection services)
+        private void ConfigureWebService(IServiceCollection services)
         {
             services.AddScoped<IPatientApiService, PatientApiService>();
+        }
+
+        private void ConfigureApplicatiojnService(IServiceCollection services)
+        {
+            services.AddScoped<IPatientService, PatientService>();
         }
     }
 }

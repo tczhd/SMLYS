@@ -8,6 +8,6 @@ namespace SMLYS.Web.Interfaces.Api
 {
     public interface IPatientApiService
     {
-        Task<PatientResultViewModel> CreateNewPatient(List<PatientRequestModel> Patients);
+        PatientResultViewModel CreateNewPatient(List<PatientRequestModel> Patients);
     }
 }

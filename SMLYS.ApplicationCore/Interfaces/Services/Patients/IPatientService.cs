@@ -8,6 +8,6 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Patients
 {
     public interface IPatientService
     {
-        Task<Patient> CreatePatientAsync(Patient patient);
+        List<Patient> CreatePatientAsync(List<Patient> patient);
     }
 }
