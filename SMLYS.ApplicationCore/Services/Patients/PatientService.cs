@@ -43,18 +43,13 @@ namespace SMLYS.ApplicationCore.Services.Patients
         {
             var patientSpecification = new PatientSpecification(searchPatientParameter[0].SearchContent);
 
-            //foreach (var parameter in searchPatientParameter)
-            //{
-            //    if (parameter.SearchType == "first_name")
-            //    {
-            //        patientSpecification.AddFirstName(parameter.SearchContent);
-            //    }
-            //}
-
-            //if (patientSpecification.Criteria == null)
-            //{
-            //    return _patientRepository.ListAll().ToList();
-            //}
+            foreach (var parameter in searchPatientParameter)
+            {
+                if (parameter.SearchType == "first_name")
+                {
+                    patientSpecification.AddFirstName(parameter.SearchContent);
+                }
+            }
 
             return  _patientRepository.List(patientSpecification).ToList();
         }

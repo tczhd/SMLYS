@@ -80,7 +80,10 @@ namespace SMLYS.Web.Services.Api
             }).ToList();
             var data = _patientService.SearchPatientAsync(searchPatientFilter);
 
-            SearchPatientResultViewModel result = new SearchPatientResultViewModel();
+            SearchPatientResultViewModel result = new SearchPatientResultViewModel() {
+                Success = true,
+                Message = "Search patients success. "
+            };
 
             result.PatientDetail = data.Select(p => new SearchPatientDetailResultViewModel {
                 PatientAddress = $"{p.Address.Address1}, {p.Address.City} {p.Address.RegionNavigation.Name}" ,

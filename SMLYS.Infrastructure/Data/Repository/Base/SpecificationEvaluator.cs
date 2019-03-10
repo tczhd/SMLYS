@@ -12,9 +12,11 @@ namespace SMLYS.Infrastructure.Data.Repository.Base
             var query = inputQuery;
 
             // modify the IQueryable using the specification's criteria expression
-            if (specification.Criteria != null)
+            if (specification.Criterias.Any())
             {
-                query = query.Where(specification.Criteria);
+                foreach (var expression in specification.Criterias)
+                    query = query.Where(expression);
+               // query = query.Where(specification.Criterias);
             }
 
             // Includes all expression-based includes

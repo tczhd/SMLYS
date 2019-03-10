@@ -8,11 +8,11 @@ namespace SMLYS.ApplicationCore.Specifications.Base
 {
     public abstract class BaseSpecification<T> : ISpecification<T>
     {
-        protected BaseSpecification(Expression<Func<T, bool>> criteria)
+        protected BaseSpecification()
         {
-            Criteria = criteria;
+            Criterias = new List<Expression<Func<T, bool>>>();
         }
-        public Expression<Func<T, bool>> Criteria { get; }
+        public List<Expression<Func<T, bool>>> Criterias { get; }
         public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
         public List<string> IncludeStrings { get; } = new List<string>();
         public Expression<Func<T, object>> OrderBy { get; private set; }
@@ -22,6 +22,10 @@ namespace SMLYS.ApplicationCore.Specifications.Base
         public int Skip { get; private set; }
         public bool isPagingEnabled { get; private set; } = false;
 
+        protected virtual void AddCriteria(Expression<Func<T, bool>> criteria)
+        {
+            Criterias.Add(criteria);
+        }
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {
             Includes.Add(includeExpression);

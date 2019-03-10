@@ -8,6 +8,6 @@ namespace SMLYS.Web.ViewModels.Base
         [DataMember(Name = "success")]
         public bool Success { get; set; }
         [DataMember(Name = "message")]
-        public bool Message { get; set; }
+        public string Message { get; set; }
     }
 }

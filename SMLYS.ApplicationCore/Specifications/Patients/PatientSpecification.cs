@@ -9,7 +9,7 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
 {
     public class PatientSpecification : BaseSpecification<Patient>
     {
-        public PatientSpecification(string name) : base(p => p.FirstName == name)
+        public PatientSpecification(string name) : base()
         {
             AddInclude(b => b.Address);
             AddInclude($"{nameof(Patient.Address)}.{nameof(Address.Country)}");
@@ -18,7 +18,7 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
 
         public void AddFirstName(string firstName)
         {
-            AddInclude(q => q.FirstName == firstName);
+            AddCriteria(q => q.FirstName == firstName);
         }
     }
 }

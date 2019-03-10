@@ -70,7 +70,7 @@ function PopulateAddModal() {
         data: jsonData,
         success: function (result) {
 
-            alert('OK');
+            modalBody.html("Add new patient success. ");
             
         }, //End of AJAX Success function  
 
