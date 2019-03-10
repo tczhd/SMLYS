@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SMLYS.Web.Interfaces.Api;
 
 namespace SMLYS.Web.Controllers
 {
@@ -8,6 +9,8 @@ namespace SMLYS.Web.Controllers
     [Route("Patient")]
     public class PatientController : Controller
     {
+        private readonly IPatientApiService _patientApiService;
+
         [Route("{view=Index}")]
         public IActionResult Index(string view)
         {

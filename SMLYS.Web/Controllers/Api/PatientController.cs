@@ -38,9 +38,18 @@ namespace SMLYS.Web.Controllers.Api
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]List<PatientRequestModel> patients)
+        public IActionResult Post([FromBody]List<CreatePatientRequestModel> patients)
         {
             var result = _patientApiService.CreateNewPatient(patients);
+            return Json(result);
+        }
+
+        // POST api/<controller>/PostSearchPatients
+        [Route("[action]")]
+        [HttpPost]
+        public IActionResult PostSearchPatients([FromBody]List<SearchPatientRequestModel> patients)
+        {
+            var result = _patientApiService.SearchPatients(patients);
             return Json(result);
         }
 

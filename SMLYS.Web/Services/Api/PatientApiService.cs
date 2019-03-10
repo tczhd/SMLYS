@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SMLYS.ApplicationCore.Entities.CommonAggregate;
+using System.Linq;
+using SMLYS.ApplicationCore.DTOs.Patients;
 
 namespace SMLYS.Web.Services.Api
 {
@@ -19,7 +21,7 @@ namespace SMLYS.Web.Services.Api
             _patientService = patientService;
         }
 
-        public  PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
+        public  CreatePatientResultViewModel CreateNewPatient(List<CreatePatientRequestModel> newPatients)
         {
             var patients = new List<Patient>();
 
@@ -28,7 +30,7 @@ namespace SMLYS.Web.Services.Api
                 Name = newPatients[0].LastName
             };
 
-            foreach (PatientRequestModel newPatient in newPatients)
+            foreach (CreatePatientRequestModel newPatient in newPatients)
             {
                 var patient = new Patient();
                 patient.Address = new Address()
@@ -65,9 +67,31 @@ namespace SMLYS.Web.Services.Api
 
            _patientService.CreatePatientAsync(patients);
 
-            var result = new PatientResultViewModel {  Success = true};
+            var result = new CreatePatientResultViewModel {  Success = true};
 
             return  result;
+        }
+
+        public SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels)
+        {
+            var searchPatientFilter = searchPatientRequestModels.Select(p => new SearchPatientParameter {
+                SearchType = p.SearchType,
+                SearchContent = p.SearchContent
+            }).ToList();
+            var data = _patientService.SearchPatientAsync(searchPatientFilter);
+
+            SearchPatientResultViewModel result = new SearchPatientResultViewModel();
+
+            result.PatientDetail = data.Select(p => new SearchPatientDetailResultViewModel {
+                PatientAddress = $"{p.Address.Address1}, {p.Address.City} {p.Address.RegionNavigation.Name}" ,
+                PatientEmail = p.Email,
+                PatientName = $"{p.FirstName } {p.LastName}",
+                PatientPhone = p.Phone,
+                PatientStatus = p.CreatedDateUtc.ToString("MMM dd")
+
+            }).ToList();
+
+            return result;
         }
     }
 }

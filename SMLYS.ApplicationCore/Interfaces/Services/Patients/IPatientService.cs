@@ -1,4 +1,5 @@
-﻿using SMLYS.ApplicationCore.Entities.PatientAggregate;
+﻿using SMLYS.ApplicationCore.DTOs.Patients;
+using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Patients
     public interface IPatientService
     {
         List<Patient> CreatePatientAsync(List<Patient> patient);
+
+        List<Patient> SearchPatientAsync(List<SearchPatientParameter> patient);
     }
 }
