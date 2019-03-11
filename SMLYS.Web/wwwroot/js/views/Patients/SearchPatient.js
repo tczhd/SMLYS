@@ -1,19 +1,38 @@
-﻿
-function PopulateAddModal() {
-    var spinner = "<img src='/images/loading.gif' width='30' height='30' ></img>";
+﻿$(document).ready(function () {
+
+    $('#search').click(function () {
+        PopulateAddModal($(this));
+    });
 
 
-    var modalBody = $('div.modal-body');
-    modalBody.html(spinner);
-    var modalContent = $('.modal-content');
-    var modalTitle = modalContent.find('.modal-title');
-    modalTitle.text("Search Patient");
+    $('#add').click(function () {
+       
+    });
 
+});
+
+
+function PopulateAddModal(button) {
+    //var spinner = "<img src='/images/loading.gif' width='30' height='30' ></img>";
+    var spinner = $('#search-spinner');
+    spinner.removeClass("invisible");
+    button.hide();
+
+    //var modalBody = $('div.modal-body');
+    //modalBody.html(spinner);
+    //var modalContent = $('.modal-content');
+    //var modalTitle = modalContent.find('.modal-title');
+    //modalTitle.text("Search Patient");
+
+    //var footerButton = modalContent.find('button.footer-close');
+    //var headerClose = modalContent.find('button.header-close');
+    //footerButton.addClass("invisible");
+    //headerClose.addClass("invisible");
+    //$('#primaryModal').modal('show');
 
     var dataType = 'application/json; charset=utf-8';
     var patientContent = $('div.view-patients-content');
-    var addButton = patientContent.find("button[id=add]");
-    var searchButton = patientContent.find("button[id=search]");
+
     var tablePatients = patientContent.find('table.table-patients');
     var bodyPatients = tablePatients.find('tbody');
     bodyPatients.empty();
@@ -44,19 +63,29 @@ function PopulateAddModal() {
                     bodyPatients.append(tr);
                 });
 
-                modalBody.html("Search patients success. ");
+               // $('#primaryModal').modal('hide');
+            
             }
             else {
-                alert(result.message);
+
+                modalBody.html("Search patients failed. " + result.message);
+                footerButton.removeClass("myClass yourClass");
+                headerClose.removeClass("myClass yourClass");
             }
-            
+
+            spinner.addClass("invisible");
+            button.show();
         }, //End of AJAX Success function  
 
         failure: function (data) {
             alert(data.responseText);
+            spinner.addClass("invisible");
+            button.show();
         }, //End of AJAX failure function  
         error: function (data) {
             alert(data.responseText);
+            spinner.addClass("invisible");
+            button.show();
         } //End of AJAX error function  
 
     });
