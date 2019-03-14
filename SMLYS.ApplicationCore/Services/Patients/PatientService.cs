@@ -41,13 +41,17 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public List<Patient> SearchPatientAsync(List<SearchPatientParameter> searchPatientParameter)
         {
-            var patientSpecification = new PatientSpecification(searchPatientParameter[0].SearchContent);
+            var patientSpecification = new PatientSpecification();
 
             foreach (var parameter in searchPatientParameter)
             {
                 if (parameter.SearchType == "first_name")
                 {
                     patientSpecification.AddFirstName(parameter.SearchContent);
+                }
+                else if (parameter.SearchType == "last_name")
+                {
+                    patientSpecification.AddLastName(parameter.SearchContent);
                 }
             }
 
