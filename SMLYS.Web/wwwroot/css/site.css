@@ -41,3 +41,19 @@ h2 {
 .nav-pills .nav-link.active > a {
     color: whitesmoke !important;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-croshair {
+    cursor: crosshair;
+}
+
+.cursor-eresize {
+    cursor: e-resize;
+}
+
+.cursor-move {
+    cursor: move;
+}
