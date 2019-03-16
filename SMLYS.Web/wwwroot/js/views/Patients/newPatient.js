@@ -1,27 +1,46 @@
 ﻿//var SMLYS = {};
 $(document).ready(function () {
 
-    var myForm = $('#myForm');
-    var patientBody = myForm.find('div.patient-body');
-
-    var patient_base_form = $('#patient_base_form').html();
-    var patient_base_form_address = $('#patient_base_form_address').html();
-    var patient_base_form_action = $('#patient_base_form_action').html();
-
-    patientBody.append($(patient_base_form).clone());
-    patientBody.append($(patient_base_form_address).clone());
-    patientBody.append($(patient_base_form_action));
-
     $('#add_family_member').click(function () {
-        var cardHeader = '<div class="card-header"><strong>Add family member / Dependent</strong></div>'
-        var checkBoxAddess = '<div class="card-block"><input type="checkbox" name="AddressCheckBox"  checked="checked" /> Address same as primary member  </div >';
-        var cardBody = $('<div class="card-body patient-body"> </div>');
-        cardBody.append($(patient_base_form).clone());
-        cardBody.append($(patient_base_form_address).clone());
 
-        $(cardHeader).insertBefore(".add-patient-buttons");
-        $(checkBoxAddess).insertBefore(".add-patient-buttons");
-        cardBody.insertBefore(".add-patient-buttons");
+        var primaryPatientSection = $('section.primary-patient-section');
+        var patientBasicSection = primaryPatientSection.find('section.patient-basic-section').clone();
+        var patientAddressSection = primaryPatientSection.find('section.patient-address-section').clone();
+
+        var additionalPatientSection = $('<section class="Additional-patient-section patient"></section>');
+
+        var cardHeader = $('<div class="card-header"><strong>Add family member / Dependent</strong></div>');
+
+        var closeIcon = $('<i class="fa fa-close fa-lg float-right"></i>');
+
+        $(closeIcon).click(function () {
+            additionalPatientSection.remove();
+        });
+
+        cardHeader.append(closeIcon);
+        additionalPatientSection.append(cardHeader);
+        var cardBody = $('<div class="card-body patient-body"> </div>');
+        cardBody.append(patientBasicSection);
+        var checkBoxAddessBlock = $('<div class="card-block"> </div >');
+        var checkBoxAddress = $('<input type="checkbox" name="AddressCheckBox"  checked="checked" />');
+        var checkBoxLabel = $('<label for="AddressCheckBoxLabel">Address same as primary member </label>');
+        checkBoxAddessBlock.append(checkBoxAddress);
+        checkBoxAddessBlock.append(checkBoxLabel);
+        checkBoxAddress.change(function () {
+            if (checkBoxAddress.is(":checked")) {
+                patientAddressSection.addClass('d-none');
+            } else {
+                patientAddressSection.removeClass('d-none');
+            }
+        });
+
+        cardBody.append(checkBoxAddessBlock);
+
+        patientAddressSection.addClass('d-none');
+        cardBody.append(patientAddressSection);
+
+        additionalPatientSection.append(cardBody);
+        additionalPatientSection.insertBefore(".add-patient-buttons");
     });
 });
 
@@ -30,89 +49,96 @@ SMLYS.Patient = {
 
     AddNewPatientModal: function () {
 
-        //var isvalid = $("#myForm").valid();  // Tells whether the form is valid
+        var isvalid = $("#myForm").valid();  // Tells whether the form is valid
 
-        //if (isvalid) {
-        //    var a = 1;
-        //}
-        //else {
-        //    var b = 2;
-        //}
+        if (isvalid) {
+            var spinner = SMLYS.getSpinner();
+            $('#primaryModal').modal('show');
 
-        var spinner = "<img src='/images/loading.gif' width='30' height='30' ></img>";
-        $('#primaryModal').modal('show');
+            var dataType = 'application/json; charset=utf-8';
+            var modalBody = $('div.modal-body');
+            modalBody.html(spinner);
+            var modalContent = $('.modal-content');
+            var modalTitle = modalContent.find('.modal-title');
+            modalTitle.text("New Patient");
+            var modalFooter = modalContent.find('.modal-footer');
 
-        var dataType = 'application/json; charset=utf-8';
-        var modalBody = $('div.modal-body');
-        modalBody.html(spinner);
-        var modalContent = $('.modal-content');
-        var modalTitle = modalContent.find('.modal-title');
-        modalTitle.text("New Patient");
-        var modalFooter = modalContent.find('.modal-footer');
+            var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Invoice');
 
-        var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Invoice');
+            var jsonPatients = [];
 
-        var jsonPatients = [];
+            var patients = $('div.patients');
+            var sectionPatients = patients.find('section.patient');
+            sectionPatients.each(function () {
 
-        var patients = $('div.patients > div.patient');
+                var patient = $(this);
+                var email = patient.find("input[id=Email]").val();
+                var firstName = patient.find('input[id=FirstName]').val();
+                var lastName = patient.find('input[id=LastName]').val();
+                var company = patient.find('input[id=Company]').val();
+                var address1 = patient.find('input[id=Address_Address1]').val();
+                var address2 = patient.find('input[id=Address_Address2]').val();
+                var city = patient.find('input[id=Address_City]').val();
+                var countryId = patient.find('select[id=selectCountry]').val();
+                var stateId = patient.find('select[id=selectState]').val();
+                var postalCode = patient.find('input[id=Address_PostalCode]').val();
+                var phone = patient.find('input[id=Phone]').val();
 
-        patients.each(function () {
+                var newPatient = {
+                    email: email,
+                    first_name: firstName,
+                    last_name: lastName,
+                    company: company,
+                    address1: address1,
+                    address2: address2,
+                    city: city,
+                    country_id: countryId,
+                    state_id: stateId,
+                    postal_code: postalCode,
+                    phone: phone
+                };
 
-            var patient = $(this);
-            var email = patient.find("input[id=Email]").val();
-            var firstName = patient.find('input[id=FirstName]').val();
-            var lastName = patient.find('input[id=LastName]').val();
-            var company = patient.find('input[id=Company]').val();
-            var address1 = patient.find('input[id=Address_Address1]').val();
-            var address2 = patient.find('input[id=Address_Address2]').val();
-            var city = patient.find('input[id=Address_City]').val();
-            var countryId = patient.find('select[id=selectCountry]').val();
-            var stateId = patient.find('select[id=selectState]').val();
-            var postalCode = patient.find('input[id=Address_PostalCode]').val();
-            var phone = patient.find('input[id=Phone]').val();
+                if ($(patient).hasClass("Additional-patient-section") === true) {
+                    var checkBoxAddress = patient.find('input[name="AddressCheckBox"]');
+                    if (checkBoxAddress && checkBoxAddress.is(":checked")) {
+                        newPatient.address1 = jsonPatients[0].address1;
+                        newPatient.address = jsonPatients[0].address;
+                        newPatient.company = jsonPatients[0].company;
+                        newPatient.country_id = jsonPatients[0].country_id;
+                        newPatient.state_id = jsonPatients[0].state_id;
+                        newPatient.postal_code = jsonPatients[0].postal_code;
+                        newPatient.phone = jsonPatients[0].phone;
+                    }
+                }
 
-            var newPatient = {
-                email: email,
-                first_name: firstName,
-                last_name: lastName,
-                company: company,
-                address1: address1,
-                address2: address2,
-                city: city,
-                country_id: countryId,
-                state_id: stateId,
-                postal_code: postalCode,
-                phone: phone
-            };
+                jsonPatients.push(newPatient);
+            });
 
-            jsonPatients.push(newPatient);
-        });
+            var jsonData = JSON.stringify(jsonPatients);
 
-        var jsonData = JSON.stringify(jsonPatients);
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/api/Patient",
+            //    contentType: dataType,
+            //    dataType: "json",
+            //    data: jsonData,
+            //    success: function (result) {
 
-        $.ajax({
-            type: "POST",
-            url: "/api/Patient",
-            contentType: dataType,
-            dataType: "json",
-            data: jsonData,
-            success: function (result) {
+            //        modalBody.html("Add new patient success. ");
+            //        modalFooter.append(button);
 
-                modalBody.html("Add new patient success. ");
-                modalFooter.append(button);
+            //    }, //End of AJAX Success function  
 
-            }, //End of AJAX Success function  
+            //    failure: function (data) {
+            //        alert(data.responseText);
+            //    }, //End of AJAX failure function  
+            //    error: function (data) {
+            //        alert(data.responseText);
+            //    } //End of AJAX error function  
 
-            failure: function (data) {
-                alert(data.responseText);
-            }, //End of AJAX failure function  
-            error: function (data) {
-                alert(data.responseText);
-            } //End of AJAX error function  
-
-        });
+            //});
+        }
     }
-
 };
 
 

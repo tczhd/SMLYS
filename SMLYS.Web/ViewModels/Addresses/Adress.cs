@@ -26,10 +26,10 @@ namespace SMLYS.Web.ViewModels.Adresses
 
         [Display(Name = "State Name")]
         public string Region { get; set; }
-        [Required]
+
         [Display(Name = "Country")]
         public int CountryId { get; set; }
-        [Required]
+      
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
 
