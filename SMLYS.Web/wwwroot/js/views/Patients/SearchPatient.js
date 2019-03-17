@@ -9,6 +9,13 @@
         SMLYS.Patient.AddSearchFilter();
     });
 
+    $('#filterInput').keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            SMLYS.Patient.AddSearchFilter();
+        }
+    });
+
 });
 
 SMLYS.Patient = {
@@ -36,6 +43,7 @@ SMLYS.Patient = {
         searchItem.append(searchContentSpan);
         searchItem.append(closeIcon);
         searchFilters.append(searchItem);
+        filterInput.val("");
     },
 
     SearchPatient: function (button) {

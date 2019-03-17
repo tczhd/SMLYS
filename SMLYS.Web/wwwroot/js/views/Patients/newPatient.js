@@ -54,6 +54,7 @@ SMLYS.Patient = {
         if (isvalid) {
             var spinner = SMLYS.getSpinner();
             $('#primaryModal').modal('show');
+       
 
             var dataType = 'application/json; charset=utf-8';
             var modalBody = $('div.modal-body');
@@ -62,6 +63,7 @@ SMLYS.Patient = {
             var modalTitle = modalContent.find('.modal-title');
             modalTitle.text("New Patient");
             var modalFooter = modalContent.find('.modal-footer');
+            modalFooter.html('');
 
             var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Invoice');
 

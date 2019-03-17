@@ -33,7 +33,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
             }
             catch (Exception ex)
             {
-                string a = ex.Message;
+                throw new Exception("Add patient failed: " + ex.Message);
             }
 
             return patients;
