@@ -26,10 +26,10 @@ namespace SMLYS.ApplicationCore.Services.Patients
             {
                 foreach (Patient patient in patients)
                 {
-                    _patientRepository.Add(patient);
+                    _patientRepository.AddOnly(patient);
                 }
 
-               // await _patientRepository.SaveAllAsync();
+               _patientRepository.SaveAll();
             }
             catch (Exception ex)
             {

@@ -41,8 +41,8 @@ namespace SMLYS.Web.Services.Api
                     Address2 = newPatient.Address2,
                     AttentionTo = "",
                     City = newPatient.City,
-                    CountryId = 38,
-                    RegionId = 54,
+                    CountryId = newPatient.CountryId,
+                    RegionId = newPatient.StateId,
                     CreatedBy = 1
                 };
 

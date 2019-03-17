@@ -80,16 +80,15 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <select id="selectCountry" name="selectCountry" class="form-control">
-                                                <option value="1">Canada</option>
-                                                <option value="2">USA</option>
+                                                <option value="38">Canada</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <select id="selectState" name="selectState" class="form-control">
-                                                <option value="1">British Columbia</option>
-                                                <option value="2">Toronto</option>
+                                                <option value="54">British Columbia</option>
+                                                <option value="53">Alberta</option>
                                             </select>
                                         </div>
                                     </div>
@@ -119,118 +118,10 @@
                         </div>
                     </section>
 
-                    @*<section class="Additional-patient-section">
-                        <div class="card-header">
-                            <strong>New Patient</strong>
-                        </div>
-                        <div class="card-body patient-body">
-
-                            <section class="patient-basic-section">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Email" class="form-control" placeholder="Email address" />
-                                            <span asp-validation-for="Email" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                                            <span asp-validation-for="LastName" class="text-danger"></span>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <section class="patient-address-section">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Company" class="form-control" placeholder="Company (optional)" />
-                                            <span asp-validation-for="Company" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Address.Address1" class="form-control" placeholder="Address" />
-                                            <span asp-validation-for="Address.Address1" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Address.Address2" class="form-control" placeholder="Appartment, suite, etc (optional)" />
-                                            <span asp-validation-for="Address.Address2" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Address.City" class="form-control" placeholder="City" />
-                                            <span asp-validation-for="Address.City" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <select id="selectCountry" name="selectCountry" class="form-control">
-                                                <option value="1">Canada</option>
-                                                <option value="2">USA</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <select id="selectState" name="selectState" class="form-control">
-                                                <option value="1">British Columbia</option>
-                                                <option value="2">Toronto</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <input asp-for="Address.PostalCode" class="form-control" placeholder="Postal code" />
-                                            <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input asp-for="Phone" class="form-control" placeholder="Phone (optional)" />
-                                            <span asp-validation-for="Phone" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12 cursor-pointer" id="add_family_member">
-                                        <i class="fa fa-plus fa-lg mt-4"></i>  <span>Add family member / Dependent</span>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </section>*@
+                   
                     <div class="card-footer add-patient-buttons">
                         <button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()">Submit</button>
-                        @*<button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()" data-toggle="modal" data-target="#primaryModal">
-                <i class="fa fa-dot-circle-o"></i> Submit
-            </button>*@
+
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
                     </div>
                 </div>
@@ -240,116 +131,6 @@
         </div>
     </form>
 </div>
-
-@*<div class="d-none" id="patient_base_form">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Email" class="form-control" placeholder="Email address" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-
-            </div>
-        </div>
-    </div>
-</div>
-<div class="d-none" id="patient_base_form_address">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Company" class="form-control" placeholder="Company (optional)" />
-                <span asp-validation-for="Company" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Address.Address1" class="form-control" placeholder="Address" />
-                <span asp-validation-for="Address.Address1" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Address.Address2" class="form-control" placeholder="Appartment, suite, etc (optional)" />
-                <span asp-validation-for="Address.Address2" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Address.City" class="form-control" placeholder="City" />
-                <span asp-validation-for="Address.City" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <select id="selectCountry" name="selectCountry" class="form-control">
-                    <option value="1">Canada</option>
-                    <option value="2">USA</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <select id="selectState" name="selectState" class="form-control">
-                    <option value="1">British Columbia</option>
-                    <option value="2">Toronto</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <input asp-for="Address.PostalCode" class="form-control" placeholder="Postal code" />
-                <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="form-group">
-                <input asp-for="Phone" class="form-control" placeholder="Phone (optional)" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="d-none" id="patient_base_form_action">
-    <div class="row">
-        <div class="col-sm-12">
-            <i class="fa fa-plus fa-lg mt-4"></i>  <span>Add another phone</span>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12 cursor-pointer" id="add_family_member">
-            <i class="fa fa-plus fa-lg mt-4"></i>  <span>Add family member / Dependent</span>
-        </div>
-    </div>
-</div>*@
 
 
 @section Scripts {

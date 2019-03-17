@@ -116,27 +116,27 @@ SMLYS.Patient = {
 
             var jsonData = JSON.stringify(jsonPatients);
 
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/api/Patient",
-            //    contentType: dataType,
-            //    dataType: "json",
-            //    data: jsonData,
-            //    success: function (result) {
+            $.ajax({
+                type: "POST",
+                url: "/api/Patient",
+                contentType: dataType,
+                dataType: "json",
+                data: jsonData,
+                success: function (result) {
 
-            //        modalBody.html("Add new patient success. ");
-            //        modalFooter.append(button);
+                    modalBody.html("Add new patient success. ");
+                    modalFooter.append(button);
 
-            //    }, //End of AJAX Success function  
+                }, //End of AJAX Success function  
 
-            //    failure: function (data) {
-            //        alert(data.responseText);
-            //    }, //End of AJAX failure function  
-            //    error: function (data) {
-            //        alert(data.responseText);
-            //    } //End of AJAX error function  
+                failure: function (data) {
+                    alert(data.responseText);
+                }, //End of AJAX failure function  
+                error: function (data) {
+                    alert(data.responseText);
+                } //End of AJAX error function  
 
-            //});
+            });
         }
     }
 };
