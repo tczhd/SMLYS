@@ -21,7 +21,7 @@ namespace SMLYS.Web.Services.Api
             _patientService = patientService;
         }
 
-        public  CreatePatientResultViewModel CreateNewPatient(List<CreatePatientRequestModel> newPatients)
+        public  PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
         {
             var patients = new List<Patient>();
 
@@ -30,7 +30,7 @@ namespace SMLYS.Web.Services.Api
                 Name = newPatients[0].LastName
             };
 
-            foreach (CreatePatientRequestModel newPatient in newPatients)
+            foreach (PatientRequestModel newPatient in newPatients)
             {
                 var patient = new Patient();
                 patient.Address = new Address()
@@ -67,9 +67,35 @@ namespace SMLYS.Web.Services.Api
 
            _patientService.CreatePatientAsync(patients);
 
-            var result = new CreatePatientResultViewModel {  Success = true};
+            var result = new PatientResultViewModel {  Success = true};
 
             return  result;
+        }
+
+        public PatientViewModel SearchPatient(int id)
+        {
+            var patient = _patientService.SearchPatientAsync(id);
+            if (patient != null)
+            {
+                var data = new PatientViewModel() {
+                    
+                    Phone = patient.Phone,
+                    FirstName = patient.FirstName,
+                    LastName = patient.LastName,
+                    Email = patient.Email,
+                    Address = new ViewModels.Adresses.AddressViewModel {
+                        Address1 = patient.Address.Address1,
+                        Address2 = patient.Address.Address2,
+                        City = patient.Address.City,
+                        CountryId = patient.Address.CountryId,
+                        RegionId  = patient.Address.RegionId,
+                    }
+
+                };
+                return data;
+            }
+
+            return null;
         }
 
         public SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels)
@@ -90,7 +116,8 @@ namespace SMLYS.Web.Services.Api
                 PatientEmail = p.Email,
                 PatientName = $"{p.FirstName } {p.LastName}",
                 PatientPhone = p.Phone,
-                PatientStatus = p.CreatedDateUtc.ToString("MMM dd")
+                PatientStatus = p.CreatedDateUtc.ToString("MMM dd"),
+                PatientId = p.Id
 
             }).ToList();
 

@@ -8,7 +8,9 @@ namespace SMLYS.Web.Interfaces.Api
 {
     public interface IPatientApiService
     {
-        CreatePatientResultViewModel CreateNewPatient(List<CreatePatientRequestModel> Patients);
+        PatientResultViewModel CreateNewPatient(List<PatientRequestModel> Patients);
         SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels);
+
+        PatientViewModel SearchPatient(int id);
     }
 }

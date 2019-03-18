@@ -38,7 +38,7 @@ namespace SMLYS.Web.Controllers.Api
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]List<CreatePatientRequestModel> patients)
+        public IActionResult Post([FromBody]List<PatientRequestModel> patients)
         {
             var result = _patientApiService.CreateNewPatient(patients);
             return Json(result);

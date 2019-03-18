@@ -12,5 +12,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Patients
         List<Patient> CreatePatientAsync(List<Patient> patient);
 
         List<Patient> SearchPatientAsync(List<SearchPatientParameter> patient);
+
+        Patient SearchPatientAsync(int id);
     }
 }

@@ -57,5 +57,13 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
             return  _patientRepository.List(patientSpecification).ToList();
         }
+
+        public Patient SearchPatientAsync(int id)
+        {
+            var patientSpecification = new PatientSpecification();
+            patientSpecification.AddPatientId(id);
+
+            return _patientRepository.GetSingleBySpec(patientSpecification);
+        }
     }
 }

@@ -8,7 +8,6 @@
     <meta name="description" content="FZBS">
     <meta name="author" content="David">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="img/favicon.png">
     <title>@ViewData["Title"] - SMLYS</title>
     <!-- Icons -->
     <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
@@ -27,19 +26,19 @@
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <!-- *APP-HEADER* -->
-    @Html.Partial("_AppHeader")
+    <partial name="_AppHeader" />
     <!-- /*APP-HEADER* -->
     <div class="app-body">
         <div class="sidebar">
             <!-- *SIDEBAR-NAV* -->
-            @Html.Partial("_SidebarNav")
+            <partial name="_SidebarNav" />
             <!-- /*SIDEBAR-NAV* -->
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
         <!-- *MAIN CONTENT* -->
         <main class="main">
             <!-- *BREADCRUMB* -->
-            @Html.Partial("_BreadCrumb")
+            <partial name="_BreadCrumb" />
             <!-- /*BREADCRUMB* -->
             <!-- *CONTAINER-FLUID* -->
             <div class="container-fluid">
@@ -51,7 +50,7 @@
         </main>
         <!-- /*MAIN CONTENT* -->
         <!-- *ASIDE-MENU* -->
-        @Html.Partial("_AsideMenu")
+        <partial name="_AsideMenu" />
         <!-- /*ASIDE-MENU* -->
     </div>
     <!-- /.modal -->
@@ -68,10 +67,6 @@
                     <p>One fine body…</p>
                 </div>
                 <div class="modal-footer">
-                    @*<button type="button" class="btn btn-secondary footer-close" data-dismiss="modal">Close</button>*@
-                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
-
-                    @*<button type="button" id="cancel-btn" class="btn btn-warning btn-lg shiny" data-dismiss="modal" aria-hidden="true">Cancel</button>*@
                 </div>
             </div>
             <!-- /.modal-content -->

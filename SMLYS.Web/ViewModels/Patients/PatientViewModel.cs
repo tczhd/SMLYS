@@ -9,6 +9,8 @@ namespace SMLYS.Web.ViewModels.Patients
 {
     public class PatientViewModel
     {
+        [Display(Name = "patient_form_type")]
+        public string PatientFormType { get; set; }
         [Display(Name = "patient_id")]
         public int PatientId { get; set; }
         [Display(Name = "Company")]

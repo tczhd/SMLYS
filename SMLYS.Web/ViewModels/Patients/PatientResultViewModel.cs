@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace SMLYS.Web.ViewModels.Patients
 {
     [DataContract(Name = "create_patient_result")]
-    public class CreatePatientResultViewModel : BaseResultViewModel
+    public class PatientResultViewModel : BaseResultViewModel
     {
 
     }

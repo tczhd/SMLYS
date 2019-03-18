@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SMLYS.Web.ViewModels.Patients
 {
     [DataContract(Name ="patient")]
-    public class CreatePatientRequestModel
+    public class PatientRequestModel
     {
         [DataMember(Name = "first_name")]
         public string FirstName { get; set; }

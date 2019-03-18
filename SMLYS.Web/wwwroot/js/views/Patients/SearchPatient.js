@@ -88,7 +88,7 @@ SMLYS.Patient = {
 
                     if (result.patient_detail.length > 0) {
                         $.each(result.patient_detail, function (index, patient) {
-                            var tr = SMLYS.Patient.GetPatientRow(patient.patient_name, patient.patient_address, patient.patient_phone, patient.patient_email, patient.patient_status);
+                            var tr = SMLYS.Patient.GetPatientRow(patient);
                             bodyPatients.append(tr);
                         });
                     }
@@ -120,13 +120,14 @@ SMLYS.Patient = {
     },
 
 
-    GetPatientRow: function (name, address, phone, email, status) {
+    GetPatientRow: function (patient) {
+
         var tr = "<tr>" +
-            "<td>" + name + "</td> " +
-            "<td>" + address + "</td> " +
-            "<td>" + phone + "</td> " +
-            "<td>" + email + "</td> " +
-            "<td><span class='badge badge-success'>" + status + "</span></td> " +
+            "<td><a href='/Patient/PatientForm?id=" + patient.patient_id + "' >" + patient.patient_name + "</a></td> " +
+            "<td>" + patient.patient_address + "</td> " +
+            "<td>" + patient.patient_phone + "</td> " +
+            "<td>" + patient.patient_email + "</td> " +
+            "<td><span class='badge badge-success'>" + patient.patient_status + "</span></td> " +
             "</tr>";
 
         return tr;
