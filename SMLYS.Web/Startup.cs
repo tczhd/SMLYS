@@ -22,6 +22,7 @@ using SMLYS.ApplicationCore.Services.Patients;
 using SMLYS.Infrastructure.Services.Email;
 using SMLYS.Web.Interfaces.Api;
 using SMLYS.Web.Services.Api;
+using SMLYS.ApplicationCore.Domain.User;
 
 namespace SMLYS.Web
 {
@@ -80,6 +81,8 @@ namespace SMLYS.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+            services.AddSingleton<UserHandler>();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

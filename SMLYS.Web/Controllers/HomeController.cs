@@ -3,14 +3,28 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using SMLYS.Web.Models;
+using Microsoft.AspNetCore.Http;
+using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.User;
 
 namespace SMLYS.Web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly UserHandler _userHandler;
+
+        public HomeController(UserHandler userHandler)
+        {
+            _userHandler = userHandler;
+        }
+
         public IActionResult Index()
         {
+            UserContext uc = new UserContext();
+            _userHandler.SetUserContext(uc);
+
+            uc = _userHandler.GetUserContext();
             return View();
         }
 
