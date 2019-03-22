@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SMLYS.Infrastructure.Identity;
+using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.User;
+using Microsoft.AspNetCore.Http;
+using SMLYS.ApplicationCore.Interfaces.Services.Users;
 
 namespace SMLYS.Web.Areas.Identity.Pages.Account
 {
@@ -18,11 +22,17 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserHandler _userHandler;
+        private readonly IUserService _userService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserHandler userHandler, IUserService userService)
         {
+            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _userHandler = userHandler;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -78,6 +88,11 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var userContext = _userService.GetUserContextAsync(user.Id);
+
+                    _userHandler.SetUserContext(userContext);
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

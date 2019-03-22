@@ -1,6 +1,13 @@
 ﻿@using SMLYS.Infrastructure.Identity
+@using SMLYS.ApplicationCore.Domain.User
+
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
 @inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> UserManager
+@inject UserHandler _userHandler
+
+@{
+    var userContext = _userHandler.GetUserContext();
+}
 
 <!-- *APP-HEADER* -->
 <header class="app-header navbar">
@@ -19,17 +26,17 @@
 
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-md-down-none">
-            <a asp-area="" asp-controller="Home" asp-action="About">BroadWay Clinic</a>
+            <a asp-area="" asp-controller="Home" asp-action="About">@userContext.ClinicName</a>
         </li>
 
-        @Html.Partial("_UserNav")
+        <partial name="_UserNav" />
     </ul>
 
     @*@if (SignInManager.IsSignedIn(User))
-    {
-        <button class="navbar-toggler aside-menu-toggler" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    }*@
+        {
+            <button class="navbar-toggler aside-menu-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        }*@
 </header>
 <!-- /*APP-HEADER* -->

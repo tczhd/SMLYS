@@ -21,10 +21,8 @@ namespace SMLYS.Web.Controllers
 
         public IActionResult Index()
         {
-            UserContext uc = new UserContext();
-            _userHandler.SetUserContext(uc);
-
-            uc = _userHandler.GetUserContext();
+            //var data = _userHandler.GetUserContext();
+  
             return View();
         }
 

@@ -10,7 +10,7 @@ namespace SMLYS.ApplicationCore.Domain.User
 {
     public class UserHandler
     {
-        IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public UserHandler(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;

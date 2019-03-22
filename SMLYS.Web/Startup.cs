@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,11 +14,12 @@ using SMLYS.Infrastructure.Data.Repository.Base;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Services.Patients;
-//using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.Infrastructure.Services.Email;
 using SMLYS.Web.Interfaces.Api;
 using SMLYS.Web.Services.Api;
 using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.Interfaces.Services.Users;
+using SMLYS.ApplicationCore.Services.Users;
 
 namespace SMLYS.Web
 {
@@ -70,6 +67,13 @@ namespace SMLYS.Web
                 options.SlidingExpiration = true;
             });
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddTransient<IEmailSender, EmailSender>();
@@ -81,8 +85,9 @@ namespace SMLYS.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+            //services.AddHttpContextAccessor();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<UserHandler>();
-            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,6 +129,7 @@ namespace SMLYS.Web
         private void ConfigureApplicatiojnService(IServiceCollection services)
         {
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }
