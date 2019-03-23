@@ -1,0 +1,74 @@
+﻿@model SMLYS.Web.ViewModels.SiteUsers.SiteUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal" id="myForm">
+        <div class="row patients">
+            <div class="col-sm-12 patient">
+                <div class="card">
+                    <section class="primary-patient-section patient">
+                        <div class="card-header">
+                            <strong>@ViewData["FormType"]</strong>
+                            <input type="hidden" asp-for="SiteUserId" id="PatientIdHidden" />
+                        </div>
+                        <div class="card-body patient-body">
+
+                            <section class="patient-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input asp-for="Email" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="Password" class="form-control" placeholder="Password" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                        </div>
+                    </section>
+
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()">Submit</button>
+
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
