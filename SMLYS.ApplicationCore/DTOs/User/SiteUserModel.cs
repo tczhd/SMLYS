@@ -7,7 +7,9 @@ namespace SMLYS.ApplicationCore.DTOs.User
     public class SiteUserModel
     {
         public int SiteUserId { get; set; }
-
+        public string UserId { get; set; }
+        public int SiteUserLevelId { get; set; }
+        public string SiteUserLevelName { get; set; }
         public string Email { get; set; }
 
         public string FirstName { get; set; }

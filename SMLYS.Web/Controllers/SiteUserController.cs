@@ -46,12 +46,23 @@ namespace SMLYS.Web.Controllers
                     ViewData["FormType"] = $"Edit User";
 
                    // var data = _patientApiService.SearchPatient(id);
-                    return View(view);
+                   
                 }
+
+                return View(view);
             }
             else if (view == "Index")
             {
                 ViewData["Title"] = $"Search Users";
+                var data = _userService.SearchSiteUsers();
+                var viewData = data.Select(p => new SiteUserViewModel
+                {
+                    Email = p.Email,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    SiteUserLevelName = p.SiteUserLevelName
+                });
+                return View(view, viewData);
             }
 
             return View(view);
@@ -72,16 +83,19 @@ namespace SMLYS.Web.Controllers
                     IsDoctor = true,
                     LastName = model.LastName,
                     Password =model.Password,
-                    SiteUserId = model.SiteUserId
+                    SiteUserId = model.SiteUserId,
+                    UserId = user.Id,
+                    SiteUserLevelId = 1
                     };
 
-                    var userId = _userService.RegisterUser(siteUserModel);
-                    if (!string.IsNullOrWhiteSpace(userId))
+                    var registerUserResult = _userService.RegisterUser(siteUserModel);
+                    if (registerUserResult.Success)
                     {
                         return View(model);
                     }
                     else
                     {
+                        await _userManager.DeleteAsync(user);
                         ModelState.AddModelError(siteUserModel.Email, "Create user Failed. ");
                     }
                 }

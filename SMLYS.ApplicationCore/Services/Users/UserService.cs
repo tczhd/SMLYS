@@ -1,23 +1,27 @@
 ﻿using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.Common;
 using SMLYS.ApplicationCore.DTOs.User;
+using SMLYS.ApplicationCore.Entities.DoctorAggregate;
 using SMLYS.ApplicationCore.Entities.UserAggregate;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.ApplicationCore.Interfaces.Services.Users;
 using SMLYS.ApplicationCore.Specifications.Users;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace SMLYS.ApplicationCore.Services.Users
 {
     public class UserService : IUserService
     {
         private readonly IRepository<SiteUser> _siteUserRepository;
+        private readonly IRepository<Doctor> _doctorRepository;
         private readonly UserHandler _userHandler;
 
-        public UserService(IRepository<SiteUser> siteUserRepository, UserHandler userHandler)
+        public UserService(IRepository<SiteUser> siteUserRepository, IRepository<Doctor> doctorRepository, UserHandler userHandler)
         {
             _siteUserRepository = siteUserRepository;
+            _doctorRepository = doctorRepository;
             _userHandler = userHandler;
         }
 
@@ -50,10 +54,66 @@ namespace SMLYS.ApplicationCore.Services.Users
             }
         }
 
-        public string RegisterUser(SiteUserModel siteUserModel)
+        public Result RegisterUser(SiteUserModel siteUserModel)
         {
             var userContext = _userHandler.GetUserContext();
-            throw new NotImplementedException();
+            var result = new Result();
+            try
+            {
+                var doctor = new Doctor()
+                {
+                    Active = true,
+                    Age = 1,
+                    ClinicId = userContext.ClinicId,
+                    CreatedBy = userContext.SiteUserId,
+                    CreatedDateUtc = DateTime.UtcNow,
+                    Email = siteUserModel.Email,
+                    FirstName = siteUserModel.FirstName,
+                    Gender = 1,
+                    LastName = siteUserModel.LastName,
+                    Title = "Dr."
+                };
+
+                SiteUser siteUser = new SiteUser() {
+                    FirstName = siteUserModel.FirstName,
+                    LastName = siteUserModel.LastName,
+                    Email = siteUserModel.Email,
+                    UserId = siteUserModel.UserId,
+                    SiteUserLevelId = siteUserModel.SiteUserLevelId,
+                    Active= "1",
+                    ClinicId = userContext.ClinicId,
+                    Doctor = doctor
+                };
+
+                _siteUserRepository.Add(siteUser);
+
+                result.Success = true;
+                result.Message = "Create user success. ";
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Add user failed: " + ex.Message;
+            }
+
+            return result;
+        }
+
+        public List<SiteUserModel> SearchSiteUsers()
+        {
+
+            var searchSiteUserSpecification = new SearchSiteUserSpecification();
+
+            var data = _siteUserRepository.List(searchSiteUserSpecification).ToList();
+
+            var result = data.Select(p => new SiteUserModel {
+                Email = p.Email,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                SiteUserLevelId = p.SiteUserLevelId,
+                SiteUserLevelName = p.SiteUserLevel.Name
+            }).ToList();
+
+            return result;
         }
     }
 }

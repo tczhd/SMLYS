@@ -1,10 +1,15 @@
-﻿using SMLYS.ApplicationCore.DTOs.User;
+﻿using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.DTOs.User;
+using System.Collections.Generic;
+
 namespace SMLYS.ApplicationCore.Interfaces.Services.Users
 {
     public interface IUserService
     {
         UserContext GetUserContextAsync(string userId);
 
-        string RegisterUser(SiteUserModel siteUserModel);
+        Result RegisterUser(SiteUserModel siteUserModel);
+
+        List<SiteUserModel> SearchSiteUsers();
     }
 }
