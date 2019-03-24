@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SMLYS.ApplicationCore.DTOs.User;
+using SMLYS.ApplicationCore.Interfaces.Services.Users;
+using SMLYS.Infrastructure.Identity;
+using SMLYS.Web.ViewModels.SiteUsers;
 
 namespace SMLYS.Web.Controllers
 {
@@ -11,7 +16,20 @@ namespace SMLYS.Web.Controllers
     [Route("SiteUser")]
     public class SiteUserController : Controller
     {
-       
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserService _userService;
+
+        public SiteUserController(
+         UserManager<ApplicationUser> userManager,
+         SignInManager<ApplicationUser> signInManager,
+         IUserService userService)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userService = userService;
+        }
+
         [Route("{view=Index}")]
         public IActionResult Index(int id, string view)
         {
@@ -37,6 +55,48 @@ namespace SMLYS.Web.Controllers
             }
 
             return View(view);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser(SiteUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var siteUserModel = new SiteUserModel {
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    IsDoctor = true,
+                    LastName = model.LastName,
+                    Password =model.Password,
+                    SiteUserId = model.SiteUserId
+                    };
+
+                    var userId = _userService.RegisterUser(siteUserModel);
+                    if (!string.IsNullOrWhiteSpace(userId))
+                    {
+                        return View(model);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(siteUserModel.Email, "Create user Failed. ");
+                    }
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
         }
     }
 }

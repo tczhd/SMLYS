@@ -4,5 +4,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Users
     public interface IUserService
     {
         UserContext GetUserContextAsync(string userId);
+
+        string RegisterUser(SiteUserModel siteUserModel);
     }
 }

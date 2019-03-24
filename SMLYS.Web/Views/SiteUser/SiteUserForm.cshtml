@@ -5,14 +5,14 @@
 }
 
 <div class="animated fadeIn">
-    <form method="post" class="form-horizontal" id="myForm">
+    <form asp-controller="SiteUser" method="post" class="form-horizontal" id="myForm" asp-action="RegisterUser">
         <div class="row patients">
             <div class="col-sm-12 patient">
                 <div class="card">
                     <section class="primary-patient-section patient">
                         <div class="card-header">
                             <strong>@ViewData["FormType"]</strong>
-                            <input type="hidden" asp-for="SiteUserId" id="PatientIdHidden" />
+                            <input type="hidden" asp-for="SiteUserId" id="PatientIdHidden" value="0"/>
                         </div>
                         <div class="card-body patient-body">
 
@@ -43,6 +43,26 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            <select id="selectUserType" name="selectUserType" class="form-control">
+                                                <option value="2">Site User</option>
+                                                <option value="1">Admin User</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                            Is Doctor
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
                                             <input asp-for="Password" class="form-control" placeholder="Password" />
                                             <span asp-validation-for="Password" class="text-danger"></span>
                                         </div>
@@ -59,9 +79,8 @@
                         </div>
                     </section>
 
-
                     <div class="card-footer add-patient-buttons">
-                        <button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()">Submit</button>
+                        <button type="submit" class="btn btn-sm btn-primary" >Submit</button>
 
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
                     </div>
