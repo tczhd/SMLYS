@@ -22,7 +22,6 @@ namespace SMLYS.Web.ViewModels.SiteUsers
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
         [Display(Name = "Site User Level Name")]
         public string SiteUserLevelName { get; set; }
         [Required]

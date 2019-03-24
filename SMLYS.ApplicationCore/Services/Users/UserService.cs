@@ -80,7 +80,7 @@ namespace SMLYS.ApplicationCore.Services.Users
                     Email = siteUserModel.Email,
                     UserId = siteUserModel.UserId,
                     SiteUserLevelId = siteUserModel.SiteUserLevelId,
-                    Active= "1",
+                    Active= true,
                     ClinicId = userContext.ClinicId,
                     Doctor = doctor
                 };

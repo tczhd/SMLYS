@@ -31,7 +31,7 @@ namespace SMLYS.ApplicationCore.Entities.UserAggregate
         [StringLength(450)]
         public string UserId { get; set; }
         public int SiteUserLevelId { get; set; }
-        public string Active { get; set; }
+        public bool Active { get; set; }
         public string Note { get; set; }
         public int ClinicId { get; set; }
         public int? DoctorId { get; set; }
