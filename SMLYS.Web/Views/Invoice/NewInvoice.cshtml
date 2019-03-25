@@ -1,0 +1,141 @@
+﻿@model SMLYS.Web.ViewModels.Invoices.InvoiceViewModel
+
+@{
+    ViewData["Title"] = "NewInvoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NewInvoice</h2>
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal" id="myForm">
+        <div class="row invoice">
+            <div class="col-sm-12 invoice">
+                <div class="card">
+                    <section class="primary-invoice-section invoice">
+                        <div class="card-header">
+                            <strong>New Invoice</strong>
+                            <input type="hidden" asp-for="InvoiceId" id="PatientIdHidden" />
+                        </div>
+                        <div class="card-body invoice-body">
+
+                            <section class="invoice-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="PatientName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="PatientName" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="PatientName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="InvoiceId"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-14">
+                                        <div class="form-group">
+                                            <input asp-for="InvoiceId" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="InvoiceId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="SendToName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="SendToName" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="SendToName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="InvoiceDate"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-14">
+                                        <div class="form-group">
+                                            <input asp-for="InvoiceDate" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="Address" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="DoctorName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-14">
+                                        <div class="form-group">
+                                            <input asp-for="DoctorName" class="form-control" placeholder="Email address" />
+                                            <span asp-validation-for="DoctorName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="ReOccouring"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <select id="selectCountry" name="selectCountry" class="form-control">
+                                                <option value="1">Yearly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-14">
+                                        <div class="form-group">
+                                            <select id="selectCountry" name="selectCountry" class="form-control">
+                                                <option value="1">Starting January 9, 2019</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()">Submit</button>
+
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
