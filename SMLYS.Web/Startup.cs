@@ -20,6 +20,8 @@ using SMLYS.Web.Services.Api;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.Interfaces.Services.Users;
 using SMLYS.ApplicationCore.Services.Users;
+using SMLYS.ApplicationCore.Services.Items;
+using SMLYS.ApplicationCore.Interfaces.Services.Items;
 
 namespace SMLYS.Web
 {
@@ -130,6 +132,7 @@ namespace SMLYS.Web
         {
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IItemService, ItemService>();
         }
     }
 }

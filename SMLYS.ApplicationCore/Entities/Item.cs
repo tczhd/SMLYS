@@ -6,14 +6,13 @@ using SMLYS.ApplicationCore.Entities.UserAggregate;
 
 namespace SMLYS.ApplicationCore.Entities
 {
-    public partial class Item
+    public partial class Item : BaseEntity
     {
         public Item()
         {
             InvoiceItem = new HashSet<InvoiceItem>();
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Cost { get; set; }

@@ -1,0 +1,61 @@
+﻿@model SMLYS.Web.ViewModels.Items.ItemViewModel
+
+@{
+    ViewData["Title"] = "New Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn">
+    <form asp-controller="Item" method="post" class="form-horizontal" id="myForm" asp-action="AddItem">
+        <div class="row item">
+            <div class="col-sm-12 item">
+                <div class="card">
+                    <section class="primary-item-section item">
+                        <div class="card-header">
+                            <strong>New Item</strong>
+                            <input type="hidden" asp-for="ItemId" id="ItemIdHidden" value="0"/>
+                        </div>
+                        <div class="card-body item-body">
+
+                            <section class="item-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="ItemName" class="form-control" placeholder="Item Name" />
+                                            <span asp-validation-for="ItemName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input asp-for="Cost" class="form-control" placeholder="Item Cost" />
+                                            <span asp-validation-for="Cost" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input asp-for="Description" class="form-control" placeholder="Item Description" />
+                                            <span asp-validation-for="Description" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </section>
+                        </div>
+                    </section>
+
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>

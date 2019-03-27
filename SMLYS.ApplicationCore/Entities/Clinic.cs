@@ -8,7 +8,7 @@ using SMLYS.ApplicationCore.Entities.UserAggregate;
 
 namespace SMLYS.ApplicationCore.Entities
 {
-    public partial class Clinic
+    public partial class Clinic : BaseEntity
     {
         public Clinic()
         {
@@ -19,7 +19,6 @@ namespace SMLYS.ApplicationCore.Entities
             SiteUser = new HashSet<SiteUser>();
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

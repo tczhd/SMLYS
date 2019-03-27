@@ -10,12 +10,33 @@ using Microsoft.AspNetCore.Mvc;
 namespace SMLYS.Web.Controllers
 {
     [Authorize]
+    [Route("Invoice")]
     public class InvoiceController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        [Route("{view=Index}")]
+        public IActionResult Index(int id, string view)
         {
-            return View();
+            if (view == "InvoiceForm")
+            {
+                if (id == 0)
+                {
+                    ViewData["Title"] = $"New Invoice";
+                    ViewData["FormType"] = $"New Invoice";
+                }
+                else
+                {
+                    ViewData["Title"] = $"Edit Invoice";
+                    ViewData["FormType"] = $"Edit Invoice";
+
+                    return View(view);
+                }
+            }
+            else if (view == "Index")
+            {
+                ViewData["Title"] = $"Search Invoice";
+            }
+
+            return View(view);
         }
     }
 }
