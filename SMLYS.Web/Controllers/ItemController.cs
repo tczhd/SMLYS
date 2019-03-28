@@ -48,6 +48,16 @@ namespace SMLYS.Web.Controllers
             else if (view == "Index")
             {
                 ViewData["Title"] = $"Search Item";
+
+                var data = _itemService.SearchItems();
+                var viewData = data.Select(p => new ItemViewModel
+                {
+                    Cost = p.Cost,
+                    Description = p.Description,
+                    ItemId = p.ItemId,
+                    ItemName = p.ItemName
+                });
+                return View(view, viewData);
             }
 
             return View(view);

@@ -6,7 +6,7 @@ using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace SMLYS.ApplicationCore.Services.Items
 {
@@ -53,7 +53,18 @@ namespace SMLYS.ApplicationCore.Services.Items
 
         public List<ItemModel> SearchItems()
         {
-            throw new NotImplementedException();
+            var data = _itemRepository.ListAll().ToList();
+            var result = data.Select(p => new ItemModel
+            {
+                Cost =  p.Cost,
+                Description = p.Description,
+                ItemId = p.Id,
+                ItemName = p.Name
+
+            }).ToList();
+
+            return result;
         }
     }
 }
+

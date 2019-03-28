@@ -22,6 +22,8 @@ using SMLYS.ApplicationCore.Interfaces.Services.Users;
 using SMLYS.ApplicationCore.Services.Users;
 using SMLYS.ApplicationCore.Services.Items;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
+using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
+using SMLYS.ApplicationCore.Services.Utiliites;
 
 namespace SMLYS.Web
 {
@@ -130,6 +132,7 @@ namespace SMLYS.Web
 
         private void ConfigureApplicatiojnService(IServiceCollection services)
         {
+            services.AddScoped<IUtilityService, UtilityService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IItemService, ItemService>();
