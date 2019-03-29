@@ -127,6 +127,9 @@ SMLYS.Patient = {
                 success: function (result) {
 
                     modalBody.html("Add new patient success. ");
+                    $(button).click(function () {
+                        window.location.href = '/Invoice/InvoiceForm?patientId=' + result.patient_id;
+                    });
                     modalFooter.append(button);
 
                 }, //End of AJAX Success function  

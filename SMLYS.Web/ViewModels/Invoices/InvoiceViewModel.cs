@@ -12,6 +12,8 @@ namespace SMLYS.Web.ViewModels.Invoices
         public int InvoiceId { get; set; }
         [Display(Name = "Patient Name")]
         public string PatientName { get; set; }
+        [Display(Name = "Patient Id")]
+        public int PatientId { get; set; }
         [Required]
         [Display(Name = "Send To")]
         public string SendToName { get; set; }

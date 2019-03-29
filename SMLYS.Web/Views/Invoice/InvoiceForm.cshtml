@@ -13,7 +13,8 @@
                     <section class="primary-invoice-section invoice">
                         <div class="card-header">
                             <strong>New Invoice</strong>
-                            <input type="hidden" asp-for="InvoiceId" id="PatientIdHidden" />
+                            @*<input type="hidden" asp-for="InvoiceId" id="InvoiceIdHidden" />*@
+                            <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
                         </div>
                         <div class="card-body invoice-body">
 
@@ -26,7 +27,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="PatientName" class="form-control" placeholder="Email address" />
+                                            <input asp-for="PatientName" class="form-control" placeholder="Patient Name" contenteditable="false"/>
                                             <span asp-validation-for="PatientName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -37,7 +38,7 @@
                                     </div>
                                     <div class="col-sm-14">
                                         <div class="form-group">
-                                            <input asp-for="InvoiceId" class="form-control" placeholder="Email address" />
+                                            <input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />
                                             <span asp-validation-for="InvoiceId" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -50,7 +51,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="SendToName" class="form-control" placeholder="Email address" />
+                                            <input asp-for="SendToName" class="form-control" placeholder="Send To Name" />
                                             <span asp-validation-for="SendToName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -61,7 +62,7 @@
                                     </div>
                                     <div class="col-sm-14">
                                         <div class="form-group">
-                                            <input asp-for="InvoiceDate" class="form-control" placeholder="Email address" />
+                                            <input asp-for="InvoiceDate" class="form-control" placeholder="Invoice Date" />
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -74,7 +75,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="Address" class="form-control" placeholder="Email address" />
+                                            <input asp-for="Address" class="form-control" placeholder="address" />
                                             <span asp-validation-for="Address" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -85,7 +86,7 @@
                                     </div>
                                     <div class="col-sm-14">
                                         <div class="form-group">
-                                            <input asp-for="DoctorName" class="form-control" placeholder="Email address" />
+                                            <input asp-for="DoctorName" class="form-control" placeholder="Doctor Name" />
                                             <span asp-validation-for="DoctorName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -126,7 +127,7 @@
 
 
                     <div class="card-footer add-patient-buttons">
-                        <button type="button" class="btn btn-sm btn-primary" onclick="SMLYS.Patient.AddNewPatientModal()">Submit</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
 
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
                     </div>

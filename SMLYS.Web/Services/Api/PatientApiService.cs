@@ -67,7 +67,7 @@ namespace SMLYS.Web.Services.Api
 
            _patientService.CreatePatientAsync(patients);
 
-            var result = new PatientResultViewModel {  Success = true};
+            var result = new PatientResultViewModel {  Success = true, Message= "Add patient success. ", PatienId = patients.First().Id};
 
             return  result;
         }

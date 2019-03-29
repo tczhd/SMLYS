@@ -18,6 +18,9 @@ namespace SMLYS.Web.ViewModels.Patients
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
         [Display(Name = "Title")]
         public string Title { get; set; }
         [Required]
