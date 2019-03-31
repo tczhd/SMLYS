@@ -127,11 +127,11 @@ SMLYS.Patient = {
             "<td>" + patient.patient_address + "</td> " +
             "<td>" + patient.patient_phone + "</td> " +
             "<td>" + patient.patient_email + "</td> " +
-            "<td><span class='badge badge-success'>" + patient.patient_status + "</span></td> " +
+            "<td><span class='badge badge-success'>" + patient.patient_status + "</span>" +
+            "<a href='/Invoice/InvoiceForm?patientId=" + patient.patient_id + "' ><span class='badge badge-primary ml-1'>Create Invoice</span></a>" +
+            "</td >" +
             "</tr>";
 
         return tr;
     }
 };
-
-

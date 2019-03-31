@@ -1,7 +1,7 @@
 ﻿@model SMLYS.Web.ViewModels.Invoices.InvoiceViewModel
 
 @{
-    ViewData["Title"] = "NewInvoice";
+    ViewData["Title"] = "New Invoice";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,7 +12,7 @@
                 <div class="card">
                     <section class="primary-invoice-section invoice">
                         <div class="card-header">
-                            <strong>New Invoice</strong>
+                            <strong>@ViewData["Title"]</strong>
                             @*<input type="hidden" asp-for="InvoiceId" id="InvoiceIdHidden" />*@
                             <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
                         </div>
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="PatientName" class="form-control" placeholder="Patient Name" contenteditable="false"/>
+                                            <input asp-for="PatientName" class="form-control" placeholder="Patient Name" contenteditable="false" />
                                             <span asp-validation-for="PatientName" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                             <label asp-for="InvoiceId"></label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-14">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />
                                             <span asp-validation-for="InvoiceId" class="text-danger"></span>
@@ -60,7 +60,7 @@
                                             <label asp-for="InvoiceDate"></label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-14">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <input asp-for="InvoiceDate" class="form-control" placeholder="Invoice Date" />
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
@@ -84,7 +84,7 @@
                                             <label asp-for="DoctorName"></label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-14">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <input asp-for="DoctorName" class="form-control" placeholder="Doctor Name" />
                                             <span asp-validation-for="DoctorName" class="text-danger"></span>
@@ -125,6 +125,55 @@
                         </div>
                     </section>
 
+                    <section class="invoice-detail-section">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-striped table-sm table-invoices">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Description</th>
+                                                    <th>Qty</th>
+                                                    <th>Cost</th>
+                                                    <th>Tax</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice-items"></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                    </section>
+
+                    <section class="invoice-total">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-8 button ">
+                                        <div class="add-item cursor-pointer" id="add_item">
+                                            <i class="fa fa-plus fa-lg mt-4"></i>  <span>Add another line</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 invoice-total">
+                                        <table class="table table-bordered table-sm table-invoices">
+                                            <tbody class="invoice-total">
+                                                <tr><td>Subtotal</td><td>200.00</td></tr>
+                                                <tr><td>Tax</td><td>24.00</td></tr>
+                                                <tr><td>Amount paid</td><td>0</td></tr>
+                                                <tr><td>Balance Due</td><td>224.00</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     <div class="card-footer add-patient-buttons">
                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
@@ -138,3 +187,8 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/views/Invoices/newInvoice.js" asp-append-version="true"></script>
+}
