@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.Infrastructure.Identity;
 
 
@@ -18,15 +18,18 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ISmsSender _authMessageSender;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ISmsSender authMessageSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _authMessageSender = authMessageSender;
         }
 
         public string Username { get; set; }
@@ -144,6 +147,36 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostEnableTwoFactorAuthenticationAsync()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                await _userManager.SetTwoFactorEnabledAsync(user, true);
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                //_logger.LogInformation(1, "User enabled two-factor authentication.");
+            }
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostVerifyPhoneNumberAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToPage();
+            }
+            // Generate the token and send it
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return RedirectToPage();
+            }
+            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, Input.PhoneNumber);
+            await _authMessageSender.SendSmsAsync(Input.PhoneNumber, "Your security code is: " + code);
+
+            return RedirectToPage("VerifyPhoneNumber", new { phoneNumber = Input.PhoneNumber });
         }
     }
 }

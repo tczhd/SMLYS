@@ -11,7 +11,7 @@ using SMLYS.Infrastructure.Data;
 using SMLYS.Infrastructure.Identity;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.Infrastructure.Data.Repository.Base;
-using Microsoft.AspNetCore.Identity.UI.Services;
+//using Microsoft.AspNetCore.Identity.UI.Services;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Services.Patients;
 using SMLYS.Infrastructure.Services.Email;
@@ -24,6 +24,9 @@ using SMLYS.ApplicationCore.Services.Items;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
 using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
 using SMLYS.ApplicationCore.Services.Utiliites;
+using SMLYS.ApplicationCore.Interfaces.Base;
+using SMLYS.Infrastructure.Configuration.Sms;
+using SMLYS.Infrastructure.Services.SMS;
 
 namespace SMLYS.Web
 {
@@ -82,6 +85,8 @@ namespace SMLYS.Web
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.Configure<SMSoptions>(Configuration.GetSection("TwilioAccountDetails"));
+
             ConfigureApplicatiojnService(services);
             ConfigureWebService(services);
             // Add application services.
@@ -92,6 +97,10 @@ namespace SMLYS.Web
             //services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<UserHandler>();
+
+            services.AddTransient<IEmailSender, TwilioAuthMessageSender>();
+            services.AddTransient<ISmsSender, TwilioAuthMessageSender>();
+            services.Configure<SMSoptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

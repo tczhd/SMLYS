@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.Interfaces.Base;
+using SMLYS.ApplicationCore.Interfaces.Services.Users;
 using SMLYS.Infrastructure.Identity;
 
 
@@ -17,12 +20,21 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account
     public class LoginWith2faModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly UserHandler _userHandler;
+        private readonly IUserService _userService;
+        private readonly ISmsSender _authMessageSender;
 
-        public LoginWith2faModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginWith2faModel> logger)
+        public LoginWith2faModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
+            ILogger<LoginWith2faModel> logger, UserHandler userHandler, IUserService userService, ISmsSender authMessageSender)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userHandler = userHandler;
+            _userManager = userManager;
+            _userService = userService;
+            _authMessageSender = authMessageSender;
         }
 
         [BindProperty]
@@ -54,6 +66,9 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
+            var code = await _userManager.GenerateTwoFactorTokenAsync(user, "Phone");
+            await _authMessageSender.SendSmsAsync(user.PhoneNumber, "Your security code is: " + code);
+
             ReturnUrl = returnUrl;
             RememberMe = rememberMe;
 
@@ -75,13 +90,22 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
+            //var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
+            //var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, Input.RememberMachine);
+            // var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, Input.RememberMachine);
+            var result = await _signInManager.TwoFactorSignInAsync("Phone", authenticatorCode, rememberMe, Input.RememberMachine);
 
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+
+                var userContext = _userService.GetUserContextAsync(user.Id);
+
+                _userHandler.SetUserContext(userContext);
+
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)

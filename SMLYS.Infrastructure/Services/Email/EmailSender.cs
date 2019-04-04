@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿
+using SMLYS.ApplicationCore.Interfaces.Base;
 using System.Threading.Tasks;
 
 namespace SMLYS.Infrastructure.Services.Email
