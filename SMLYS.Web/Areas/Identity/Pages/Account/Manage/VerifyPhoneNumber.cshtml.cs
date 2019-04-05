@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SMLYS.ApplicationCore.Interfaces.Base;
+using SMLYS.Infrastructure.Identity;
 
 namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
 {
     public class VerifyPhoneNumberModel : PageModel
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _authMessageSender;
 
         public VerifyPhoneNumberModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
            ISmsSender authMessageSender)
         {

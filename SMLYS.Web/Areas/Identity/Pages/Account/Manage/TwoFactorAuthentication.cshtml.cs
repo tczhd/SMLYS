@@ -70,5 +70,17 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
             StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
             return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostEnableTwoFactorAuthenticationAsync()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                await _userManager.SetTwoFactorEnabledAsync(user, true);
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                //_logger.LogInformation(1, "User enabled two-factor authentication.");
+            }
+            return RedirectToPage();
+        }
     }
 }
