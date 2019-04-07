@@ -25,6 +25,13 @@ namespace SMLYS.ApplicationCore.Services.Items
         {
             var userContext = _userHandler.GetUserContext();
             var result = new Result();
+
+            if (userContext == null)
+            {
+                result.Message = "Session expired. ";
+                return result;
+            }
+
             try
             {
                 var item = new Item()

@@ -58,6 +58,12 @@ namespace SMLYS.ApplicationCore.Services.Users
         {
             var userContext = _userHandler.GetUserContext();
             var result = new Result();
+            if (userContext == null)
+            {
+                result.Message = "Session expired. ";
+                return result;
+            }
+
             try
             {
                 var doctor = new Doctor()

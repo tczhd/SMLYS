@@ -58,7 +58,7 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToAction("Index", "Home");
             }
 
             var userName = await _userManager.GetUserNameAsync(user);
@@ -88,7 +88,7 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToAction("Index", "Home");
             }
 
             var email = await _userManager.GetEmailAsync(user);
@@ -128,7 +128,7 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToAction("Index", "Home");
             }
 
 
@@ -171,12 +171,22 @@ namespace SMLYS.Web.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
             {
+                return RedirectToAction("Index", "Home");
+            }
+
+            try
+            {
+                var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, Input.PhoneNumber);
+                await _authMessageSender.SendSmsAsync(Input.PhoneNumber, "Your security code is: " + code);
+
+                return RedirectToPage("VerifyPhoneNumber", new { phoneNumber = Input.PhoneNumber });
+            }
+            catch(Exception ex)
+            {
+                StatusMessage = "The number is unverified. Trial accounts cannot send messages to unverified numbers. ";
                 return RedirectToPage();
             }
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, Input.PhoneNumber);
-            await _authMessageSender.SendSmsAsync(Input.PhoneNumber, "Your security code is: " + code);
-
-            return RedirectToPage("VerifyPhoneNumber", new { phoneNumber = Input.PhoneNumber });
+           
         }
     }
 }

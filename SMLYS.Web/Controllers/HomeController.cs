@@ -20,9 +20,7 @@ namespace SMLYS.Web.Controllers
         }
 
         public IActionResult Index()
-        {
-            //var data = _userHandler.GetUserContext();
-  
+        { 
             return View();
         }
 
