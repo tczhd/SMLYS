@@ -78,9 +78,6 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            @*<select id="selectCountry" name="selectCountry" class="form-control">
-                                                <option value="38">Canada</option>
-                                            </select>*@
 
                                             <select asp-for="Address.CountryId" id="selectCountry" name="selectCountry" 
                                                     class="form-control"
@@ -89,10 +86,10 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <select id="selectState" name="selectState" class="form-control">
-                                                <option value="54">British Columbia</option>
-                                                <option value="53">Alberta</option>
-                                            </select>
+
+                                            <select asp-for="Address.RegionId" id="selectState" name="selectState"
+                                                    class="form-control"
+                                                    asp-items="@(new SelectList(@ViewBag.ListofRegion,"Id", "Name"))"></select>
 
                                         </div>
                                     </div>

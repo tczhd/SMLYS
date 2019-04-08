@@ -25,6 +25,7 @@ namespace SMLYS.Web.Controllers
             if (view == "PatientForm")
             {
                 ViewBag.ListofCountry = _utilityService.GetCountries();
+                ViewBag.ListofRegion = _utilityService.GetRegions();
 
                 if (id == 0)
                 {
