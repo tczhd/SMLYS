@@ -11,6 +11,7 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
     {
         public PatientSpecification() : base()
         {
+            AddInclude(b => b.Family);
             AddInclude(b => b.Address);
             AddInclude($"{nameof(Patient.Address)}.{nameof(Address.Country)}");
             AddInclude($"{nameof(Patient.Address)}.{nameof(Address.RegionNavigation)}");

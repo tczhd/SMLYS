@@ -24,9 +24,22 @@ namespace SMLYS.ApplicationCore.Services.Patients
         {
             try
             {
+                var family = patients.First().Family;
+
                 foreach (Patient patient in patients)
                 {
-                    _patientRepository.AddOnly(patient);
+                    if (patient.Id > 0)
+                    {
+                        var patientEntity = SearchPatientAsync(patient.Id);
+                        family = patientEntity.Family;
+
+                        patientEntity = CopyPatientData(patientEntity, patient);
+                    }
+                    else
+                    {
+                        patient.Family = family;
+                        _patientRepository.AddOnly(patient);
+                    }
                 }
 
                _patientRepository.SaveAll();
@@ -37,6 +50,23 @@ namespace SMLYS.ApplicationCore.Services.Patients
             }
 
             return patients;
+        }
+
+        private Patient CopyPatientData(Patient patient, Patient soruce)
+        {
+            patient.Address.Address1 = soruce.Address.Address1;
+            patient.Address.Address2 = soruce.Address.Address2;
+            patient.Address.City = soruce.Address.City;
+            patient.Address.CountryId = soruce.Address.CountryId;
+            patient.Address.RegionId = soruce.Address.RegionId;
+            patient.Address.Address1 = soruce.Address.Address1;
+
+            patient.FirstName = soruce.FirstName;
+            patient.LastName = soruce.LastName;
+            patient.Phone = soruce.Phone;
+            patient.Email = soruce.Email;
+
+            return patient;
         }
 
         public List<Patient> SearchPatientAsync(List<SearchPatientParameter> searchPatientParameter)

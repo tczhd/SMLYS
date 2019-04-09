@@ -22,7 +22,7 @@ namespace SMLYS.Web.Services.Api
         }
 
         public  PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
-        {
+        {          
             var patients = new List<Patient>();
 
             var family = new Family
@@ -33,6 +33,7 @@ namespace SMLYS.Web.Services.Api
             foreach (PatientRequestModel newPatient in newPatients)
             {
                 var patient = new Patient();
+
                 patient.Address = new Address()
                 {
                     CreatedDateUtc = DateTime.UtcNow,
@@ -46,6 +47,7 @@ namespace SMLYS.Web.Services.Api
                     CreatedBy = 1
                 };
 
+                patient.Id = newPatient.PatientId;
                 patient.FirstName = newPatient.FirstName;
                 patient.LastName = newPatient.LastName;
                 patient.ClinicId = 1;
@@ -79,10 +81,15 @@ namespace SMLYS.Web.Services.Api
             {
                 var data = new PatientViewModel() {
                     
+                    PatientId = patient.Id,
                     Phone = patient.Phone,
                     FirstName = patient.FirstName,
                     LastName = patient.LastName,
                     Email = patient.Email,
+                    Family = new FamilyViewModel {
+                        FamilyId = patient.FamilyId,
+                        FamilyName = patient.Family.Name
+                    },
                     Address = new ViewModels.Adresses.AddressViewModel {
                         Address1 = patient.Address.Address1,
                         Address2 = patient.Address.Address2,

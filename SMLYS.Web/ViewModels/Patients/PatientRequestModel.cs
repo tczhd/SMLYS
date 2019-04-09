@@ -9,6 +9,8 @@ namespace SMLYS.Web.ViewModels.Patients
     [DataContract(Name ="patient")]
     public class PatientRequestModel
     {
+        [DataMember(Name = "patient_id")]
+        public int PatientId { get; set; }
         [DataMember(Name = "first_name")]
         public string FirstName { get; set; }
         [DataMember(Name = "last_name")]

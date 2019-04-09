@@ -11,6 +11,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Repository
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
+        void UpdateOnlyAsync(T entity);
         Task DeleteAsync(T entity);
         Task<int> CountAsync(ISpecification<T> spec);
         void AddOnlyAsync(T entity);

@@ -50,7 +50,7 @@ namespace SMLYS.Web.ViewModels.Patients
         //public virtual Clinic Clinic { get; set; }
         //public virtual SiteUser CreatedByNavigation { get; set; }
         //public virtual Doctor Doctor { get; set; }
-        //public virtual Family Family { get; set; }
+        public virtual FamilyViewModel Family { get; set; }
         //public virtual PatientStatus StatusNavigation { get; set; }
         //public virtual SiteUser UpdatedByNavigation { get; set; }
     }

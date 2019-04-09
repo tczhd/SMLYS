@@ -74,6 +74,7 @@ SMLYS.Patient = {
             sectionPatients.each(function () {
 
                 var patient = $(this);
+                var patientId = patient.find("input[id*=PatientId]").val();
                 var email = patient.find("input[id=Email]").val();
                 var firstName = patient.find('input[id=FirstName]').val();
                 var lastName = patient.find('input[id=LastName]').val();
@@ -87,6 +88,7 @@ SMLYS.Patient = {
                 var phone = patient.find('input[id=Phone]').val();
 
                 var newPatient = {
+                    patientId: patientId,
                     email: email,
                     first_name: firstName,
                     last_name: lastName,

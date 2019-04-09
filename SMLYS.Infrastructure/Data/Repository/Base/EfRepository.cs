@@ -104,6 +104,16 @@ namespace SMLYS.Infrastructure.Data.Repository.Base
             return entity;
         }
 
+        public void UpdateOnly(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+        public void UpdateOnlyAsync(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+
         public void Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;

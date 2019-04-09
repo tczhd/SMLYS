@@ -12,6 +12,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Repository
         T Add(T entity);
         void AddOnly(T entity);
         void Update(T entity);
+        void UpdateOnly(T entity);
         void Delete(T entity);
         int Count(ISpecification<T> spec);
         void SaveAll();
