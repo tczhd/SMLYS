@@ -34,6 +34,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
                         family = patientEntity.Family;
 
                         patientEntity = CopyPatientData(patientEntity, patient);
+                        _patientRepository.UpdateOnly(patientEntity);
                     }
                     else
                     {

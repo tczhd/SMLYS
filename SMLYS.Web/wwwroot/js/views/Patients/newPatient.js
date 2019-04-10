@@ -88,7 +88,7 @@ SMLYS.Patient = {
                 var phone = patient.find('input[id=Phone]').val();
 
                 var newPatient = {
-                    patientId: patientId,
+                    patient_id: patientId,
                     email: email,
                     first_name: firstName,
                     last_name: lastName,
