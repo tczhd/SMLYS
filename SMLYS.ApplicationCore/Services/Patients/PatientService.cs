@@ -61,6 +61,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
             patient.Address.CountryId = soruce.Address.CountryId;
             patient.Address.RegionId = soruce.Address.RegionId;
             patient.Address.Address1 = soruce.Address.Address1;
+            patient.Address.PostalCode = soruce.Address.PostalCode;
 
             patient.FirstName = soruce.FirstName;
             patient.LastName = soruce.LastName;

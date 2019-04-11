@@ -30,7 +30,7 @@ namespace SMLYS.Web.Controllers
         [Route("{view=Index}")]
         public IActionResult Index(int id, string view)
         {
-            if (view == "Item")
+            if (view == "ItemForm")
             {
                 if (id == 0)
                 {
@@ -42,7 +42,21 @@ namespace SMLYS.Web.Controllers
                     ViewData["Title"] = $"Edit Item";
                     ViewData["FormType"] = $"Edit Item";
 
-                    return View(view);
+                    var data = _itemService.SearchItem(id);
+                    if (data != null)
+                    {
+                        var viewData = new ItemViewModel
+                        {
+                            Cost = data.Cost,
+                            Description = data.Description,
+                            ItemId = data.ItemId,
+                            ItemName = data.ItemName
+                        };
+                        return View(view, viewData);
+                    }
+                    else {
+                        return View(view);
+                    }
                 }
             }
             else if (view == "Index")
@@ -72,12 +86,13 @@ namespace SMLYS.Web.Controllers
             {
                 var model = new ItemModel
                 {
+                    ItemId = itemViewModel.ItemId??0,
                     Cost = itemViewModel.Cost,
                     Description = itemViewModel.Description,
                     ItemName = itemViewModel.ItemName
                 };
 
-                var itemResult = _itemService.AddItem(model);
+                var itemResult = _itemService.SaveItem(model);
                 result.Success = itemResult.Success;
                 result.Message = itemResult.Message;
             }

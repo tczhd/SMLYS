@@ -8,8 +8,10 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Items
 {
     public interface IItemService
     {
-        Result AddItem(ItemModel itemModel);
+        Result SaveItem(ItemModel itemModel);
 
         List<ItemModel> SearchItems();
+
+        ItemModel SearchItem(int id);
     }
 }

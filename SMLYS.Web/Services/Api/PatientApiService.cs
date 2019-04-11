@@ -44,6 +44,7 @@ namespace SMLYS.Web.Services.Api
                     City = newPatient.City,
                     CountryId = newPatient.CountryId,
                     RegionId = newPatient.StateId,
+                    PostalCode = newPatient.PostalCode,
                     CreatedBy = 1
                 };
 
@@ -96,6 +97,7 @@ namespace SMLYS.Web.Services.Api
                         City = patient.Address.City,
                         CountryId = patient.Address.CountryId,
                         RegionId  = patient.Address.RegionId,
+                        PostalCode = patient.Address.PostalCode
                     }
 
                 };

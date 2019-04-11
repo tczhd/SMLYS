@@ -35,5 +35,3 @@ namespace SMLYS.Web.ViewModels.Patients
         public string Phone { get; set; }
     }
 }
-
-

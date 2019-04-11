@@ -21,7 +21,7 @@ namespace SMLYS.ApplicationCore.Services.Items
             _userHandler = userHandler;
         }
 
-        public Result AddItem(ItemModel itemModel)
+        public Result SaveItem(ItemModel itemModel)
         {
             var userContext = _userHandler.GetUserContext();
             var result = new Result();
@@ -34,21 +34,40 @@ namespace SMLYS.ApplicationCore.Services.Items
 
             try
             {
-                var item = new Item()
+                if (itemModel.ItemId > 0)
                 {
-                    Active = true,
-                    ClinicId = userContext.ClinicId,
-                    Cost = itemModel.Cost,
-                    Description = itemModel.Description,
-                    Name = itemModel.ItemName,
-                    UpdatedBy = userContext.SiteUserId,
-                    UpdatedDateUtc = DateTime.UtcNow
-                };
+                    var item = _itemRepository.GetById(itemModel.ItemId);
+                    if (item != null)
+                    {
+                        item.Cost = itemModel.Cost;
+                        item.Name = itemModel.ItemName;
+                        item.Description = itemModel.Description;
 
-                _itemRepository.Add(item);
+                        _itemRepository.Update(item);
+                        result.Message = "Update item success. ";
+                        result.Success = true;
+                    }
+                    else {
+                        result.Message = "Update item failed ";
+                    }
+                }
+                else
+                {
+                    var item = new Item()
+                    {
+                        Active = true,
+                        ClinicId = userContext.ClinicId,
+                        Cost = itemModel.Cost,
+                        Description = itemModel.Description,
+                        Name = itemModel.ItemName,
+                        UpdatedBy = userContext.SiteUserId,
+                        UpdatedDateUtc = DateTime.UtcNow
+                    };
 
-                result.Success = true;
-                result.Message = "Add itemsuccess. ";
+                    _itemRepository.Add(item);
+                    result.Message = "Add item success. ";
+                    result.Success = true;
+                }
             }
             catch (Exception ex)
             {
@@ -56,6 +75,18 @@ namespace SMLYS.ApplicationCore.Services.Items
             }
 
             return result;
+        }
+
+        public ItemModel SearchItem(int id)
+        {
+            var item =  _itemRepository.GetById(id);
+
+            if (item != null)
+            {
+                return new ItemModel { Cost = item.Cost, ItemId = item.Id, ItemName = item.Name, Description = item.Description };
+            }
+
+            return null;
         }
 
         public List<ItemModel> SearchItems()

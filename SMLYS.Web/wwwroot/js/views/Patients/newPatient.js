@@ -54,7 +54,7 @@ SMLYS.Patient = {
         if (isvalid) {
             var spinner = SMLYS.getSpinner();
             $('#primaryModal').modal('show');
-       
+
 
             var dataType = 'application/json; charset=utf-8';
             var modalBody = $('div.modal-body');
@@ -86,6 +86,10 @@ SMLYS.Patient = {
                 var stateId = patient.find('select[id=selectState]').val();
                 var postalCode = patient.find('input[id=Address_PostalCode]').val();
                 var phone = patient.find('input[id=Phone]').val();
+
+                if (patientId === undefined || patientId === "" || patientId.length === 0) {
+                    patientId = "0";
+                }
 
                 var newPatient = {
                     patient_id: patientId,

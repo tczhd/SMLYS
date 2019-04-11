@@ -23,6 +23,7 @@ namespace SMLYS.ApplicationCore.Entities.CommonAggregate
         public string Region { get; set; }
         public int CountryId { get; set; }
         public string AttentionTo { get; set; }
+        public string PostalCode { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public DateTime? UpdatedDateUtc { get; set; }
         public int CreatedBy { get; set; }
