@@ -38,7 +38,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />
+                                            @Html.DisplayFor(item => item.InvoiceId)
+                                           
+                                            @*<input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />*@
                                             <span asp-validation-for="InvoiceId" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -62,7 +64,8 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="InvoiceDate" class="form-control" placeholder="Invoice Date" />
+                                            @Html.DisplayFor(item => item.InvoiceDate)
+                                            @*<input asp-for="InvoiceDate" class="form-control" placeholder="Invoice Date" />*@
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
                                     </div>

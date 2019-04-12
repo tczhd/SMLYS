@@ -43,7 +43,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
                     }
                 }
 
-               _patientRepository.SaveAll();
+                _patientRepository.SaveAll();
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
                 }
             }
 
-            return  _patientRepository.List(patientSpecification).ToList();
+            return _patientRepository.List(patientSpecification).ToList();
         }
 
         public Patient SearchPatientAsync(int id)
@@ -96,6 +96,44 @@ namespace SMLYS.ApplicationCore.Services.Patients
             patientSpecification.AddPatientId(id);
 
             return _patientRepository.GetSingleBySpec(patientSpecification);
+        }
+
+        public PatientModel SearchPatientModelAsync(int id)
+        {
+            var data = _patientRepository.GetById(id);
+
+            if (data != null)
+            {
+                var result = new PatientModel {
+                    DoctorId = data.DoctorId,
+                    FamilyId = data.FamilyId,
+                    PatientId = data.Id,
+                    PatientName = data.FirstName + " " + data.LastName
+                };
+
+                return result;
+            }
+
+            return null;
+
+        }
+
+        public List<PatientModel> SearchPatientsAsync(int familyId)
+        {
+            var patientSpecification = new PatientSpecification();
+            patientSpecification.AddfamilyId(familyId);
+
+            var data = _patientRepository.List(patientSpecification);
+
+            var result = data.Select(p => new PatientModel {
+                DoctorId = p.DoctorId,
+                FamilyId = p.FamilyId,
+                PatientId = p.Id,
+                PatientName = p.FirstName + " " + p.LastName
+            }).ToList();
+
+            return result;
+
         }
     }
 }

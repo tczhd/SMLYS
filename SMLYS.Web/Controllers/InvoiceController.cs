@@ -39,10 +39,14 @@ namespace SMLYS.Web.Controllers
                     ViewData["Title"] = $"New Invoice";
                     ViewData["FormType"] = $"New Invoice";
 
-                    var patient = _patientService.SearchPatientAsync(patientId);
+                    var patient = _patientService.SearchPatientModelAsync(patientId);
                     if (patient != null)
                     {
-                        var data = new InvoiceViewModel { PatientId = patient.Id, PatientName = $"{patient.FirstName} {patient.LastName}" };
+                        var patients = _patientService.SearchPatientsAsync(patient.FamilyId);
+
+                        var data = new InvoiceViewModel { PatientId = patient.PatientId, PatientName = patient.PatientName,
+                            Patients = patients.Select(p => new PatientViewModel { PatientId = p.PatientId, Name = p.PatientName}).ToList()
+                        };
                         return View(view, data);
                     }
                     else

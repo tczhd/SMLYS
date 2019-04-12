@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMLYS.Web.ViewModels.Patients;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SMLYS.Web.ViewModels.Invoices
         [Display(Name = "Send To")]
         public string SendToName { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Invoice Date")]
         public DateTime InvoiceDate { get; set; }
         [Display(Name = "Address")]
@@ -42,6 +44,8 @@ namespace SMLYS.Web.ViewModels.Invoices
         public decimal Total { get; set; }
         [Display(Name = "Amount Paid")]
         public decimal AmountPaid { get; set; }
+        [Display(Name = "Items")]
+        public List<PatientViewModel> Patients { get; set; }
         [Display(Name = "Items")]
         public List<InvoiceItemViewModel> Items { get; set; }
     }

@@ -17,6 +17,11 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
             AddInclude($"{nameof(Patient.Address)}.{nameof(Address.RegionNavigation)}");
         }
 
+        public void AddfamilyId(int familyId)
+        {
+            AddCriteria(q => q.FamilyId == familyId);
+        }
+
         public void AddPatientId(int patientId)
         {
             AddCriteria(q => q.Id == patientId);
