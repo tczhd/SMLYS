@@ -7,10 +7,7 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Interfaces\Logging\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="Services\Doctors\" />
     <Folder Include="Services\Invoices\" />
-    <Folder Include="Specifications\Doctors\" />
     <Folder Include="Specifications\Invoices\" />
   </ItemGroup>
 

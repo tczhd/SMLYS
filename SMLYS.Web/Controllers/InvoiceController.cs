@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.Interfaces.Services.Doctor;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
 using SMLYS.Web.Interfaces.Api;
@@ -22,16 +25,22 @@ namespace SMLYS.Web.Controllers
 
         private readonly IUtilityService _utilityService;
         private readonly IPatientService _patientService;
+        private readonly IDoctorService _doctorService;
+        private readonly UserHandler _userHandler;
 
-        public InvoiceController(IPatientService patientService, IUtilityService utilityService)
+        public InvoiceController(IPatientService patientService, IDoctorService doctorService, 
+            IUtilityService utilityService, UserHandler userHandler)
         {
             _patientService = patientService;
             _utilityService = utilityService;
+            _doctorService = doctorService;
+            _userHandler = userHandler;
         }
 
         [Route("{view=Index}")]
         public IActionResult Index(int id, string view, int patientId)
         {
+            var userContext = _userHandler.GetUserContext();
             if (view == "InvoiceForm")
             {
                 if (id == 0)
@@ -44,8 +53,28 @@ namespace SMLYS.Web.Controllers
                     {
                         var patients = _patientService.SearchPatientsAsync(patient.FamilyId);
 
-                        var data = new InvoiceViewModel { PatientId = patient.PatientId, PatientName = patient.PatientName,
-                            Patients = patients.Select(p => new PatientViewModel { PatientId = p.PatientId, Name = p.PatientName}).ToList()
+                        ViewBag.ListofPatient = patients.Select(p => new ListItemModel
+                        {
+                            Id = p.PatientId,
+                            Name = $"{p.FirstName} {p.LastName}"
+                        }).ToList();
+
+                        var doctors = _doctorService.SearchDoctorsAsync(userContext.ClinicId);
+
+                        ViewBag.ListofDoctor = doctors.Select(p => new ListItemModel
+                        {
+                            Id = p.DoctorId,
+                            Name = $"{p.FirstName} {p.LastName}"
+                        }).ToList();
+
+                        var data = new InvoiceViewModel
+                        {
+                            FamilyId = patient.FamilyId,
+                            PatientId = patient.PatientId,
+                            DoctorId = patient.DoctorId,
+                            InvoiceDate = DateTime.Now,
+                            PatientName = $"{patient.FirstName} {patient.LastName}",
+                            Patients = patients.Select(p => (PatientViewModel)p).ToList()
                         };
                         return View(view, data);
                     }

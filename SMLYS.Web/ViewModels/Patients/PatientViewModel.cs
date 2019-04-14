@@ -1,16 +1,17 @@
-﻿using SMLYS.Web.ViewModels.Adresses;
+﻿using SMLYS.ApplicationCore.DTOs.Patients;
+using SMLYS.Web.ViewModels.Adresses;
 using System.ComponentModel.DataAnnotations;
 
 namespace SMLYS.Web.ViewModels.Patients
 {
     public class PatientViewModel
     {
-        [Display(Name = "patient_form_type")]
-        public string PatientFormType { get; set; }
-        [Display(Name = "patient_id")]
+        [Display(Name = "Patient Id")]
         public int PatientId { get; set; }
-        [Display(Name = "Company")]
-        public string Company { get; set; }
+        [Display(Name = "Family Id")]
+        public int FamilyId { get; set; }
+        [Display(Name = "Doctor Id")]
+        public int DoctorId { get; set; }
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -18,27 +19,16 @@ namespace SMLYS.Web.ViewModels.Patients
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Name")]
-        public string Name { get; set; }
-
-        [Display(Name = "Title")]
-        public string Title { get; set; }
-        [Required]
-        [Display(Name = "Gender")]
-        public int Gender { get; set; }
-        [Required]
-        [Display(Name = "Age")]
-        public int Age { get; set; }
-
+        [Display(Name = "Company")]
+        public string Company { get; set; }
+        [Display(Name = "Patient Name")]
+        public string PatientName { get; set; }
         [Display(Name = "Phone")]
         public string Phone { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required]
-        [Display(Name = "Note")]
-        public string Note { get; set; }
         [Required]
         [Display(Name = "Primary Member")]
         public bool PrimaryMember { get; set; }
@@ -47,11 +37,32 @@ namespace SMLYS.Web.ViewModels.Patients
         public bool Minor { get; set; }
 
         public AddressViewModel Address { get; set; }
-        //public virtual Clinic Clinic { get; set; }
-        //public virtual SiteUser CreatedByNavigation { get; set; }
-        //public virtual Doctor Doctor { get; set; }
+
         public virtual FamilyViewModel Family { get; set; }
-        //public virtual PatientStatus StatusNavigation { get; set; }
-        //public virtual SiteUser UpdatedByNavigation { get; set; }
+
+        public static implicit operator PatientViewModel(PatientModel source)
+        {
+            return new PatientViewModel
+            {
+                DoctorId = source.DoctorId,
+                FamilyId = source.FamilyId,
+                PatientId = source.PatientId,
+                FirstName = source.FirstName,
+                LastName = source.LastName,
+                
+                Address = new AddressViewModel
+                {
+                    Address1 = source.Address.Address1,
+                    Address2 = source.Address.Address2,
+                    AttentionTo = source.Address.AttentionTo,
+                    City = source.Address.City,
+                    CountryId = source.Address.CountryId,
+                    PostalCode = source.Address.PostalCode,
+                    RegionId = source.Address.RegionId,
+                    RegionName = source.Address.RegionName,
+                    CountryName = source.Address.CountryName
+                }
+            };
+        }
     }
 }

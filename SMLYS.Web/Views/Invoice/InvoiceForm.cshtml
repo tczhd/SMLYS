@@ -7,13 +7,13 @@
 
 <div class="animated fadeIn">
     <form method="post" class="form-horizontal" id="myForm">
-        <div class="row invoice">
-            <div class="col-sm-12 invoice">
+        <div id="invoice" class="row invoice-row">
+            <div class="col-sm-12 invoice-col">
                 <div class="card">
                     <section class="primary-invoice-section invoice">
                         <div class="card-header">
                             <strong>@ViewData["Title"]</strong>
-                            @*<input type="hidden" asp-for="InvoiceId" id="InvoiceIdHidden" />*@
+                            <input type="hidden" asp-for="FamilyId" id="FamilyIdHidden" />
                             <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
                         </div>
                         <div class="card-body invoice-body">
@@ -27,8 +27,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="PatientName" class="form-control" placeholder="Patient Name" contenteditable="false" />
-                                            <span asp-validation-for="PatientName" class="text-danger"></span>
+                                            <select asp-for="PatientId" id="selectPatient" name="selectPatient"
+                                                    class="form-control"
+                                                    asp-items="@(new SelectList(@ViewBag.ListofPatient,"Id", "Name"))"></select>
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
@@ -39,8 +40,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             @Html.DisplayFor(item => item.InvoiceId)
-                                           
-                                            @*<input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />*@
+
                                             <span asp-validation-for="InvoiceId" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -53,8 +53,10 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="SendToName" class="form-control" placeholder="Send To Name" />
-                                            <span asp-validation-for="SendToName" class="text-danger"></span>
+                                            <div class="send-to-name float-sm-left">
+                                                <span title="@Model.PatientName"> @Html.DisplayFor(item => item.PatientName) </span>
+                                                <i class="fa fa-close fa-lg float-right"></i>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
@@ -65,7 +67,6 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             @Html.DisplayFor(item => item.InvoiceDate)
-                                            @*<input asp-for="InvoiceDate" class="form-control" placeholder="Invoice Date" />*@
                                             <span asp-validation-for="InvoiceDate" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -77,9 +78,25 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <input asp-for="Address" class="form-control" placeholder="address" />
-                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        <div class="form-group address-sestion">
+                                            @if (Model != null && Model.Patients.Any())
+                                            {
+                                                @foreach (var patient in Model.Patients)
+                                                {
+                                            <div class="patient-address d-none">
+                                                <input type="hidden" asp-for="@patient.PatientId" id="AddressPatientIdHidden" />
+                                                <div>
+                                                    @Html.DisplayFor(modelItem => patient.Address.Address1) -
+                                                    @Html.DisplayFor(modelItem => patient.Address.Address2)
+                                                </div>
+                                                <div>
+                                                    @Html.DisplayFor(modelItem => patient.Address.City),
+                                                    @Html.DisplayFor(modelItem => patient.Address.RegionName) &nbsp;
+                                                    @Html.DisplayFor(modelItem => patient.Address.CountryName)
+                                                </div>
+                                            </div>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
@@ -89,8 +106,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <input asp-for="DoctorName" class="form-control" placeholder="Doctor Name" />
-                                            <span asp-validation-for="DoctorName" class="text-danger"></span>
+                                            <select asp-for="DoctorId" id="selectPatient" name="selectPatient"
+                                                    class="form-control"
+                                                    asp-items="@(new SelectList(@ViewBag.ListofDoctor,"Id", "Name"))"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -109,20 +127,22 @@
                                             </label>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <select id="selectCountry" name="selectCountry" class="form-control">
+                                        <div class="form-group re-occouring-type d-none">
+                                            <select id="selectReOccouringType" name="selectReOccouringType" class="form-control">
                                                 <option value="1">Yearly</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-14">
-                                        <div class="form-group">
-                                            <select id="selectCountry" name="selectCountry" class="form-control">
+                                    <div class="col-sm-4">
+                                        <div class="form-group re-occouring-year d-none">
+                                            <select id="selectYear" name="selectYear" class="form-control">
                                                 <option value="1">Starting January 9, 2019</option>
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
                             </section>
                         </div>
@@ -190,6 +210,10 @@
         </div>
     </form>
 </div>
+@section Styles {
+    <link href="~/css/Invoice/invoice.css" rel="stylesheet">
+}
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

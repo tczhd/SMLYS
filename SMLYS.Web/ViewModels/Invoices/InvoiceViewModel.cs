@@ -15,6 +15,10 @@ namespace SMLYS.Web.ViewModels.Invoices
         public string PatientName { get; set; }
         [Display(Name = "Patient Id")]
         public int PatientId { get; set; }
+        [Display(Name = "Doctor Id")]
+        public int DoctorId { get; set; }
+        [Display(Name = "Family Id")]
+        public int FamilyId { get; set; }
         [Required]
         [Display(Name = "Send To")]
         public string SendToName { get; set; }
@@ -22,7 +26,7 @@ namespace SMLYS.Web.ViewModels.Invoices
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Invoice Date")]
         public DateTime InvoiceDate { get; set; }
-        [Display(Name = "Address")]
+        [Display(Name = "address")]
         public string Address { get; set; }
         [Display(Name = "Physician")]
         public string DoctorName { get; set; }

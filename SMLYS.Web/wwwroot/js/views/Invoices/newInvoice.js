@@ -1,6 +1,8 @@
 ﻿//var SMLYS = {};
 $(document).ready(function () {
 
+    SMLYS.Invoice.Init();
+
     $('#add_item').click(function () {
 
         var invoiceDetailSection = $('section.invoice-detail-section');
@@ -14,6 +16,42 @@ $(document).ready(function () {
 
 
 SMLYS.Invoice = {
+    Init: function () {
+        var dataType = 'application/json; charset=utf-8';
+        var primaryInvoiceSection = $('section.primary-invoice-section');
+        var familyId = primaryInvoiceSection.find('input[id*=FamilyId]').val();
+        var patientId = primaryInvoiceSection.find('input[id*=PatientId]').val();
+        var addressSestion = primaryInvoiceSection.find('div.address-sestion');
+        var patientAddresses = addressSestion.find('div.patient-address');
+        patientAddresses.each(function () {
+            var adderssPatient = $(this);
+            var addressPatientId = adderssPatient.find('input[id*=AddressPatientId]').val();
+            if (addressPatientId === patientId) {
+                adderssPatient.removeClass('d-none');
+                return false;
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/api/Invoice/GetInitData/" + familyId,
+            contentType: dataType,
+            dataType: "json",
+            success: function (result) {
+                alert('OK');
+
+            }, //End of AJAX Success function  
+
+            failure: function (data) {
+                alert(data.responseText);
+            }, //End of AJAX failure function  
+            error: function (data) {
+                alert(data.responseText);
+            } //End of AJAX error function  
+
+        });
+    },
+
     GetInvoiceRow: function () {
 
         var tr = "<tr>" +

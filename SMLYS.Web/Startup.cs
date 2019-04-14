@@ -11,7 +11,6 @@ using SMLYS.Infrastructure.Data;
 using SMLYS.Infrastructure.Identity;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.Infrastructure.Data.Repository.Base;
-//using Microsoft.AspNetCore.Identity.UI.Services;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Services.Patients;
 using SMLYS.Infrastructure.Services.Email;
@@ -27,6 +26,8 @@ using SMLYS.ApplicationCore.Services.Utiliites;
 using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.Infrastructure.Configuration.Sms;
 using SMLYS.Infrastructure.Services.SMS;
+using SMLYS.ApplicationCore.Services.Doctors;
+using SMLYS.ApplicationCore.Interfaces.Services.Doctor;
 
 namespace SMLYS.Web
 {
@@ -145,6 +146,7 @@ namespace SMLYS.Web
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IDoctorService, DoctorService>();
         }
     }
 }

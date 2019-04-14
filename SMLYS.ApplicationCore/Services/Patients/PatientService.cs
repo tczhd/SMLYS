@@ -100,18 +100,13 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public PatientModel SearchPatientModelAsync(int id)
         {
-            var data = _patientRepository.GetById(id);
+            var patientSpecification = new PatientSpecification();
+            patientSpecification.AddPatientId(id);
+            var data = _patientRepository.GetSingleBySpec(patientSpecification);
 
             if (data != null)
             {
-                var result = new PatientModel {
-                    DoctorId = data.DoctorId,
-                    FamilyId = data.FamilyId,
-                    PatientId = data.Id,
-                    PatientName = data.FirstName + " " + data.LastName
-                };
-
-                return result;
+                return data;
             }
 
             return null;
@@ -125,12 +120,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
             var data = _patientRepository.List(patientSpecification);
 
-            var result = data.Select(p => new PatientModel {
-                DoctorId = p.DoctorId,
-                FamilyId = p.FamilyId,
-                PatientId = p.Id,
-                PatientName = p.FirstName + " " + p.LastName
-            }).ToList();
+            var result = data.Select(p => (PatientModel)p).ToList();
 
             return result;
 

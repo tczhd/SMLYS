@@ -25,11 +25,14 @@ namespace SMLYS.Web.ViewModels.Adresses
         public int? RegionId { get; set; }
 
         [Display(Name = "State Name")]
-        public string Region { get; set; }
+        public string RegionName { get; set; }
 
         [Display(Name = "Country")]
         public int CountryId { get; set; }
-      
+
+        [Display(Name = "Country Name")]
+        public string CountryName { get; set; }
+
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
 
