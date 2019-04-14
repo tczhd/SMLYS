@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SMLYS.ApplicationCore.Entities.CommonAggregate;
 using System.Linq;
 using SMLYS.ApplicationCore.DTOs.Patients;
+using SMLYS.Web.Models.Patients;
 
 namespace SMLYS.Web.Services.Api
 {

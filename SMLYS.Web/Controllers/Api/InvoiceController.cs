@@ -4,7 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.Interfaces.Services.Items;
+using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
 using SMLYS.Web.Interfaces.Api;
+using SMLYS.Web.Models.Patients;
 using SMLYS.Web.ViewModels.Patients;
 
 namespace SMLYS.Web.Controllers.Api
@@ -15,10 +19,17 @@ namespace SMLYS.Web.Controllers.Api
     public class InvoiceController : Controller
     {
         private readonly IPatientApiService _patientApiService;
+        private readonly IItemService _itemService;
+        private readonly ITaxService _taxService;
+        private readonly UserHandler _userHandler;
 
-        public InvoiceController(IPatientApiService patientApiService)
+        public InvoiceController(IPatientApiService patientApiService, IItemService itemService, 
+            ITaxService taxService, UserHandler userHandler)
         {
             _patientApiService = patientApiService;
+            _itemService = itemService;
+            _taxService = taxService;
+            _userHandler = userHandler;
         }
         // GET: api/<controller>
         [HttpGet]
@@ -36,9 +47,14 @@ namespace SMLYS.Web.Controllers.Api
 
         // GET api/<controller>/5
         [Route("[action]/{familyId}")]
-        public string GetInitData(int familyId)
+        public IActionResult GetInitData(int familyId)
         {
-            return "value";
+            var userContext = _userHandler.GetUserContext();
+            var taxes = _taxService.SearchTaxesAsync(userContext.ClinicCountryId, userContext.ClinicRegionId, false);
+            var items = _itemService.SearchItems();
+
+            var data = new { Items = items, Taxes = taxes };
+            return Json(data);
         }
 
         // POST api/<controller>

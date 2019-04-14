@@ -1,4 +1,5 @@
-﻿using SMLYS.ApplicationCore.Entities.UserAggregate;
+﻿using SMLYS.ApplicationCore.Entities;
+using SMLYS.ApplicationCore.Entities.UserAggregate;
 using SMLYS.ApplicationCore.Specifications.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace SMLYS.ApplicationCore.Specifications.Users
         {
             AddInclude(b => b.SiteUserLevel);
             AddInclude(b => b.Clinic);
+            AddInclude(b => b.Clinic.Address);
             AddInclude(b => b.Doctor);
         }
 

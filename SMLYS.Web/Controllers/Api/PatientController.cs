@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SMLYS.Web.Interfaces.Api;
+using SMLYS.Web.Models.Patients;
 using SMLYS.Web.ViewModels.Patients;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -15,5 +15,7 @@ namespace SMLYS.ApplicationCore.DTOs.User
         public string SiteUserImage{ get; set; }
         public int? DoctorId { get; set; }
         public string DoctorName { get; set; }
+        public int ClinicCountryId { get; set; }
+        public int? ClinicRegionId { get; set; }
     }
 }

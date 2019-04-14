@@ -38,6 +38,8 @@ namespace SMLYS.ApplicationCore.Services.Users
                 {
                     ClinicId = siteUser.ClinicId,
                     ClinicName = siteUser.Clinic.Name,
+                    ClinicCountryId = siteUser.Clinic.Address.CountryId,
+                    ClinicRegionId = siteUser.Clinic.Address.RegionId,
                     DoctorId = siteUser.DoctorId,
                     DoctorName = siteUser.Doctor != null ? $"{siteUser.Doctor.FirstName} {siteUser.Doctor.LastName}" : string.Empty,
                     SiteUserId = siteUser.Id,

@@ -28,6 +28,8 @@ using SMLYS.Infrastructure.Configuration.Sms;
 using SMLYS.Infrastructure.Services.SMS;
 using SMLYS.ApplicationCore.Services.Doctors;
 using SMLYS.ApplicationCore.Interfaces.Services.Doctor;
+using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
+using SMLYS.ApplicationCore.Services.Taxes;
 
 namespace SMLYS.Web
 {
@@ -147,6 +149,7 @@ namespace SMLYS.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<ITaxService, TaxService>();
         }
     }
 }

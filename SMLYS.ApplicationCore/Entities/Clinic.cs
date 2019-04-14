@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SMLYS.ApplicationCore.Entities.CommonAggregate;
 using SMLYS.ApplicationCore.Entities.DoctorAggregate;
 using SMLYS.ApplicationCore.Entities.InvoiceAggregate;
 using SMLYS.ApplicationCore.Entities.PatientAggregate;
@@ -28,6 +29,8 @@ namespace SMLYS.ApplicationCore.Entities
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
         public string Note { get; set; }
+        
+        public int AddressId { get; set; }
 
         public virtual SiteUser CreatedByNavigation { get; set; }
         public virtual SiteUser UpdatedByNavigation { get; set; }
@@ -36,5 +39,6 @@ namespace SMLYS.ApplicationCore.Entities
         public virtual ICollection<Item> Item { get; set; }
         public virtual ICollection<Patient> Patient { get; set; }
         public virtual ICollection<SiteUser> SiteUser { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

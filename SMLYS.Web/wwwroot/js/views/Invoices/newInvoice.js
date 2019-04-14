@@ -17,28 +17,26 @@ $(document).ready(function () {
 
 SMLYS.Invoice = {
     Init: function () {
-        var dataType = 'application/json; charset=utf-8';
+
         var primaryInvoiceSection = $('section.primary-invoice-section');
         var familyId = primaryInvoiceSection.find('input[id*=FamilyId]').val();
         var patientId = primaryInvoiceSection.find('input[id*=PatientId]').val();
-        var addressSestion = primaryInvoiceSection.find('div.address-sestion');
-        var patientAddresses = addressSestion.find('div.patient-address');
-        patientAddresses.each(function () {
-            var adderssPatient = $(this);
-            var addressPatientId = adderssPatient.find('input[id*=AddressPatientId]').val();
-            if (addressPatientId === patientId) {
-                adderssPatient.removeClass('d-none');
-                return false;
-            }
-        });
 
+
+        SMLYS.Invoice.InitData(familyId);
+        SMLYS.Invoice.InitSendToCloseIcon();
+        SMLYS.Invoice.ChangePatient(patientId);
+    },
+
+    InitData(familyId) {
+        var dataType = 'application/json; charset=utf-8';
         $.ajax({
             type: "GET",
             url: "/api/Invoice/GetInitData/" + familyId,
             contentType: dataType,
             dataType: "json",
             success: function (result) {
-                alert('OK');
+                alert(result.items.length);
 
             }, //End of AJAX Success function  
 
@@ -50,6 +48,34 @@ SMLYS.Invoice = {
             } //End of AJAX error function  
 
         });
+    },
+
+    InitSendToCloseIcon: function () {
+        var primaryInvoiceSection = $('section.primary-invoice-section');
+        var sendTos = primaryInvoiceSection.find('div.send-to-name');
+        sendTos.each(function () {
+            var sendTo = $(this);
+            var faClose = sendTo.find('i.fa-close');
+
+            $(faClose).click(function () {
+                sendTo.remove();
+            });
+        });
+    },
+
+    ChangePatient: function (patientId) {
+        var primaryInvoiceSection = $('section.primary-invoice-section');
+        var addressSestion = primaryInvoiceSection.find('div.address-sestion');
+        var patientAddresses = addressSestion.find('div.patient-address');
+        patientAddresses.each(function () {
+            var adderssPatient = $(this);
+            var addressPatientId = adderssPatient.find('input[id*=AddressPatientId]').val();
+            if (addressPatientId === patientId) {
+                adderssPatient.removeClass('d-none');
+                return false;
+            }
+        });
+
     },
 
     GetInvoiceRow: function () {
@@ -73,7 +99,7 @@ SMLYS.Invoice = {
         if (isvalid) {
             var spinner = SMLYS.getSpinner();
             $('#primaryModal').modal('show');
-       
+
 
             var dataType = 'application/json; charset=utf-8';
             var modalBody = $('div.modal-body');

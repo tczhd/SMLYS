@@ -13,6 +13,7 @@ namespace SMLYS.ApplicationCore.Entities.CommonAggregate
         public Address()
         {
             Patient = new HashSet<Patient>();
+            Clinic = new HashSet<Clinic>();
         }
 
         public int AddressTypeId { get; set; }
@@ -35,5 +36,6 @@ namespace SMLYS.ApplicationCore.Entities.CommonAggregate
         public virtual Region RegionNavigation { get; set; }
         public virtual SiteUser UpdatedByNavigation { get; set; }
         public virtual ICollection<Patient> Patient { get; set; }
+        public virtual ICollection<Clinic> Clinic { get; set; }
     }
 }

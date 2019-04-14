@@ -1,4 +1,5 @@
-﻿using SMLYS.Web.ViewModels.Patients;
+﻿using SMLYS.Web.Models.Patients;
+using SMLYS.Web.ViewModels.Patients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
