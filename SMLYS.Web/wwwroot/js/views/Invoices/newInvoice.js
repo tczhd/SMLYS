@@ -3,32 +3,68 @@ $(document).ready(function () {
 
     SMLYS.Invoice.Init();
 
-    $('#add_item').click(function () {
-
-        var invoiceDetailSection = $('section.invoice-detail-section');
-        var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
-        var itemRow = SMLYS.Invoice.GetInvoiceRow();
-
-        invoiceItemsTbody.append($(itemRow));
-    });
 });
 
 
 
 SMLYS.Invoice = {
+    Items: [],
+    Taxes: [],
+
     Init: function () {
 
         var primaryInvoiceSection = $('section.primary-invoice-section');
         var familyId = primaryInvoiceSection.find('input[id*=FamilyId]').val();
         var patientId = primaryInvoiceSection.find('input[id*=PatientId]').val();
 
+        $('#add_item').click(function () {
+
+            var invoiceDetailSection = $('section.invoice-detail-section');
+            var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
+            var itemRow = $(SMLYS.Invoice.GetInvoiceRow());
+
+            var selectItemList = itemRow.find('select[id*=selectItemList]');
+            $(selectItemList).change(function () {
+
+                SMLYS.Invoice.UpdateItemRow(selectItemList, itemRow);
+            });
+
+            invoiceItemsTbody.append(itemRow);
+        });
 
         SMLYS.Invoice.InitData(familyId);
         SMLYS.Invoice.InitSendToCloseIcon();
         SMLYS.Invoice.ChangePatient(patientId);
     },
 
-    InitData(familyId) {
+    UpdateItemRow: function (selectItemList, itemRow) {
+        var itemId = $(selectItemList).children("option:selected").val();
+        var quantityText = itemRow.find('input.item-quantity').val();
+        var costTd = itemRow.find('td.item-cost');
+        var itemSubtotalTd = itemRow.find('td.item-subtotal');
+
+        var taxRateTotal = 0;
+        $.each(SMLYS.Invoice.Taxes, function (key, value) {
+            taxRateTotal += value.taxRate;
+        });
+
+        $.each(SMLYS.Invoice.Items, function (key, value) {
+            if (value.itemId === parseInt(itemId)) {
+                costTd.text(value.cost);
+                itemSubtotalTd.text(value.cost);
+
+                if (!isNaN(quantityText)) {
+                    var quantity = parseInt(quantityText);
+                    var subtotal = quantity * value.cost * (1 + taxRateTotal);
+                    itemSubtotalTd.text(subtotal);
+                }
+
+                return false;
+            }
+        });
+    },
+
+    InitData: function(familyId) {
         var dataType = 'application/json; charset=utf-8';
         $.ajax({
             type: "GET",
@@ -36,17 +72,15 @@ SMLYS.Invoice = {
             contentType: dataType,
             dataType: "json",
             success: function (result) {
-                alert(result.items.length);
-
+                SMLYS.Invoice.Items = result.items;
+                SMLYS.Invoice.Taxes = result.taxes;
             }, //End of AJAX Success function  
-
             failure: function (data) {
                 alert(data.responseText);
             }, //End of AJAX failure function  
             error: function (data) {
                 alert(data.responseText);
             } //End of AJAX error function  
-
         });
     },
 
@@ -61,6 +95,18 @@ SMLYS.Invoice = {
                 sendTo.remove();
             });
         });
+    },
+
+    GetItemList: function() {
+        var selectList = "<select id='selectItemList' name='selectItemList' class='form-control'>";
+
+        $.each(SMLYS.Invoice.Items, function (key, value) {
+            selectList += "<option value='" + value.itemId + "'>" + value.itemName + "</option>";
+        });
+
+        selectList += "</select>";
+
+        return selectList;
     },
 
     ChangePatient: function (patientId) {
@@ -80,17 +126,28 @@ SMLYS.Invoice = {
 
     GetInvoiceRow: function () {
 
-        var tr = "<tr>" +
-            "<td>Extended Coverage, 1 Year subscription</td> " +
-            "<td>Ipso Leurm facto desniata eu</td> " +
-            "<td>1</td> " +
-            "<td>200.00</td> " +
-            "<td>GST, PST</td >" +
-            "<td>200.00</td >" +
+        var inputQuantity = "<input type='text' class='form-control item-quantity' value='1' size='10' >";
+        var firstItem = SMLYS.Invoice.Items[0];
+        var taxDisplay = "<div class='tax-list'>";
+
+        $.each(SMLYS.Invoice.Taxes, function (key, value) {
+            taxDisplay += "<div>" + value.taxName + "</div>";
+        });
+
+        taxDisplay += "</div>";
+
+        var tr = "<tr class='invoice-item'>" +
+            "<td>" + SMLYS.Invoice.GetItemList() + "</td> " +
+            "<td class='description'>" + firstItem.description +"</td> " +
+            "<td class='item-quantity'>" + inputQuantity + "</td> " +
+            "<td class='item-cost'>" + firstItem.cost + "</td> " +
+            "<td>" + taxDisplay +"</td >" +
+            "<td class='item-subtotal'>" + firstItem.cost + "</td >" +
+            "<td class='item-remove'><i class='fa fa-close fa-lg float-right' ></i></td >" +
             "</tr>";
 
         return tr;
-    },
+    },      
 
     AddInvoiceModal: function () {
 
