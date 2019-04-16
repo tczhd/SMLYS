@@ -30,6 +30,12 @@ SMLYS.Invoice = {
             });
 
             invoiceItemsTbody.append(itemRow);
+
+            var faClose = itemRow.find('i.fa-close');
+
+            $(faClose).click(function () {
+                itemRow.remove();
+            });
         });
 
         SMLYS.Invoice.InitData(familyId);
@@ -62,6 +68,37 @@ SMLYS.Invoice = {
                 return false;
             }
         });
+    },
+
+    UpdateTotal: function (selectItemList, itemRow) {
+
+        var invoiceDetailSection = $('section.invoice-detail-section');
+        var invoiceTotalSection = $('section.invoice-total"');
+
+        //var itemId = $(selectItemList).children("option:selected").val();
+        //var quantityText = itemRow.find('input.item-quantity').val();
+        //var costTd = itemRow.find('td.item-cost');
+        //var itemSubtotalTd = itemRow.find('td.item-subtotal');
+
+        //var taxRateTotal = 0;
+        //$.each(SMLYS.Invoice.Taxes, function (key, value) {
+        //    taxRateTotal += value.taxRate;
+        //});
+
+        //$.each(SMLYS.Invoice.Items, function (key, value) {
+        //    if (value.itemId === parseInt(itemId)) {
+        //        costTd.text(value.cost);
+        //        itemSubtotalTd.text(value.cost);
+
+        //        if (!isNaN(quantityText)) {
+        //            var quantity = parseInt(quantityText);
+        //            var subtotal = quantity * value.cost * (1 + taxRateTotal);
+        //            itemSubtotalTd.text(subtotal);
+        //        }
+
+        //        return false;
+        //    }
+        //});
     },
 
     InitData: function(familyId) {
@@ -126,7 +163,7 @@ SMLYS.Invoice = {
 
     GetInvoiceRow: function () {
 
-        var inputQuantity = "<input type='text' class='form-control item-quantity' value='1' size='10' >";
+        var inputQuantity = "<div class='col-xs-2'><input type='text' class='form-control input-sm item-quantity' value='1' size='2' ></div>";
         var firstItem = SMLYS.Invoice.Items[0];
         var taxDisplay = "<div class='tax-list'>";
 
