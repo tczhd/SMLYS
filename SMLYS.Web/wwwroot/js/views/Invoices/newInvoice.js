@@ -34,8 +34,11 @@ SMLYS.Invoice = {
             var faClose = itemRow.find('i.fa-close');
 
             $(faClose).click(function () {
+                SMLYS.Invoice.UpdateTotal();
                 itemRow.remove();
             });
+
+            SMLYS.Invoice.UpdateTotal();
         });
 
         SMLYS.Invoice.InitData(familyId);
@@ -49,10 +52,7 @@ SMLYS.Invoice = {
         var costTd = itemRow.find('td.item-cost');
         var itemSubtotalTd = itemRow.find('td.item-subtotal');
 
-        var taxRateTotal = 0;
-        $.each(SMLYS.Invoice.Taxes, function (key, value) {
-            taxRateTotal += value.taxRate;
-        });
+        var taxRateTotal = SMLYS.Invoice.GetTaxRate();
 
         $.each(SMLYS.Invoice.Items, function (key, value) {
             if (value.itemId === parseInt(itemId)) {
@@ -68,37 +68,55 @@ SMLYS.Invoice = {
                 return false;
             }
         });
+
+        SMLYS.Invoice.UpdateTotal();
     },
 
-    UpdateTotal: function (selectItemList, itemRow) {
+    GetTaxRate: function () {
+        var taxRateTotal = 0;
+        $.each(SMLYS.Invoice.Taxes, function (key, value) {
+            taxRateTotal += value.taxRate;
+        });
+
+        return taxRateTotal;
+    },
+
+    UpdateTotal: function () {
 
         var invoiceDetailSection = $('section.invoice-detail-section');
-        var invoiceTotalSection = $('section.invoice-total"');
+              var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
+        var invoiceItemsTrs = invoiceItemsTbody.find('tr.invoice-item');
 
-        //var itemId = $(selectItemList).children("option:selected").val();
-        //var quantityText = itemRow.find('input.item-quantity').val();
-        //var costTd = itemRow.find('td.item-cost');
-        //var itemSubtotalTd = itemRow.find('td.item-subtotal');
+        var invoiceTotalSection = $('section.invoice-total');
+        var invoiceSubtotal = invoiceTotalSection.find('td.invoice-subtotal');
+        var invoiceTax = invoiceTotalSection.find('td.invoice-tax');
+        var invoiceTotal = invoiceTotalSection.find('td.invoice-total');
 
-        //var taxRateTotal = 0;
-        //$.each(SMLYS.Invoice.Taxes, function (key, value) {
-        //    taxRateTotal += value.taxRate;
-        //});
+        var taxRateTotal = SMLYS.Invoice.GetTaxRate();
+        var taxTotal = 0;
+        var subTotal = 0;
+        var total = 0;
 
-        //$.each(SMLYS.Invoice.Items, function (key, value) {
-        //    if (value.itemId === parseInt(itemId)) {
-        //        costTd.text(value.cost);
-        //        itemSubtotalTd.text(value.cost);
+        invoiceItemsTrs.each(function () {
+            var invoiceItemTr = $(this);
+            var itemQuantityTd = invoiceItemTr.find('td.item-quantity');
+            var itemQuantityInput = itemQuantityTd.find('input');
+            var itemCostTd = invoiceItemTr.find('td.item-cost');
 
-        //        if (!isNaN(quantityText)) {
-        //            var quantity = parseInt(quantityText);
-        //            var subtotal = quantity * value.cost * (1 + taxRateTotal);
-        //            itemSubtotalTd.text(subtotal);
-        //        }
+            var quantity = itemQuantityInput.val();
+            var cost = itemCostTd.text();
 
-        //        return false;
-        //    }
-        //});
+            var singleItemSubTotal = parseInt(quantity) * parseFloat(cost);
+            var singleItemTax = singleItemSubTotal * taxRateTotal;
+            subTotal += singleItemSubTotal;
+            taxTotal += singleItemTax;
+
+        });
+
+        total = subTotal + taxTotal;
+        invoiceSubtotal.text(subTotal.toFixed(2));
+        invoiceTax.text(taxTotal.toFixed(2));
+        invoiceTotal.text(total.toFixed(2));
     },
 
     InitData: function(familyId) {
@@ -163,12 +181,14 @@ SMLYS.Invoice = {
 
     GetInvoiceRow: function () {
 
+        var taxRateTotal = SMLYS.Invoice.GetTaxRate();
+
         var inputQuantity = "<div class='col-xs-2'><input type='text' class='form-control input-sm item-quantity' value='1' size='2' ></div>";
         var firstItem = SMLYS.Invoice.Items[0];
         var taxDisplay = "<div class='tax-list'>";
 
         $.each(SMLYS.Invoice.Taxes, function (key, value) {
-            taxDisplay += "<div>" + value.taxName + "</div>";
+            taxDisplay += "<span class='pl-1'>" + value.taxName + "</span>";
         });
 
         taxDisplay += "</div>";
@@ -179,7 +199,7 @@ SMLYS.Invoice = {
             "<td class='item-quantity'>" + inputQuantity + "</td> " +
             "<td class='item-cost'>" + firstItem.cost + "</td> " +
             "<td>" + taxDisplay +"</td >" +
-            "<td class='item-subtotal'>" + firstItem.cost + "</td >" +
+            "<td class='item-subtotal'>" + firstItem.cost * (1 + taxRateTotal) + "</td >" +
             "<td class='item-remove'><i class='fa fa-close fa-lg float-right' ></i></td >" +
             "</tr>";
 
