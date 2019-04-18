@@ -30,6 +30,8 @@ using SMLYS.ApplicationCore.Services.Doctors;
 using SMLYS.ApplicationCore.Interfaces.Services.Doctor;
 using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
 using SMLYS.ApplicationCore.Services.Taxes;
+using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
+using SMLYS.ApplicationCore.Services.Invoices;
 
 namespace SMLYS.Web
 {
@@ -150,6 +152,7 @@ namespace SMLYS.Web
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<ITaxService, TaxService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
         }
     }
 }

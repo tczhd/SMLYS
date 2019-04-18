@@ -224,70 +224,59 @@ SMLYS.Invoice = {
             var modalFooter = modalContent.find('.modal-footer');
             modalFooter.html('');
 
-            var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Invoice');
+            var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Another Invoice');
 
-            var jsonPatients = [];
+            var jsonInvoice = { invoice_items:[]};
 
-            var patients = $('div.patients');
-            var sectionPatients = patients.find('section.patient');
-            sectionPatients.each(function () {
+            var primaryInvoiceSection = $('section.primary-invoice-section');
+            var selectPatient = primaryInvoiceSection.find('select[id*=selectPatient]');
+            var patientId = $(selectPatient).children("option:selected").val();
+            jsonInvoice.patient_id = parseInt(patientId);
 
-                var patient = $(this);
-                var email = patient.find("input[id=Email]").val();
-                var firstName = patient.find('input[id=FirstName]').val();
-                var lastName = patient.find('input[id=LastName]').val();
-                var company = patient.find('input[id=Company]').val();
-                var address1 = patient.find('input[id=Address_Address1]').val();
-                var address2 = patient.find('input[id=Address_Address2]').val();
-                var city = patient.find('input[id=Address_City]').val();
-                var countryId = patient.find('select[id=selectCountry]').val();
-                var stateId = patient.find('select[id=selectState]').val();
-                var postalCode = patient.find('input[id=Address_PostalCode]').val();
-                var phone = patient.find('input[id=Phone]').val();
+            var invoiceDate = primaryInvoiceSection.find('div.invoice-date');
+            jsonInvoice.invoice_date = invoiceDate.text();
+            var selectDoctor = primaryInvoiceSection.find('select[id*=selectDoctor]');
+            var doctorId = $(selectDoctor).children("option:selected").val();
+            jsonInvoice.doctor_id = parseInt(doctorId);
 
-                var newPatient = {
-                    email: email,
-                    first_name: firstName,
-                    last_name: lastName,
-                    company: company,
-                    address1: address1,
-                    address2: address2,
-                    city: city,
-                    country_id: countryId,
-                    state_id: stateId,
-                    postal_code: postalCode,
-                    phone: phone
+            var invoiceDetailSection = $('section.invoice-detail-section');
+            var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
+            var invoiceItemsTrs = invoiceItemsTbody.find('tr.invoice-item');
+
+            invoiceItemsTrs.each(function () {
+                var invoiceItemTr = $(this);
+                var itemSelect = invoiceItemTr.find('select[id *= selectItemList]');
+                var itemId = $(itemSelect).children("option:selected").val();
+                var itemQuantityTd = invoiceItemTr.find('td.item-quantity');
+                var itemQuantityInput = itemQuantityTd.find('input');
+                var itemCostTd = invoiceItemTr.find('td.item-cost');
+
+                var quantity = itemQuantityInput.val();
+                var cost = itemCostTd.text();
+
+                var itemData = {
+                    item_id: parseInt(itemId),
+                    quantity: parseInt(quantity),
+                    cost: parseFloat(cost)
                 };
 
-                if ($(patient).hasClass("Additional-patient-section") === true) {
-                    var checkBoxAddress = patient.find('input[name="AddressCheckBox"]');
-                    if (checkBoxAddress && checkBoxAddress.is(":checked")) {
-                        newPatient.address1 = jsonPatients[0].address1;
-                        newPatient.address = jsonPatients[0].address;
-                        newPatient.company = jsonPatients[0].company;
-                        newPatient.country_id = jsonPatients[0].country_id;
-                        newPatient.state_id = jsonPatients[0].state_id;
-                        newPatient.postal_code = jsonPatients[0].postal_code;
-                        newPatient.phone = jsonPatients[0].phone;
-                    }
-                }
+                jsonInvoice.invoice_items.push(itemData);
 
-                jsonPatients.push(newPatient);
             });
 
-            var jsonData = JSON.stringify(jsonPatients);
+            var jsonData = JSON.stringify(jsonInvoice);
 
             $.ajax({
                 type: "POST",
-                url: "/api/Patient",
+                url: "/api/Invoice",
                 contentType: dataType,
                 dataType: "json",
                 data: jsonData,
                 success: function (result) {
 
-                    modalBody.html("Add new patient success. ");
+                    modalBody.html("Add new invoice success. ");
                     $(button).click(function () {
-                        window.location.href = '/Invoice/InvoiceForm?patientId=' + result.patient_id;
+                        window.location.href = '/Invoice/InvoiceDeatil?invoiceId=' + result.invoice_id;
                     });
                     modalFooter.append(button);
 

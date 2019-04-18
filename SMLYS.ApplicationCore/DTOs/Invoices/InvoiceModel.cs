@@ -1,0 +1,107 @@
+﻿using SMLYS.ApplicationCore.Entities.InvoiceAggregate;
+using SMLYS.ApplicationCore.Interfaces.EntityBase;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Linq;
+
+namespace SMLYS.ApplicationCore.DTOs.Invoices
+{
+    public class InvoiceModel : IResultable<Invoice, InvoiceModel>
+    {
+        public int InvoiceId { get; set; }
+        public int PatientId { get; set; }
+        public int DoctorId { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal DiscountTotal { get; set; }
+        public decimal TaxTotal { get; set; }
+        public decimal Total { get; set; }
+        public decimal AmountPaid { get; set; }
+        public int InvoiceStatus { get; set; }
+        public int PaymentStatus { get; set; }
+        public string Note { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime? UpdatedDateUTC { get; set; }
+        public int? UpdatedBy { get; set; }
+        public bool ReOccouring { get; set; }
+        public int ClinicId { get; set; }
+
+        public List<InvoiceItemModel> InvoiceItems { get; set; }
+        public Expression<Func<Invoice, InvoiceModel>> CreateResult()
+        {
+            return m => new InvoiceModel
+            {
+              AmountPaid = m.AmountPaid,
+              ClinicId= m.ClinicId,
+              CreatedBy = m.CreatedBy,
+              DiscountTotal= m.DiscountTotal,
+              DoctorId = m.DoctorId,
+              InvoiceDate = m.InvoiceDate,
+              InvoiceId = m.Id,
+              InvoiceStatus = m.InvoiceStatus,
+              Note = m.Note,
+              PatientId = m.PatientId,
+              PaymentStatus = m.PaymentStatus,
+              ReOccouring = m.ReOccouring,
+              Subtotal = m.Subtotal,
+              TaxTotal = m.TaxTotal,
+              Total = m.Total,
+              UpdatedBy = m.UpdatedBy,
+              UpdatedDateUTC = m.UpdatedDateUtc ,
+              InvoiceItems = m.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
+            };
+        }
+
+        public static implicit operator InvoiceModel(Invoice source)
+        {
+            return new InvoiceModel
+            {
+                AmountPaid = source.AmountPaid,
+                ClinicId = source.ClinicId,
+                CreatedBy = source.CreatedBy,
+                DiscountTotal = source.DiscountTotal,
+                DoctorId = source.DoctorId,
+                InvoiceDate = source.InvoiceDate,
+                InvoiceId = source.Id,
+                InvoiceStatus = source.InvoiceStatus,
+                Note = source.Note,
+                PatientId = source.PatientId,
+                PaymentStatus = source.PaymentStatus,
+                ReOccouring = source.ReOccouring,
+                Subtotal = source.Subtotal,
+                TaxTotal = source.TaxTotal,
+                Total = source.Total,
+                UpdatedBy = source.UpdatedBy,
+                UpdatedDateUTC = source.UpdatedDateUtc,
+                InvoiceItems = source.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
+            };
+        }
+
+        public static implicit operator Invoice(InvoiceModel source)
+        {
+            return new Invoice
+            {
+                AmountPaid = source.AmountPaid,
+                ClinicId = source.ClinicId,
+                CreatedBy = source.CreatedBy,
+                DiscountTotal = source.DiscountTotal,
+                DoctorId = source.DoctorId,
+                InvoiceDate = source.InvoiceDate,
+                Id = source.InvoiceId,
+                InvoiceStatus = source.InvoiceStatus,
+                Note = source.Note,
+                PatientId = source.PatientId,
+                PaymentStatus = source.PaymentStatus,
+                ReOccouring = source.ReOccouring,
+                Subtotal = source.Subtotal,
+                TaxTotal = source.TaxTotal,
+                Total = source.Total,
+                UpdatedBy = source.UpdatedBy,
+                UpdatedDateUtc = source.UpdatedDateUTC,
+                InvoiceItem = source.InvoiceItems.Select(p => (InvoiceItem)p).ToList()
+            };
+        }
+
+    }
+}

@@ -22,7 +22,6 @@
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Extensions\" />
     <Folder Include="HealthChecks\" />
-    <Folder Include="Models\Invoices\" />
     <Folder Include="Pages\" />
   </ItemGroup>
 
