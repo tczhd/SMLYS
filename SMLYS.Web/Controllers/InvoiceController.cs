@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.DTOs.Common;
 using SMLYS.ApplicationCore.Interfaces.Services.Doctor;
+using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
 using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
 using SMLYS.Web.Interfaces.Api;
@@ -26,14 +27,16 @@ namespace SMLYS.Web.Controllers
         private readonly IUtilityService _utilityService;
         private readonly IPatientService _patientService;
         private readonly IDoctorService _doctorService;
+        private readonly IInvoiceService _invoiceService;
         private readonly UserHandler _userHandler;
 
         public InvoiceController(IPatientService patientService, IDoctorService doctorService, 
-            IUtilityService utilityService, UserHandler userHandler)
+            IUtilityService utilityService, IInvoiceService invoiceService, UserHandler userHandler)
         {
             _patientService = patientService;
             _utilityService = utilityService;
             _doctorService = doctorService;
+            _invoiceService = invoiceService;
             _userHandler = userHandler;
         }
 
@@ -98,6 +101,11 @@ namespace SMLYS.Web.Controllers
             else if (view == "Index")
             {
                 ViewData["Title"] = $"Search Invoice";
+
+                var data = _invoiceService.SearchInvoices();
+                var viewData = data.Select(p => (InvoiceViewModel)p).ToList();
+
+                return View(view, viewData);
             }
 
             return View(view);

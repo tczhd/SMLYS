@@ -11,7 +11,9 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
     {
         public int InvoiceId { get; set; }
         public int PatientId { get; set; }
+        public string PatientName { get; set; }
         public int DoctorId { get; set; }
+        public string DoctorName { get; set; }
         public DateTime InvoiceDate { get; set; }
         public decimal Subtotal { get; set; }
         public decimal DiscountTotal { get; set; }
@@ -37,11 +39,13 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
               CreatedBy = m.CreatedBy,
               DiscountTotal= m.DiscountTotal,
               DoctorId = m.DoctorId,
+              DoctorName = m.Doctor != null ? m.Doctor.FirstName + " " + m.Doctor.LastName : string.Empty,
               InvoiceDate = m.InvoiceDate,
               InvoiceId = m.Id,
               InvoiceStatus = m.InvoiceStatus,
               Note = m.Note,
               PatientId = m.PatientId,
+              PatientName = m.Patient != null?m.Patient.FirstName + " " + m.Patient.LastName:string.Empty,
               PaymentStatus = m.PaymentStatus,
               ReOccouring = m.ReOccouring,
               Subtotal = m.Subtotal,
@@ -62,11 +66,13 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 CreatedBy = source.CreatedBy,
                 DiscountTotal = source.DiscountTotal,
                 DoctorId = source.DoctorId,
+                DoctorName = source.Doctor != null ? source.Doctor.FirstName + " " + source.Doctor.LastName : string.Empty,
                 InvoiceDate = source.InvoiceDate,
                 InvoiceId = source.Id,
                 InvoiceStatus = source.InvoiceStatus,
                 Note = source.Note,
                 PatientId = source.PatientId,
+                PatientName = source.Patient != null ? source.Patient.FirstName + " " + source.Patient.LastName : string.Empty,
                 PaymentStatus = source.PaymentStatus,
                 ReOccouring = source.ReOccouring,
                 Subtotal = source.Subtotal,

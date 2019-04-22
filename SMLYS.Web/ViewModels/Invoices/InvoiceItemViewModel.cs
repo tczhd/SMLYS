@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMLYS.ApplicationCore.DTOs.Invoices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,5 +23,17 @@ namespace SMLYS.Web.ViewModels.Invoices
         public decimal Tax { get; set; }
         [Display(Name = "SubTotal")]
         public decimal SubTotal { get; set; }
+
+        public static implicit operator InvoiceItemViewModel(InvoiceItemModel source)
+        {
+            return new InvoiceItemViewModel
+            {
+               ItemId = source.ItemId,
+               ItemName = source.ItemName,
+               Quantity = source.Quantity,
+               Cost = source.Price,
+               SubTotal = source.Subtotal
+            };
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SMLYS.ApplicationCore.DTOs.Patients;
+﻿using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.Patients;
 using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.ApplicationCore.Interfaces.Services.Patients;
@@ -14,10 +15,14 @@ namespace SMLYS.ApplicationCore.Services.Patients
     public class PatientService : IPatientService
     {
         private readonly IRepository<Patient> _patientRepository;
+        private readonly UserHandler _userHandler;
+        private int _clinicId;
 
-        public PatientService(IRepository<Patient> patientRepository)
+        public PatientService(IRepository<Patient> patientRepository, UserHandler userHandler)
         {
             _patientRepository = patientRepository;
+            _userHandler = userHandler;
+            _clinicId = _userHandler.GetUserContext().ClinicId;
         }
 
         public List<Patient> CreatePatientAsync(List<Patient> patients)
@@ -73,7 +78,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public List<Patient> SearchPatientAsync(List<SearchPatientParameter> searchPatientParameter)
         {
-            var patientSpecification = new PatientSpecification();
+            var patientSpecification = new PatientSpecification(_clinicId);
 
             foreach (var parameter in searchPatientParameter)
             {
@@ -92,7 +97,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public Patient SearchPatientAsync(int id)
         {
-            var patientSpecification = new PatientSpecification();
+            var patientSpecification = new PatientSpecification(_clinicId);
             patientSpecification.AddPatientId(id);
 
             return _patientRepository.GetSingleBySpec(patientSpecification);
@@ -100,7 +105,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public PatientModel SearchPatientModelAsync(int id)
         {
-            var patientSpecification = new PatientSpecification();
+            var patientSpecification = new PatientSpecification(_clinicId);
             patientSpecification.AddPatientId(id);
             var data = _patientRepository.GetSingleBySpec(patientSpecification);
 
@@ -115,7 +120,7 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
         public List<PatientModel> SearchPatientsAsync(int familyId)
         {
-            var patientSpecification = new PatientSpecification();
+            var patientSpecification = new PatientSpecification(_clinicId);
             patientSpecification.AddfamilyId(familyId);
 
             var data = _patientRepository.List(patientSpecification);

@@ -9,8 +9,9 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
 {
     public class PatientSpecification : BaseSpecification<Patient>
     {
-        public PatientSpecification() : base()
+        public PatientSpecification(int clinicId) : base()
         {
+            AddCriteria(q => q.ClinicId == clinicId);
             AddInclude(b => b.Family);
             AddInclude(b => b.Address);
             AddInclude($"{nameof(Patient.Address)}.{nameof(Address.Country)}");

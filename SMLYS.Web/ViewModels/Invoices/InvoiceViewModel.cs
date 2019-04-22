@@ -1,4 +1,5 @@
-﻿using SMLYS.Web.ViewModels.Patients;
+﻿using SMLYS.ApplicationCore.DTOs.Invoices;
+using SMLYS.Web.ViewModels.Patients;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,8 @@ namespace SMLYS.Web.ViewModels.Invoices
         public int PatientId { get; set; }
         [Display(Name = "Doctor Id")]
         public int DoctorId { get; set; }
+        [Display(Name = "Clinic Id")]
+        public int ClinicId { get; set; }
         [Display(Name = "Family Id")]
         public int FamilyId { get; set; }
         [Required]
@@ -51,6 +54,24 @@ namespace SMLYS.Web.ViewModels.Invoices
         [Display(Name = "Items")]
         public List<PatientViewModel> Patients { get; set; }
         [Display(Name = "Items")]
-        public List<InvoiceItemViewModel> Items { get; set; }
+        public List<InvoiceItemViewModel> InvoiceItems { get; set; }
+
+        public static implicit operator InvoiceViewModel(InvoiceModel source)
+        {
+            return new InvoiceViewModel
+            {
+                AmountPaid = source.AmountPaid,
+                ClinicId = source.ClinicId,
+                DoctorId = source.DoctorId,
+                DoctorName = source.DoctorName,
+                InvoiceDate = source.InvoiceDate,
+                InvoiceId = source.InvoiceId,
+                PatientId = source.PatientId,
+                PatientName = source.PatientName,
+                ReOccouring = source.ReOccouring,
+                Total = source.Total,
+                InvoiceItems = source.InvoiceItems.Select(p => (InvoiceItemViewModel)p).ToList()
+            };
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public int InvoiceItemId { get; set; }
         public int InvoiceId { get; set; }
         public int ItemId { get; set; }
+        public string ItemName { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal Subtotal { get; set; }
@@ -25,6 +26,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 InvoiceId = m.InvoiceId,
                 InvoiceItemId = m.Id,
                 ItemId = m.ItemId,
+                ItemName = m.Item != null? m.Item.Name: string.Empty,
                 Note = m.Note,
                 Price = m.Price,
                 Quantity = m.Quantity,
@@ -41,6 +43,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 InvoiceId = source.InvoiceId,
                 InvoiceItemId = source.Id,
                 ItemId = source.ItemId,
+                ItemName = source.Item != null ? source.Item.Name : string.Empty,
                 Note = source.Note,
                 Price = source.Price,
                 Quantity = source.Quantity,

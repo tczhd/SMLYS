@@ -1,8 +1,70 @@
-﻿
+﻿@using SMLYS.Web.ViewModels.Invoices
+
+@model IEnumerable<InvoiceViewModel>
+
+
 @{
-    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Invoice</h2>
+<div class="animated fadeIn  view-item-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> @ViewData["Title"]
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-sm table-items">
+                        <thead>
+                            <tr>
+                                <th>INVOICE ID</th>
+                                <th>PATIENT</th>
+                                <th>PHYSICIAN</th>
+                                <th>INVOICE DATE</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                            <tr>
+                                <td>
+                                    <a href="/Invoice/InvoiceForm?id=@item.InvoiceId">@Html.DisplayFor(modelItem => item.InvoiceId) </a>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.PatientName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DoctorName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                            </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+
+
+
+</div>
 
