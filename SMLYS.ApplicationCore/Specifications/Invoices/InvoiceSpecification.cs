@@ -1,8 +1,8 @@
-﻿using SMLYS.ApplicationCore.Entities.InvoiceAggregate;
+﻿using SMLYS.ApplicationCore.Entities.CommonAggregate;
+using SMLYS.ApplicationCore.Entities.InvoiceAggregate;
+using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using SMLYS.ApplicationCore.Specifications.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace SMLYS.ApplicationCore.Specifications.Invoices
 {
@@ -13,8 +13,16 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
             AddCriteria(q => q.ClinicId == clinicId);
             AddInclude(b => b.Doctor);
             AddInclude(b => b.Patient);
+            AddInclude($"{nameof(Invoice.Patient)}.{nameof(Patient.Address)}");
+            AddInclude($"{nameof(Invoice.Patient)}.{nameof(Patient.Address)}.{nameof(Address.Country)}");
+           // AddInclude($"{nameof(Invoice.Patient)}.{nameof(Patient.Address)}.{nameof(Address.Region)}");
             AddInclude(b => b.InvoiceItem);
             AddInclude($"{nameof(Invoice.InvoiceItem)}.{nameof(InvoiceItem.Item)}");
+        }
+
+        public void AddInvoiceId(int invoiceId)
+        {
+            AddCriteria(q => q.Id == invoiceId);
         }
 
 

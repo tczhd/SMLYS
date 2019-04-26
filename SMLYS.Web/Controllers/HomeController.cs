@@ -19,9 +19,12 @@ namespace SMLYS.Web.Controllers
             _userHandler = userHandler;
         }
 
-        public IActionResult Index()
-        { 
-            return View();
+        [Route("{view=Index}")]
+        public IActionResult Index(string view)
+        {
+            ViewData["Title"] = view;
+
+            return View(view);
         }
 
         public IActionResult About()

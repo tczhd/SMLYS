@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMLYS.ApplicationCore.DTOs.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -38,5 +39,21 @@ namespace SMLYS.Web.ViewModels.Adresses
 
         [Display(Name = "Attention To")]
         public string AttentionTo { get; set; }
+
+        public static implicit operator AddressViewModel(AddressModel source)
+        {
+            return new AddressViewModel
+            {
+                Address1 = source.Address1,
+                Address2 = source.Address2,
+                AttentionTo = source.AttentionTo,
+                City = source.City,
+                CountryId = source.CountryId,
+                CountryName = source.CountryName,
+                RegionId = source.RegionId,
+                RegionName = source.RegionName,
+                PostalCode = source.PostalCode
+            };
+        }
     }
 }

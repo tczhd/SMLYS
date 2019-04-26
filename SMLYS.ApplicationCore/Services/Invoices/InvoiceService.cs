@@ -43,6 +43,15 @@ namespace SMLYS.ApplicationCore.Services.Invoices
             }        
         }
 
+        public InvoiceModel SearchInvoice(int invoiceId)
+        {
+            var invoiceDetailSpecification = new InvoiceSpecification(_clinicId);
+            invoiceDetailSpecification.AddInvoiceId(invoiceId);
+            var data = _invoiceRepository.GetSingleBySpec(invoiceDetailSpecification);
+
+            return data;
+        }
+
         public List<InvoiceModel> SearchInvoices()
         {
             var invoiceSpecification = new InvoiceSpecification(_clinicId);

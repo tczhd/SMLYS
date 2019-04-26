@@ -41,7 +41,7 @@ namespace SMLYS.Web.Controllers
         }
 
         [Route("{view=Index}")]
-        public IActionResult Index(int id, string view, int patientId)
+        public IActionResult Index(int id, string view, int patientId, int invoiceId)
         {
             var userContext = _userHandler.GetUserContext();
             if (view == "InvoiceForm")
@@ -96,6 +96,25 @@ namespace SMLYS.Web.Controllers
                     ViewData["FormType"] = $"Edit Invoice";
 
                     return View(view);
+                }
+            }
+            else if (view == "InvoiceDetail")
+            {
+                ViewData["Title"] = $"Invoice Detail";
+
+                var data = _invoiceService.SearchInvoice(invoiceId);
+                if (data != null)
+                {
+                    var viewData = (InvoiceViewModel)data;
+
+                    return View(view, viewData);
+                }
+                else
+                {
+                    var result = new BaseResultViewModel();
+                    result.Message = "Invoice not found. ";
+
+                    return View("_SharedResult", result);
                 }
             }
             else if (view == "Index")

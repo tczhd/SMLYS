@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
+using SMLYS.ApplicationCore.DTOs.Common;
 
 namespace SMLYS.ApplicationCore.DTOs.Invoices
 {
@@ -28,7 +29,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public int? UpdatedBy { get; set; }
         public bool ReOccouring { get; set; }
         public int ClinicId { get; set; }
-
+        public AddressModel PatientAddress { get; set; }
         public List<InvoiceItemModel> InvoiceItems { get; set; }
         public Expression<Func<Invoice, InvoiceModel>> CreateResult()
         {
@@ -53,6 +54,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
               Total = m.Total,
               UpdatedBy = m.UpdatedBy,
               UpdatedDateUTC = m.UpdatedDateUtc ,
+              PatientAddress = (m.Patient.Address != null)? m.Patient.Address : null,
               InvoiceItems = m.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
             };
         }
@@ -80,6 +82,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 Total = source.Total,
                 UpdatedBy = source.UpdatedBy,
                 UpdatedDateUTC = source.UpdatedDateUtc,
+                PatientAddress = (source.Patient.Address != null)? source.Patient.Address: null,
                 InvoiceItems = source.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
             };
         }

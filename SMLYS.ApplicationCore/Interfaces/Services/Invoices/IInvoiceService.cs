@@ -10,5 +10,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Invoices
         List<InvoiceModel> CreateInvoiceAsync(List<InvoiceModel> invoice);
 
         List<InvoiceModel> SearchInvoices();
+
+        InvoiceModel SearchInvoice(int invoiceId);
     }
 }

@@ -1,0 +1,223 @@
+﻿@model SMLYS.Web.ViewModels.Invoices.InvoiceViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal" id="myForm">
+        <div id="invoice" class="row invoice-row">
+            <div class="col-sm-12 invoice-col">
+                <div class="card">
+                    <section class="primary-invoice-section invoice">
+                        <div class="card-header">
+                            <strong>@ViewData["Title"]</strong>
+                            <input type="hidden" asp-for="InvoiceId" id="FamilyIdHidden" />
+                            <input type="hidden" asp-for="FamilyId" id="FamilyIdHidden" />
+                            <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
+                        </div>
+                        <div class="card-body invoice-body">
+
+                            <section class="invoice-basic-section">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="PatientName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.PatientName)
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="InvoiceId"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.InvoiceId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="SendToName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="send-to-name float-sm-left">
+                                                @Html.DisplayFor(item => item.PatientName)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="InvoiceDate"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group invoice-date">
+                                            @Html.DisplayFor(item => item.InvoiceDate)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group address-sestion">
+
+                                            <div class="patient-address d-none">
+                                                <input type="hidden" asp-for="PatientId" id="AddressPatientIdHidden" />
+                                                <div>
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.Address1) -
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.Address2)
+                                                </div>
+                                                <div>
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.City),
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.RegionName) &nbsp;
+                                                    @Html.DisplayFor(modelItem => modelItem.PatientAddress.CountryName)
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="DoctorName"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.DisplayFor(item => item.DoctorName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label asp-for="ReOccouring"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="form-group re-occouring-type d-none">
+                                            <select id="selectReOccouringType" name="selectReOccouringType" class="form-control">
+                                                <option value="1">Yearly</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group re-occouring-year d-none">
+                                            <select id="selectYear" name="selectYear" class="form-control">
+                                                <option value="1">Starting January 9, 2019</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section class="invoice-detail-section">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-striped table-sm table-invoices">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:20%">Item</th>
+                                                    <th style="width:35%">Description</th>
+                                                    <th style="width:10%">Qty</th>
+                                                    <th style="width:10%">Cost</th>
+                                                    <th style="width:10%">Tax</th>
+                                                    <th style="width:10%">Amount</th>
+                                                    <th style="width:5%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="invoice-items">
+
+                                                @foreach (var item in Model.InvoiceItems)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @item.ItemName
+                                                        </td>
+                                                        <td>
+                                                            @item.Description
+                                                        </td>
+                                                        <td>
+                                                            @item.Quantity
+                                                        </td>
+                                                        <td>
+                                                            @item.Cost
+                                                        </td>
+                                                        <td>
+                                                            @item.Tax
+                                                        </td>
+                                                        <td>
+                                                            @item.SubTotal
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.col-->
+                        </div>
+                    </section>
+
+                    <section class="invoice-total">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-8 ">
+
+                                    </div>
+                                    <div class="col-sm-4 invoice-total">
+                                        <table class="table table-bordered table-sm table-invoices">
+                                            <tbody class="invoice-total">
+                                                <tr><td>Subtotal</td><td class="invoice-subtotal">@Model.SubTotal</td></tr>
+                                                <tr><td>Tax</td><td class="invoice-tax">@Model.Tax</td></tr>
+                                                <tr><td>Amount paid</td><td class="invoice-amount-paid">@Model.AmountPaid</td></tr>
+                                                <tr><td>Balance Due</td><td class="invoice-total">@Model.Total</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="card-footer add-patient-buttons">
+                        <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
