@@ -9,7 +9,7 @@ using Twilio.Types;
 
 namespace SMLYS.Infrastructure.Services.SMS
 {
-    public class TwilioAuthMessageSender : IEmailSender, ISmsSender
+    public class TwilioAuthMessageSender : ISmsSender
     {
         public TwilioAuthMessageSender(IOptions<SMSoptions> optionsAccessor)
         {
@@ -17,12 +17,6 @@ namespace SMLYS.Infrastructure.Services.SMS
         }
 
         public SMSoptions Options { get; }  // set only via Secret Manager
-
-        public Task SendEmailAsync(string email, string subject, string message)
-        {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
-        }
 
         public Task SendSmsAsync(string number, string message)
         {

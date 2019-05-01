@@ -6,6 +6,7 @@ using SMLYS.Web.Models;
 using Microsoft.AspNetCore.Http;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.DTOs.User;
+using SMLYS.ApplicationCore.Interfaces.Base;
 
 namespace SMLYS.Web.Controllers
 {
@@ -13,16 +14,19 @@ namespace SMLYS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserHandler _userHandler;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(UserHandler userHandler)
+        public HomeController(UserHandler userHandler, IEmailSender emailSender)
         {
             _userHandler = userHandler;
+            _emailSender = emailSender;
         }
 
         [Route("{view=Index}")]
         public IActionResult Index(string view)
         {
             ViewData["Title"] = view;
+            _emailSender.SendEmailAsync("hongdingzhu@hotmail.com", "Test", "Test content");
 
             return View(view);
         }

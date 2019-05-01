@@ -32,6 +32,8 @@ using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
 using SMLYS.ApplicationCore.Services.Taxes;
 using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
 using SMLYS.ApplicationCore.Services.Invoices;
+using SMLYS.Infrastructure.Configuration.Identity;
+using SMLYS.Infrastructure.Configuration.Email;
 
 namespace SMLYS.Web
 {
@@ -63,6 +65,14 @@ namespace SMLYS.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")
                     , b => b.MigrationsAssembly("SMLYS.Infrastructure")));
+
+
+            // Get Identity Default Options
+            IConfigurationSection identityDefaultOptionsConfigurationSection = Configuration.GetSection("IdentityDefaultOptions");
+
+            services.Configure<IdentityDefaultOptions>(identityDefaultOptionsConfigurationSection);
+
+            var identityDefaultOptions = identityDefaultOptionsConfigurationSection.Get<IdentityDefaultOptions>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                   .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -96,6 +106,17 @@ namespace SMLYS.Web
             ConfigureWebService(services);
             // Add application services.
 
+            // Add DI for Dotnetdesk
+            services.AddTransient<INetcoreService, NetcoreService>();
+
+            // Get SendGrid configuration options
+            services.Configure<SendGridOptions>(Configuration.GetSection("SendGridOptions"));
+            var sgDefaultOptions = Configuration.GetSection("SendGridOptions").Get<SendGridOptions>();
+
+            // Get SMTP configuration options
+            services.Configure<SmtpOptions>(Configuration.GetSection("SmtpOptions"));
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
@@ -103,7 +124,7 @@ namespace SMLYS.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<UserHandler>();
 
-            services.AddTransient<IEmailSender, TwilioAuthMessageSender>();
+            //services.AddTransient<IEmailSender, TwilioAuthMessageSender>();
             services.AddTransient<ISmsSender, TwilioAuthMessageSender>();
             services.Configure<SMSoptions>(Configuration);
         }
