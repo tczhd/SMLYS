@@ -224,7 +224,7 @@ SMLYS.Invoice = {
             var modalFooter = modalContent.find('.modal-footer');
             modalFooter.html('');
 
-            var button = SMLYS.getModalFooterButton('create-invoice-btn', 'Create Another Invoice');
+            var button = SMLYS.getModalFooterButton('view-invoice-btn', 'Go to invoice detail');
 
             var jsonInvoice = { invoice_items:[]};
 
@@ -276,7 +276,7 @@ SMLYS.Invoice = {
 
                     modalBody.html("Add new invoice success. ");
                     $(button).click(function () {
-                        window.location.href = '/Invoice/InvoiceDeatil?invoiceId=' + result.InvoiceId;
+                        window.location.href = '/Invoice/InvoiceDetail?invoiceId=' + result.invoiceId;
                     });
                     modalFooter.append(button);
 

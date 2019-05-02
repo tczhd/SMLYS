@@ -96,10 +96,8 @@ namespace SMLYS.Web.Controllers.Api
                 UpdatedDateUTC = DateTime.UtcNow
             };
 
-            var invoiceList = new List<InvoiceModel>();
-            invoiceList.Add(invoiceModel);
-            var result = _invoiceService.CreateInvoiceAsync(invoiceList);
-            return Json(result.First());
+            var result = _invoiceService.CreateInvoiceAsync(invoiceModel);
+            return Json(result);
         }
 
         // POST api/<controller>/PostSearchPatients

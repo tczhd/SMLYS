@@ -26,7 +26,7 @@ namespace SMLYS.Web.Controllers
         public IActionResult Index(string view)
         {
             ViewData["Title"] = view;
-            _emailSender.SendEmailAsync("hongdingzhu@hotmail.com", "Test", "Test content");
+           // _emailSender.SendEmailAsync("hongdingzhu@gmail.com", "Test", "Test content");
 
             return View(view);
         }

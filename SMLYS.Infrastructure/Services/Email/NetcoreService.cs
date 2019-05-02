@@ -22,16 +22,15 @@ namespace SMLYS.Infrastructure.Services.Email
         public async Task SendEmailBySendGridAsync(string apiKey, string fromEmail, string fromFullName, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress(fromEmail, fromFullName),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email, email));
-            await client.SendEmailAsync(msg);
+            var from = new EmailAddress(fromEmail, fromFullName);
+            var to = new EmailAddress(email);
+            var plainTextContent = message;
+            var htmlContent = "<strong>" + message  + "</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
+            var response = await client.SendEmailAsync(msg);
+
+            var data = response.Body;
         }
 
         public async Task SendEmailByGmailAsync(string fromEmail,

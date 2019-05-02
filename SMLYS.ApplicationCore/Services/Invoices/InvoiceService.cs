@@ -22,20 +22,17 @@ namespace SMLYS.ApplicationCore.Services.Invoices
             _userHandler = userHandler;
             _clinicId = _userHandler.GetUserContext().ClinicId;
         }
-        public List<InvoiceModel> CreateInvoiceAsync(List<InvoiceModel> invoiceModels)
+        public InvoiceModel CreateInvoiceAsync(InvoiceModel invoiceModel)
         {
             try
             {
-                var invoices = invoiceModels.Select(p => (Invoice)p).ToList();
-
-                foreach (Invoice invoice in invoices)
-                {
-                    _invoiceRepository.AddOnly(invoice);
-                }
+                var invoice = (Invoice)invoiceModel;
+                 _invoiceRepository.AddOnly(invoice);
 
                 _invoiceRepository.SaveAll();
 
-                return invoiceModels;
+                invoiceModel.InvoiceId = invoice.Id;
+                return invoiceModel;
             }
             catch (Exception ex)
             {

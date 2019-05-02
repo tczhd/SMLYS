@@ -7,7 +7,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Invoices
 {
     public interface IInvoiceService
     {
-        List<InvoiceModel> CreateInvoiceAsync(List<InvoiceModel> invoice);
+        InvoiceModel CreateInvoiceAsync(InvoiceModel invoice);
 
         List<InvoiceModel> SearchInvoices();
 
