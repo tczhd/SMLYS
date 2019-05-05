@@ -22,14 +22,15 @@ namespace SMLYS.Infrastructure.Services.Email
         }
 
 
-        public Task SendEmailAsync(string email, string subject, string message)
+        public Task SendEmailAsync(string email, string subject, string plainTextContent, string htmlContent)
         {
             //send email using sendgrid via netcoreService
             _netcoreService.SendEmailBySendGridAsync(_sendGridOptions.SendGridKey,
                 _sendGridOptions.FromEmail,
                 _sendGridOptions.FromFullName,
                 subject,
-                message,
+                plainTextContent,
+                htmlContent,
                 email).Wait();
 
             //send email using smtp via dotnetdesk. uncomment to use it

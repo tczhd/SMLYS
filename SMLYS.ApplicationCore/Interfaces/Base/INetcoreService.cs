@@ -9,7 +9,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Base
 {
     public interface INetcoreService
     {
-        Task SendEmailBySendGridAsync(string apiKey, string fromEmail, string fromFullName, string subject, string message, string email);
+        Task SendEmailBySendGridAsync(string apiKey, string fromEmail, string fromFullName, string subject, string plainTextContent, string htmlContent , string email);
 
         Task SendEmailByGmailAsync(string fromEmail,
             string fromFullName,

@@ -5,6 +5,6 @@ namespace SMLYS.ApplicationCore.Interfaces.Base
 
     public interface IEmailSender
     {
-        Task SendEmailAsync(string email, string subject, string message);
+        Task SendEmailAsync(string email, string subject, string plainTextContent, string htmlContent);
     }
 }

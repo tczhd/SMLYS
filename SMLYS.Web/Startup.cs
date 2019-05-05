@@ -34,6 +34,7 @@ using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
 using SMLYS.ApplicationCore.Services.Invoices;
 using SMLYS.Infrastructure.Configuration.Identity;
 using SMLYS.Infrastructure.Configuration.Email;
+using SMLYS.RazorClassLib.Services;
 
 namespace SMLYS.Web
 {
@@ -163,6 +164,7 @@ namespace SMLYS.Web
         private void ConfigureWebService(IServiceCollection services)
         {
             services.AddScoped<IPatientApiService, PatientApiService>();
+            services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
         }
 
         private void ConfigureApplicatiojnService(IServiceCollection services)

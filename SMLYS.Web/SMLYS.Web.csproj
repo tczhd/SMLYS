@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Emails\ConfirmAccount\ConfirmAccountEmail.cshtml" />
     <None Include="wwwroot\images\banner1.svg" />
     <None Include="wwwroot\images\banner2.svg" />
     <None Include="wwwroot\images\banner3.svg" />
@@ -74,6 +75,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SMLYS.ApplicationCore\SMLYS.ApplicationCore.csproj" />
     <ProjectReference Include="..\SMLYS.Infrastructure\SMLYS.Infrastructure.csproj" />
+    <ProjectReference Include="..\SMLYS.RazorClassLib\SMLYS.RazorClassLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

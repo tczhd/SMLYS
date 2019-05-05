@@ -19,13 +19,11 @@ namespace SMLYS.Infrastructure.Services.Email
         {
         }
 
-        public async Task SendEmailBySendGridAsync(string apiKey, string fromEmail, string fromFullName, string subject, string message, string email)
+        public async Task SendEmailBySendGridAsync(string apiKey, string fromEmail, string fromFullName, string subject, string plainTextContent, string htmlContent , string email)
         {
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(fromEmail, fromFullName);
             var to = new EmailAddress(email);
-            var plainTextContent = message;
-            var htmlContent = "<strong>" + message  + "</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
             var response = await client.SendEmailAsync(msg);

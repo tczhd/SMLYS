@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.DTOs.User;
 using SMLYS.ApplicationCore.Interfaces.Base;
+using SMLYS.RazorClassLib.Services;
+using SMLYS.RazorClassLib.Views.Emails.ConfirmAccount;
+using System.Threading.Tasks;
 
 namespace SMLYS.Web.Controllers
 {
@@ -15,18 +18,26 @@ namespace SMLYS.Web.Controllers
     {
         private readonly UserHandler _userHandler;
         private readonly IEmailSender _emailSender;
+        private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
-        public HomeController(UserHandler userHandler, IEmailSender emailSender)
+        public HomeController(UserHandler userHandler, IEmailSender emailSender,
+            IRazorViewToStringRenderer razorViewToStringRenderer)
         {
             _userHandler = userHandler;
             _emailSender = emailSender;
+            _razorViewToStringRenderer = razorViewToStringRenderer;
         }
 
         [Route("{view=Index}")]
-        public IActionResult Index(string view)
+        public async Task<IActionResult> Index(string view)
         {
             ViewData["Title"] = view;
-           // _emailSender.SendEmailAsync("hongdingzhu@gmail.com", "Test", "Test content");
+
+          //  var confirmAccountModel = new ConfirmAccountEmailViewModel($"test_link");
+
+           // string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/ConfirmAccount/ConfirmAccountEmail.cshtml", confirmAccountModel);
+
+            //await _emailSender.SendEmailAsync("hongdingzhu@gmail.com", "Test", "Test content", body);
 
             return View(view);
         }
