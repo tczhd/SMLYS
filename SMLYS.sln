@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.IntegrationTests", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.UnitTests", "SMLYS.UnitTests\SMLYS.UnitTests.csproj", "{45E313D3-1708-4A92-B2D7-D87E2254DC90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMLYS.RazorClassLib", "SMLYS.RazorClassLib\SMLYS.RazorClassLib.csproj", "{BE7F62C0-6032-4B12-97DC-7FFA89343AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMLYS.RazorClassLib", "SMLYS.RazorClassLib\SMLYS.RazorClassLib.csproj", "{BE7F62C0-6032-4B12-97DC-7FFA89343AA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

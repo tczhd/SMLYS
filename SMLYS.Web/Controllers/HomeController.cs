@@ -33,9 +33,8 @@ namespace SMLYS.Web.Controllers
         {
             ViewData["Title"] = view;
 
-          //  var confirmAccountModel = new ConfirmAccountEmailViewModel($"test_link");
-
-           // string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/ConfirmAccount/ConfirmAccountEmail.cshtml", confirmAccountModel);
+            //var invoiceModel = new SMLYS.Web.Views.Emails.Invoices.InvoiceModel();
+            //string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/Invoices/Invoice.cshtml", invoiceModel);
 
             //await _emailSender.SendEmailAsync("hongdingzhu@gmail.com", "Test", "Test content", body);
 
