@@ -1,166 +1,564 @@
-﻿@using SMLYS.Web.Views.Emails.Invoices
+﻿@using SMLYS.ApplicationCore.DTOs.Invoices
 
 @model InvoiceModel
 @{
 }
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome Email from TCP</title>
+    <title>Invoice</title>
 </head>
 
 <body>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td align="center" valign="top" bgcolor="#ffe77b" style="background-color:#ffe77b;">
-                <br>
-                <br>
-                <table width="600" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td height="70" align="left" valign="middle"></td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top"><img src="http://localhost:2131/Templates/EmailTemplate/images/top.png" width="600" height="13" style="display:block;"></td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top" bgcolor="#564319" style="background-color:#564319; font-family:Arial, Helvetica, sans-serif; padding:10px;">
-                            <div style="font-size:36px; color:#ffffff;">
-                                <b>{0}</b>
-                            </div>
-                            <div style="font-size:13px; color:#a29881;">
-                                <b>{1} : ASP.NET Core Demp App</b>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top" bgcolor="#ffffff" style="background-color:#ffffff;">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td align="center" valign="middle" style="padding:10px; color:#564319; font-size:28px; font-family:Georgia, 'Times New Roman', Times, serif;">
-                                        Congratulations! <small>You are registered.</small>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td width="40%" align="center" valign="middle" style="padding:10px;">
-                                        <img src="http://localhost:2131/Templates/EmailTemplate/images/Weak_Password.gif" width="169" height="187" style="display:block">
-                                    </td>
-                                    <td align="left" valign="middle" style="color:#525252; font-family:Arial, Helvetica, sans-serif; padding:10px;">
-                                        <div style="font-size:16px;">
-                                            Dear {2},
-                                        </div>
-                                        <div style="font-size:12px;">
-                                            Thank you for showing your interest  in  our website.
-                                            All you need to do is click the button below (it only takes a few seconds).
-                                            You won’t be asked to log in to your account – we're simply verifying ownership of this email address.
-                                            <hr>
-                                            <center>
-
-                                                <button type="button" title="Confirm Account Registration" style="background: #1b97f1">
-                                                    <a href="{6}" style="font-size:22px; padding: 10px; color: #ffffff">
-                                                        Confirm Email Now
-                                                    </a>
-                                                </button>
-
-                                            </center>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td align="center" valign="middle" style="padding:5px;">
-                                        <img src="http://localhost:2131/Templates/EmailTemplate/images/divider.gif" width="566" height="30">
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-bottom:15px;">
-                                <tr>
-                                    <td align="left" valign="middle" style="padding:15px; font-family:Arial, Helvetica, sans-serif;">
-                                        <div style="font-size:20px; color:#564319;">
-                                            <b>Please keep your credentials confidential for future use. </b>
-                                        </div>
-                                        <div style="font-size:16px; color:#525252;">
-                                            <b>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {2}
-                                            <br />
-                                            <b>Username :</b> {3}
-                                            <br />
-                                            <b>Password :</b> {4}
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:10px;">
-                                <tr>
-                                    <td align="left" valign="middle" style="padding:15px; background-color:#564319; font-family:Arial, Helvetica, sans-serif;">
-                                        <div style="font-size:20px; color:#fff;">
-                                            <b>Update your password now.</b>
-                                        </div>
-                                        <div style="font-size:13px; color:#ffe77b;">
-                                            Weak passwords get stolen and lead to hacked accounts. Celebrate World Password Day with a new, strong password.
-                                            <br>
-                                            <br>
-                                            <a href="#" style="color:#ffe77b; text-decoration:underline;">CLICK HERE</a> TO CHANGE PASSOWORD
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td width="50%" align="left" valign="middle" style="padding:10px;">
-                                        <table width="75%" border="0" cellspacing="0" cellpadding="4">
+    <blockquote style="margin-top:5.0pt; margin-bottom:5.0pt">
+        <div>
+            <div>
+                <p class="x_MsoNormal"><span style="font-size:1.0pt">Receipt for $24.00 at SMLYS Inc. on 02/03/2019, 12:34.</span></p>
+            </div>
+            <div>
+                <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; border-collapse:collapse">
+                    <tbody>
+                        <tr>
+                            <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                <div align="center">
+                                    <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="375" style="width:281.25pt">
+                                        <tbody>
                                             <tr>
-                                                <td align="left" valign="top" style="font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#000000;">
-                                                    <b>Follow Us On</b>
+                                                <td width="375" valign="top" style="width:281.25pt; padding:0cm 0cm 0cm 0cm">
+                                                    <div align="center">
+                                                        <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="max-width:281.25pt; border-collapse:collapse">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="padding:0cm 0cm 0cm 0cm">
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <div align="center">
+                                                                                                <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="background:#43505E; border-collapse:collapse">
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td valign="bottom" style="padding:0cm 0cm 0cm 0cm">
+                                                                                                                <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed.png" border="0" width="375" height="3" id="x__x0000_i1025" alt="gray" style="width:3.9062in; height:.0312in"></span></p>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td valign="bottom" style="padding:0cm 0cm 0cm 0cm">
+                                                                                                                <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(1).png" border="0" width="375" height="3" id="x__x0000_i1026" alt="white" style="width:3.9062in; height:.0312in"></span></p>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr style="height:6.0pt">
+                                                                                                            <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:6.0pt"></td>
+                                                                                                        </tr>
+                                                                                                        <tr style="height:105.75pt">
+                                                                                                            <td width="100%" style="width:100.0%; padding:0cm 27.0pt 0cm 27.0pt; height:105.75pt">
+                                                                                                                <div align="center">
+                                                                                                                    <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; border-collapse:collapse; border-spacing:0; word-wrap:break-word">
+                                                                                                                        <tbody>
+                                                                                                                            <tr>
+                                                                                                                                <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                                                                    <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); border: 2.25pt solid white; padding: 0cm;"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/original.jpeg" border="0" width="64" height="64" id="x__x0000_i1027" style="width:.6666in; height:.6666in"></span><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"></span></p>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                            <tr>
+                                                                                                                                <td style="padding:18.0pt 0cm 0cm 0cm">
+                                                                                                                                    <p class="x_MsoNormal" align="center" style="text-align:center; line-height:13.5pt">
+                                                                                                                                        <span style="font-size: 12pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: white; letter-spacing: 0.25pt;">SMLYS Inc.</span>
+                                                                                                                                    </p>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        </tbody>
+                                                                                                                    </table>
+                                                                                                                </div>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr style="height:6.0pt">
+                                                                                                            <td valign="bottom" style="padding:0cm 0cm 0cm 0cm; height:6.0pt"></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:#546476; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr style="height:9.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:9.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <div>
+                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:18.0pt">
+                                                                                                    <span style="font-size: 12pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: white; letter-spacing: 0.15pt;">How was your experience?</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:3.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:3.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                            <div align="center">
+                                                                                                <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-spacing:0">
+                                                                                                    <tbody>
+                                                                                                        <tr style="height:39.0pt">
+                                                                                                            <td width="74" style="width:55.5pt; padding:0cm 0cm 0cm 0cm; height:39.0pt">
+                                                                                                                <div>
+                                                                                                                    <p class="x_MsoNormal" align="center" style="text-align:center; line-height:12.0pt">
+                                                                                                                        <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: blue;"><a href="https://a.squareupmessaging.com/CL0/https:%2F%2Faccount.squareup.com%2Fresponse%2FrT65GPRG55SSZT9%2F1/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/uotWPLQ5qafbR2PE3AqrgXCwYjL-akQTtWO7BSGnoJg=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="text-decoration:none"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/feedback-positive-bc34c2851006e86f0d10d5f7fa726d30.png" border="0" width="64" height="64" id="x__x0000_i1028" alt="Positive" style="width:.6666in; height:.6666in"></span></a><span class="x_MsoHyperlink"><span style="text-decoration:none"></span></span></span>
+                                                                                                                    </p>
+                                                                                                                </div>
+                                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:12.0pt">
+                                                                                                                    <span style="color:#3D454D">&nbsp;</span>
+                                                                                                                </p>
+                                                                                                            </td>
+                                                                                                            <td width="74" style="width:55.5pt; padding:0cm 0cm 0cm 0cm; height:39.0pt">
+                                                                                                                <div>
+                                                                                                                    <p class="x_MsoNormal" align="center" style="text-align:center; line-height:12.0pt">
+                                                                                                                        <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: blue;"><a href="https://a.squareupmessaging.com/CL0/https:%2F%2Faccount.squareup.com%2Fresponse%2FrT65GPRG55SSZT9%2F-1/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/98nIXr9CJOxus_fnb8UtPFbAZZxOHYpTMC7YaZew1sc=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="text-decoration:none"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/feedback-negative-0ca99b85bb431c7cbd5c68e1e7276ad6.png" border="0" width="64" height="64" id="x__x0000_i1029" alt="Negative" style="width:.6666in; height:.6666in"></span></a></span><span class="x_MsoHyperlink"><span style="text-decoration:none"></span></span>
+                                                                                                                    </p>
+                                                                                                                </div>
+                                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:12.0pt">
+                                                                                                                    <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);">&nbsp;</span>
+                                                                                                                </p>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:12.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:12.0pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr style="height:18.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:18.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center; line-height:48.0pt">
+                                                                                                <span class="x_currencysymbol"><sup><span style="font-size: 19.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);">$</span></sup></span><span style="font-size: 48pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);">24.00</span>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:12.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:12.0pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1030" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%; word-wrap:break-word">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm"></td>
+                                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <p class="x_MsoNormal">&nbsp;</p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:2.25pt">
+                                                                                                        <td width="100%" colspan="2" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:2.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:.75pt">
+                                                                                                        <td colspan="2" style="border:none; border-top:dashed #E0E1E2 1.0pt; padding:0cm 0cm 0cm 0cm; height:.75pt">
+                                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="1" height="1" id="x__x0000_i1031" style="width:.0104in; height:.0104in"></span></p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:5.25pt">
+                                                                                                        <td width="100%" colspan="2" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:5.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="70%" valign="top" style="width:70.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">Bulbs Small Bag</span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td width="30%" valign="top" style="width:30.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt">
+                                                                                                                    <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">$10.00</span>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="70%" valign="top" style="width:70.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">Bulbils × 7</span></p>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:13.5pt"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">($2.00 ea.)</span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td width="30%" valign="top" style="width:30.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt">
+                                                                                                                    <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">$14.00</span>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:8.25pt">
+                                                                                                        <td width="100%" colspan="2" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:8.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:.75pt">
+                                                                                                        <td colspan="2" style="border:none; border-top:dashed #E0E1E2 1.0pt; padding:0cm 0cm 0cm 0cm; height:.75pt">
+                                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="1" height="1" id="x__x0000_i1032" style="width:.0104in; height:.0104in"></span></p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:8.25pt">
+                                                                                                        <td width="100%" colspan="2" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:8.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="70%" style="width:70.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">Total</span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td width="30%" style="width:30.0%; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt">
+                                                                                                                    <b><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">$24.00</span></b>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1033" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1034" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%; word-wrap:break-word">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm"></td>
+                                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <p class="x_MsoNormal">&nbsp;</p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:12.0pt">
+                                                                                                        <td width="100%" colspan="2" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:12.0pt"></td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1035" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%; word-wrap:break-word">
+                                                                                <tbody>
+                                                                                    <tr style="height:.75pt">
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm; height:.75pt"></td>
+                                                                                    </tr>
+                                                                                    <tr style="height:18.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:18.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center; line-height:17.25pt">
+                                                                                                <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">SMLYS Inc.</span>
+                                                                                            </p>
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center; line-height:17.25pt">
+                                                                                                <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;"><a href="http://a.squareupmessaging.com/CL0/tel:778-833-4786/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/OeWYKjqNgX4QAMqwjibS-B5vrY6t_nOc7JULibs70ac=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="color:#3D454D; text-decoration:none">778-833-4786</span></a></span>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:12.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:12.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td id="x_receipt-instagram-url" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <div align="center">
+                                                                                                <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-spacing:0">
+                                                                                                    <tbody>
+                                                                                                        <tr style="height:24.0pt">
+                                                                                                            <td width="56" style="width:42.0pt; padding:0cm 0cm 0cm 0cm; height:24.0pt; border-spacing:0">
+                                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><a href="https://a.squareupmessaging.com/CL0/https:%2F%2Finstagram.com%2Fbcgarlic/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/ZJa8gd34WY3xjcxUdcJBQpJ8Xw5IKlRpsXRQuv4GAWQ=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="text-decoration:none"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/instagram-icon-15a3789a9bfe2b42c65c01ff4902ffdf.png" border="0" width="32" height="32" id="x__x0000_i1036" alt="Instagram icon" style="width:.3333in; height:.3333in"></span></a></span></p>
+                                                                                                            </td>
+                                                                                                            <td width="56" id="x_receipt-website-url" style="width:42.0pt; padding:0cm 0cm 0cm 0cm; height:24.0pt">
+                                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><a href="http://a.squareupmessaging.com/CL0/http:%2F%2Fbcgarlic.com/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/RRZtk5HbAV7TKRqrLagAOoywz1zLndRmhvExvAWxes0=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="text-decoration:none"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/website-icon-6421faf6aecca340cea0b412a567f098.png" border="0" width="32" height="32" id="x__x0000_i1037" alt="Website icon" style="width:.3333in; height:.3333in"></span></a></span></p>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:15.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:15.0pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-spacing:0">
+                                                                                <tbody>
+                                                                                    <tr style="height:.75pt">
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm; height:.75pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1038" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                        <td style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:white; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td width="140" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm"></td>
+                                                                                                        <td width="140" style="width:105.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <p class="x_MsoNormal">&nbsp;</p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:12.0pt">
+                                                                                                        <td width="100%" valign="top" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:12.0pt"></td>
+                                                                                                        <td width="140" style="width:105.0pt; padding:0cm 0cm 0cm 0cm; height:12.0pt">
+                                                                                                            <p class="x_MsoNormal">&nbsp;</p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="140" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt; vertical-align:top"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">Visa 8776 (Contactless)</span></p>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt; vertical-align:top"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/tender-visa-bf2b54a2ce73a8025ce46738a05503f0.png" border="0" width="40" height="16" id="x__x0000_i1039" style="width:.4166in; height:.1666in"></span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td width="140" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt; vertical-align:top">
+                                                                                                                    <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">02/03/2019, 12:34</span>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt; vertical-align:top">
+                                                                                                                    <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">#FAYU</span>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" align="right" style="text-align:right; line-height:15.75pt; vertical-align:top">
+                                                                                                                    <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">Auth code: 030238</span>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="140" colspan="2" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm"></td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:8.25pt">
+                                                                                                        <td width="100%" colspan="2" valign="top" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:8.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:.75pt">
+                                                                                                        <td width="140" colspan="2" valign="top" style="width:105.0pt; border:none; border-top:dashed #E0E1E2 1.0pt; padding:0cm 0cm 0cm 0cm; height:.75pt">
+                                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="1" height="1" id="x__x0000_i1040" style="width:.0104in; height:.0104in"></span></p>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr style="height:8.25pt">
+                                                                                                        <td width="100%" colspan="2" valign="top" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:8.25pt"></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="140" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt; vertical-align:top"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">AID: A0000000031010</span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                        <td width="140" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm"></td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td width="140" colspan="2" valign="top" style="width:105.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                                            <div>
+                                                                                                                <p class="x_MsoNormal" style="line-height:15.75pt; vertical-align:top"><span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">GST/HST: 776013922RT0001</span></p>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                        <td width="16" style="width:12.0pt; padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/spacer-aaefc7206bbc074481af8eb7755a10ed(2).png" border="0" width="16" height="1" id="x__x0000_i1041" style="width:.1666in; height:.0104in"></span></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="background:#F2F4F5; border-collapse:collapse; border-spacing:0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" style=""><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/receipt-bottom-edge-ca4f6dd992e49e004260fe59d690d9c0.png" border="0" width="375" height="4" id="x__x0000_i1042" style="width:3.9062in; height:.0416in"></span></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%; background:#F2F4F5; border-collapse:collapse; border-spacing:0; min-width:100%">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td style="padding:18.0pt 33.75pt 1.5pt 33.75pt">
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center; line-height:15.75pt">
+                                                                                                <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); letter-spacing: 0.15pt;">Run your own business?</span>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="padding:0cm 33.75pt 9.0pt 33.75pt">
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center; line-height:15.75pt">
+                                                                                                <span style="font-size: 10.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">Start using Square and process $1,000 in sales for free.</span>
+                                                                                            </p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 18.0pt 0cm">
+                                                                                            <div>
+                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:12.0pt">
+                                                                                                    <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><span style=""><map name="x_MicrosoftOfficeMap0"><area href="https://squareup.com/t/f_referrals/d_receipt?route=signup%3Fsignup_token%3DBCGARLICGR" target="_blank" rel="noopener noreferrer" shape="Polygon" coords="9, 4, 4, 9, 4, 39, 9, 44, 198, 44, 204, 39, 204, 9, 198, 4, 9, 4"></map><img data-imagetype="AttachmentByCid" originalsrc="cid:image002.png@01D504C4.4E5AEAE0" data-custom="AQMkADAwATYwMAItOWExOC01ZmUwLTAwAi0wMAoARgAAA4EoMBe2hDZNjiYhOF%2B%2FIdkHAKtsyxgORrdOkpB9pKY7mXcAAAIBDAAAAKtsyxgORrdOkpB9pKY7mXcAApPBcOQAAAABEgAQALnEzKPOgq5ImQgdpvgFpJU%3D" naturalheight="46" naturalwidth="206" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM4AAAAuCAYAAABgWyZGAAAHiUlEQVR4Xu1dQWgcVRj+A4KXEms04r0lPZhDUooUvGxPC4WKEBYRpBWSg2j2EKzgkoNJoeyhhgibgmADNvRkLEKF0gVxA156KEkPEax08VpaCBL0IEjj997Mm3nzZmbnzXZ3Z9/yTxlodt/73/u////+/3//tJkx4osRYARyIzCWewZPYAQYAWLisBMwAl0gkEiclZWVNyFrE/fbuF/vQi5PYQRcR+A/KLCPuwY+3DOViREHgz7BoDrucdc15/0zAj1A4C/IuAdefKDLihAHX84cHR39PDY29loPFmQRjMBIIAA+/ANefAN+XFYKmcTZwxczI6EtK8EI9BaBA4h7B+T5XYgNiIMPjoNZT8Csl3u7HktjBNxHANz4F9z4Ajz52iTOe/jyO3z5ivtqsgaMQF8Q+AHEqZjE+QgfNHAf68uSLJQRcB8BJo77NmQNCkCAiVMA6Lyk+wgwcdy3IWtQAAJMnAJA5yXdR4CJ474NWYMCEGDiFAA6L+k+Akwc923IGhSAABOnANB5SfcRGBxx1lrP6Gptic6XT9AJH7j24ybdXajQwbnPckG5dq1FF29v0oU7s3T/jeS5Yr3tGxtUPumJbjcbND+3TOc+98bbyLDdVK9krV3Dnv/Gnh83qDQT7tV2H55evgxq0uKxCk1CX3N/4uerD3eoejIcY7NGFqY2MkZkzGCIs9aaoL2dakAYE7zmp+OpBEgC+tnZL2mjTJQ2L3QeY3ZzkVbvT8oPs2TkMXCvZPWCODZ4dUMcG0zzYOb42P4TJzSSiPqLiPpbMurLDISMUBUZQYuwMjrWa7RULftEa4Mg8yDWORk5vUipwa6RQX0aENWXu3vmIm3vIJLLKFynUykyxLztG9UgSxEyYsPPiOHa2E/zMZ0si/218SfMoHJ9fz+d9Aj2KfRB5qwiCwMd6HmX6DrWN/DwdG5TozQrs3Nr4kPaqWKO0o9O+7iIMes0laHr+Nx+mHFKf9AFpTP0XZzxspR5dcY0zGwRfRrQpxrqsxvsU8+G8Syb3w6QV6rQ1oPTqb7TY6IOgDgq2ySUHx5AU/QTnHPSL9dU9DYVbTdKNFujfMSRzjhP9Zu7kRItiXzjc+SVSebCMefUBsDRmpihykGdOJ30uHWQEgSUaAMrRRSVYUPZngNunbnqZXQ57xHVpB7pQSIkToI7JQQiWQIGVUMcUyUlTec4wdOJs0sIcrnt4JW207cPZSWS5DsC8x5eAyDO07N0eF3UVWGZlKaAHtUWF5YlmWRdHURQL7JllUZJmUmcp9YTCJpa7glSwxk9B4RzBtEyzCqmwyhZNnoEzg75DUTLpEwSnMeU0wLDKMG9LLT81rbE2Asu077jhc5p4hWpAjBHEhl22oMMj3zx81UWpjqxsjNj54yj+4cMrhZ2sME8KZN2SaZiiCOMJMkUXL5zXvIcIPkKS5Us4sgI6TcQNmQZpK50Z1JzTl+ao7l3p+j8CTiRLAlN4oT7SCVOTD9do6iz6wEl7YwTOC3+0XppAb8EAo6EepEI5SKYQ+tTO4i0vtwHKmLbECfUxeZ81QnTLWU7LUCaMq1LNdgurx3iPhXHPG8TqgOpBkCchFJtEMTRlW49naDaknd2McudMEv4mU3U+et12r85rZU8esYZPHGELl6wEOcrxRf/LIMPmiB5WZAKmSIsdWyIYx/5TScyMa2QH/RekDjBeTSnHUaPOPqBHmWAKsGEIVoow2qyZRyv1fVxptGyMk5weIYRS2hGiEh38baIyunEUXNEA+MWOm8tZI1NUbp0k3G0YJGmR1jaZJdqMhtGspiHF+k1fdCUiLej00s1e+JkYVr5zT9n4Vwpy0d5UN+kjcQmhrBDSTZ8zEYH1fdk4yOvHZJKtS7LMJtp/c840ugZ7Wi925Z1wBR1f2RMp65aDIJ4FJZDxNnhzoWUMtG+VFOyRMs7S4+wbEmwU1IjJXg+4+1XrKGTKcicCc9xTLwiXbXgWU/nZ0jpNkzBVFdL0ycTl9RyPacdUta3YYXFmMEQxyMP2sy1TVoyH4CiLDpA5FGXqqMj48yHlzoR/ayiDtKBnA6t5RiZpYx9dGUQIVVruIFuHH6lnIh+wikrN/WWr9cW1tcKnlNFspyhb8JD2E7tW1Mn5XSiCSAP9AEOCZlDfwAaw2uf5owHoFZnnCxMrdrrIOhD9WA63oL3qoMu7eCfazv5jgUpbIYMjjg2u+Exo4WADRkd1ZiJ46jhnNg2E8cJM/Emhw0BJs6wWYT3wwgUiwCXasXiz6s7igATx1HD8baLRYCJUyz+vLqjCDBxHDUcb7tYBJg4xeLPqzuKABPHUcPxtotFIJE4JezpR9zHi90br84IDC0CW3hbwSWxO34/ztDaiDc2TAikvh9HbHJ1dfUXvB+np//XdJiU570wAi+AwCHmnkLGeRLJOOIH/23Tj/BXfnHuCyDMU0cOgcPnz59fvnLlyrdKs6S3Touzzve4X8X90shBwAoxAvkQOABpvgJpxJvYgytGHD/zHEfJ9jHquvfx8zQTKB/SPNp9BOD7f4IDv0KTunphbiZx3FebNWAE+otAYsbp75IsnRFwH4H/AU5Gz4nfFfKLAAAAAElFTkSuQmCC" border="0" width="206" height="46" usemap="#x_MicrosoftOfficeMap0" alt="Rectangle: Rounded Corners: Get Started with Square " style="width: 2.1458in; height: 0.4791in; cursor: pointer;" crossorigin="use-credentials"></span></span><span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);">
+                                                                                                        <a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com%2Ft%2Ff_referrals%2Fd_receipt%3Froute=signup%253Fsignup_token%253DBCGARLICGR/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/37PQIYDqJRz-5ecYSyySzPw0R1ULp1ggdN3nH2afkV4=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable">
+                                                                                                            <span style="font-size:10.5pt; color:white; letter-spacing:.25pt; border:solid gray 1.0pt; padding:0cm; background:gray; text-decoration:none">
+                                                                                                                Get
+                                                                                                                Started with Square
+                                                                                                            </span>
+                                                                                                        </a>
+                                                                                                    </span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:.75pt">
+                                                                                        <td style="background:#E0E2E3; padding:0cm 0cm 0cm 0cm; height:.75pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77); display: none;">&nbsp;</span></p>
+                                                                        <div align="center">
+                                                                            <table class="x_MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="background:#F2F4F5; border-collapse:collapse; border-spacing:0">
+                                                                                <tbody>
+                                                                                    <tr style="height:18.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:18.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm"></td>
+                                                                                    </tr>
+                                                                                    <tr style="height:7.5pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:7.5pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <div>
+                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:13.5pt">
+                                                                                                    <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">© 2019 Square, Inc.</span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:7.5pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:7.5pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <div>
+                                                                                                <p class="x_MsoNormal" align="center" style="text-align:center; line-height:13.5pt">
+                                                                                                    <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(133, 137, 140); letter-spacing: 0.15pt;">
+                                                                                                        <a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com%2Fca%2Fen%2Flegal%2Fprivacy/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/bqsCfbcMj8tc6RfagaM18Nh2tv9mjyF1eA7WR5FtP2Q=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable">
+                                                                                                            <span style="color:#85898C">
+                                                                                                                Square
+                                                                                                                Privacy Policy
+                                                                                                            </span>
+                                                                                                        </a> · <a href="https://a.squareupmessaging.com/CL0/https:%2F%2Faccount.squareup.com%2Fnot-your-receipt%2FrT65GPRG55SSZT9/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/c2Y1LvrUaM6Rkz8hsSJ4qjZRJEwgymL8PynbQap-t7g=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable">
+                                                                                                            <span style="color:#85898C">Not your receipt?</span>
+                                                                                                        </a>
+                                                                                                    </span>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:15.0pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:15.0pt"></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td valign="top" style="padding:0cm 0cm 0cm 0cm">
+                                                                                            <p class="x_MsoNormal" align="center" style="text-align:center"><span style="font-size: 1pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(61, 69, 77);"><a href="https://a.squareupmessaging.com/CL0/https:%2F%2Fsquareup.com/1/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/gFvvVNBNivwANolHOjNekIwKeF2OMtSUCnWa1P4XwEA=78" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable"><span style="color:#85898C; text-decoration:none"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/footer-logo-4fe2c9805ac615a4490d13629b9da7a7.png" border="0" width="24" height="24" id="x__x0000_i1044" alt="Footer logo" style="width:.25in; height:.25in"></span></a></span></p>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr style="height:22.5pt">
+                                                                                        <td width="100%" style="width:100.0%; padding:0cm 0cm 0cm 0cm; height:22.5pt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <p class="x_MsoNormal" align="center" style="text-align:center"><span style="color:windowtext"></span></p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td align="left" valign="top" style="font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <td width="33%" align="left" valign="middle">
-                                                                <a href="https://twitter.com" title="Facebook">
-                                                                    <img src="http://localhost:2131/Templates/EmailTemplate/images/tweet48.png" width="48" height="48">
-                                                                </a>
-                                                            </td>
-                                                            <td width="34%" align="left" valign="middle">
-                                                                <a href="https://linkedin.com" title="Linkedin">
-                                                                    <img src="http://localhost:2131/Templates/EmailTemplate/images/in48.png" width="48" height="48">
-                                                                </a>
-                                                            </td>
-                                                            <td width="33%" align="left" valign="middle">
-                                                                <a href="https://facebook.com" title="Facebook">
-                                                                    <img src="http://localhost:2131/Templates/EmailTemplate/images/face48.png" width="48" height="48">
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td width="50%" align="left" valign="middle" style="color:#564319; font-size:11px; font-family:Arial, Helvetica, sans-serif; padding:10px;">
-                                        <b>Hours:</b> Mon-Fri 9:30-5:30, Sat. 9:30-3:00, Sun. Closed <br>
-                                        <b>Customer Support:</b> <a href="mailto:name@yourcompanyname.com" style="color:#564319; text-decoration:none;">name@yourcompanyname.com</a><br>
-                                        <br>
-                                        <b>Company Address</b><br>
-                                        Company URL: <a href="http://www.yourcompanyname.com" target="_blank" style="color:#564319; text-decoration:none;">http://www.yourcompanyname.com</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top"><img src="http://localhost:2131/Templates/EmailTemplate/images/bot.png" width="600" height="37" style="display:block;"></td>
-                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <br>
-                <br>
-            </td>
-        </tr>
-    </table>
+            </div>
+            <p class="x_MsoNormal"><img data-imagetype="External" src="./Mail - hongding zhu - Outlook_files/ei" originalsrc="http://a.squareupmessaging.com/CI0/010101694023e643-963271bf-2fbc-4bf7-b77e-d4aea77a7412-000000/h2kiZwXg3aLHxRUrlItLSAIMmJdKbibiQxMb-_dW1Lk=78" data-connectorsauthtoken="1" data-imageproxyendpoint="/actions/ei" data-imageproxyid="" border="0" id="x__x0000_i1045"></p>
+        </div>
+    </blockquote>
 </body>
 </html>

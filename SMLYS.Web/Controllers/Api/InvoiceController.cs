@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.DTOs.Invoices;
+using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
 using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
+using SMLYS.RazorClassLib.Services;
 using SMLYS.Web.Interfaces.Api;
+using SMLYS.Web.Models;
 using SMLYS.Web.Models.Invoices;
 using SMLYS.Web.Models.Patients;
 using SMLYS.Web.ViewModels.Patients;
@@ -25,14 +28,18 @@ namespace SMLYS.Web.Controllers.Api
         private readonly IItemService _itemService;
         private readonly ITaxService _taxService;
         private readonly UserHandler _userHandler;
+        private readonly IEmailSender _emailSender;
+        private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
         public InvoiceController(IInvoiceService invoiceService, IItemService itemService, 
-            ITaxService taxService, UserHandler userHandler)
+            ITaxService taxService, UserHandler userHandler, IEmailSender emailSender, IRazorViewToStringRenderer razorViewToStringRenderer)
         {
             _invoiceService = invoiceService;
             _itemService = itemService;
             _taxService = taxService;
             _userHandler = userHandler;
+            _emailSender = emailSender;
+            _razorViewToStringRenderer = razorViewToStringRenderer;
         }
         // GET: api/<controller>
         [HttpGet]
@@ -100,14 +107,37 @@ namespace SMLYS.Web.Controllers.Api
             return Json(result);
         }
 
-        // POST api/<controller>/PostSearchPatients
-        //[Route("[action]")]
-        //[HttpPost]
-        //public IActionResult PostSearchPatients([FromBody]List<SearchPatientRequestModel> patients)
-        //{
-        //    var result = _patientApiService.SearchPatients(patients);
-        //    return Json(result);
-        //}
+        // POST api/<controller>/PostSendInvoiceEmail
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> PostSendInvoiceEmail([FromBody]InvoiceEmailRequestModel invoice)
+        {
+            var result = new ResultModel();
+
+            var invoiceModel = _invoiceService.SearchInvoice(invoice.InvoiceId);
+            if (invoiceModel != null)
+            {
+
+                try
+                {
+                    string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/Invoices/Invoice.cshtml", invoiceModel);
+
+                    await _emailSender.SendEmailAsync(invoiceModel.PatientEmail, "SMLYS invoice", string.Empty, body);
+
+                    result.Success = true;
+                    result.Message = "Email has been sent successfully.";
+                }
+                catch (Exception ex)
+                {
+                    result.Message = "Oops, Email was not sent. please try again. ";
+                }
+            }
+            else {
+                result.Message = "Invalid invoice Id, Please choose right one and try again. ";
+            }
+
+            return Json(result);
+        }
 
         //// PUT api/<controller>/5
         //[HttpPut("{id}")]

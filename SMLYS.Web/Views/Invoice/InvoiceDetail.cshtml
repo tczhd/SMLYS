@@ -12,7 +12,7 @@
                     <section class="primary-invoice-section invoice">
                         <div class="card-header">
                             <strong>@ViewData["Title"]</strong>
-                            <input type="hidden" asp-for="InvoiceId" id="FamilyIdHidden" />
+                            <input type="hidden" asp-for="InvoiceId" id="InvoiceIdHidden" />
                             <input type="hidden" asp-for="FamilyId" id="FamilyIdHidden" />
                             <input type="hidden" asp-for="PatientId" id="PatientIdHidden" />
                         </div>
@@ -213,7 +213,7 @@
 
                     <div class="card-footer add-patient-buttons">
                         <button type="submit" class="btn btn-sm btn-primary edit-invoice">Edit</button>
-                        <button type="button" class="btn btn-sm btn-primary send-email">Send Email</button>
+                        <button type="button" class="btn btn-sm btn-primary send-email" onclick="SMLYS.InvoiceDetail.SendInvoiceEmailModal()">Send Email</button>
                         <button type="button" class="btn btn-sm btn-primary apply-payment">Apply Payment</button>
                     </div>
                 </div>
@@ -223,3 +223,13 @@
         </div>
     </form>
 </div>
+
+@section Styles {
+
+}
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/views/Invoices/invoiceDetail.js" asp-append-version="true"></script>
+}

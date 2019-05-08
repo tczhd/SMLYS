@@ -13,6 +13,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public int InvoiceId { get; set; }
         public int PatientId { get; set; }
         public string PatientName { get; set; }
+        public string PatientEmail { get; set; }
         public int DoctorId { get; set; }
         public string DoctorName { get; set; }
         public DateTime InvoiceDate { get; set; }
@@ -47,7 +48,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
               Note = m.Note,
               PatientId = m.PatientId,
               PatientName = m.Patient != null?m.Patient.FirstName + " " + m.Patient.LastName:string.Empty,
-              PaymentStatus = m.PaymentStatus,
+              PatientEmail = m.Patient != null ? m.Patient.Email: string.Empty,
+                PaymentStatus = m.PaymentStatus,
               ReOccouring = m.ReOccouring,
               Subtotal = m.Subtotal,
               TaxTotal = m.TaxTotal,
@@ -75,6 +77,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 Note = source.Note,
                 PatientId = source.PatientId,
                 PatientName = source.Patient != null ? source.Patient.FirstName + " " + source.Patient.LastName : string.Empty,
+                PatientEmail = source.Patient != null ? source.Patient.Email : string.Empty,
                 PaymentStatus = source.PaymentStatus,
                 ReOccouring = source.ReOccouring,
                 Subtotal = source.Subtotal,
