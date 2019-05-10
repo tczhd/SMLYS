@@ -17,26 +17,16 @@ namespace SMLYS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserHandler _userHandler;
-        private readonly IEmailSender _emailSender;
-        private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
-        public HomeController(UserHandler userHandler, IEmailSender emailSender,
-            IRazorViewToStringRenderer razorViewToStringRenderer)
+        public HomeController(UserHandler userHandler)
         {
             _userHandler = userHandler;
-            _emailSender = emailSender;
-            _razorViewToStringRenderer = razorViewToStringRenderer;
         }
 
         [Route("{view=Index}")]
-        public async Task<IActionResult> Index(string view)
+        public IActionResult Index(string view)
         {
             ViewData["Title"] = view;
-
-            //var invoiceModel = new SMLYS.Web.Views.Emails.Invoices.InvoiceModel();
-            //string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/Invoices/Invoice.cshtml", invoiceModel);
-
-            //await _emailSender.SendEmailAsync("hongdingzhu@gmail.com", "Test", "Test content", body);
 
             return View(view);
         }

@@ -29,6 +29,19 @@ SMLYS.Invoice = {
                 SMLYS.Invoice.UpdateItemRow(selectItemList, itemRow);
             });
 
+            var inputQuantity = itemRow.find('input.item-quantity');
+            $(inputQuantity).keypress(function (event) {
+                if (event.which === 13) {
+                    event.preventDefault();
+                    SMLYS.Invoice.UpdateTotal();
+                }
+            });
+
+            $(inputQuantity).blur(function (event) {
+                    event.preventDefault();
+                    SMLYS.Invoice.UpdateTotal();
+            });
+
             invoiceItemsTbody.append(itemRow);
 
             var faClose = itemRow.find('i.fa-close');
