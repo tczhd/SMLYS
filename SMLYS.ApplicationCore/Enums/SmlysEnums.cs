@@ -10,4 +10,10 @@ namespace SMLYS.ApplicationCore.Enums
         [Description("User")]
         User = 2
     }
+
+    public enum PaymentGateWayType
+    {
+        [Description("HelCim")]
+        HelCim= 1
+    }
 }

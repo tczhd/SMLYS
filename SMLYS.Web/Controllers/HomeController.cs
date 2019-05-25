@@ -5,11 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using SMLYS.Web.Models;
 using Microsoft.AspNetCore.Http;
 using SMLYS.ApplicationCore.Domain.User;
-using SMLYS.ApplicationCore.DTOs.User;
-using SMLYS.ApplicationCore.Interfaces.Base;
-using SMLYS.RazorClassLib.Services;
-using SMLYS.RazorClassLib.Views.Emails.ConfirmAccount;
-using System.Threading.Tasks;
+using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
 
 namespace SMLYS.Web.Controllers
 {
@@ -17,16 +13,19 @@ namespace SMLYS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserHandler _userHandler;
-
-        public HomeController(UserHandler userHandler)
+        private readonly IPaymentService _helcimPaymentService;
+        public HomeController(UserHandler userHandler, IPaymentService helcimPaymentService)
         {
             _userHandler = userHandler;
+            _helcimPaymentService = helcimPaymentService;
         }
 
         [Route("{view=Index}")]
         public IActionResult Index(string view)
         {
             ViewData["Title"] = view;
+
+            //var result = _helcimPaymentService.ProcessPayment();
 
             return View(view);
         }

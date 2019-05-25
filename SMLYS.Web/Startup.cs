@@ -35,6 +35,8 @@ using SMLYS.ApplicationCore.Services.Invoices;
 using SMLYS.Infrastructure.Configuration.Identity;
 using SMLYS.Infrastructure.Configuration.Email;
 using SMLYS.RazorClassLib.Services;
+using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim;
+using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
 
 namespace SMLYS.Web
 {
@@ -103,6 +105,7 @@ namespace SMLYS.Web
 
             services.Configure<SMSoptions>(Configuration.GetSection("TwilioAccountDetails"));
 
+            ConfigureThirdPartyService(services);
             ConfigureApplicatiojnService(services);
             ConfigureWebService(services);
             // Add application services.
@@ -159,6 +162,11 @@ namespace SMLYS.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void ConfigureThirdPartyService(IServiceCollection services)
+        {
+            services.AddScoped< IPaymentService, HelcimPaymentService>();
         }
 
         private void ConfigureWebService(IServiceCollection services)
