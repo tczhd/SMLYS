@@ -13,8 +13,8 @@ namespace SMLYS.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserHandler _userHandler;
-        private readonly IPaymentService _helcimPaymentService;
-        public HomeController(UserHandler userHandler, IPaymentService helcimPaymentService)
+        private readonly IThirdPartyPaymentService _helcimPaymentService;
+        public HomeController(UserHandler userHandler, IThirdPartyPaymentService helcimPaymentService)
         {
             _userHandler = userHandler;
             _helcimPaymentService = helcimPaymentService;

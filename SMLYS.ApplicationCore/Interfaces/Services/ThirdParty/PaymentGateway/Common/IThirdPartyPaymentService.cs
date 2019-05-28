@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common
 {
-    public interface IPaymentService
+    public interface IThirdPartyPaymentService
     {
         Result ProcessPayment(BasicRequestModel requestMdoel);
         Result ProcessVoid(BasicRequestModel requestMdoel);

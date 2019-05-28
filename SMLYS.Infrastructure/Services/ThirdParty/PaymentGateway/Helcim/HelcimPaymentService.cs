@@ -10,7 +10,7 @@ using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim;
 
 namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
 {
-    public class HelcimPaymentService : IPaymentService
+    public class HelcimPaymentService : IThirdPartyPaymentService
     {
         private const string LIVE_URL = "https://secure.myhelcim.com/api/";
 

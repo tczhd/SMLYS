@@ -166,7 +166,7 @@ namespace SMLYS.Web
 
         private void ConfigureThirdPartyService(IServiceCollection services)
         {
-            services.AddScoped< IPaymentService, HelcimPaymentService>();
+            services.AddScoped< IThirdPartyPaymentService, HelcimPaymentService>();
         }
 
         private void ConfigureWebService(IServiceCollection services)
