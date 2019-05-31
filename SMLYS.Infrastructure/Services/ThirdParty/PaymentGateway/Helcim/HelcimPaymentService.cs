@@ -52,20 +52,7 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             Result result = new Result();
 
             var paymentData = (HelcimBasicRequestModel)requestModel;
-            // SET UP POST FIELDS
-            //var values = new NameValueCollection();
-            //values["accountId"] = "2500318950";
-            //values["apiToken"] = "NXK54k3T92M433HK2ec6fFgJS";
-            //values["transactionType"] = "purchase";
-            //values["terminalId"] = "70028";
-            //values["test"] = "1";
-            //values["amount"] = "66.00";
-            //values["cardHolderName"] = "Jane Smith";
-            //values["cardNumber"] = "5454545454545454";
-            //values["cardExpiry"] = "1020";
-            //values["cardCVV"] = "100";
-            //values["cardHolderAddress"] = "123 Road Street";
-            //values["cardHolderPostalCode"] = "90212";
+
             var values = GetBasicData(paymentData);
             values["transactionType"] = "purchase";
             values["terminalId"] = paymentData.TerminalId;

@@ -60,9 +60,7 @@ namespace SMLYS.Web.Controllers
         private void test()
         {
             ////var request = new HelcimBasicRequestModel()
-            ////{
-            ////    AccountId = "2500318950",
-            ////    ApiToken = "NXK54k3T92M433HK2ec6fFgJS",
+            ////{,
             ////    TransactionType = "purchase",
             ////    TerminalId = "70028",
             ////    Test = true,
