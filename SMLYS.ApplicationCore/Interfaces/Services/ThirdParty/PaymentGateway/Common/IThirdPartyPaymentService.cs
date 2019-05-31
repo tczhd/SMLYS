@@ -8,8 +8,8 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Co
 {
     public interface IThirdPartyPaymentService
     {
-        Result ProcessPayment(BasicRequestModel requestMdoel);
-        Result ProcessVoid(BasicRequestModel requestMdoel);
-
+        Result ProcessPayment(BasicRequestModel requestModel);
+        Result ProcessVoid(BasicRequestModel requestModel);
+        Result ProcessRefund(BasicRequestModel requestModel);
     }
 }

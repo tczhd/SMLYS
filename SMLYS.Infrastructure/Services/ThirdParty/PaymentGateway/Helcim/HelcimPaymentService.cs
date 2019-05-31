@@ -43,20 +43,16 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             var values = new NameValueCollection();
             values["accountId"] = data.AccountId;
             values["apiToken"] = data.ApiToken;
-            values["transactionType"] = data.TransactionType;
-            values["terminalId"] = data.TerminalId;
-            values["test"] = data.Test?"1":"0";
-            values["amount"] = data.Amount.ToString("0.00");
 
             return values;
         }
-       
+
         public Result ProcessPayment(BasicRequestModel requestModel)
         {
             Result result = new Result();
 
-            var paymentData = (HelcimPaymentRequestModel)requestModel;
-                // SET UP POST FIELDS
+            var paymentData = (HelcimBasicRequestModel)requestModel;
+            // SET UP POST FIELDS
             //var values = new NameValueCollection();
             //values["accountId"] = "2500318950";
             //values["apiToken"] = "NXK54k3T92M433HK2ec6fFgJS";
@@ -71,12 +67,27 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             //values["cardHolderAddress"] = "123 Road Street";
             //values["cardHolderPostalCode"] = "90212";
             var values = GetBasicData(paymentData);
-            values["cardHolderName"] = paymentData.CardHolderName;
-            values["cardNumber"] = paymentData.cardNumber;
-            values["cardExpiry"] = paymentData.cardExpiry;
-            values["cardCVV"] = paymentData.cardCVV;
-            values["cardHolderAddress"] = paymentData.cardHolderAddress;
-            values["cardHolderPostalCode"] = paymentData.cardHolderPostalCode;
+            values["transactionType"] = "purchase";
+            values["terminalId"] = paymentData.TerminalId;
+            values["test"] = paymentData.Test ? "1" : "0";
+            values["amount"] = paymentData.Amount.ToString("0.00");
+
+            if (paymentData.CreditCard != null)
+            {
+                var creditCard = (HelcimCreditCardRequestModel)paymentData.CreditCard;
+                values["cardHolderName"] = creditCard.CardHolderName;
+                values["cardNumber"] = creditCard.cardNumber;
+                values["cardExpiry"] = creditCard.cardExpiry;
+                values["cardCVV"] = creditCard.cardCVV;
+                values["cardHolderAddress"] = creditCard.cardHolderAddress;
+                values["cardHolderPostalCode"] = creditCard.cardHolderPostalCode;
+            }
+            else
+            {
+                values["cardToken"] = paymentData.CardToken;
+                values["cardF4L4"] = paymentData.CardF4L4;
+                values["comments"] = paymentData.Comments;
+            }
 
 
             var data = BasicRequest(values);
@@ -86,13 +97,73 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
                 result.Message = "Process success. ";
                 result.Data = data;
             }
+            else
+            {
+                result.Message = "Process failed ";
+            }
 
             return result;
         }
 
-        public Result ProcessVoid(BasicRequestModel requestMdoel)
+        public Result ProcessVoid(BasicRequestModel requestModel)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+
+            var paymentData = (HelcimBasicRequestModel)requestModel;
+
+            var values = GetBasicData(paymentData);
+            values["transactionType"] = "void";
+
+            values["transactionId"] = paymentData.TransactionId;
+
+            var data = BasicRequest(values);
+            if (data != null)
+            {
+                result.Success = true;
+                result.Message = "Process void success. ";
+                result.Data = data;
+            }
+            else
+            {
+                result.Message = "Process void failed. ";
+            }
+
+            return result;
+        }
+
+        public Result ProcessRefund(BasicRequestModel requestModel)
+        {
+            var result = new Result
+            {
+                Message = "Process refund failed. "
+            };
+
+            var paymentData = (HelcimBasicRequestModel)requestModel;
+
+            var values = GetBasicData(paymentData);
+            values["transactionType"] = "refund";
+            values["terminalId"] = paymentData.TerminalId;
+            values["test"] = paymentData.Test ? "1" : "0";
+            values["amount"] = paymentData.Amount.ToString("0.00");
+
+            if (paymentData.CreditCard != null)
+            {
+                var creditCard = (HelcimCreditCardRequestModel)paymentData.CreditCard;
+                values["cardHolderName"] = creditCard.CardHolderName;
+                values["cardNumber"] = creditCard.cardNumber;
+                values["cardExpiry"] = creditCard.cardExpiry;
+                values["cardCVV"] = creditCard.cardCVV;
+
+                var data = BasicRequest(values);
+                if (data != null)
+                {
+                    result.Success = true;
+                    result.Message = "Process refund success. ";
+                    result.Data = data;
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace SMLYS.ApplicationCore.Entities.CommonAggregate
         public string PostalCode { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public DateTime? UpdatedDateUtc { get; set; }
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
 
         public virtual AddressType AddressType { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim
 {
-    public class HelcimPaymentRequestModel : HelcimBasicRequestModel
+    public class HelcimCreditCardRequestModel
     {
         public string CardHolderName { get; set; }
         public string cardNumber { get; set; }
