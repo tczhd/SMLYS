@@ -18,6 +18,7 @@ namespace SMLYS.ApplicationCore.Entities
             Item = new HashSet<Item>();
             Patient = new HashSet<Patient>();
             SiteUser = new HashSet<SiteUser>();
+            Payment = new HashSet<Payment>();
         }
 
         public string Name { get; set; }
@@ -39,6 +40,7 @@ namespace SMLYS.ApplicationCore.Entities
         public virtual ICollection<Item> Item { get; set; }
         public virtual ICollection<Patient> Patient { get; set; }
         public virtual ICollection<SiteUser> SiteUser { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
         public virtual Address Address { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace SMLYS.ApplicationCore.Entities.UserAggregate
             Item = new HashSet<Item>();
             PatientCreatedByNavigation = new HashSet<Patient>();
             PatientUpdatedByNavigation = new HashSet<Patient>();
+            PaymentUpdatedByNavigation = new HashSet<Payment>();
         }
 
         public string FirstName { get; set; }
@@ -51,5 +52,6 @@ namespace SMLYS.ApplicationCore.Entities.UserAggregate
         public virtual ICollection<Item> Item { get; set; }
         public virtual ICollection<Patient> PatientCreatedByNavigation { get; set; }
         public virtual ICollection<Patient> PatientUpdatedByNavigation { get; set; }
+        public virtual ICollection<Payment> PaymentUpdatedByNavigation { get; set; }
     }
 }

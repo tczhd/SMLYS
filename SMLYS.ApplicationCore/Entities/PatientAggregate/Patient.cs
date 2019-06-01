@@ -13,6 +13,7 @@ namespace SMLYS.ApplicationCore.Entities.PatientAggregate
         public Patient()
         {
             Invoice = new HashSet<Invoice>();
+            PatientCardOnFile = new HashSet<PatientCardOnFile>();
         }
 
         public string FirstName { get; set; }
@@ -43,5 +44,6 @@ namespace SMLYS.ApplicationCore.Entities.PatientAggregate
         public virtual PatientStatus StatusNavigation { get; set; }
         public virtual SiteUser UpdatedByNavigation { get; set; }
         public virtual ICollection<Invoice> Invoice { get; set; }
+        public virtual ICollection<PatientCardOnFile> PatientCardOnFile { get; set; }
     }
 }

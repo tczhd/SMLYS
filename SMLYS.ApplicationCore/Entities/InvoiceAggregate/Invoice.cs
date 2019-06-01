@@ -13,6 +13,7 @@ namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
         {
             InvoiceItem = new HashSet<InvoiceItem>();
             InvoiceReOccouring = new HashSet<InvoiceReOccouring>();
+            InvoicePayment = new HashSet<InvoicePayment>();
         }
 
         public int PatientId { get; set; }
@@ -39,5 +40,6 @@ namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
         public virtual SiteUser UpdatedByNavigation { get; set; }
         public virtual ICollection<InvoiceItem> InvoiceItem { get; set; }
         public virtual ICollection<InvoiceReOccouring> InvoiceReOccouring { get; set; }
+        public virtual ICollection<InvoicePayment> InvoicePayment { get; set; }
     }
 }

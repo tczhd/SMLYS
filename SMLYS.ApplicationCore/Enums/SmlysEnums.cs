@@ -18,17 +18,27 @@ namespace SMLYS.ApplicationCore.Enums
         [Description("Check")]
         Check = 2,
         [Description("CreditCard")]
-        CreditCard = 2,
+        CreditCard = 3,
     }
 
-    public enum CreditCardType
+    public enum PaymentMethodType
     {
         [Description("Visa")]
         Visa = 1,
         [Description("MasterCard")]
         MasterCard = 2,
         [Description("American Express")]
-        AmericanExpress = 2,
+        AmericanExpress = 3,
+    }
+
+    public enum PaymentStatusType
+    {
+        [Description("Purchase")]
+        Purchase = 1,
+        [Description("Void")]
+        Void = 2,
+        [Description("Refund")]
+        Refund = 3,
     }
 
     public enum PaymentGateWayType

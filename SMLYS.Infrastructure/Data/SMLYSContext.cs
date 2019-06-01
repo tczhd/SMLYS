@@ -41,7 +41,8 @@ namespace SMLYS.Infrastructure.Data
         public virtual DbSet<SiteUserLevel> SiteUserLevel { get; set; }
         public virtual DbSet<Specality> Specality { get; set; }
         public virtual DbSet<Tax> Tax { get; set; }
-
+        public virtual DbSet<Payment> Payment { get; set; }
+        public virtual DbSet<InvoicePayment> InvoicePayment { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
@@ -571,6 +572,27 @@ namespace SMLYS.Infrastructure.Data
                     .HasMaxLength(30);
 
                 entity.Property(e => e.TaxRate).HasColumnType("decimal(18, 6)");
+            });
+
+            modelBuilder.Entity<Payment>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AuthorizationCode)
+                    .HasMaxLength(50);
+                entity.Property(e => e.CardToken)
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 6)");
+            });
+
+            modelBuilder.Entity<InvoicePayment>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AmountPaid).HasColumnType("decimal(18, 6)");
             });
         }
     }
