@@ -591,7 +591,7 @@ namespace SMLYS.Infrastructure.Data
                 .WithMany(p => p.PaymentUpdatedByNavigation)
                 .HasForeignKey(d => d.UpdatedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Payment_SiteUser");
+                .HasConstraintName("FK_Payment_SiteUser_UpdatedBy");
             });
 
             modelBuilder.Entity<InvoicePayment>(entity =>
@@ -618,7 +618,7 @@ namespace SMLYS.Infrastructure.Data
                  .WithMany(p => p.PatientCardOnFileUpdatedByNavigation)
                  .HasForeignKey(d => d.UpdatedBy)
                  .OnDelete(DeleteBehavior.ClientSetNull)
-                 .HasConstraintName("FK_PatientCardOnFile_SiteUser");
+                 .HasConstraintName("FK_PatientCardOnFile_SiteUser_UpdatedBy");
             });
         }
     }
