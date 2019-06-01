@@ -27,7 +27,7 @@ namespace SMLYS.ApplicationCore.Entities
         public int ClinicId { get; set; }
 
         public virtual Clinic Clinic { get; set; }
-        public virtual SiteUser UpdatedByNavigation { get; set; }
+        public virtual SiteUser SiteUser{ get; set; }
 
         public virtual ICollection<InvoicePayment> InvoicePayment { get; set; }
     }

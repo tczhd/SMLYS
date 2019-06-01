@@ -21,6 +21,6 @@ namespace SMLYS.ApplicationCore.Entities.PatientAggregate
         public bool Active { get; set; }
         public int UpdatedBy { get; set; }
         public virtual Patient Patient{ get; set; }
-        public virtual SiteUser UpdatedByNavigation { get; set; }
+        public virtual SiteUser SiteUser { get; set; }
     }
 }

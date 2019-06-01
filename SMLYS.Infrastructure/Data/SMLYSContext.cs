@@ -43,6 +43,7 @@ namespace SMLYS.Infrastructure.Data
         public virtual DbSet<Tax> Tax { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<InvoicePayment> InvoicePayment { get; set; }
+        public virtual DbSet<PatientCardOnFile> PatientCardOnFile { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
@@ -585,6 +586,12 @@ namespace SMLYS.Infrastructure.Data
                     .HasMaxLength(150);
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 6)");
+
+                entity.HasOne(d => d.SiteUser)
+                .WithMany(p => p.PaymentUpdatedByNavigation)
+                .HasForeignKey(d => d.UpdatedBy)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Payment_SiteUser");
             });
 
             modelBuilder.Entity<InvoicePayment>(entity =>
@@ -593,6 +600,25 @@ namespace SMLYS.Infrastructure.Data
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.AmountPaid).HasColumnType("decimal(18, 6)");
+            });
+
+            modelBuilder.Entity<PatientCardOnFile>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CardToken)
+                    .HasMaxLength(150);
+                entity.Property(e => e.CustomerCode)
+                  .HasMaxLength(150);
+                entity.Property(e => e.CardF4L4)
+                .HasMaxLength(8);
+
+                entity.HasOne(d => d.SiteUser)
+                 .WithMany(p => p.PatientCardOnFileUpdatedByNavigation)
+                 .HasForeignKey(d => d.UpdatedBy)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_PatientCardOnFile_SiteUser");
             });
         }
     }
