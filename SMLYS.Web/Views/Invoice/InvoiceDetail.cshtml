@@ -168,13 +168,13 @@
                                                             @item.Quantity
                                                         </td>
                                                         <td>
-                                                            @item.Cost
+                                                            @item.Cost.ToString("0.00")
                                                         </td>
                                                         <td>
-                                                            @item.Tax
+                                                            @item.Tax.ToString("0.00")
                                                         </td>
                                                         <td>
-                                                            @item.SubTotal
+                                                            @item.SubTotal.ToString("0.00")
                                                         </td>
                                                     </tr>
 
@@ -199,10 +199,10 @@
                                     <div class="col-sm-4 invoice-total">
                                         <table class="table table-bordered table-sm table-invoices">
                                             <tbody class="invoice-total">
-                                                <tr><td>Subtotal</td><td class="invoice-subtotal">@Model.SubTotal</td></tr>
-                                                <tr><td>Tax</td><td class="invoice-tax">@Model.Tax</td></tr>
-                                                <tr><td>Amount paid</td><td class="invoice-amount-paid">@Model.AmountPaid</td></tr>
-                                                <tr><td>Balance Due</td><td class="invoice-total">@Model.Total</td></tr>
+                                                <tr><td>Subtotal</td><td class="invoice-subtotal">@Model.SubTotal.ToString("0.00")</td></tr>
+                                                <tr><td>Tax</td><td class="invoice-tax">@Model.Tax.ToString("0.00")</td></tr>
+                                                <tr><td>Amount paid</td><td class="invoice-amount-paid">@Model.AmountPaid.ToString("0.00")</td></tr>
+                                                <tr><td>Balance Due</td><td class="invoice-total">@Model.Total.ToString("0.00")</td></tr>
                                             </tbody>
                                         </table>
                                     </div>

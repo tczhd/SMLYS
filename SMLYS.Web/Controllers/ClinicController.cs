@@ -10,12 +10,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace SMLYS.Web.Controllers
 {
     [Authorize]
+    [Route("Clinic")]
     public class ClinicController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(string view)
         {
-            return View();
+            ViewData["Title"] = view;
+
+            //test();
+
+            return View(view);
         }
     }
 }
