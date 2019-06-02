@@ -22,7 +22,11 @@ namespace SMLYS.ApplicationCore.Services.Patients
         {
             _patientRepository = patientRepository;
             _userHandler = userHandler;
-            _clinicId = _userHandler.GetUserContext().ClinicId;
+            var userContext = _userHandler.GetUserContext();
+            if (userContext != null)
+            {
+                _clinicId = userContext.ClinicId;
+            }
         }
 
         public List<Patient> CreatePatientAsync(List<Patient> patients)

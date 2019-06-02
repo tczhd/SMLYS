@@ -214,7 +214,7 @@
                     <div class="card-footer add-patient-buttons">
                         <button type="submit" class="btn btn-sm btn-primary edit-invoice">Edit</button>
                         <button type="button" class="btn btn-sm btn-primary send-email" onclick="SMLYS.InvoiceDetail.SendInvoiceEmailModal()">Send Email</button>
-                        <button type="button" class="btn btn-sm btn-primary apply-payment">Apply Payment</button>
+                        <button type="button" class="btn btn-sm btn-primary apply-payment" onclick="SMLYS.InvoiceDetail.ShowPaymentModal()">Apply Payment</button>
                     </div>
                 </div>
             </div>
@@ -223,6 +223,131 @@
         </div>
     </form>
 </div>
+
+<div id="credit-card-form" style="display:none;">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+
+                    <label class="radio-inline" for="inline-radio-credit-card"">
+                        <input type="radio" id="inline-radio-credit-card" name="inline-radios" value="option1" checked="checked"> Credit Card
+                    </label>
+                    <label class="radio-inline" for="inline-radio-check">
+                        <input type="radio" id="inline-radio-check" name="inline-radios" value="option2"> Check
+                    </label>
+                    <label class="radio-inline" for="inline-radio-cash">
+                        <input type="radio" id="inline-radio-cash" name="inline-radios" value="option3"> Cash
+                    </label>
+                </div>
+                <div class="card-body">
+                    <section class="basic-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Payment Amount</label>
+                                    <input type="text" class="form-control payment-amount" placeholder="Enter your payment amount">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="check-info" style="display:none">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Check No.</label>
+                                    <input type="text" class="form-control check-no"" placeholder="Enter your check No.">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="credit-card-info">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control name" placeholder="Enter your name">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Credit Card Number</label>
+                                    <input type="text" class="form-control ccnumber" placeholder="0000 0000 0000 0000">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                <label for="ccmonth">Month</label>
+                                <select class="form-control ccmonth">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label for="ccyear">Year</label>
+                                <select class="form-control ccyear">
+                                    <option>2014</option>
+                                    <option>2015</option>
+                                    <option>2016</option>
+                                    <option>2017</option>
+                                    <option>2018</option>
+                                    <option>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="cvv">CVV/CVC</label>
+                                    <input type="text" class="form-control cvv"  placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Zip</label>
+                                    <input type="text" class="form-control zip"  placeholder="Enter your Zip">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Address (option)</label>
+                                    <input type="text" class="form-control adress" placeholder="Enter your address">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Styles {
 
