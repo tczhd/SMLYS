@@ -32,6 +32,7 @@ namespace SMLYS.Web.ViewModels.Invoices
                ItemName = source.ItemName,
                Quantity = source.Quantity,
                Cost = source.Price,
+               Tax = source.TaxTotal,
                SubTotal = source.Subtotal
             };
         }

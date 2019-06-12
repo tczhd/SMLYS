@@ -52,6 +52,8 @@ namespace SMLYS.Web.ViewModels.Invoices
         public decimal Total { get; set; }
         [Display(Name = "Amount Paid")]
         public decimal AmountPaid { get; set; }
+        [Display(Name = "Balance Due")]
+        public decimal BalanceDue { get; set; }
         [Display(Name = "Patient")]
         public AddressViewModel PatientAddress { get; set; }
         [Display(Name = "Patients")]
@@ -73,6 +75,9 @@ namespace SMLYS.Web.ViewModels.Invoices
                 PatientName = source.PatientName,
                 ReOccouring = source.ReOccouring,
                 Total = source.Total,
+                SubTotal =source.Subtotal,
+                Tax = source.TaxTotal,
+                BalanceDue = source.Total - source.AmountPaid,
                 PatientAddress = source.PatientAddress,
                 InvoiceItems = source.InvoiceItems.Select(p => (InvoiceItemViewModel)p).ToList()
             };
