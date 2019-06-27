@@ -37,6 +37,8 @@ using SMLYS.Infrastructure.Configuration.Email;
 using SMLYS.RazorClassLib.Services;
 using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim;
 using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
+using SMLYS.Infrastructure.Configuration.ThirdParty.PaymentGateway.Stripe;
+using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe;
 
 namespace SMLYS.Web
 {
@@ -99,27 +101,19 @@ namespace SMLYS.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Set configuration options
+            SetConfigurationOptions(services);
+
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.Configure<SMSoptions>(Configuration.GetSection("TwilioAccountDetails"));
-
             ConfigureThirdPartyService(services);
             ConfigureApplicatiojnService(services);
             ConfigureWebService(services);
-            // Add application services.
 
             // Add DI for Dotnetdesk
             services.AddTransient<INetcoreService, NetcoreService>();
-
-            // Get SendGrid configuration options
-            services.Configure<SendGridOptions>(Configuration.GetSection("SendGridOptions"));
-            var sgDefaultOptions = Configuration.GetSection("SendGridOptions").Get<SendGridOptions>();
-
-            // Get SMTP configuration options
-            services.Configure<SmtpOptions>(Configuration.GetSection("SmtpOptions"));
-
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
@@ -128,9 +122,8 @@ namespace SMLYS.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<UserHandler>();
 
-            //services.AddTransient<IEmailSender, TwilioAuthMessageSender>();
             services.AddTransient<ISmsSender, TwilioAuthMessageSender>();
-            services.Configure<SMSoptions>(Configuration);
+           // services.Configure<SMSoptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -164,9 +157,18 @@ namespace SMLYS.Web
             });
         }
 
+        private void SetConfigurationOptions(IServiceCollection services)
+        {
+            services.Configure<SmtpOptions>(Configuration.GetSection("SmtpOptions"));
+            services.Configure<SMSoptions>(Configuration.GetSection("TwilioAccountDetails"));
+            services.Configure<StripeKeys>(Configuration.GetSection("Stripe"));
+            services.Configure<SendGridOptions>(Configuration.GetSection("SendGridOptions"));
+        }
+
         private void ConfigureThirdPartyService(IServiceCollection services)
         {
-            services.AddScoped< IThirdPartyPaymentService, HelcimPaymentService>();
+            services.AddScoped<IThirdPartyPaymentService, HelcimPaymentService>();
+            services.AddScoped<IThirdPartyPaymentService, StripePaymentService>();
         }
 
         private void ConfigureWebService(IServiceCollection services)

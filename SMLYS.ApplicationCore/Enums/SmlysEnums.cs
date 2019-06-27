@@ -44,6 +44,16 @@ namespace SMLYS.ApplicationCore.Enums
     public enum PaymentGateWayType
     {
         [Description("HelCim")]
-        HelCim= 1
+        HelCim= 1,
+        [Description("Stripe")]
+        Stripe = 2
+    }
+
+    public enum CurrencyType
+    {
+        [Description("USD")]
+        USD = 1,
+        [Description("CAD")]
+        CAD = 2
     }
 }
