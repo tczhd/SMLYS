@@ -75,9 +75,25 @@ SMLYS.InvoiceDetail = {
         var modalFooter = modalContent.find('.modal-footer');
         modalFooter.html('');
 
-        var creditCardForm = $("#credit-card-form");
+        var primaryInvoiceSection = $('section.primary-invoice-section');
+        var invoiceIdHidden = primaryInvoiceSection.find('input[id*=InvoiceIdHidden]');
 
-        modalBody.html(creditCardForm.html());
+        var primaryInvoiceTotalSection = $('section.invoice-total');
+        var invoiceTotal = primaryInvoiceTotalSection.find('td.invoice-total');
+        var iinvoiceAmountPaid = primaryInvoiceTotalSection.find('td.invoice-amount-paid');
+        var invoiceBalance = primaryInvoiceTotalSection.find('td.invoice-balance');
+
+        var paymentDetail = { invoice_id: invoiceIdHidden.val()};
+
+
+        var creditCardForm = $("#credit-card-form");
+        var cardContent = creditCardForm.clone();
+
+        modalBody.html(cardContent.html());
+
+        var inputPaymentAmount = modalBody.find('input[id*=PaymentAmount]');
+        var amount = invoiceBalance.text();
+        inputPaymentAmount.val(amount);
 
         var button = SMLYS.getModalFooterButton('apply-payment-btn', 'Apply Payment');
         modalFooter.append(button);
