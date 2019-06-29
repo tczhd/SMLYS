@@ -8,7 +8,7 @@ namespace SMLYS.ApplicationCore.Services.Payment
 {
     public class PaymentService : IPaymentService
     {
-        public Result Pay(PaymentDataModel requestMdoel)
+        public Result ApplyPayment(PaymentDataModel requestMdoel)
         {
             throw new NotImplementedException();
         }

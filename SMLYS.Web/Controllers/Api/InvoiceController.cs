@@ -139,6 +139,39 @@ namespace SMLYS.Web.Controllers.Api
             return Json(result);
         }
 
+        // POST api/<controller>/PostApplyPayment
+        [Route("[action]")]
+        [HttpPost]
+        public IActionResult PostApplyPayment([FromBody]InvoicePaymentRequestModel invoicePayment)
+        {
+            var result = new ResultModel();
+
+            //var invoiceModel = _invoiceService.SearchInvoice(invoice.InvoiceId);
+            //if (invoiceModel != null)
+            //{
+
+            //    try
+            //    {
+            //        string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/Invoices/Invoice.cshtml", invoiceModel);
+
+            //        await _emailSender.SendEmailAsync(invoiceModel.PatientEmail, "SMLYS invoice", string.Empty, body);
+
+            //        result.Success = true;
+            //        result.Message = "Email has been sent successfully.";
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        result.Message = "Oops, Email was not sent. please try again. ";
+            //    }
+            //}
+            //else
+            //{
+            //    result.Message = "Invalid invoice Id, Please choose right one and try again. ";
+            //}
+
+            return Json(result);
+        }
+
         //// PUT api/<controller>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody]string value)

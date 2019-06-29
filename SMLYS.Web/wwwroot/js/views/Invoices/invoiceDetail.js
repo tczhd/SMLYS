@@ -63,17 +63,20 @@ SMLYS.InvoiceDetail = {
 
     ShowPaymentModal: function () {
 
-        var dataType = 'application/json; charset=utf-8';
+  
         var spinner = SMLYS.getSpinner();
         $('#primaryModal').modal('show');
 
         var modalBody = $('div.modal-body');
-        //modalBody.html(spinner);
+
         var modalContent = $('.modal-content');
         var modalTitle = modalContent.find('.modal-title');
         modalTitle.text("Apply Payment");
         var modalFooter = modalContent.find('.modal-footer');
         modalFooter.html('');
+
+        var button = SMLYS.getModalFooterButton('apply-payment-btn', 'Apply Payment');
+        modalFooter.append(button);
 
         var primaryInvoiceSection = $('section.primary-invoice-section');
         var invoiceIdHidden = primaryInvoiceSection.find('input[id*=InvoiceIdHidden]');
@@ -83,47 +86,92 @@ SMLYS.InvoiceDetail = {
         var iinvoiceAmountPaid = primaryInvoiceTotalSection.find('td.invoice-amount-paid');
         var invoiceBalance = primaryInvoiceTotalSection.find('td.invoice-balance');
 
-        var paymentDetail = { invoice_id: invoiceIdHidden.val()};
-
-
         var creditCardForm = $("#credit-card-form");
         var cardContent = creditCardForm.clone();
 
         modalBody.html(cardContent.html());
 
+        var paymentTypeId = 1;
+        var cardHeader = modalBody.find('div.card-header');
+        var radioCreditCard = cardHeader.find('input[id*=inline-radio-credit-card]');
+        var radioCheck = cardHeader.find('input[id*=inline-radio-check]');
+        if (radioCreditCard.is(":checked")) {
+            paymentTypeId = 3;
+        }
+        else if (radioCheck.is(":checked")) {
+            paymentTypeId = 2;
+        }
+
         var inputPaymentAmount = modalBody.find('input[id*=PaymentAmount]');
-        var amount = invoiceBalance.text();
-        inputPaymentAmount.val(amount);
+        inputPaymentAmount.val(invoiceBalance.text());
+        var creditCardInfo = modalBody.find('section.credit-card-info');
 
-        var button = SMLYS.getModalFooterButton('apply-payment-btn', 'Apply Payment');
-        modalFooter.append(button);
-        //var primaryInvoiceSection = $('section.primary-invoice-section');
-        //var invoiceIdHidden = primaryInvoiceSection.find('input[id*=InvoiceIdHidden]');
+        var cardHolderName = creditCardInfo.find('input.card-holder-name');
+        var cardNumber = creditCardInfo.find('input.credit-card-number');
+        var cardMonth = creditCardInfo.find('select.credit-card-month');
+        var cardYear = creditCardInfo.find('select.credit-card-year');
+        var cardCvv = creditCardInfo.find('input.credit-card-cvv');
+        var cardZip = creditCardInfo.find('input.credit-card-zip');
+        var cardAddress = creditCardInfo.find('input.credit-card-adress');
 
-        //var jsonInvoice = { invoice_id: invoiceIdHidden.val() };
+        $(button).click(function () {
+            if (isNaN(invoiceBalance.text())) {
+                alert("Please input valid payment amount. ");
+                return;
+            }
 
-        //var jsonData = JSON.stringify(jsonInvoice);
+            var paidAmount = parseFloat(invoiceBalance.text());
 
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/api/Invoice/PostSendInvoiceEmail",
-        //    contentType: dataType,
-        //    dataType: "json",
-        //    data: jsonData,
-        //    success: function (result) {
+            var paymentDetail = {
+                payment_type_id: paymentTypeId,
+                invoice_id: invoiceIdHidden.val(),
+                amount_paid: paidAmount
+            };
 
-        //        modalBody.html(result.message);
+            paymentDetail.credit_card = {
+                card_holder_name: cardHolderName.val(),
+                card_number: cardNumber.val(),
+                card_month: parseInt( cardMonth.val()),
+                card_year: parseInt( cardYear.val()),
+                card_cvv: cardCvv.val(),
+                card_zip: cardZip.val(),
+                card_address: cardAddress.val()
+            };
 
-        //    }, //End of AJAX Success function  
+            var jsonData = JSON.stringify(paymentDetail);
 
-        //    failure: function (data) {
-        //        alert(data.responseText);
-        //    }, //End of AJAX failure function  
-        //    error: function (data) {
-        //        alert(data.responseText);
-        //    } //End of AJAX error function  
+            var paymentButton = button.remove();
+            modalFooter.html('');
 
-        //});
+            modalFooter.append(spinner);
+            var dataType = 'application/json; charset=utf-8';
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Invoice/PostApplyPayment",
+                contentType: dataType,
+                dataType: "json",
+                data: jsonData,
+                success: function (result) {
+                    modalFooter.html('');
+                    modalBody.html(result.message);
+
+                }, //End of AJAX Success function  
+
+                failure: function (data) {
+                    alert(data.responseText);
+                    modalFooter.html('');
+                    modalFooter.append(paymentButton);
+                }, //End of AJAX failure function  
+                error: function (data) {
+                    alert(data.responseText);
+                    modalFooter.html('');
+                    modalFooter.append(paymentButton);
+                } //End of AJAX error function  
+
+            });
+
+        });
 
     }
 };

@@ -232,14 +232,14 @@
             <div class="card">
                 <div class="card-header">
 
-                    <label class="radio-inline" for="inline-radio-credit-card"">
-                        <input type="radio" id="inline-radio-credit-card" name="inline-radios" value="option1" checked="checked"> Credit Card
+                    <label class="radio-inline" for="inline-radio-credit-card">
+                        <input type="radio" id="inline-radio-credit-card" name="inline-radios" value="3" checked="checked"> Credit Card
                     </label>
                     <label class="radio-inline" for="inline-radio-check">
-                        <input type="radio" id="inline-radio-check" name="inline-radios" value="option2"> Check
+                        <input type="radio" id="inline-radio-check" name="inline-radios" value="2"> Check
                     </label>
                     <label class="radio-inline" for="inline-radio-cash">
-                        <input type="radio" id="inline-radio-cash" name="inline-radios" value="option3"> Cash
+                        <input type="radio" id="inline-radio-cash" name="inline-radios" value="1"> Cash
                     </label>
                 </div>
                 <div class="card-body">
@@ -267,8 +267,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control name" placeholder="Enter your name">
+                                    <label for="name">Card Holder Name</label>
+                                    <input type="text" class="form-control card-holder-name" placeholder="Enter card holder name">
                                 </div>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="ccnumber">Credit Card Number</label>
-                                    <input type="text" class="form-control ccnumber" placeholder="0000 0000 0000 0000">
+                                    <input type="text" class="form-control credit-card-number" placeholder="0000 0000 0000 0000">
                                 </div>
                             </div>
                         </div>
@@ -285,16 +285,16 @@
                         <div class="row">
                             <div class="form-group col-sm-4">
                                 <label for="ccmonth">Month</label>
-                                <select class="form-control ccmonth">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
+                                <select class="form-control credit-card-month">
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                    <option>06</option>
+                                    <option>07</option>
+                                    <option>08</option>
+                                    <option>09</option>
                                     <option>10</option>
                                     <option>11</option>
                                     <option>12</option>
@@ -302,7 +302,7 @@
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="ccyear">Year</label>
-                                <select class="form-control ccyear">
+                                <select class="form-control credit-card-year">
                                     <option>2014</option>
                                     <option>2015</option>
                                     <option>2016</option>
@@ -320,7 +320,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">CVV/CVC</label>
-                                    <input type="text" class="form-control cvv"  placeholder="123">
+                                    <input type="text" class="form-control credit-card-cvv"  placeholder="cvv code">
                                 </div>
                             </div>
                         </div>
@@ -328,7 +328,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Zip</label>
-                                    <input type="text" class="form-control zip"  placeholder="Enter your Zip">
+                                    <input type="text" class="form-control credit-card-zip"  placeholder="Enter your Zip">
                                 </div>
                             </div>
                         </div>
@@ -337,7 +337,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="ccnumber">Address (option)</label>
-                                    <input type="text" class="form-control adress" placeholder="Enter your address">
+                                    <input type="text" class="form-control credit-card-adress" placeholder="Enter your address">
                                 </div>
                             </div>
                         </div>
@@ -350,12 +350,8 @@
 </div>
 
 
-@section Styles {
-
-}
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/views/Invoices/invoiceDetail.js" asp-append-version="true"></script>
+    <script src="/js/views/Invoices/invoiceDetail.js" ></script>
 }
