@@ -9,6 +9,7 @@ using SMLYS.ApplicationCore.DTOs.Invoices;
 using SMLYS.ApplicationCore.Interfaces.Base;
 using SMLYS.ApplicationCore.Interfaces.Services.Invoices;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
+using SMLYS.ApplicationCore.Interfaces.Services.Payment;
 using SMLYS.ApplicationCore.Interfaces.Services.Taxes;
 using SMLYS.RazorClassLib.Services;
 using SMLYS.Web.Interfaces.Api;
@@ -27,12 +28,14 @@ namespace SMLYS.Web.Controllers.Api
         private readonly IInvoiceService _invoiceService;
         private readonly IItemService _itemService;
         private readonly ITaxService _taxService;
+        private readonly IPaymentService _paymentService;
         private readonly UserHandler _userHandler;
         private readonly IEmailSender _emailSender;
         private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
         public InvoiceController(IInvoiceService invoiceService, IItemService itemService, 
-            ITaxService taxService, UserHandler userHandler, IEmailSender emailSender, IRazorViewToStringRenderer razorViewToStringRenderer)
+            ITaxService taxService, UserHandler userHandler, IEmailSender emailSender
+            , IRazorViewToStringRenderer razorViewToStringRenderer, IPaymentService paymentService)
         {
             _invoiceService = invoiceService;
             _itemService = itemService;
@@ -40,6 +43,7 @@ namespace SMLYS.Web.Controllers.Api
             _userHandler = userHandler;
             _emailSender = emailSender;
             _razorViewToStringRenderer = razorViewToStringRenderer;
+            _paymentService = paymentService;
         }
         // GET: api/<controller>
         [HttpGet]
@@ -146,28 +150,26 @@ namespace SMLYS.Web.Controllers.Api
         {
             var result = new ResultModel();
 
-            //var invoiceModel = _invoiceService.SearchInvoice(invoice.InvoiceId);
-            //if (invoiceModel != null)
-            //{
+            var invoiceModel = _invoiceService.SearchInvoice(invoicePayment.InvoiceId);
+            if (invoiceModel != null)
+            {
 
-            //    try
-            //    {
-            //        string body = await _razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/Invoices/Invoice.cshtml", invoiceModel);
+                try
+                {
+                    var data = _paymentService.ApplyPayment(invoicePayment);
 
-            //        await _emailSender.SendEmailAsync(invoiceModel.PatientEmail, "SMLYS invoice", string.Empty, body);
-
-            //        result.Success = true;
-            //        result.Message = "Email has been sent successfully.";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        result.Message = "Oops, Email was not sent. please try again. ";
-            //    }
-            //}
-            //else
-            //{
-            //    result.Message = "Invalid invoice Id, Please choose right one and try again. ";
-            //}
+                    result.Success = true;
+                    result.Message = "Email has been sent successfully.";
+                }
+                catch (Exception ex)
+                {
+                    result.Message = "Oops, Email was not sent. please try again. ";
+                }
+            }
+            else
+            {
+                result.Message = "Invalid invoice Id, Please choose right one and try again. ";
+            }
 
             return Json(result);
         }

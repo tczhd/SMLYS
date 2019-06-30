@@ -39,6 +39,8 @@ using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim;
 using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
 using SMLYS.Infrastructure.Configuration.ThirdParty.PaymentGateway.Stripe;
 using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe;
+using SMLYS.ApplicationCore.Interfaces.Services.Payment;
+using SMLYS.ApplicationCore.Services.Payments;
 
 namespace SMLYS.Web
 {
@@ -186,6 +188,7 @@ namespace SMLYS.Web
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<ITaxService, TaxService>();
             services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IPaymentService, PaymentService>();
         }
     }
 }

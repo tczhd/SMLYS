@@ -32,6 +32,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public int ClinicId { get; set; }
         public AddressModel PatientAddress { get; set; }
         public List<InvoiceItemModel> InvoiceItems { get; set; }
+        public List<InvoicePaymentModel> InvoicePayments { get; set; }
         public Expression<Func<Invoice, InvoiceModel>> CreateResult()
         {
             return m => new InvoiceModel
@@ -57,7 +58,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
               UpdatedBy = m.UpdatedBy,
               UpdatedDateUTC = m.UpdatedDateUtc ,
               PatientAddress = (m.Patient.Address != null)? m.Patient.Address : null,
-              InvoiceItems = m.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
+              InvoiceItems = m.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList(),
+              InvoicePayments = m.InvoicePayment.Select(p => (InvoicePaymentModel)p).ToList()
             };
         }
 
@@ -86,7 +88,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 UpdatedBy = source.UpdatedBy,
                 UpdatedDateUTC = source.UpdatedDateUtc,
                 PatientAddress = (source.Patient.Address != null)? source.Patient.Address: null,
-                InvoiceItems = source.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList()
+                InvoiceItems = source.InvoiceItem.Select(p => (InvoiceItemModel)p).ToList(),
+                InvoicePayments = source.InvoicePayment.Select(p => (InvoicePaymentModel)p).ToList()
             };
         }
 
@@ -111,7 +114,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 Total = source.Total,
                 UpdatedBy = source.UpdatedBy,
                 UpdatedDateUtc = source.UpdatedDateUTC,
-                InvoiceItem = source.InvoiceItems.Select(p => (InvoiceItem)p).ToList()
+                InvoiceItem = source.InvoiceItems.Select(p => (InvoiceItem)p).ToList(),
+                InvoicePayment = source.InvoicePayments.Select(p => (InvoicePayment)p).ToList()
             };
         }
 

@@ -8,7 +8,8 @@ namespace SMLYS.ApplicationCore.DTOs.Payment
     {
         public string CardHolderName { get; set; }
         public string cardNumber { get; set; }
-        public DateTime cardExpiry { get; set; }
+        public int cardExpiryMonth { get; set; }
+        public int cardExpiryYear { get; set; }
         public string cardCVV { get; set; }
         public string cardHolderAddress { get; set; }
         public string cardHolderPostalCode { get; set; }

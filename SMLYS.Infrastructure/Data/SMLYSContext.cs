@@ -585,6 +585,14 @@ namespace SMLYS.Infrastructure.Data
                 entity.Property(e => e.CardToken)
                     .HasMaxLength(150);
 
+                entity.Property(e => e.PaymentDate)
+                  .HasColumnName("PaymentDate")
+                  .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDateUtc)
+                  .HasColumnName("UpdatedDateUTC")
+                  .HasColumnType("datetime");
+
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 6)");
 
                 entity.HasOne(d => d.SiteUser)

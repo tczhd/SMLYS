@@ -29,6 +29,10 @@ namespace SMLYS.ApplicationCore.Enums
         MasterCard = 2,
         [Description("American Express")]
         AmericanExpress = 3,
+        [Description("Cash")]
+        Cash = 11,
+        [Description("Check")]
+        Check = 12,
     }
 
     public enum PaymentStatusType

@@ -16,6 +16,7 @@ namespace SMLYS.ApplicationCore.DTOs.Payment
         public string CheckNo { get; set; }
         public string TokenId { get; set; }
         public string TransactionId { get; set; }
+        public string Note { get; set; }
         public CreditCardDataModel CreditCard { get; set; }
     }
 }
