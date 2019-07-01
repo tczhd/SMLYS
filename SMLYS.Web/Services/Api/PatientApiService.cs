@@ -10,16 +10,19 @@ using SMLYS.ApplicationCore.Entities.CommonAggregate;
 using System.Linq;
 using SMLYS.ApplicationCore.DTOs.Patients;
 using SMLYS.Web.Models.Patients;
+using SMLYS.ApplicationCore.Domain.User;
 
 namespace SMLYS.Web.Services.Api
 {
     public class PatientApiService : IPatientApiService
     {
         public readonly IPatientService _patientService;
+        private readonly UserHandler _userHandler;
 
-        public PatientApiService(IPatientService patientService)
+        public PatientApiService(IPatientService patientService, UserHandler userHandler)
         {
             _patientService = patientService;
+            _userHandler = userHandler;
         }
 
         public  PatientResultViewModel CreateNewPatient(List<PatientRequestModel> newPatients)
@@ -33,6 +36,7 @@ namespace SMLYS.Web.Services.Api
 
             foreach (PatientRequestModel newPatient in newPatients)
             {
+                var userContext = _userHandler.GetUserContext();
                 var patient = new Patient();
 
                 patient.Address = new Address()
@@ -46,13 +50,13 @@ namespace SMLYS.Web.Services.Api
                     CountryId = newPatient.CountryId,
                     RegionId = newPatient.StateId,
                     PostalCode = newPatient.PostalCode,
-                    CreatedBy = 1
+                    CreatedBy = userContext.SiteUserId
                 };
 
                 patient.Id = newPatient.PatientId;
                 patient.FirstName = newPatient.FirstName;
                 patient.LastName = newPatient.LastName;
-                patient.ClinicId = 1;
+                patient.ClinicId = userContext.ClinicId;
                 patient.Age = 30;
                 patient.Status = 1;
                 patient.Title = "Mr.";
@@ -60,11 +64,11 @@ namespace SMLYS.Web.Services.Api
                 patient.Phone = newPatient.Phone;
                 patient.Email = newPatient.Email;
                 patient.CreatedDateUtc = DateTime.UtcNow;
-                patient.CreatedBy = 1;
+                patient.CreatedBy = userContext.SiteUserId;
                 patient.Family = family;
                 patient.PrimaryMember = true;
                 patient.Minor = false;
-                patient.DoctorId = 1;
+                patient.DoctorId = userContext.DoctorId??0;
 
                 patients.Add(patient);
             }

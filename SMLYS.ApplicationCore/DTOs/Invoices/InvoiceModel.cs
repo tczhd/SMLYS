@@ -33,6 +33,13 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public AddressModel PatientAddress { get; set; }
         public List<InvoiceItemModel> InvoiceItems { get; set; }
         public List<InvoicePaymentModel> InvoicePayments { get; set; }
+
+        public InvoiceModel()
+        {
+            InvoiceItems = new List<InvoiceItemModel>();
+            InvoicePayments = new List<InvoicePaymentModel>();
+        }
+
         public Expression<Func<Invoice, InvoiceModel>> CreateResult()
         {
             return m => new InvoiceModel

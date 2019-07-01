@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.DTOs.Payment;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Stripe;
 using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
@@ -50,13 +51,13 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe
             });
         }
 
-        public async Task<string> GetTokenId(BankAccountOptions bankAccount, CreditCardOptions card )
+        public async Task<string> GetTokenId(BankAccountOptions bankAccount, CreditCardOptions card)
         {
             return await Task.Run(() =>
             {
 
                 var myToken = new TokenCreateOptions
-                { 
+                {
                     BankAccount = bankAccount,
                     Card = card
                     //BankAccount = new BankAccountOptions { },
@@ -106,17 +107,25 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe
                 Amount = (long)(paymentData.Amount * 100),
                 Currency = paymentData.Currency.ToString().ToLower(),
                 Description = paymentData.Description,
-                //Currency = "gbp",
-                //Description = "Charge for property sign and postage",
                 Source = tokenId
             };
 
             var chargeService = new ChargeService();
             var stripeCharge = chargeService.Create(myCharge, options);
 
-            result.Success = true;
-            result.Message = "Payment success. ";
-            result.Data = stripeCharge;
+            result = new PaymentResultModel
+            {
+                Success = true,
+                Message = "Payment success. ",
+                Approved = stripeCharge.Status == "succeeded",
+                AuthCode = stripeCharge.AuthorizationCode,
+                CardToken = tokenId,
+                FailureCode = stripeCharge.FailureCode,
+                FailureMessage = stripeCharge.FailureMessage,
+                TransactionId = stripeCharge.Id,
+                Data = stripeCharge
+            };
+
             return result;
         }
 
