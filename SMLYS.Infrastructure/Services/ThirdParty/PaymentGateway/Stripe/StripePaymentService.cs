@@ -77,9 +77,9 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe
             });
         }
 
-        public Result ProcessPayment(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessPayment(BasicRequestModel requestModel)
         {
-            var result = new Result();
+            var result = new PaymentResultModel();
 
             var paymentData = (StripeBasicRequestModel)requestModel;
             var tokenId = paymentData.TokenId;
@@ -129,12 +129,12 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe
             return result;
         }
 
-        public Result ProcessRefund(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessRefund(BasicRequestModel requestModel)
         {
             throw new NotImplementedException();
         }
 
-        public Result ProcessVoid(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessVoid(BasicRequestModel requestModel)
         {
             throw new NotImplementedException();
         }

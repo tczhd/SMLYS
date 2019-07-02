@@ -194,7 +194,9 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-8 ">
-
+                                        <div class="@(@Model.BalanceDue == 0 ? "d-none" : "")">
+                                            <img src="~/img/paidInFull.jpg" />
+                                        </div>
                                     </div>
                                     <div class="col-sm-4 invoice-total">
                                         <table class="table table-bordered table-sm table-invoices">

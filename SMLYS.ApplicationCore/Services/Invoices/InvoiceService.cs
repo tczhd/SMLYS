@@ -20,7 +20,7 @@ namespace SMLYS.ApplicationCore.Services.Invoices
         {
             _invoiceRepository = invoiceRepository;
             _userHandler = userHandler;
-            _clinicId = _userHandler.GetUserContext().ClinicId;
+            _clinicId = _userHandler.GetUserContext() != null? _userHandler.GetUserContext().ClinicId: 0;
         }
         public InvoiceModel CreateInvoiceAsync(InvoiceModel invoiceModel)
         {

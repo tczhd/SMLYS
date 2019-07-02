@@ -1,4 +1,5 @@
 ﻿using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.DTOs.Payment;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Co
 {
     public interface IThirdPartyPaymentService
     {
-        Result ProcessPayment(BasicRequestModel requestModel);
-        Result ProcessVoid(BasicRequestModel requestModel);
-        Result ProcessRefund(BasicRequestModel requestModel);
+        PaymentResultModel ProcessPayment(BasicRequestModel requestModel);
+        PaymentResultModel ProcessVoid(BasicRequestModel requestModel);
+        PaymentResultModel ProcessRefund(BasicRequestModel requestModel);
     }
 }

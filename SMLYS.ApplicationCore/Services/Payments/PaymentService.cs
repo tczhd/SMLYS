@@ -10,21 +10,29 @@ using SMLYS.ApplicationCore.Entities;
 using SMLYS.ApplicationCore.Enums;
 using SMLYS.ApplicationCore.Interfaces.Services.ThirdParty.PaymentGateway.Common;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Stripe;
+using SMLYS.ApplicationCore.Entities.PatientAggregate;
 
 namespace SMLYS.ApplicationCore.Services.Payments
 {
     public class PaymentService : IPaymentService
     {
         private readonly IRepository<Invoice> _invoiceRepository;
+        private readonly IRepository<InvoicePayment> _invoicePaymentRepository;
+        private readonly IRepository<PatientCardOnFile> _patientCardOnFileRepository;
         private readonly IThirdPartyPaymentService _stripePaymentService;
         private readonly UserHandler _userHandler;
         private int _clinicId;
 
         public PaymentService(IRepository<Invoice> invoiceRepository,
-            IThirdPartyPaymentService stripePaymentService, UserHandler userHandler)
+            IThirdPartyPaymentService stripePaymentService,
+            IRepository<InvoicePayment> invoicePaymentRepository,
+             IRepository<PatientCardOnFile> patientCardOnFileRepository,
+            UserHandler userHandler)
         {
             _invoiceRepository = invoiceRepository;
             _stripePaymentService = stripePaymentService;
+            _invoicePaymentRepository = invoicePaymentRepository;
+            _patientCardOnFileRepository = patientCardOnFileRepository;
             _userHandler = userHandler;
             _clinicId = _userHandler.GetUserContext().ClinicId;
         }
@@ -36,30 +44,66 @@ namespace SMLYS.ApplicationCore.Services.Payments
             var userContext = _userHandler.GetUserContext();
             var invoiceDetailSpecification = new InvoiceSpecification(_clinicId);
             invoiceDetailSpecification.AddInvoiceId(requestMdoel.InvoiceId);
-            var data = _invoiceRepository.GetSingleBySpec(invoiceDetailSpecification);
+            var invoice = _invoiceRepository.GetSingleBySpec(invoiceDetailSpecification);
 
-            var payementResult = _stripePaymentService.ProcessPayment((StripeBasicRequestModel)requestMdoel);
-
-            var payment = new Payment
+            if (invoice != null)
             {
-                ClinicId = _clinicId,
-                Description = requestMdoel.Note,
-                PaymentDate = DateTime.UtcNow,
-                PaymentMethodTypeId = (int)PaymentMethodType.Visa,
-                PaymentStatusTypeId = (int)requestMdoel.PaymentStatusType,
-                PaymentTypeId = (int)requestMdoel.PaymentType,
-                UpdatedBy = userContext.SiteUserId,
-                UpdatedDateUtc = DateTime.UtcNow,
-                Amount = requestMdoel.PaymentAmount
-            };
+                var payementResult = _stripePaymentService.ProcessPayment((StripeBasicRequestModel)requestMdoel);
+                result = payementResult;
 
-            var invoicePayment = new InvoicePayment {
-                 AmountPaid = requestMdoel.PaymentAmount,
-                 InvoiceId = requestMdoel.InvoiceId,
-                 Payment = payment,
-                 Note = requestMdoel.Note
-            };
-           
+                if (payementResult.Success && payementResult.Approved)
+                {
+                    var payment = new Payment
+                    {
+                        ClinicId = _clinicId,
+                        Description = requestMdoel.Note,
+                        PaymentDate = DateTime.UtcNow,
+                        PaymentMethodTypeId = (int)PaymentMethodType.Visa,
+                        PaymentStatusTypeId = (int)requestMdoel.PaymentStatusType,
+                        PaymentTypeId = (int)requestMdoel.PaymentType,
+                        UpdatedBy = userContext.SiteUserId,
+                        UpdatedDateUtc = DateTime.UtcNow,
+                        Amount = requestMdoel.PaymentAmount,
+                        TransactionId = payementResult.TransactionId,
+                        AuthorizationCode = payementResult.AuthCode,
+                        CardToken = payementResult.CardToken,
+                        CardF4L4 = requestMdoel.CreditCard.GetCardF4L4()
+                    };
+
+                    var invoicePayment = new InvoicePayment
+                    {
+                        AmountPaid = requestMdoel.PaymentAmount,
+                        InvoiceId = requestMdoel.InvoiceId,
+                        Payment = payment,
+                        Note = requestMdoel.Note
+                    };
+
+                    _invoicePaymentRepository.AddOnly(invoicePayment);
+
+                    var patientCardOnFile = new PatientCardOnFile {
+                        Active = true,
+                        CardF4L4 = requestMdoel.CreditCard.GetCardF4L4(),
+                        CardToken = payementResult.CardToken,
+                        UpdatedDateUtc = DateTime.UtcNow,
+                        PatientId = invoice.PatientId,
+                        UpdatedBy = userContext.SiteUserId
+                    };
+
+                    _patientCardOnFileRepository.AddOnly(patientCardOnFile);
+
+                    invoice.AmountPaid += requestMdoel.PaymentAmount;
+
+                    _invoicePaymentRepository.SaveAll();
+                }
+                else {
+                    result.Message = "Process payment failed. ";
+                }
+            }
+            else
+            {
+                result.Message = "Invalid invoice Id, Please choose right one and try again. ";
+            }
+
             return result;
         }
 

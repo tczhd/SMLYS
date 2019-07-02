@@ -7,6 +7,7 @@ using System.Net;
 using System.Collections.Specialized;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Helcim;
+using SMLYS.ApplicationCore.DTOs.Payment;
 
 namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
 {
@@ -47,9 +48,9 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             return values;
         }
 
-        public Result ProcessPayment(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessPayment(BasicRequestModel requestModel)
         {
-            Result result = new Result();
+            PaymentResultModel result = new PaymentResultModel();
 
             var paymentData = (HelcimBasicRequestModel)requestModel;
 
@@ -92,9 +93,9 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             return result;
         }
 
-        public Result ProcessVoid(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessVoid(BasicRequestModel requestModel)
         {
-            var result = new Result();
+            var result = new PaymentResultModel();
 
             var paymentData = (HelcimBasicRequestModel)requestModel;
 
@@ -118,9 +119,9 @@ namespace SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Helcim
             return result;
         }
 
-        public Result ProcessRefund(BasicRequestModel requestModel)
+        public PaymentResultModel ProcessRefund(BasicRequestModel requestModel)
         {
-            var result = new Result
+            var result = new PaymentResultModel
             {
                 Message = "Process refund failed. "
             };
