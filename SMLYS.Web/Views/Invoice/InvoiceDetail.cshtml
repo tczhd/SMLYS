@@ -194,7 +194,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-8 ">
-                                        <div class="@(@Model.BalanceDue == 0 ? "d-none" : "")">
+                                        <div class="paid-in-full @(@Model.BalanceDue == 0 ? "" : "d-none")">
                                             <img src="~/img/paidInFull.jpg" />
                                         </div>
                                     </div>
@@ -217,7 +217,11 @@
                     <div class="card-footer add-patient-buttons">
                         <button type="submit" class="btn btn-sm btn-primary edit-invoice">Edit</button>
                         <button type="button" class="btn btn-sm btn-primary send-email" onclick="SMLYS.InvoiceDetail.SendInvoiceEmailModal()">Send Email</button>
+                        @{ if (@Model.BalanceDue > 0)
+                            {
                         <button type="button" class="btn btn-sm btn-primary apply-payment" onclick="SMLYS.InvoiceDetail.ShowPaymentModal()">Apply Payment</button>
+                                } 
+                            }
                     </div>
                 </div>
             </div>
@@ -229,7 +233,7 @@
 
 <div id="credit-card-form" style="display:none;">
 
-    <div class="row">
+    <div class="row credit-card-row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">

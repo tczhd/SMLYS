@@ -16,6 +16,7 @@ using SMLYS.Web.Interfaces.Api;
 using SMLYS.Web.Models;
 using SMLYS.Web.Models.Invoices;
 using SMLYS.Web.Models.Patients;
+using SMLYS.Web.Models.Payments;
 using SMLYS.Web.ViewModels.Patients;
 
 namespace SMLYS.Web.Controllers.Api
@@ -33,7 +34,7 @@ namespace SMLYS.Web.Controllers.Api
         private readonly IEmailSender _emailSender;
         private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
-        public InvoiceController(IInvoiceService invoiceService, IItemService itemService, 
+        public InvoiceController(IInvoiceService invoiceService, IItemService itemService,
             ITaxService taxService, UserHandler userHandler, IEmailSender emailSender
             , IRazorViewToStringRenderer razorViewToStringRenderer, IPaymentService paymentService)
         {
@@ -78,7 +79,8 @@ namespace SMLYS.Web.Controllers.Api
             var userContext = _userHandler.GetUserContext();
             var taxes = _taxService.SearchTaxesAsync(userContext.ClinicCountryId, userContext.ClinicRegionId, false);
             var taxRate = taxes.Sum(p => p.TaxRate);
-            var invoiceItemModels = invoice.InvoiceItems.Select(p => new InvoiceItemModel {
+            var invoiceItemModels = invoice.InvoiceItems.Select(p => new InvoiceItemModel
+            {
                 ItemId = p.ItemId,
                 Price = p.Cost,
                 Quantity = p.Quantity,
@@ -88,7 +90,8 @@ namespace SMLYS.Web.Controllers.Api
             }).ToList();
 
 
-            var invoiceModel = new InvoiceModel {
+            var invoiceModel = new InvoiceModel
+            {
                 AmountPaid = 0,
                 Note = "New Invoice",
                 InvoiceStatus = 1,
@@ -136,7 +139,8 @@ namespace SMLYS.Web.Controllers.Api
                     result.Message = "Oops, Email was not sent. please try again. ";
                 }
             }
-            else {
+            else
+            {
                 result.Message = "Invalid invoice Id, Please choose right one and try again. ";
             }
 
@@ -148,42 +152,20 @@ namespace SMLYS.Web.Controllers.Api
         [HttpPost]
         public IActionResult PostApplyPayment([FromBody]InvoicePaymentRequestModel invoicePayment)
         {
-            var result = new ResultModel();
+            var result = new PaymentResultApiModel();
 
-            var invoiceModel = _invoiceService.SearchInvoice(invoicePayment.InvoiceId);
-            if (invoiceModel != null)
+            try
             {
-
-                try
-                {
-                    var data = _paymentService.ApplyPayment(invoicePayment);
-
-                    result.Success = true;
-                    result.Message = "Email has been sent successfully.";
-                }
-                catch (Exception ex)
-                {
-                    result.Message = "Oops, Email was not sent. please try again. ";
-                }
+                result = _paymentService.ApplyPayment(invoicePayment);
+                result.Message = result.Approved?"Payment has been processed sccessfully.":
+                    "Oops, Payment was not processed!!!";
             }
-            else
+            catch (Exception ex)
             {
-                result.Message = "Invalid invoice Id, Please choose right one and try again. ";
+                result.Message = "Oops, Payment cannot be processed. ";
             }
 
             return Json(result);
         }
-
-        //// PUT api/<controller>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE api/<controller>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

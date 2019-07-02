@@ -82,9 +82,13 @@ SMLYS.InvoiceDetail = {
         var invoiceIdHidden = primaryInvoiceSection.find('input[id*=InvoiceIdHidden]');
 
         var primaryInvoiceTotalSection = $('section.invoice-total');
-        var invoiceTotal = primaryInvoiceTotalSection.find('td.invoice-total');
-        var iinvoiceAmountPaid = primaryInvoiceTotalSection.find('td.invoice-amount-paid');
-        var invoiceBalance = primaryInvoiceTotalSection.find('td.invoice-balance');
+        var tdInvoiceTotal = primaryInvoiceTotalSection.find('td.invoice-total');
+        var tdInvoiceAmountPaid = primaryInvoiceTotalSection.find('td.invoice-amount-paid');
+        var tdInvoiceBalance = primaryInvoiceTotalSection.find('td.invoice-balance');
+
+        var invoiceAmountTotal = parseFloat(tdInvoiceTotal.text());
+        var invoiceAmountPaid = parseFloat(tdInvoiceAmountPaid.text());
+        var amountDifference = invoiceAmountTotal - invoiceAmountPaid;
 
         var creditCardForm = $("#credit-card-form");
         var cardContent = creditCardForm.clone();
@@ -103,7 +107,7 @@ SMLYS.InvoiceDetail = {
         }
 
         var inputPaymentAmount = modalBody.find('input[id*=PaymentAmount]');
-        inputPaymentAmount.val(invoiceBalance.text());
+        inputPaymentAmount.val(tdInvoiceBalance.text());
         var creditCardInfo = modalBody.find('section.credit-card-info');
 
         var cardHolderName = creditCardInfo.find('input.card-holder-name');
@@ -114,13 +118,19 @@ SMLYS.InvoiceDetail = {
         var cardZip = creditCardInfo.find('input.credit-card-zip');
         var cardAddress = creditCardInfo.find('input.credit-card-adress');
 
+        var paidInFullDiv = primaryInvoiceTotalSection.find('div.paid-in-full');
+
         $(button).click(function () {
-            if (isNaN(invoiceBalance.text())) {
+            if (isNaN(tdInvoiceBalance.text())) {
                 alert("Please input valid payment amount. ");
                 return;
             }
 
-            var paidAmount = parseFloat(invoiceBalance.text());
+            var paidAmount = parseFloat(tdInvoiceBalance.text());
+            if (paidAmount > amountDifference) {
+                alert("Cannot pay more than invoice total. ");
+                return;
+            }
 
             var paymentDetail = {
                 payment_type_id: paymentTypeId,
@@ -139,11 +149,14 @@ SMLYS.InvoiceDetail = {
             };
 
             var jsonData = JSON.stringify(paymentDetail);
+            var creditCardRow = modalBody.find('div.credit-card-row');
+            var creditCardRowContent = creditCardRow.remove();
+           // modalBody.html('');
+            modalBody.append(spinner);
 
             var paymentButton = button.remove();
             modalFooter.html('');
 
-            modalFooter.append(spinner);
             var dataType = 'application/json; charset=utf-8';
 
             $.ajax({
@@ -153,9 +166,32 @@ SMLYS.InvoiceDetail = {
                 dataType: "json",
                 data: jsonData,
                 success: function (result) {
-                    modalFooter.html('');
-                    modalBody.html(result.message);
 
+                    modalFooter.html('');
+                    if (result.approved) {
+                        var paymentMessage = "<h2>" + result.message + "</h2> <h3>Amount paid: " + result.amount_paid + "</h3>";
+                        paymentMessage += "<h3>AuthCode: " + result.auth_code+ "</h3>";
+                        paymentMessage += "<h3>Card: " + result.card_last4 + "</h3>";
+                        paymentMessage += "<h3>TransactionId: " + result.transaction_id + "</h3>";
+
+                        modalBody.html(paymentMessage);
+
+                        tdInvoiceAmountPaid.html(result.amount_paid_total);
+                        tdInvoiceBalance.html(invoiceAmountTotal - result.amount_paid_total);
+
+                        if (invoiceAmountTotal - result.amount_paid_total === 0) {
+                            paidInFullDiv.removeClass("d-none");
+                        }
+                    }
+                    else {
+                        modalBody.html(result.message);
+                        var tryAgainBbutton = SMLYS.getModalFooterButton('try-again-btn', 'Try Again');
+                        modalFooter.html(tryAgainBbutton);
+                        $(tryAgainBbutton).click(function () {
+                            modalBody.html(creditCardRowContent);
+                            modalFooter.html(paymentButton);
+                        });
+                    }
                 }, //End of AJAX Success function  
 
                 failure: function (data) {

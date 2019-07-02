@@ -8,7 +8,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Payment
 {
     public interface IPaymentService
     {
-        Result ApplyPayment(PaymentDataModel requestMdoel);
-        Result Void(PaymentDataModel requestMdoel);
+        PaymentResultModel ApplyPayment(PaymentDataModel requestMdoel);
+        PaymentResultModel Void(PaymentDataModel requestMdoel);
     }
 }

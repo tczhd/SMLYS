@@ -37,9 +37,9 @@ namespace SMLYS.ApplicationCore.Services.Payments
             _clinicId = _userHandler.GetUserContext().ClinicId;
         }
 
-        public Result ApplyPayment(PaymentDataModel requestMdoel)
+        public PaymentResultModel ApplyPayment(PaymentDataModel requestMdoel)
         {
-            Result result = new Result();
+            var result = new PaymentResultModel();
 
             var userContext = _userHandler.GetUserContext();
             var invoiceDetailSpecification = new InvoiceSpecification(_clinicId);
@@ -50,6 +50,8 @@ namespace SMLYS.ApplicationCore.Services.Payments
             {
                 var payementResult = _stripePaymentService.ProcessPayment((StripeBasicRequestModel)requestMdoel);
                 result = payementResult;
+                var cardLast4 = requestMdoel.CreditCard.GetCardF4L4();
+                result.CardLast4 = cardLast4;
 
                 if (payementResult.Success && payementResult.Approved)
                 {
@@ -67,7 +69,7 @@ namespace SMLYS.ApplicationCore.Services.Payments
                         TransactionId = payementResult.TransactionId,
                         AuthorizationCode = payementResult.AuthCode,
                         CardToken = payementResult.CardToken,
-                        CardF4L4 = requestMdoel.CreditCard.GetCardF4L4()
+                        CardF4L4 = cardLast4
                     };
 
                     var invoicePayment = new InvoicePayment
@@ -94,6 +96,8 @@ namespace SMLYS.ApplicationCore.Services.Payments
                     invoice.AmountPaid += requestMdoel.PaymentAmount;
 
                     _invoicePaymentRepository.SaveAll();
+
+                    result.AmountPaidTotal = invoice.AmountPaid;
                 }
                 else {
                     result.Message = "Process payment failed. ";
@@ -107,7 +111,7 @@ namespace SMLYS.ApplicationCore.Services.Payments
             return result;
         }
 
-        public Result Void(PaymentDataModel requestMdoel)
+        public PaymentResultModel Void(PaymentDataModel requestMdoel)
         {
             throw new NotImplementedException();
         }
