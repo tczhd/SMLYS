@@ -132,11 +132,16 @@ SMLYS.Patient = {
                 data: jsonData,
                 success: function (result) {
 
-                    modalBody.html("Add new patient success. ");
-                    $(button).click(function () {
-                        window.location.href = '/Invoice/InvoiceForm?patientId=' + result.patient_id;
-                    });
-                    modalFooter.append(button);
+                    if (result.success) {
+                        modalBody.html("Add new patient success. ");
+                        $(button).click(function () {
+                            window.location.href = '/Invoice/InvoiceForm?patientId=' + result.patient_id;
+                        });
+                        modalFooter.append(button);
+                    }
+                    else {
+                        modalBody.html("Add new patient failed. Error: " + result.message);
+                    }
 
                 }, //End of AJAX Success function  
 
