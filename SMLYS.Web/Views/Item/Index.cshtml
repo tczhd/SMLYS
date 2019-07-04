@@ -16,30 +16,33 @@
                     <i class="fa fa-align-justify"></i> @ViewData["Title"]
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-sm table-items">
-                        <thead>
-                            <tr>
-                                <th>ITEM NAME</th>
-                                <th>DESCRIPTION</th>
-                                <th>COST</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Any())
-                            {
-                                @foreach (var item in Model)
+                    <div class="table-responsive-md text-nowrap">
+                        <table class="table table-bordered table-striped table-sm table-items">
+                            <thead>
+                                <tr>
+                                    <th>ITEM NAME</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>COST</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
                                 {
-                                    <tr>
-                                        <td>
-                                        <a href="/Item/ItemForm?id=@item.ItemId">@Html.DisplayFor(modelItem => item.ItemName) </a></td>
-                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Cost)</td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="/Item/ItemForm?id=@item.ItemId">@Html.DisplayFor(modelItem => item.ItemName) </a>
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+                                        </tr>
+                                    }
                                 }
-                            }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     <nav>
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Prev</a></li>

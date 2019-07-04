@@ -14,31 +14,33 @@
                     <i class="fa fa-align-justify"></i> Site Users
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-sm table-patients">
-                        <thead>
-                            <tr>
-                                <th>USER NAME</th>
-                                <th>EMAIL</th>
-                                <th>USER LEVEL</th>
-                                <th>STATUS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Any())
-                            {
-                                @foreach (var item in Model)
+                    <div class="table-responsive-md text-nowrap">
+                        <table class="table table-bordered table-striped table-sm table-patients">
+                            <thead>
+                                <tr>
+                                    <th>USER NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>USER LEVEL</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.FirstName) &nbsp; @Html.DisplayFor(modelItem => item.LastName) </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.SiteUserLevelName)</td>
-                                        <td></td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.FirstName) &nbsp; @Html.DisplayFor(modelItem => item.LastName) </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.SiteUserLevelName)</td>
+                                            <td></td>
+                                        </tr>
+                                    }
                                 }
-                            }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     <nav>
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Prev</a></li>

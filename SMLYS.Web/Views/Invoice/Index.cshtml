@@ -16,35 +16,37 @@
                     <i class="fa fa-align-justify"></i> @ViewData["Title"]
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-sm table-items">
-                        <thead>
-                            <tr>
-                                <th>INVOICE ID</th>
-                                <th>PATIENT</th>
-                                <th>PHYSICIAN</th>
-                                <th>INVOICE DATE</th>
-                                <th>TOTAL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Any())
-                            {
-                                @foreach (var item in Model)
+                    <div class="table-responsive-md text-nowrap">
+                        <table class="table table-bordered table-striped table-sm table-items">
+                            <thead>
+                                <tr>
+                                    <th>INVOICE ID</th>
+                                    <th>PATIENT</th>
+                                    <th>PHYSICIAN</th>
+                                    <th>INVOICE DATE</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
                                 {
-                            <tr>
-                                <td>
-                                    <a href="/Invoice/InvoiceDetail?InvoiceId=@item.InvoiceId">@Html.DisplayFor(modelItem => item.InvoiceId) </a>
-                                </td>
-                                <td>@Html.DisplayFor(modelItem => item.PatientName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DoctorName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                            </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="/Invoice/InvoiceDetail?InvoiceId=@item.InvoiceId">@Html.DisplayFor(modelItem => item.InvoiceId) </a>
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.PatientName)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DoctorName)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                        </tr>
+                                    }
                                 }
-                            }
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     <nav>
                         <ul class="pagination">
                             <li class="page-item"><a class="page-link" href="#">Prev</a></li>
