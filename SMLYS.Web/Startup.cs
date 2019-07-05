@@ -41,6 +41,8 @@ using SMLYS.Infrastructure.Configuration.ThirdParty.PaymentGateway.Stripe;
 using SMLYS.Infrastructure.Services.ThirdParty.PaymentGateway.Stripe;
 using SMLYS.ApplicationCore.Interfaces.Services.Payment;
 using SMLYS.ApplicationCore.Services.Payments;
+using SMLYS.Web.Interfaces;
+using SMLYS.Web.Services;
 
 namespace SMLYS.Web
 {
@@ -119,13 +121,21 @@ namespace SMLYS.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromHours(30);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
             //services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<UserHandler>();
+            services.AddSingleton<WebUserHandler>();
 
             services.AddTransient<ISmsSender, TwilioAuthMessageSender>();
-           // services.Configure<SMSoptions>(Configuration);
+            // services.Configure<SMSoptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -175,6 +185,7 @@ namespace SMLYS.Web
 
         private void ConfigureWebService(IServiceCollection services)
         {
+            
             services.AddScoped<IPatientApiService, PatientApiService>();
             services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
         }

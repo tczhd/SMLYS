@@ -12,13 +12,12 @@ using SMLYS.ApplicationCore.DTOs.ThirdPartyService.PaymentGateway.Common;
 namespace SMLYS.Web.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly UserHandler _userHandler;
         private readonly IThirdPartyPaymentService _helcimPaymentService;
         public HomeController(UserHandler userHandler, IThirdPartyPaymentService helcimPaymentService)
+            : base(userHandler)
         {
-            _userHandler = userHandler;
             _helcimPaymentService = helcimPaymentService;
         }
 
@@ -27,6 +26,11 @@ namespace SMLYS.Web.Controllers
         {
             ViewData["Title"] = view;
 
+            var actionResult = GetActionResult();
+            if (actionResult != null)
+            {
+                return actionResult;
+            }
             //test();
 
             return View(view);

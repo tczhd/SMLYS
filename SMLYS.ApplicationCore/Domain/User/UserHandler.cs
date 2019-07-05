@@ -18,7 +18,8 @@ namespace SMLYS.ApplicationCore.Domain.User
 
         public UserContext GetUserContext()
         {
-            return _httpContextAccessor.HttpContext.Session.Get<UserContext>("UserContext");
+            var userContext =  _httpContextAccessor.HttpContext.Session.Get<UserContext>("UserContext");
+            return userContext;
         }
 
         public void SetUserContext(UserContext userContext)
