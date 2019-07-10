@@ -40,6 +40,14 @@ h2 {
     }
 }
 
+@media (max-width: 480px) {
+    .input-group-addon {
+        width: 100%;
+        box-sizing: content-box;
+        white-space: pre-line;
+    }
+}
+
 .nav-pills .nav-link.active > a {
     color: whitesmoke !important;
 }
