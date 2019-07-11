@@ -129,5 +129,28 @@ namespace SMLYS.Web.Controllers
 
             return View(view);
         }
+
+        [HttpPost]
+        public IActionResult SearchInvoice(InvoiceRequestViewModel invoiceRequestViewModel)
+        {
+            var result = new BaseResultViewModel();
+
+            if (ModelState.IsValid)
+            {
+                var model = new InvoiceRequestViewModel
+                {         
+                };
+
+                //var itemResult = _itemService.SaveItem(model);
+                //result.Success = itemResult.Success;
+                //result.Message = itemResult.Message;
+            }
+            else
+            {
+                result.Message = "Invalid data.";
+            }
+
+            return View( invoiceRequestViewModel);
+        }
     }
 }

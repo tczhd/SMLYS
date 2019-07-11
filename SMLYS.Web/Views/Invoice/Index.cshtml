@@ -13,14 +13,12 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-edit"></i>Search Invoice
-
                 </div>
-                <form class="form-horizontal">
+                <form asp-controller="Invoice" method="post" class="form-horizontal" id="myForm" asp-action="SearchInvoice">
                     <div class="card-body view-invoice-search-section">
 
-
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Invoice Id" />
                                 </div>
@@ -35,9 +33,14 @@
                                     <input class="form-control" placeholder="Last Name" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Invoice Date" />
+                                    <input class="form-control" placeholder="Invoice From Date" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Invoice To Date" />
                                 </div>
                             </div>
                         </div>
