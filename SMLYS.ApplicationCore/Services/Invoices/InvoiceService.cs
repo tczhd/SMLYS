@@ -49,9 +49,30 @@ namespace SMLYS.ApplicationCore.Services.Invoices
             return data;
         }
 
-        public List<InvoiceModel> SearchInvoices()
+        public List<InvoiceModel> SearchInvoices(InvoiceSearchDataModel searchModel)
         {
             var invoiceSpecification = new InvoiceSpecification(_clinicId);
+            if (searchModel.InvoiceId != null && searchModel.InvoiceId > 0)
+            {
+                invoiceSpecification.AddInvoiceId((int)searchModel.InvoiceId);
+            }
+            if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
+            {
+                invoiceSpecification.AddFirstName(searchModel.FirstName);
+            }
+            if (!string.IsNullOrWhiteSpace(searchModel.LastName))
+            {
+                invoiceSpecification.AddFirstName(searchModel.LastName);
+            }
+            if (searchModel.InvoiceFromDate != null)
+            {
+                invoiceSpecification.AddFromDate((DateTime)searchModel.InvoiceFromDate);
+            }
+            if (searchModel.InvoiceToDate != null)
+            {
+                invoiceSpecification.AddToDate((DateTime)searchModel.InvoiceToDate);
+            }
+
             var data = _invoiceRepository.List(invoiceSpecification);
             var result = data.Select(p => (InvoiceModel)p).ToList();
 

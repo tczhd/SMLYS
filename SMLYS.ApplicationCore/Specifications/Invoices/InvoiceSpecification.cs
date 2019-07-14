@@ -2,7 +2,7 @@
 using SMLYS.ApplicationCore.Entities.InvoiceAggregate;
 using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using SMLYS.ApplicationCore.Specifications.Base;
-
+using System;
 
 namespace SMLYS.ApplicationCore.Specifications.Invoices
 {
@@ -28,7 +28,6 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
             AddCriteria(q => q.Id == invoiceId);
         }
 
-
         public void AddPatientId(int patientId)
         {
             AddCriteria(q => q.Id == patientId);
@@ -36,12 +35,21 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
 
         public void AddFirstName(string firstName)
         {
-            AddCriteria(q => q.Patient.FirstName == firstName);
+            AddCriteria(q => q.Patient.FirstName.Contains( firstName));
         }
 
         public void AddLastName(string lastName)
         {
-            AddCriteria(q => q.Patient.LastName == lastName);
+            AddCriteria(q => q.Patient.LastName.Contains(lastName));
+        }
+        public void AddFromDate(DateTime fromDate)
+        {
+            AddCriteria(q => q.InvoiceDate >= fromDate);
+        }
+
+        public void AddToDate(DateTime toDate)
+        {
+            AddCriteria(q => q.InvoiceDate < toDate.Date.AddDays(1));
         }
     }
 }

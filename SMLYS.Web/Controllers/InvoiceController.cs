@@ -121,36 +121,33 @@ namespace SMLYS.Web.Controllers
             {
                 ViewData["Title"] = $"Search Invoice";
 
-                var data = _invoiceService.SearchInvoices();
-                var viewData = data.Select(p => (InvoiceViewModel)p).ToList();
+               // var data = _invoiceService.SearchInvoices();
+                //var viewData = data.Select(p => (InvoiceViewModel)p).ToList();
 
+                var viewData = new InvoiceRequestViewModel();
                 return View(view, viewData);
             }
 
             return View(view);
         }
 
+
         [HttpPost]
         public IActionResult SearchInvoice(InvoiceRequestViewModel invoiceRequestViewModel)
         {
-            var result = new BaseResultViewModel();
 
             if (ModelState.IsValid)
             {
-                var model = new InvoiceRequestViewModel
-                {         
-                };
-
-                //var itemResult = _itemService.SaveItem(model);
-                //result.Success = itemResult.Success;
-                //result.Message = itemResult.Message;
+                var invoice = _invoiceService.SearchInvoices(invoiceRequestViewModel);
+                invoiceRequestViewModel.Invoices = invoice.Select(p => (InvoiceViewModel)p).ToList();
             }
             else
             {
-                result.Message = "Invalid data.";
+                invoiceRequestViewModel.Invoices = new List<InvoiceViewModel>();
             }
 
-            return View( invoiceRequestViewModel);
+            return View("Index", invoiceRequestViewModel);
+
         }
     }
 }

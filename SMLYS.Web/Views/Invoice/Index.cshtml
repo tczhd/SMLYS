@@ -1,6 +1,6 @@
 ﻿@using SMLYS.Web.ViewModels.Invoices
 
-@model IEnumerable<InvoiceViewModel>
+@model InvoiceRequestViewModel
 
 
 @{
@@ -20,33 +20,33 @@
                         <div class="row">
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Invoice Id" />
+                                    <input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="First Name" />
+                                    <input asp-for="FirstName"  class="form-control" placeholder="First Name" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Last Name" />
+                                    <input asp-for="LastName"  class="form-control" placeholder="Last Name" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Invoice From Date" />
+                                    <input asp-for="InvoiceFromDate"  class="form-control" placeholder="Invoice From Date" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Invoice To Date" />
+                                    <input asp-for="InvoiceToDate"  class="form-control" placeholder="Invoice To Date" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" id="search" class="btn btn-secondary ml-1">Search </button>
+                        <button type="submit" class="btn btn-sm btn-secondary">Search</button>
                     </div>
 
                 </form>
@@ -74,9 +74,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model != null && Model.Any())
+                                @if (Model != null && Model.Invoices.Any())
                                 {
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.Invoices)
                                     {
                                         <tr>
                                             <td>

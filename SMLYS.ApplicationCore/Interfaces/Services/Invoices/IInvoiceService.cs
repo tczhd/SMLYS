@@ -9,7 +9,7 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Invoices
     {
         InvoiceModel CreateInvoiceAsync(InvoiceModel invoice);
 
-        List<InvoiceModel> SearchInvoices();
+        List<InvoiceModel> SearchInvoices(InvoiceSearchDataModel searchModel);
 
         InvoiceModel SearchInvoice(int invoiceId);
     }
