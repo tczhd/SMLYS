@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JW;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SMLYS.ApplicationCore.Domain.User;
 using SMLYS.ApplicationCore.DTOs.Common;
@@ -14,7 +16,7 @@ using SMLYS.Web.Interfaces.Api;
 using SMLYS.Web.ViewModels.Base;
 using SMLYS.Web.ViewModels.Invoices;
 using SMLYS.Web.ViewModels.Patients;
-
+using SMLYS.ApplicationCore.Extensions;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SMLYS.Web.Controllers
@@ -41,7 +43,7 @@ namespace SMLYS.Web.Controllers
         }
 
         [Route("{view=Index}")]
-        public IActionResult Index(int id, string view, int patientId, int invoiceId)
+        public IActionResult Index(int id, string view, int patientId, int invoiceId, int page)
         {
             var userContext = _userHandler.GetUserContext();
             if (view == "InvoiceForm")
@@ -121,11 +123,17 @@ namespace SMLYS.Web.Controllers
             {
                 ViewData["Title"] = $"Search Invoice";
 
-               // var data = _invoiceService.SearchInvoices();
-                //var viewData = data.Select(p => (InvoiceViewModel)p).ToList();
+                var invoiceRequestViewModel = new InvoiceRequestViewModel();
 
-                var viewData = new InvoiceRequestViewModel();
-                return View(view, viewData);
+                //if (page > 0 && HttpContext.Session.Get< InvoiceRequestViewModel>("InvoiceSearchViewModel") != null)
+                //{
+                //    var data = HttpContext.Session.Get<InvoiceRequestViewModel>("InvoiceSearchViewModel");
+                //    invoiceRequestViewModel = GetInvoiceRequestViewModel(data);
+
+                //    HttpContext.Session.Set("InvoiceSearchViewModel", invoiceRequestViewModel);
+                //}
+
+                return View(view, invoiceRequestViewModel);
             }
 
             return View(view);
@@ -135,19 +143,31 @@ namespace SMLYS.Web.Controllers
         [HttpPost]
         public IActionResult SearchInvoice(InvoiceRequestViewModel invoiceRequestViewModel)
         {
-
             if (ModelState.IsValid)
             {
-                var invoice = _invoiceService.SearchInvoices(invoiceRequestViewModel);
-                invoiceRequestViewModel.Invoices = invoice.Select(p => (InvoiceViewModel)p).ToList();
+                invoiceRequestViewModel = GetInvoiceRequestViewModel(invoiceRequestViewModel);
+                HttpContext.Session.Set("InvoiceSearchViewModel", invoiceRequestViewModel);
             }
             else
             {
                 invoiceRequestViewModel.Invoices = new List<InvoiceViewModel>();
+                invoiceRequestViewModel.Pager = new Pager(0, 1
+                    , invoiceRequestViewModel.PageSize, invoiceRequestViewModel.MaxPages);
             }
 
             return View("Index", invoiceRequestViewModel);
+        }
 
+        private InvoiceRequestViewModel GetInvoiceRequestViewModel(InvoiceRequestViewModel invoiceRequestViewModel)
+        {
+            var invoices = _invoiceService.SearchInvoices(invoiceRequestViewModel);
+            var count = _invoiceService.SearchInvoiceCount(invoiceRequestViewModel);
+            invoiceRequestViewModel.Invoices = invoices.Select(p => (InvoiceViewModel)p).ToList();
+
+            invoiceRequestViewModel.Pager = new Pager(count, invoiceRequestViewModel.CurrentPage
+                , invoiceRequestViewModel.PageSize, invoiceRequestViewModel.MaxPages);
+
+            return invoiceRequestViewModel;
         }
     }
 }

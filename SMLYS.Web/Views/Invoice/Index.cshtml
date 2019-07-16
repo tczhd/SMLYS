@@ -25,22 +25,22 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input asp-for="FirstName"  class="form-control" placeholder="First Name" />
+                                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input asp-for="LastName"  class="form-control" placeholder="Last Name" />
+                                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input asp-for="InvoiceFromDate"  class="form-control" placeholder="Invoice From Date" />
+                                    <input asp-for="InvoiceFromDate" class="form-control" placeholder="Invoice From Date" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <input asp-for="InvoiceToDate"  class="form-control" placeholder="Invoice To Date" />
+                                    <input asp-for="InvoiceToDate" class="form-control" placeholder="Invoice To Date" />
                                 </div>
                             </div>
                         </div>
@@ -93,26 +93,46 @@
                             </tbody>
                         </table>
                     </div>
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
+                    @if (Model.Pager.Pages.Any())
+                    {
+                        <nav class="table-responsive">
+                            <ul class="pagination justify-content-center d-flex flex-wrap">
+                                @if (Model.Pager.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="/Invoice?page=1">First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                    </li>
+                                }
+
+                                @foreach (var p in Model.Pager.Pages)
+                                {
+                                    <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                                        <a class="page-link" href="/Invoice?page=@p">@p</a>
+                                    </li>
+                                }
+
+                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.TotalPages)">Last</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
                 </div>
             </div>
         </div>
         <!--/.col-->
     </div>
     <!--/.row-->
-
-
-
+    <!-- pager -->
+  
 </div>
 

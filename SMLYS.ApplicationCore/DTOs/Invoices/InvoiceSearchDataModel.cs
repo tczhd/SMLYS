@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SMLYS.ApplicationCore.DTOs.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SMLYS.ApplicationCore.DTOs.Invoices
 {
-    public class InvoiceSearchDataModel
+    public class InvoiceSearchDataModel: BasicDataModel
     {
         public int? InvoiceId { get; set; }
         public string FirstName { get; set; }

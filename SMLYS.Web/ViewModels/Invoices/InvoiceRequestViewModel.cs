@@ -1,4 +1,5 @@
 ﻿using SMLYS.ApplicationCore.DTOs.Invoices;
+using SMLYS.Web.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SMLYS.Web.ViewModels.Invoices
 {
-    public class InvoiceRequestViewModel
+    public class InvoiceRequestViewModel:BasicRequestViewModel
     {
         public InvoiceRequestViewModel()
         {
@@ -46,7 +47,9 @@ namespace SMLYS.Web.ViewModels.Invoices
                 LastName = source.LastName,
                 InvoiceId = source.InvoiceId,
                 InvoiceFromDate = fromDate,
-                InvoiceToDate = toDate
+                InvoiceToDate = toDate,
+                CurrentPage = source.CurrentPage,
+                PageSize = source.PageSize
             };
         }
     }

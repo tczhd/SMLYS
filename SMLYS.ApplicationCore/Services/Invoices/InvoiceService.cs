@@ -49,7 +49,20 @@ namespace SMLYS.ApplicationCore.Services.Invoices
             return data;
         }
 
+        public int SearchInvoiceCount(InvoiceSearchDataModel searchModel)
+        {
+            return  _invoiceRepository.Count(GetInvoiceSpecification(searchModel, true));
+        }
+
         public List<InvoiceModel> SearchInvoices(InvoiceSearchDataModel searchModel)
+        {
+            var data = _invoiceRepository.List(GetInvoiceSpecification(searchModel, false));
+            var result = data.Select(p => (InvoiceModel)p).ToList();
+
+            return result;
+        }
+
+        private InvoiceSpecification GetInvoiceSpecification(InvoiceSearchDataModel searchModel, bool IsCount)
         {
             var invoiceSpecification = new InvoiceSpecification(_clinicId);
             if (searchModel.InvoiceId != null && searchModel.InvoiceId > 0)
@@ -73,10 +86,12 @@ namespace SMLYS.ApplicationCore.Services.Invoices
                 invoiceSpecification.AddToDate((DateTime)searchModel.InvoiceToDate);
             }
 
-            var data = _invoiceRepository.List(invoiceSpecification);
-            var result = data.Select(p => (InvoiceModel)p).ToList();
+            if (!IsCount)
+            {
+                invoiceSpecification.AddPagination(searchModel.CurrentPage, searchModel.PageSize);
+            }
 
-            return result;
+            return invoiceSpecification;
         }
     }
 }

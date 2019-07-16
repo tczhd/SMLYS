@@ -23,6 +23,11 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
             AddInclude($"{nameof(Invoice.InvoicePayment)}.{nameof(InvoicePayment.Payment)}");
         }
 
+        public void AddPagination(int currentPage, int pageSize)
+        {
+            ApplyPaging(currentPage - 1,  pageSize);
+        }
+
         public void AddInvoiceId(int invoiceId)
         {
             AddCriteria(q => q.Id == invoiceId);
