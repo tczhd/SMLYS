@@ -95,32 +95,36 @@
                     </div>
                     @if (Model.Pager.Pages.Any())
                     {
+
+                        string filter = ViewData["InvoiceFilter"].ToString();
+
                         <nav class="table-responsive">
                             <ul class="pagination justify-content-center d-flex flex-wrap">
                                 @if (Model.Pager.CurrentPage > 1)
                                 {
                                     <li class="page-item">
-                                        <a class="page-link" href="/Invoice?page=1">First</a>
+                                        <a class="page-link" href="/Invoice?page=1@(filter)">First</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage - 1)@filter">Previous</a>
                                     </li>
                                 }
 
                                 @foreach (var p in Model.Pager.Pages)
                                 {
                                     <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
-                                        <a class="page-link" href="/Invoice?page=@p">@p</a>
+                                        <a class="page-link" href="/Invoice?page=@p@filter">@p</a>
+
                                     </li>
                                 }
 
                                 @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                                 {
                                     <li class="page-item">
-                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.CurrentPage + 1)@filter">Next</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.TotalPages)">Last</a>
+                                        <a class="page-link" href="/Invoice?page=@(Model.Pager.TotalPages)@filter">Last</a>
                                     </li>
                                 }
                             </ul>

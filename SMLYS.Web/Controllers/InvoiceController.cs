@@ -32,7 +32,7 @@ namespace SMLYS.Web.Controllers
         private readonly IInvoiceService _invoiceService;
         private readonly UserHandler _userHandler;
 
-        public InvoiceController(IPatientService patientService, IDoctorService doctorService, 
+        public InvoiceController(IPatientService patientService, IDoctorService doctorService,
             IUtilityService utilityService, IInvoiceService invoiceService, UserHandler userHandler)
         {
             _patientService = patientService;
@@ -43,7 +43,8 @@ namespace SMLYS.Web.Controllers
         }
 
         [Route("{view=Index}")]
-        public IActionResult Index(int id, string view, int patientId, int invoiceId, int page)
+        public IActionResult Index(int id, string view, int patientId, int invoiceId
+            , int page, string firstName, string lastName, string invoiceFromDate, string invoiceToDate)
         {
             var userContext = _userHandler.GetUserContext();
             if (view == "InvoiceForm")
@@ -125,13 +126,24 @@ namespace SMLYS.Web.Controllers
 
                 var invoiceRequestViewModel = new InvoiceRequestViewModel();
 
-                //if (page > 0 && HttpContext.Session.Get< InvoiceRequestViewModel>("InvoiceSearchViewModel") != null)
-                //{
-                //    var data = HttpContext.Session.Get<InvoiceRequestViewModel>("InvoiceSearchViewModel");
-                //    invoiceRequestViewModel = GetInvoiceRequestViewModel(data);
+                if (page > 0)
+                {
+                    invoiceRequestViewModel = new InvoiceRequestViewModel()
+                    {
+                        CurrentPage = page,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        InvoiceFromDate = invoiceFromDate,
+                        InvoiceToDate = invoiceToDate
+                    };
+                    if (invoiceId > 0)
+                    {
+                        invoiceRequestViewModel.InvoiceId = invoiceId;
+                    }
 
-                //    HttpContext.Session.Set("InvoiceSearchViewModel", invoiceRequestViewModel);
-                //}
+                    invoiceRequestViewModel = GetInvoiceRequestViewModel(invoiceRequestViewModel);
+                    SetInvoiceFilter(invoiceRequestViewModel);
+                }
 
                 return View(view, invoiceRequestViewModel);
             }
@@ -146,7 +158,7 @@ namespace SMLYS.Web.Controllers
             if (ModelState.IsValid)
             {
                 invoiceRequestViewModel = GetInvoiceRequestViewModel(invoiceRequestViewModel);
-                HttpContext.Session.Set("InvoiceSearchViewModel", invoiceRequestViewModel);
+                SetInvoiceFilter(invoiceRequestViewModel);
             }
             else
             {
@@ -156,6 +168,33 @@ namespace SMLYS.Web.Controllers
             }
 
             return View("Index", invoiceRequestViewModel);
+        }
+
+        private void SetInvoiceFilter(InvoiceRequestViewModel invoiceRequestViewModel)
+        {
+            var filter = "";
+            if (invoiceRequestViewModel.InvoiceId != null && invoiceRequestViewModel.InvoiceId > 0)
+            {
+                filter += "&invoiceId=" + invoiceRequestViewModel.InvoiceId;
+            }
+            if (!string.IsNullOrWhiteSpace(invoiceRequestViewModel.FirstName))
+            {
+                filter += "&firstName=" + invoiceRequestViewModel.FirstName;
+            }
+            if (!string.IsNullOrWhiteSpace(invoiceRequestViewModel.LastName))
+            {
+                filter += "&lastName=" + invoiceRequestViewModel.LastName;
+            }
+            if (!string.IsNullOrWhiteSpace(invoiceRequestViewModel.InvoiceFromDate))
+            {
+                filter += "&invoiceFromDate=" + invoiceRequestViewModel.InvoiceFromDate;
+            }
+            if (!string.IsNullOrWhiteSpace(invoiceRequestViewModel.InvoiceToDate))
+            {
+                filter += "&invoiceToDate=" + invoiceRequestViewModel.InvoiceToDate;
+            }
+
+            ViewData["InvoiceFilter"] = filter;
         }
 
         private InvoiceRequestViewModel GetInvoiceRequestViewModel(InvoiceRequestViewModel invoiceRequestViewModel)

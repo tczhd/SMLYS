@@ -25,7 +25,7 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
 
         public void AddPagination(int currentPage, int pageSize)
         {
-            ApplyPaging(currentPage - 1,  pageSize);
+            ApplyPaging((currentPage - 1) * pageSize,  pageSize);
         }
 
         public void AddInvoiceId(int invoiceId)
