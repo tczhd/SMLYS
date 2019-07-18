@@ -23,7 +23,7 @@ namespace SMLYS.Web.ViewModels.Base
         public BasicRequestViewModel() {
             CurrentPage = 1;
             MaxPages = 5;
-            PageSize = 20;
+            PageSize = 2;
             Pager = new Pager(0, CurrentPage, PageSize, MaxPages);
         }
     }

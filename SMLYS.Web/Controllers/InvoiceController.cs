@@ -194,7 +194,8 @@ namespace SMLYS.Web.Controllers
                 filter += "&invoiceToDate=" + invoiceRequestViewModel.InvoiceToDate;
             }
 
-            ViewData["InvoiceFilter"] = filter;
+            ViewData["PagerFilter"] = filter;
+            ViewData["PagerControllerName"] = "Invoice";
         }
 
         private InvoiceRequestViewModel GetInvoiceRequestViewModel(InvoiceRequestViewModel invoiceRequestViewModel)
