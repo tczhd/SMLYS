@@ -11,7 +11,7 @@ namespace SMLYS.Web.Interfaces.Api
     {
         PatientResultViewModel CreateNewPatient(List<PatientRequestModel> Patients);
         SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels);
-
+        int SearchPatientsCount(List<SearchPatientRequestModel> searchPatientRequestModels);
         PatientViewModel SearchPatient(int id);
     }
 }

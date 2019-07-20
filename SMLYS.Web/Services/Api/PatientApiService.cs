@@ -154,5 +154,10 @@ namespace SMLYS.Web.Services.Api
 
             return result;
         }
+
+        public int SearchPatientsCount(List<SearchPatientRequestModel> searchPatientRequestModels)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

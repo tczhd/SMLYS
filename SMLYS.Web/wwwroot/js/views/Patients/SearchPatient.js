@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $('#search').click(function () {
-        SMLYS.Patient.SearchPatient($(this));
+        SMLYS.Patient.SearchPatient($(this), 1);
     });
 
 
@@ -46,7 +46,7 @@ SMLYS.Patient = {
         filterInput.val("");
     },
 
-    SearchPatient: function (button) {
+    SearchPatient: function (button, currentPage) {
         var spinner = $('#search-spinner');
         spinner.removeClass("invisible");
         button.hide();
@@ -73,6 +73,13 @@ SMLYS.Patient = {
 
             searchPatients.push(patient);
         });
+
+        var pageType = {
+            search_type: "currentPage",
+            search_content: currentPage
+        };
+
+        searchPatients.push(pageType);
 
         var jsonData = JSON.stringify(searchPatients);
 
