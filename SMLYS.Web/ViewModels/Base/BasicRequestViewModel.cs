@@ -1,5 +1,5 @@
-﻿using JW;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using SMLYS.ApplicationCore.DTOs.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SMLYS.Web.ViewModels.Base
 {
-    public class BasicRequestViewModel : PageModel
+    public class BasicRequestViewModel 
     {
         [Display(Name = "Success")]
         public bool Success { get; set; }
@@ -20,7 +20,8 @@ namespace SMLYS.Web.ViewModels.Base
         public int PageSize { get; set; }
         public int MaxPages { get; set; }
 
-        public BasicRequestViewModel() {
+        public BasicRequestViewModel()
+        {
             CurrentPage = 1;
             MaxPages = WebSiteSettings.MaxPages;
             PageSize = WebSiteSettings.PageSize;

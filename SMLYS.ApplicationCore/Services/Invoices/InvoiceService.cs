@@ -86,10 +86,10 @@ namespace SMLYS.ApplicationCore.Services.Invoices
                 invoiceSpecification.AddToDate((DateTime)searchModel.InvoiceToDate);
             }
 
-            if (!IsCount)
-            {
-                invoiceSpecification.AddPagination(searchModel.CurrentPage, searchModel.PageSize);
-            }
+            //if (!IsCount)
+            //{
+            //    invoiceSpecification.AddPagination(searchModel.CurrentPage, searchModel.PageSize);
+            //}
 
             return invoiceSpecification;
         }

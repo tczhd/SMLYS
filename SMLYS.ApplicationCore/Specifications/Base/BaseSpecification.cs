@@ -23,7 +23,8 @@ namespace SMLYS.ApplicationCore.Specifications.Base
         public bool isPagingEnabled { get; private set; } = false;
         public void AddPagination(int currentPage, int pageSize)
         {
-            ApplyPaging((currentPage - 1) * pageSize, pageSize);
+            currentPage = (currentPage >= 1) ? (currentPage - 1) : 0;
+            ApplyPaging(currentPage * pageSize, pageSize);
         }
         protected virtual void AddCriteria(Expression<Func<T, bool>> criteria)
         {
