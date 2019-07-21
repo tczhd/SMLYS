@@ -1,4 +1,5 @@
-﻿using SMLYS.ApplicationCore.DTOs.Patients;
+﻿using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.DTOs.Patients;
 using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Patients
     {
         List<Patient> CreatePatientAsync(List<Patient> patient);
 
-        List<Patient> SearchPatientAsync(List<SearchPatientParameter> patient);
-
+        List<Patient> SearchPatientAsync(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize);
+        int SearchPatientCountAsync(List<GenericSearchParameter> searchParameters);
         Patient SearchPatientAsync(int id);
 
         PatientModel SearchPatientModelAsync(int id);

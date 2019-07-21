@@ -74,14 +74,12 @@ SMLYS.Patient = {
             searchPatients.push(patient);
         });
 
-        var pageType = {
-            search_type: "currentPage",
-            search_content: currentPage
+        var data = {
+            current_page: currentPage,
+            web_search_request_detail: searchPatients
         };
 
-        searchPatients.push(pageType);
-
-        var jsonData = JSON.stringify(searchPatients);
+        var jsonData = JSON.stringify(data);
 
         $.ajax({
             type: "POST",
@@ -98,6 +96,8 @@ SMLYS.Patient = {
                             var tr = SMLYS.Patient.GetPatientRow(patient);
                             bodyPatients.append(tr);
                         });
+
+                        SMLYS.setModalPagination("SMLYS.Patient.SearchPatient", result.current_page, result.pages, result.total_pages);
                     }
                     else {
                         alert("No patient was found. ");

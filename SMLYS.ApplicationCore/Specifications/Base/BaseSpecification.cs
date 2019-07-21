@@ -21,7 +21,10 @@ namespace SMLYS.ApplicationCore.Specifications.Base
         public int Take { get; private set; }
         public int Skip { get; private set; }
         public bool isPagingEnabled { get; private set; } = false;
-
+        public void AddPagination(int currentPage, int pageSize)
+        {
+            ApplyPaging((currentPage - 1) * pageSize, pageSize);
+        }
         protected virtual void AddCriteria(Expression<Func<T, bool>> criteria)
         {
             Criterias.Add(criteria);

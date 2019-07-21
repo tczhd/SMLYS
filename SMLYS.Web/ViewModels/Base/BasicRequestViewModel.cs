@@ -22,8 +22,8 @@ namespace SMLYS.Web.ViewModels.Base
 
         public BasicRequestViewModel() {
             CurrentPage = 1;
-            MaxPages = 5;
-            PageSize = 20;
+            MaxPages = WebSiteSettings.MaxPages;
+            PageSize = WebSiteSettings.PageSize;
             Pager = new Pager(0, CurrentPage, PageSize, MaxPages);
         }
     }

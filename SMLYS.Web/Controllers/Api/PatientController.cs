@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SMLYS.Web.Interfaces.Api;
+using SMLYS.Web.Models;
 using SMLYS.Web.Models.Patients;
 using SMLYS.Web.ViewModels.Patients;
 
@@ -48,9 +49,9 @@ namespace SMLYS.Web.Controllers.Api
         // POST api/<controller>/PostSearchPatients
         [Route("[action]")]
         [HttpPost]
-        public IActionResult PostSearchPatients([FromBody]List<SearchPatientRequestModel> patients)
+        public IActionResult PostSearchPatients([FromBody]WebSearchRequestModel webSearchRequestModel)
         {
-            var result = _patientApiService.SearchPatients(patients);
+            var result = _patientApiService.SearchPatients(webSearchRequestModel);
             return Json(result);
         }
 

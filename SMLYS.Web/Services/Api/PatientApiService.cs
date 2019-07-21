@@ -11,6 +11,8 @@ using System.Linq;
 using SMLYS.ApplicationCore.DTOs.Patients;
 using SMLYS.Web.Models.Patients;
 using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.Web.Models;
+using SMLYS.ApplicationCore.DTOs.Common;
 
 namespace SMLYS.Web.Services.Api
 {
@@ -126,19 +128,20 @@ namespace SMLYS.Web.Services.Api
             return null;
         }
 
-        public SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels)
+        public SearchPatientResultViewModel SearchPatients(WebSearchRequestModel searchequestModel)
         {
-            var searchPatientFilter = searchPatientRequestModels.Select(p => new SearchPatientParameter
+            var searchPatientFilter = searchequestModel.WebSearchRequestDetail.Select(p => new GenericSearchParameter
             {
                 SearchType = p.SearchType,
                 SearchContent = p.SearchContent
             }).ToList();
-            var data = _patientService.SearchPatientAsync(searchPatientFilter);
+            var data = _patientService.SearchPatientAsync(searchPatientFilter, searchequestModel.CurrentPage, WebSiteSettings.PageSize);
 
-            SearchPatientResultViewModel result = new SearchPatientResultViewModel()
+            var result = new SearchPatientResultViewModel()
             {
                 Success = true,
-                Message = "Search patients success. "
+                Message = "Search patients success. ",
+                CurrentPage = searchequestModel.CurrentPage
             };
 
             result.PatientDetail = data.Select(p => new SearchPatientDetailResultViewModel
@@ -149,15 +152,10 @@ namespace SMLYS.Web.Services.Api
                 PatientPhone = p.Phone,
                 PatientStatus = p.CreatedDateUtc.ToString("MMM dd"),
                 PatientId = p.Id
-
             }).ToList();
+            result.Count = _patientService.SearchPatientCountAsync(searchPatientFilter);
 
             return result;
-        }
-
-        public int SearchPatientsCount(List<SearchPatientRequestModel> searchPatientRequestModels)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SMLYS.ApplicationCore.Domain.User;
+using SMLYS.ApplicationCore.DTOs.Common;
 using SMLYS.ApplicationCore.DTOs.Patients;
 using SMLYS.ApplicationCore.Entities.PatientAggregate;
 using SMLYS.ApplicationCore.Interfaces.Repository;
@@ -80,11 +81,18 @@ namespace SMLYS.ApplicationCore.Services.Patients
             return patient;
         }
 
-        public List<Patient> SearchPatientAsync(List<SearchPatientParameter> searchPatientParameter)
+        public List<Patient> SearchPatientAsync(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize)
+        {
+            var patientSpecification = GetPatientSpecification(searchParameters, currentPage, pageSize, false);
+
+            return _patientRepository.List(patientSpecification).ToList();
+        }
+
+        private PatientSpecification GetPatientSpecification(List<GenericSearchParameter> searchParameters, int currentPage, int pageSize, bool IsCount)
         {
             var patientSpecification = new PatientSpecification(_clinicId);
 
-            foreach (var parameter in searchPatientParameter)
+            foreach (var parameter in searchParameters)
             {
                 if (parameter.SearchType == "first_name")
                 {
@@ -96,7 +104,12 @@ namespace SMLYS.ApplicationCore.Services.Patients
                 }
             }
 
-            return _patientRepository.List(patientSpecification).ToList();
+            if (!IsCount)
+            {
+                patientSpecification.AddPagination(currentPage, pageSize);
+            }
+
+            return patientSpecification;
         }
 
         public Patient SearchPatientAsync(int id)
@@ -133,6 +146,13 @@ namespace SMLYS.ApplicationCore.Services.Patients
 
             return result;
 
+        }
+
+        public int SearchPatientCountAsync(List<GenericSearchParameter> searchParameters)
+        {
+            var patientSpecification = GetPatientSpecification(searchParameters, 0, 0, true);
+
+            return _patientRepository.Count(patientSpecification);
         }
     }
 }

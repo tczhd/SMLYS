@@ -1,4 +1,5 @@
-﻿using SMLYS.Web.Models.Patients;
+﻿using SMLYS.Web.Models;
+using SMLYS.Web.Models.Patients;
 using SMLYS.Web.ViewModels.Patients;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,7 @@ namespace SMLYS.Web.Interfaces.Api
     public interface IPatientApiService
     {
         PatientResultViewModel CreateNewPatient(List<PatientRequestModel> Patients);
-        SearchPatientResultViewModel SearchPatients(List<SearchPatientRequestModel> searchPatientRequestModels);
-        int SearchPatientsCount(List<SearchPatientRequestModel> searchPatientRequestModels);
+        SearchPatientResultViewModel SearchPatients(WebSearchRequestModel searchequestModel);
         PatientViewModel SearchPatient(int id);
     }
 }
