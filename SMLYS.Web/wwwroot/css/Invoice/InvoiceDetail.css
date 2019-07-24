@@ -1,0 +1,4 @@
+﻿#invoice div.invoice-lable,
+#invoice td.invoice-total-lable {
+    font-weight: bold;
+}

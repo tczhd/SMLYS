@@ -21,8 +21,8 @@
                             <section class="invoice-basic-section">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="PatientName"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="PatientName"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -31,8 +31,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="InvoiceId"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="InvoiceId"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -43,8 +43,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="SendToName"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="SendToName"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -55,8 +55,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="InvoiceDate"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="InvoiceDate"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -67,8 +67,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="Address"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="Address"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -90,8 +90,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="DoctorName"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="DoctorName"></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -102,8 +102,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="ReOccouring"></label>
+                                        <div class="form-group invoice-lable">
+                                            <label asp-for="ReOccouring "></label>:
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -141,47 +141,47 @@
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <table class="table table-bordered table-striped table-sm table-invoices">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:20%">Item</th>
-                                                    <th style="width:35%">Description</th>
-                                                    <th style="width:10%">Qty</th>
-                                                    <th style="width:10%">Cost</th>
-                                                    <th style="width:10%">Tax</th>
-                                                    <th style="width:10%">Amount</th>
-                                                    <th style="width:5%"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="invoice-items">
-
-                                                @foreach (var item in Model.InvoiceItems)
-                                                {
+                                        <div class="table-responsive-md text-nowrap">
+                                            <table class="table table-bordered table-striped table-sm table-invoices">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            @item.ItemName
-                                                        </td>
-                                                        <td>
-                                                            @item.Description
-                                                        </td>
-                                                        <td>
-                                                            @item.Quantity
-                                                        </td>
-                                                        <td>
-                                                            @item.Cost.ToString("0.00")
-                                                        </td>
-                                                        <td>
-                                                            @item.Tax.ToString("0.00")
-                                                        </td>
-                                                        <td>
-                                                            @item.SubTotal.ToString("0.00")
-                                                        </td>
+                                                        <th style="width:20%">Item</th>
+                                                        <th style="width:40%">Description</th>
+                                                        <th style="width:10%">Qty</th>
+                                                        <th style="width:10%">Cost</th>
+                                                        <th style="width:10%">Tax</th>
+                                                        <th style="width:10%">Amount</th>
                                                     </tr>
+                                                </thead>
+                                                <tbody class="invoice-items">
 
-                                                }
-                                            </tbody>
-                                        </table>
+                                                    @foreach (var item in Model.InvoiceItems)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @item.ItemName
+                                                            </td>
+                                                            <td>
+                                                                @item.Description
+                                                            </td>
+                                                            <td>
+                                                                @item.Quantity
+                                                            </td>
+                                                            <td>
+                                                                @item.Cost.ToString("0.00")
+                                                            </td>
+                                                            <td>
+                                                                @item.Tax.ToString("0.00")
+                                                            </td>
+                                                            <td>
+                                                                @item.SubTotal.ToString("0.00")
+                                                            </td>
+                                                        </tr>
 
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -201,11 +201,11 @@
                                     <div class="col-sm-4 invoice-total">
                                         <table class="table table-bordered table-sm table-invoices">
                                             <tbody class="invoice-total">
-                                                <tr><td>Subtotal</td><td class="invoice-subtotal">@Model.SubTotal.ToString("0.00")</td></tr>
-                                                <tr><td>Tax</td><td class="invoice-tax">@Model.Tax.ToString("0.00")</td></tr>
-                                                <tr><td>Total</td><td class="invoice-total">@Model.Total.ToString("0.00")</td></tr>
-                                                <tr><td>Amount paid</td><td class="invoice-amount-paid">@Model.AmountPaid.ToString("0.00")</td></tr>
-                                                <tr><td>Balance Due</td><td class="invoice-balance">@Model.BalanceDue.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Subtotal:</td><td class="invoice-subtotal">@Model.SubTotal.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Tax:</td><td class="invoice-tax">@Model.Tax.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Total:</td><td class="invoice-total">@Model.Total.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Amount paid:</td><td class="invoice-amount-paid">@Model.AmountPaid.ToString("0.00")</td></tr>
+                                                <tr><td class="invoice-total-lable">Balance Due:</td><td class="invoice-balance">@Model.BalanceDue.ToString("0.00")</td></tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -219,9 +219,9 @@
                         <button type="button" class="btn btn-sm btn-primary send-email" onclick="SMLYS.InvoiceDetail.SendInvoiceEmailModal()">Send Email</button>
                         @{ if (@Model.BalanceDue > 0)
                             {
-                        <button type="button" class="btn btn-sm btn-primary apply-payment" onclick="SMLYS.InvoiceDetail.ShowPaymentModal()">Apply Payment</button>
-                                } 
+                                <button type="button" class="btn btn-sm btn-primary apply-payment" onclick="SMLYS.InvoiceDetail.ShowPaymentModal()">Apply Payment</button>
                             }
+                        }
                     </div>
                 </div>
             </div>
@@ -254,7 +254,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Payment Amount</label>
-                                    <input id="PaymentAmount"type="text" class="form-control payment-amount" placeholder="Enter your payment amount">
+                                    <input id="PaymentAmount" type="text" class="form-control payment-amount" placeholder="Enter your payment amount">
                                 </div>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Check No.</label>
-                                    <input type="text" class="form-control check-no"" placeholder="Enter your check No.">
+                                    <input type="text" class="form-control check-no" " placeholder="Enter your check No.">
                                 </div>
                             </div>
                         </div>
@@ -326,7 +326,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="cvv">CVV/CVC</label>
-                                    <input type="text" class="form-control credit-card-cvv"  placeholder="cvv code">
+                                    <input type="text" class="form-control credit-card-cvv" placeholder="cvv code">
                                 </div>
                             </div>
                         </div>
@@ -334,7 +334,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Zip</label>
-                                    <input type="text" class="form-control credit-card-zip"  placeholder="Enter your Zip">
+                                    <input type="text" class="form-control credit-card-zip" placeholder="Enter your Zip">
                                 </div>
                             </div>
                         </div>
@@ -355,9 +355,11 @@
     </div>
 </div>
 
-
+@section Styles {
+    <link href="/css/Invoice/InvoiceDetail.css" rel="stylesheet">
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="/js/views/Invoices/invoiceDetail.js" ></script>
+    <script src="/js/views/Invoices/invoiceDetail.js"></script>
 }
