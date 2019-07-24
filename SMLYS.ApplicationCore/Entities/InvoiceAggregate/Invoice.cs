@@ -32,6 +32,8 @@ namespace SMLYS.ApplicationCore.Entities.InvoiceAggregate
         public int? UpdatedBy { get; set; }
         public bool ReOccouring { get; set; }
         public int ClinicId { get; set; }
+        public int? DisplayId { get; set; }
+        public string EncryptId { get; set; }
 
         public virtual Clinic Clinic { get; set; }
         public virtual SiteUser CreatedByNavigation { get; set; }

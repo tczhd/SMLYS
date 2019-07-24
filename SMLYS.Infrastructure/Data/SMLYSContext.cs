@@ -279,6 +279,7 @@ namespace SMLYS.Infrastructure.Data
                 entity.Property(e => e.TaxTotal).HasColumnType("decimal(18, 6)");
 
                 entity.Property(e => e.Total).HasColumnType("decimal(18, 6)");
+                entity.Property(e => e.EncryptId).HasMaxLength(100);
 
                 entity.Property(e => e.UpdatedDateUtc)
                     .HasColumnName("UpdatedDateUTC")
