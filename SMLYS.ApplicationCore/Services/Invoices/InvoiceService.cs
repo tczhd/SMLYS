@@ -27,11 +27,15 @@ namespace SMLYS.ApplicationCore.Services.Invoices
             try
             {
                 var invoice = (Invoice)invoiceModel;
-                 _invoiceRepository.AddOnly(invoice);
+
+                _invoiceRepository.AddOnly(invoice);
 
                 _invoiceRepository.SaveAll();
 
                 invoiceModel.InvoiceId = invoice.Id;
+                var insertedInvoice = _invoiceRepository.GetById(invoice.Id);
+                invoiceModel.DisplayId = insertedInvoice.DisplayId;
+
                 return invoiceModel;
             }
             catch (Exception ex)

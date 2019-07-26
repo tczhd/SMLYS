@@ -90,8 +90,13 @@ namespace SMLYS.Web.Controllers.Api
             }).ToList();
 
 
+            var ticks = DateTime.Now.Ticks;
+            var guid = Guid.NewGuid().ToString();
+            var uniqueId = ticks.ToString() + '-' + guid; //guid created by combining ticks and guid
+
             var invoiceModel = new InvoiceModel
             {
+                EncryptId = uniqueId,
                 AmountPaid = 0,
                 Note = "New Invoice",
                 InvoiceStatus = 1,

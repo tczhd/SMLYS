@@ -30,6 +30,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
         public int? UpdatedBy { get; set; }
         public bool ReOccouring { get; set; }
         public int ClinicId { get; set; }
+        public int? DisplayId { get; set; }
+        public string EncryptId { get; set; }
         public AddressModel PatientAddress { get; set; }
         public List<InvoiceItemModel> InvoiceItems { get; set; }
         public List<InvoicePaymentModel> InvoicePayments { get; set; }
@@ -55,6 +57,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
               InvoiceStatus = m.InvoiceStatus,
               Note = m.Note,
               PatientId = m.PatientId,
+              DisplayId = m.DisplayId,
+              EncryptId = m.EncryptId,
               PatientName = m.Patient != null?m.Patient.FirstName + " " + m.Patient.LastName:string.Empty,
               PatientEmail = m.Patient != null ? m.Patient.Email: string.Empty,
                 PaymentStatus = m.PaymentStatus,
@@ -82,6 +86,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 DoctorName = source.Doctor != null ? source.Doctor.FirstName + " " + source.Doctor.LastName : string.Empty,
                 InvoiceDate = source.InvoiceDate,
                 InvoiceId = source.Id,
+                DisplayId = source.DisplayId,
+                EncryptId = source.EncryptId,
                 InvoiceStatus = source.InvoiceStatus,
                 Note = source.Note,
                 PatientId = source.PatientId,
@@ -111,6 +117,8 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
                 DoctorId = source.DoctorId,
                 InvoiceDate = source.InvoiceDate,
                 Id = source.InvoiceId,
+                DisplayId = source.DisplayId,
+                EncryptId = source.EncryptId,
                 InvoiceStatus = source.InvoiceStatus,
                 Note = source.Note,
                 PatientId = source.PatientId,
