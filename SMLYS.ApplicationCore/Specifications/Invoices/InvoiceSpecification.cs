@@ -23,6 +23,10 @@ namespace SMLYS.ApplicationCore.Specifications.Invoices
             AddInclude($"{nameof(Invoice.InvoicePayment)}.{nameof(InvoicePayment.Payment)}");
         }
 
+        public void AddDisplayId(int displayId)
+        {
+            AddCriteria(q => q.DisplayId == displayId);
+        }
         public void AddInvoiceId(int invoiceId)
         {
             AddCriteria(q => q.Id == invoiceId);

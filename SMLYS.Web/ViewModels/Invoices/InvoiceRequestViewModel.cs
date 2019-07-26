@@ -15,7 +15,7 @@ namespace SMLYS.Web.ViewModels.Invoices
         }
 
         [Display(Name = "Invoice Number")]
-        public int? InvoiceId { get; set; }
+        public int? DisplayId { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
@@ -44,7 +44,7 @@ namespace SMLYS.Web.ViewModels.Invoices
             {
                 FirstName = source.FirstName,
                 LastName = source.LastName,
-                InvoiceId = source.InvoiceId,
+                DisplayId = source.DisplayId,
                 InvoiceFromDate = fromDate,
                 InvoiceToDate = toDate,
                 CurrentPage = source.CurrentPage,

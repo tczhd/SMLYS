@@ -135,7 +135,7 @@ namespace SMLYS.Web.Controllers
                     };
                     if (invoiceId > 0)
                     {
-                        invoiceRequestViewModel.InvoiceId = invoiceId;
+                        invoiceRequestViewModel.DisplayId = invoiceId;
                     }
 
                     invoiceRequestViewModel = GetInvoiceRequestViewModel(invoiceRequestViewModel);
@@ -170,9 +170,9 @@ namespace SMLYS.Web.Controllers
         private void SetInvoiceFilter(InvoiceRequestViewModel invoiceRequestViewModel)
         {
             var filter = "";
-            if (invoiceRequestViewModel.InvoiceId != null && invoiceRequestViewModel.InvoiceId > 0)
+            if (invoiceRequestViewModel.DisplayId != null && invoiceRequestViewModel.DisplayId > 0)
             {
-                filter += "&invoiceId=" + invoiceRequestViewModel.InvoiceId;
+                filter += "&invoiceId=" + invoiceRequestViewModel.DisplayId;
             }
             if (!string.IsNullOrWhiteSpace(invoiceRequestViewModel.FirstName))
             {

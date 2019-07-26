@@ -7,7 +7,7 @@ namespace SMLYS.ApplicationCore.DTOs.Invoices
 {
     public class InvoiceSearchDataModel: BasicDataModel
     {
-        public int? InvoiceId { get; set; }
+        public int? DisplayId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? InvoiceFromDate { get; set; }

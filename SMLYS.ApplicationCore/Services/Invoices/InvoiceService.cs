@@ -33,8 +33,6 @@ namespace SMLYS.ApplicationCore.Services.Invoices
                 _invoiceRepository.SaveAll();
 
                 invoiceModel.InvoiceId = invoice.Id;
-                var insertedInvoice = _invoiceRepository.GetById(invoice.Id);
-                invoiceModel.DisplayId = insertedInvoice.DisplayId;
 
                 return invoiceModel;
             }
@@ -69,9 +67,9 @@ namespace SMLYS.ApplicationCore.Services.Invoices
         private InvoiceSpecification GetInvoiceSpecification(InvoiceSearchDataModel searchModel, bool IsCount)
         {
             var invoiceSpecification = new InvoiceSpecification(_clinicId);
-            if (searchModel.InvoiceId != null && searchModel.InvoiceId > 0)
+            if (searchModel.DisplayId != null && searchModel.DisplayId > 0)
             {
-                invoiceSpecification.AddInvoiceId((int)searchModel.InvoiceId);
+                invoiceSpecification.AddDisplayId((int)searchModel.DisplayId);
             }
             if (!string.IsNullOrWhiteSpace(searchModel.FirstName))
             {
@@ -90,10 +88,10 @@ namespace SMLYS.ApplicationCore.Services.Invoices
                 invoiceSpecification.AddToDate((DateTime)searchModel.InvoiceToDate);
             }
 
-            //if (!IsCount)
-            //{
-            //    invoiceSpecification.AddPagination(searchModel.CurrentPage, searchModel.PageSize);
-            //}
+            if (!IsCount)
+            {
+                invoiceSpecification.AddPagination(searchModel.CurrentPage, searchModel.PageSize);
+            }
 
             return invoiceSpecification;
         }

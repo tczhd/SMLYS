@@ -13,6 +13,8 @@ namespace SMLYS.Web.ViewModels.Invoices
     {
         [Display(Name = "Invoice Number")]
         public int InvoiceId { get; set; }
+        [Display(Name = "Invoice Number")]
+        public int? DisplayId { get; set; }
         [Display(Name = "Patient Name")]
         public string PatientName { get; set; }
         [Display(Name = "Patient Id")]
@@ -71,6 +73,7 @@ namespace SMLYS.Web.ViewModels.Invoices
                 DoctorName = source.DoctorName,
                 InvoiceDate = source.InvoiceDate,
                 InvoiceId = source.InvoiceId,
+                DisplayId = source.DisplayId,
                 PatientId = source.PatientId,
                 PatientName = source.PatientName,
                 ReOccouring = source.ReOccouring,

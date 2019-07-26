@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <input asp-for="InvoiceId" class="form-control" placeholder="Invoice Id" />
+                                    <input asp-for="DisplayId" class="form-control" placeholder="Invoice Id" />
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -80,7 +80,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                <a href="/Invoice/InvoiceDetail?InvoiceId=@item.InvoiceId">@Html.DisplayFor(modelItem => item.InvoiceId) </a>
+                                                <a href="/Invoice/InvoiceDetail?InvoiceId=@item.DisplayId">@Html.DisplayFor(modelItem => item.DisplayId) </a>
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.PatientName)</td>
                                             <td>@Html.DisplayFor(modelItem => item.DoctorName)</td>
