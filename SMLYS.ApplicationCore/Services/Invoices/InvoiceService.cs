@@ -33,6 +33,7 @@ namespace SMLYS.ApplicationCore.Services.Invoices
                 _invoiceRepository.SaveAll();
 
                 invoiceModel.InvoiceId = invoice.Id;
+                invoiceModel.DisplayId = invoice.DisplayId;
 
                 return invoiceModel;
             }
@@ -45,10 +46,10 @@ namespace SMLYS.ApplicationCore.Services.Invoices
         public InvoiceModel SearchInvoice(int invoiceId)
         {
             var invoiceDetailSpecification = new InvoiceSpecification(_clinicId);
-            invoiceDetailSpecification.AddInvoiceId(invoiceId);
+            invoiceDetailSpecification.AddDisplayId(invoiceId);
             var data = _invoiceRepository.GetSingleBySpec(invoiceDetailSpecification);
 
-            return data;
+            return data !=null?data:null;
         }
 
         public int SearchInvoiceCount(InvoiceSearchDataModel searchModel)

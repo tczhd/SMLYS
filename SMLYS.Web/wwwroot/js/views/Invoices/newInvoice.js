@@ -289,7 +289,7 @@ SMLYS.Invoice = {
 
                     modalBody.html("Add new invoice success. ");
                     $(button).click(function () {
-                        window.location.href = '/Invoice/InvoiceDetail?invoiceId=' + result.invoiceId;
+                        window.location.href = '/Invoice/InvoiceDetail?invoiceId=' + result.displayId;
                     });
                     modalFooter.append(button);
 
