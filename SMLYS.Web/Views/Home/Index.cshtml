@@ -1,28 +1,23 @@
 ﻿@{
-  ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
-@section Styles {
-  <style>
-    .carousel-caption p {
-      font-size: 20px;
-      line-height: 1.4;
-    }
+<div class="tutorialBody">
 
-    h1, .h1, h2, .h2, h3, .h3 {
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-  </style>
-}
+    <!-- Both Suggestions and Autocomplete -->
+    <div class="example">
+        <div class="searchBoxForm hide-autocomplete-dropdown">
+            <input class="searchBox" type="text" id="example3" placeholder="search">
+            <input type="submit" class="searchBoxSubmit">
+        </div>
+    </div>
+    <script>
 
-<div class="row">
-  <div class="col-md-6">
-    <h2>SMLYS</h2>
-  </div>
-  <div class="col-md-6">
-    <h2>How to</h2>
+    </script>
+    <br />
 
-  </div>
-  
 </div>
+
+@section Scripts {
+    <script src="~/js/indexTest.js" asp-append-version="true"></script>
+}
