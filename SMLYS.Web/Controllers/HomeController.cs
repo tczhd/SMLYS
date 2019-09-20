@@ -19,9 +19,10 @@ namespace SMLYS.Web.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
+        private JobsSearch _jobsSearch = new JobsSearch();
         private static SearchServiceClient _searchClient;
         private static ISearchIndexClient _indexClient;
-       // private static string IndexName = "nycjobs";
+        // private static string IndexName = "nycjobs";
         private static string IndexName = "azuresql-index";
         public static string errorMessage;
 
@@ -87,23 +88,23 @@ namespace SMLYS.Web.Controllers
 
         public ActionResult Suggest(bool highlights, bool fuzzy, string term)
         {
-            InitSearch();
+            //InitSearch();
 
-            // Call suggest API and return results
-            SuggestParameters sp = new SuggestParameters()
-            {
-                UseFuzzyMatching = fuzzy,
-                Top = 5
-            };
+            //// Call suggest API and return results
+            //SuggestParameters sp = new SuggestParameters()
+            //{
+            //    UseFuzzyMatching = fuzzy,
+            //    Top = 5
+            //};
 
-            if (highlights)
-            {
-                sp.HighlightPreTag = "<b>";
-                sp.HighlightPostTag = "</b>";
-            }
+            //if (highlights)
+            //{
+            //    sp.HighlightPreTag = "<b>";
+            //    sp.HighlightPostTag = "</b>";
+            //}
 
-            var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
-
+            //var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
+            var suggestResult = _jobsSearch.Suggest(highlights, fuzzy, term);
             // Convert the suggest query results to a list that can be displayed in the client.
             List<string> suggestions = suggestResult.Results.Select(x => x.Text).ToList();
             return new JsonResult(suggestions);
@@ -114,18 +115,42 @@ namespace SMLYS.Web.Controllers
             //});
         }
 
+        public ActionResult Search(string q = "", int currentPage = 0)
+        {
+            string businessTitleFacet = "";
+            string postingTypeFacet = "";
+            string salaryRangeFacet = "";
+            string sortType = "";
+            double lat = 40.736224;
+            double lon = -73.99251;
+            int zipCode = 10001;
+            int maxDistance = 0;
+            // If blank search, assume they want to search everything
+            if (string.IsNullOrWhiteSpace(q))
+                q = "*";
+
+            string maxDistanceLat = string.Empty;
+            string maxDistanceLon = string.Empty;
+
+            var response = _jobsSearch.Search(q, businessTitleFacet, postingTypeFacet, salaryRangeFacet, sortType, lat, lon, currentPage, maxDistance, maxDistanceLat, maxDistanceLon);
+            return new JsonResult
+            (
+                new { results = response.Results, facets = response.Facets, count = (int)response.Count }
+           );
+        }
+
         public ActionResult AutoComplete(string term)
         {
-            InitSearch();
-            //Call autocomplete API and return results
-            AutocompleteParameters ap = new AutocompleteParameters()
-            {
-                AutocompleteMode = AutocompleteMode.OneTermWithContext,
-                UseFuzzyMatching = false,
-                Top = 5
-            };
-            AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
-
+            //InitSearch();
+            ////Call autocomplete API and return results
+            //AutocompleteParameters ap = new AutocompleteParameters()
+            //{
+            //    AutocompleteMode = AutocompleteMode.OneTermWithContext,
+            //    UseFuzzyMatching = false,
+            //    Top = 5
+            //};
+            //AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
+            AutocompleteResult autocompleteResult = _jobsSearch.AutoComplete(term);
             // Conver the Suggest results to a list that can be displayed in the client.
             List<string> autocomplete = autocompleteResult.Results.Select(x => x.Text).ToList();
             return new JsonResult(autocomplete);
@@ -160,6 +185,7 @@ namespace SMLYS.Web.Controllers
             //    Data = facets
             //});
         }
+
 
         private void test()
         {

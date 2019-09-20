@@ -10680,6 +10680,10 @@ base-chart.chart {
     left: 0;
 }
 
+.app-header .patient-detail-row {
+    padding: 3px;
+}
+
 .app-footer {
     display: -ms-flexbox;
     display: flex;
