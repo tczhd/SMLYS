@@ -1,6 +1,7 @@
 ﻿$(function () {
 
     var currentPage = 1;
+    var searchBoxUl = $('#head-search-box-ul');
 
     function AddNewPatientModal() {
 
@@ -91,7 +92,7 @@
                     return;
                 }
 
-                $.getJSON("/home/autocomplete?term=" + text, function (data) {
+                $.getJSON("/home/autocomplete?searchType=" + $('#SearchTypeSelect').val() + "&term=" + text, function (data) {
                     if (data && data.length > 0) {
                         currentSuggestion3 = data[0];
                         add(data);
@@ -114,7 +115,7 @@
 
     $("#example3").autocomplete({
         html: true,
-        source: "/home/suggest?highlights=false&fuzzy=false&",
+        source: "/home/suggest?searchType=" + $('#SearchTypeSelect').val() + "&highlights=false&fuzzy=false&",
         minLength: 2,
         position: {
             my: "left top",
@@ -125,7 +126,7 @@
         }
     });
 
-    var searchBoxUl = $('#head-search-box-ul');
+
     var searchBoxSubmit = searchBoxUl.find('input.searchBoxSubmit');
     searchBoxSubmit.click(function () {
         Search();
@@ -133,6 +134,8 @@
 
     function Search() {
         // $("#job_details_div").html("Loading...");
+        var searchType = $('#SearchTypeSelect').val();
+
         var q = $("#example3").val();
         if (q.length <= 2) {
             alert('Please input at least two characters. ');
@@ -152,6 +155,7 @@
 
         $.post('/home/search',
             {
+                searchType: searchType,
                 q: q,
                 currentPage: currentPage
             },
@@ -166,8 +170,8 @@
                     var patientId = patientRow.find("div.patient-id").text();
                     var createInvoiceDiv = patientRow.find("div.create-invoice");
                     var editPatientDiv = patientRow.find("div.edit-patient");
-                    var createInvoiceButton = SMLYS.getModalFooterButtonString('create-invoice-btn', 'Create Invoice');
-                    var editPatientButton = SMLYS.getModalFooterButtonString('edit-patient-btn', 'Edit Patient');
+                    var createInvoiceButton = SMLYS.getButton('create-invoice-btn', 'Create Invoice', 'btn btn-info btn-sm', '', 'false');
+                    var editPatientButton = SMLYS.getButton('edit-patient-btn', 'Edit Patient', 'btn btn-secondary btn-sm', '', 'false');
                     $(createInvoiceButton).click(function () {
                         window.location.href = '/Invoice/InvoiceForm?patientId=' + patientId;
                     });

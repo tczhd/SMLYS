@@ -86,7 +86,7 @@ namespace SMLYS.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult Suggest(bool highlights, bool fuzzy, string term)
+        public ActionResult Suggest(string searchType, bool highlights, bool fuzzy, string term)
         {
             //InitSearch();
 
@@ -115,7 +115,7 @@ namespace SMLYS.Web.Controllers
             //});
         }
 
-        public ActionResult Search(string q = "", int currentPage = 0)
+        public ActionResult Search(string searchType, string q = "", int currentPage = 0)
         {
             string businessTitleFacet = "";
             string postingTypeFacet = "";
@@ -139,7 +139,7 @@ namespace SMLYS.Web.Controllers
            );
         }
 
-        public ActionResult AutoComplete(string term)
+        public ActionResult AutoComplete(string searchType, string term)
         {
             //InitSearch();
             ////Call autocomplete API and return results

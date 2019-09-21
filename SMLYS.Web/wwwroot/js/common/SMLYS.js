@@ -7,6 +7,11 @@
         return $(button);
     },
 
+    getButton: function (id, buttonName, classNames, dataDismiss, ariaHidden) {
+        var button = "<button type='button' id='" + id + "' class='" + classNames + "'  data-dismiss='" + dataDismiss + "' aria-hidden='" + ariaHidden + "'>" + buttonName + "</button>";
+        return $(button);
+    },
+
     getModalFooterButtonString: function (id, buttonName) {
         var button = "<button type='button' id='" + id + "' class='btn btn-warning btn-lg shiny'  data-dismiss='modal' aria-hidden='true'>" + buttonName + "</button>";
         return $(button);

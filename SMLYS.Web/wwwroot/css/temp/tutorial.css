@@ -1,4 +1,28 @@
-﻿.tutorialBody {
+﻿.input-group.md-form.form-sm.form-1 input {
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+    .input-group.md-form.form-sm.form-2 input.red-border {
+        border: 1px solid #ef9a9a;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.lime-border {
+        border: 1px solid #cddc39;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.amber-border {
+        border: 1px solid #ffca28;
+    }
+
+.tutorialBody {
     font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
     color: #292f33;
     max-width: 750px;
@@ -22,7 +46,7 @@
 }
 
 .searchBoxForm {
-    width: 648px;
+   
     box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.16);
     background-color: #fff;
     display: inline-block;
@@ -33,7 +57,7 @@
 }
 
 .searchBox {
-    width: 568px;
+  
     font-size: 16px;
     margin: 5px 0 1px 20px;
     padding: 0 10px 0 0;
@@ -55,7 +79,6 @@
     text-indent: -99em;
     border-width: 0;
     border-style: solid;
-    margin: 10px;
     outline: 0;
 }
 

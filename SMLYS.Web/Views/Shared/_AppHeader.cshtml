@@ -28,16 +28,23 @@
         </ul>*@
     <ul class="nav navbar-nav navbar-center " id="head-search-box-ul">
         <li>
-            <select class="form-control pull-left walkthrough-2" id="cmbDistance">
+            <select class="form-control pull-left walkthrough-2" id="SearchTypeSelect">
                 <option value="1">Patient</option>
                 <option value="2">Invoice</option>
             </select>
         </li>
         <li>
-            <div class="searchBoxForm hide-autocomplete-dropdown">
-                <input class="searchBox" type="text" id="example3" placeholder="search">
-                <input type="submit" class="searchBoxSubmit" >
-            </div>
+            <form class="form-inline mr-auto ">
+                <div class="hide-autocomplete-dropdown">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="example3">
+                    <input type="submit" class="searchBoxSubmit">
+                </div>
+                    @*<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2  " type="submit">Search</button>*@
+            </form>
+            @*<div class="searchBoxForm hide-autocomplete-dropdown">
+            <input class="searchBox" type="text" id="example3" placeholder="search">
+            <input type="submit" class="searchBoxSubmit" >
+        </div>*@
         </li>
     </ul>
 
