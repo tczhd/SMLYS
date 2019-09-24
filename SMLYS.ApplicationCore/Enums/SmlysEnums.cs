@@ -60,4 +60,14 @@ namespace SMLYS.ApplicationCore.Enums
         [Description("CAD")]
         CAD = 2
     }
+
+    public enum IndexNameType
+    {
+        [Description("patient-index")]
+        Patient = 1,
+        [Description("invoice-index")]
+        Invoice = 2,
+        [Description("service-index")]
+        Service = 3
+    }
 }

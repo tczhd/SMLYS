@@ -6,16 +6,19 @@ using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using Microsoft.Spatial;
 using System.Configuration;
+using SMLYS.ApplicationCore.Enums;
+using SMLYS.ApplicationCore.Extensions;
+using SMLYS.ApplicationCore.DTOs.SearchIndex;
 
 namespace SMLYS.Web
 {
     public class JobsSearch
     {
         private static SearchServiceClient _searchClient;
-        private static ISearchIndexClient _indexClient;
-        private static string IndexName = "azuresql-index";
-        private static ISearchIndexClient _indexZipClient;
-        private static string IndexZipCodes = "zipcodes";
+       // private static ISearchIndexClient _indexClient;
+        //private static string IndexName = "patient-index";
+       // private static ISearchIndexClient _indexZipClient;
+       // private static string IndexZipCodes = "zipcodes";
 
         public static string errorMessage;
 
@@ -31,8 +34,8 @@ namespace SMLYS.Web
 
                 // Create an HTTP reference to the catalog index
                 _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
-                _indexClient = _searchClient.Indexes.GetClient(IndexName);
-                _indexZipClient = _searchClient.Indexes.GetClient(IndexZipCodes);
+                //_indexClient = _searchClient.Indexes.GetClient(IndexName);
+               // _indexZipClient = _searchClient.Indexes.GetClient(IndexZipCodes);
 
             }
             catch (Exception e)
@@ -41,7 +44,14 @@ namespace SMLYS.Web
             }
         }
 
-        public DocumentSearchResult<Document> Search(string searchText, string businessTitleFacet, string postingTypeFacet, string salaryRangeFacet,
+        private ISearchIndexClient GetIndexClient(IndexNameType indexNameType)
+        {
+            var indexName = indexNameType.GetDescription();
+            var indexClient = _searchClient.Indexes.GetClient(indexName);
+            return indexClient;
+        }
+
+        public DocumentSearchResult<Document> Search(IndexNameType indexNameType, string searchText, string businessTitleFacet, string postingTypeFacet, string salaryRangeFacet,
             string sortType, double lat, double lon, int currentPage, int maxDistance, string maxDistanceLat, string maxDistanceLon)
         {
             // Execute search based on query string
@@ -53,12 +63,14 @@ namespace SMLYS.Web
                     Top = 10,
                     Skip = currentPage - 1,
                     // Limit results
-                    Select = new List<String>() {"Id", "FirstName", "LastName", "Title", "Gender",
-                        "Age", "Phone", "Email"},
+                    Select = SearchIndexFields.GetSelectFields(indexNameType),
+                    //new List<String>() {"Id", "FirstName", "LastName", "Title", "Gender",
+                    //    "Age", "Phone", "Email"},
                     // Add count
                     IncludeTotalResultCount = true,
                     // Add search highlights
-                    HighlightFields = new List<String>() { "LastName" },
+                    HighlightFields = SearchIndexFields.GetHighlightFields(indexNameType),
+                    //new List<String>() { "LastName" },
                     HighlightPreTag = "<b>",
                     HighlightPostTag = "</b>",
                     // Add facets
@@ -107,7 +119,8 @@ namespace SMLYS.Web
 
                 //sp.Filter = filter;
 
-                return _indexClient.Documents.Search(searchText, sp);
+                var indexClient = GetIndexClient(indexNameType);
+                return indexClient.Documents.Search(searchText, sp);
             }
             catch (Exception ex)
             {
@@ -116,25 +129,25 @@ namespace SMLYS.Web
             return null;
         }
 
-        public DocumentSearchResult<Document> SearchZip(string zipCode)
-        {
-            // Execute search based on query string
-            try
-            {
-                SearchParameters sp = new SearchParameters()
-                {
-                    SearchMode = SearchMode.All,
-                    Top = 1,
-                };
-                return _indexZipClient.Documents.Search(zipCode, sp);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error querying index: {0}\r\n", ex.Message.ToString());
-            }
-            return null;
-        }
-        public AutocompleteResult AutoComplete(string term)
+        //public DocumentSearchResult<Document> SearchZip(string zipCode)
+        //{
+        //    // Execute search based on query string
+        //    try
+        //    {
+        //        SearchParameters sp = new SearchParameters()
+        //        {
+        //            SearchMode = SearchMode.All,
+        //            Top = 1,
+        //        };
+        //        return _indexZipClient.Documents.Search(zipCode, sp);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Error querying index: {0}\r\n", ex.Message.ToString());
+        //    }
+        //    return null;
+        //}
+        public AutocompleteResult AutoComplete(IndexNameType indexNameType, string term)
         {
             //Call autocomplete API and return results
             AutocompleteParameters ap = new AutocompleteParameters()
@@ -143,7 +156,10 @@ namespace SMLYS.Web
                 UseFuzzyMatching = false,
                 Top = 5
             };
-            AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
+
+            var indexClient = GetIndexClient(indexNameType);
+
+            var autocompleteResult = indexClient.Documents.Autocomplete(term, "sg", ap);
 
             return autocompleteResult;
             //// Conver the Suggest results to a list that can be displayed in the client.
@@ -156,7 +172,7 @@ namespace SMLYS.Web
             //});
         }
 
-        public DocumentSuggestResult<Document> Suggest(bool highlights, bool fuzzy, string searchText)
+        public DocumentSuggestResult<Document> Suggest(IndexNameType indexNameType, bool highlights, bool fuzzy, string searchText)
         {
             // Execute search based on query string
             try
@@ -173,10 +189,11 @@ namespace SMLYS.Web
                     sp.HighlightPostTag = "</b>";
                 }
 
-                var suggestResult = _indexClient.Documents.Suggest(searchText, "sg", sp);
+                var indexClient = GetIndexClient(indexNameType);
+               // var suggestResult = indexClient.Documents.Suggest(searchText, "sg", sp);
 
 
-                return _indexClient.Documents.Suggest(searchText, "sg", sp);
+                return indexClient.Documents.Suggest(searchText, "sg", sp);
             }
             catch (Exception ex)
             {
@@ -185,12 +202,13 @@ namespace SMLYS.Web
             return null;
         }
 
-        public Document LookUp(string id)
+        public Document LookUp(IndexNameType indexNameType, string id)
         {
             // Execute geo search based on query string
             try
             {
-                return _indexClient.Documents.Get(id);
+                var indexClient = GetIndexClient(indexNameType);
+                return indexClient.Documents.Get(id);
             }
             catch (Exception ex)
             {

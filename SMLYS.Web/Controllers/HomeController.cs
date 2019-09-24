@@ -13,6 +13,7 @@ using Microsoft.Azure.Search.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft;
+using SMLYS.ApplicationCore.Enums;
 
 namespace SMLYS.Web.Controllers
 {
@@ -20,10 +21,10 @@ namespace SMLYS.Web.Controllers
     public class HomeController : BaseController
     {
         private JobsSearch _jobsSearch = new JobsSearch();
-        private static SearchServiceClient _searchClient;
-        private static ISearchIndexClient _indexClient;
-        // private static string IndexName = "nycjobs";
-        private static string IndexName = "azuresql-index";
+        //private static SearchServiceClient _searchClient;
+        //private static ISearchIndexClient _indexClient;
+        //// private static string IndexName = "nycjobs";
+        //private static string IndexName = "azuresql-index";
         public static string errorMessage;
 
         private readonly IThirdPartyPaymentService _helcimPaymentService;
@@ -38,12 +39,12 @@ namespace SMLYS.Web.Controllers
             //string searchServiceName = ConfigurationManager.AppSettings["SearchServiceName"];
             //string apiKey = ConfigurationManager.AppSettings["SearchServiceApiKey"];
 
-            string searchServiceName = "smyls-patient";
-            string apiKey = "7EA6F8B6137FAA3A9D3BCFEA7833D720";
+            //string searchServiceName = "smyls-patient";
+            //string apiKey = "7EA6F8B6137FAA3A9D3BCFEA7833D720";
 
-            // Create a reference to the NYCJobs index
-            _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
-            _indexClient = _searchClient.Indexes.GetClient(IndexName);
+            //// Create a reference to the NYCJobs index
+            //_searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
+            //_indexClient = _searchClient.Indexes.GetClient(IndexName);
         }
 
         [Route("{view=Index}")]
@@ -104,7 +105,7 @@ namespace SMLYS.Web.Controllers
             //}
 
             //var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
-            var suggestResult = _jobsSearch.Suggest(highlights, fuzzy, term);
+            var suggestResult = _jobsSearch.Suggest(GetIndexNameType(searchType), highlights, fuzzy, term);
             // Convert the suggest query results to a list that can be displayed in the client.
             List<string> suggestions = suggestResult.Results.Select(x => x.Text).ToList();
             return new JsonResult(suggestions);
@@ -132,7 +133,7 @@ namespace SMLYS.Web.Controllers
             string maxDistanceLat = string.Empty;
             string maxDistanceLon = string.Empty;
 
-            var response = _jobsSearch.Search(q, businessTitleFacet, postingTypeFacet, salaryRangeFacet, sortType, lat, lon, currentPage, maxDistance, maxDistanceLat, maxDistanceLon);
+            var response = _jobsSearch.Search(GetIndexNameType(searchType), q, businessTitleFacet, postingTypeFacet, salaryRangeFacet, sortType, lat, lon, currentPage, maxDistance, maxDistanceLat, maxDistanceLon);
             return new JsonResult
             (
                 new { results = response.Results, facets = response.Facets, count = (int)response.Count }
@@ -150,7 +151,7 @@ namespace SMLYS.Web.Controllers
             //    Top = 5
             //};
             //AutocompleteResult autocompleteResult = _indexClient.Documents.Autocomplete(term, "sg", ap);
-            AutocompleteResult autocompleteResult = _jobsSearch.AutoComplete(term);
+            AutocompleteResult autocompleteResult = _jobsSearch.AutoComplete(GetIndexNameType(searchType), term);
             // Conver the Suggest results to a list that can be displayed in the client.
             List<string> autocomplete = autocompleteResult.Results.Select(x => x.Text).ToList();
             return new JsonResult(autocomplete);
@@ -161,30 +162,35 @@ namespace SMLYS.Web.Controllers
             //});
         }
 
-        public ActionResult Facets()
+        private IndexNameType GetIndexNameType(string searchType)
         {
-            InitSearch();
-
-            // Call suggest API and return results
-            SearchParameters sp = new SearchParameters()
-            {
-                Facets = new List<string> { "agency,count:500" },
-                Top = 0
-            };
-
-
-            var searchResult = _indexClient.Documents.Search("*", sp);
-
-            // Convert the suggest query results to a list that can be displayed in the client.
-
-            List<string> facets = searchResult.Facets["agency"].Select(x => x.Value.ToString()).ToList();
-            return new JsonResult(facets);
-            //return new JsonResult(new
-            //{
-            //    JsonRequestBehavior = 0,
-            //    Data = facets
-            //});
+            int typeId = int.Parse(searchType);
+            return (IndexNameType)typeId;
         }
+        //public ActionResult Facets()
+        //{
+        //    InitSearch();
+
+        //    // Call suggest API and return results
+        //    SearchParameters sp = new SearchParameters()
+        //    {
+        //        Facets = new List<string> { "agency,count:500" },
+        //        Top = 0
+        //    };
+
+
+        //    var searchResult = _indexClient.Documents.Search("*", sp);
+
+        //    // Convert the suggest query results to a list that can be displayed in the client.
+
+        //    List<string> facets = searchResult.Facets["agency"].Select(x => x.Value.ToString()).ToList();
+        //    return new JsonResult(facets);
+        //    //return new JsonResult(new
+        //    //{
+        //    //    JsonRequestBehavior = 0,
+        //    //    Data = facets
+        //    //});
+        //}
 
 
         private void test()
