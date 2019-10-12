@@ -18,7 +18,7 @@
     },
 
     getModalFooterButton: function (id, buttonName) {
-        var button = getModalFooterButtonString(id, buttonName);
+        var button = SMLYS.getModalFooterButtonString(id, buttonName);
         return $(button);
     },
 

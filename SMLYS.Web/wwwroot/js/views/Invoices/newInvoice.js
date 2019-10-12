@@ -31,15 +31,18 @@ SMLYS.Invoice = {
 
             var inputQuantity = itemRow.find('input.item-quantity');
             $(inputQuantity).keypress(function (event) {
+
                 if (event.which === 13) {
                     event.preventDefault();
+                    SMLYS.Invoice.UpdateItemRow(selectItemList, itemRow);
                     SMLYS.Invoice.UpdateTotal();
                 }
             });
 
             $(inputQuantity).blur(function (event) {
-                    event.preventDefault();
-                    SMLYS.Invoice.UpdateTotal();
+                event.preventDefault();
+                SMLYS.Invoice.UpdateItemRow(selectItemList, itemRow);
+                SMLYS.Invoice.UpdateTotal();
             });
 
             invoiceItemsTbody.append(itemRow);
@@ -117,9 +120,13 @@ SMLYS.Invoice = {
             var itemCostTd = invoiceItemTr.find('td.item-cost');
 
             var quantity = itemQuantityInput.val();
-            var cost = itemCostTd.text();
+            var costText = itemCostTd.text();
+            var cost = 0;
+            if (costText.length > 0 && !isNaN(costText)) {
+                cost = parseFloat(costText);
+            }
 
-            var singleItemSubTotal = parseInt(quantity) * parseFloat(cost);
+            var singleItemSubTotal = parseInt(quantity) * cost;
             var singleItemTax = singleItemSubTotal * taxRateTotal;
             subTotal += singleItemSubTotal;
             taxTotal += singleItemTax;
@@ -168,6 +175,8 @@ SMLYS.Invoice = {
     GetItemList: function() {
         var selectList = "<select id='selectItemList' name='selectItemList' class='form-control'>";
 
+        selectList += "<option value='0'>Select a service</option>";
+
         $.each(SMLYS.Invoice.Items, function (key, value) {
             selectList += "<option value='" + value.itemId + "'>" + value.itemName + "</option>";
         });
@@ -208,13 +217,23 @@ SMLYS.Invoice = {
 
         var tr = "<tr class='invoice-item'>" +
             "<td>" + SMLYS.Invoice.GetItemList() + "</td> " +
-            "<td class='description'>" + firstItem.description +"</td> " +
+            "<td class='description'></td> " +
             "<td class='item-quantity'>" + inputQuantity + "</td> " +
-            "<td class='item-cost'>" + firstItem.cost + "</td> " +
-            "<td>" + taxDisplay +"</td >" +
-            "<td class='item-subtotal'>" + firstItem.cost * (1 + taxRateTotal) + "</td >" +
+            "<td class='item-cost'></td> " +
+            "<td>" + taxDisplay + "</td >" +
+            "<td class='item-subtotal'>" + 0 * (1 + taxRateTotal) + "</td >" +
             "<td class='item-remove'><i class='fa fa-close fa-lg float-right' ></i></td >" +
             "</tr>";
+
+        //var tr = "<tr class='invoice-item'>" +
+        //    "<td>" + SMLYS.Invoice.GetItemList() + "</td> " +
+        //    "<td class='description'>" + firstItem.description +"</td> " +
+        //    "<td class='item-quantity'>" + inputQuantity + "</td> " +
+        //    "<td class='item-cost'>" + firstItem.cost + "</td> " +
+        //    "<td>" + taxDisplay +"</td >" +
+        //    "<td class='item-subtotal'>" + firstItem.cost * (1 + taxRateTotal) + "</td >" +
+        //    "<td class='item-remove'><i class='fa fa-close fa-lg float-right' ></i></td >" +
+        //    "</tr>";
 
         return tr;
     },      
@@ -256,6 +275,8 @@ SMLYS.Invoice = {
             var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
             var invoiceItemsTrs = invoiceItemsTbody.find('tr.invoice-item');
 
+            var forceSelectService = false;
+
             invoiceItemsTrs.each(function () {
                 var invoiceItemTr = $(this);
                 var itemSelect = invoiceItemTr.find('select[id *= selectItemList]');
@@ -273,9 +294,21 @@ SMLYS.Invoice = {
                     cost: parseFloat(cost)
                 };
 
-                jsonInvoice.invoice_items.push(itemData);
-
+                if (itemId === "0") {
+                    itemSelect.focus();
+                    forceSelectService = true;
+                    return;
+                }
+                else {
+                    jsonInvoice.invoice_items.push(itemData);
+                }
             });
+
+            if (jsonInvoice.invoice_items.length === 0 || forceSelectService) {
+                modalBody.html("Please choose service before submit. ");
+                $('#primaryModal').modal('hide');
+                return;
+            }
 
             var jsonData = JSON.stringify(jsonInvoice);
 
