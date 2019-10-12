@@ -5,8 +5,6 @@ $(document).ready(function () {
 
 });
 
-
-
 SMLYS.Invoice = {
     Items: [],
     Taxes: [],
@@ -67,13 +65,14 @@ SMLYS.Invoice = {
         var quantityText = itemRow.find('input.item-quantity').val();
         var costTd = itemRow.find('td.item-cost');
         var itemSubtotalTd = itemRow.find('td.item-subtotal');
-
+        var descriptionTd = itemRow.find('td.description');
         var taxRateTotal = SMLYS.Invoice.GetTaxRate();
 
         $.each(SMLYS.Invoice.Items, function (key, value) {
             if (value.itemId === parseInt(itemId)) {
                 costTd.text(value.cost);
                 itemSubtotalTd.text(value.cost);
+                descriptionTd.text(value.description);
 
                 if (!isNaN(quantityText)) {
                     var quantity = parseInt(quantityText);
