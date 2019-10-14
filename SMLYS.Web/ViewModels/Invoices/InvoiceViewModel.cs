@@ -29,7 +29,7 @@ namespace SMLYS.Web.ViewModels.Invoices
         [Display(Name = "Send To")]
         public string SendToName { get; set; }
         [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Invoice Date")]
         public DateTime InvoiceDate { get; set; }
         [Display(Name = "address")]

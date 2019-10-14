@@ -4,3 +4,11 @@
     border-radius: 5px;
     margin-right: 5px;
 }
+
+.input-group .input-group-text {
+    padding: 0.0rem 0.75rem;
+}
+
+.invoice-basic-section .input-group-text {
+    width: 100px;
+}

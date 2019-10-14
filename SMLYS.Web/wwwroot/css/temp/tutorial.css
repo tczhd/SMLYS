@@ -69,7 +69,7 @@
     vertical-align: top;
 }
 
-.searchBoxSubmit {
+/*.searchBoxSubmit {
     background-color: #fff;
     border-color: #fff;
     background-image: url(/images/search.png);
@@ -80,7 +80,7 @@
     border-width: 0;
     border-style: solid;
     outline: 0;
-}
+}*/
 
 .ui-menu {
     font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;

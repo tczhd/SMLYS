@@ -26,7 +26,26 @@
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" asp-route-view="Index">Home</a>
             </li>
         </ul>*@
-    <ul class="nav navbar-nav navbar-center " id="head-search-box-ul">
+
+
+    @*<nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <select class="form-control pull-left walkthrough-2" id="SearchTypeSelect">
+                        <option value="1">Patient</option>
+                        <option value="2">Invoice</option>
+                        <option value="3">Service</option>
+                    </select>
+                </div>
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="example3">
+                <input type="submit" class="searchBoxSubmit">
+                @*<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </form>
+    </nav>*@
+
+    @*<ul class="nav navbar-nav navbar-center " id="head-search-box-ul">
         <li>
             <select class="form-control pull-left walkthrough-2" id="SearchTypeSelect">
                 <option value="1">Patient</option>
@@ -40,32 +59,28 @@
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="example3">
                     <input type="submit" class="searchBoxSubmit">
                 </div>
-                    @*<button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2  " type="submit">Search</button>*@
-            </form>
-            @*<div class="searchBoxForm hide-autocomplete-dropdown">
-            <input class="searchBox" type="text" id="example3" placeholder="search">
-            <input type="submit" class="searchBoxSubmit" >
-        </div>*@
-        </li>
-    </ul>
 
-    @*<div class="widget-content clearfix">
-        <div id="remote">
-            <select class="form-control pull-left walkthrough-2" id="cmbDistance">
+            </form>
+        </li>
+    </ul>*@
+
+    <ul class="nav navbar-nav ml-auto" id="head-search-box-ul">
+        <form class="form-inline my-2 my-lg-0">
+            <select class="form-control pull-left walkthrough-2" id="SearchTypeSelect">
                 <option value="1">Patient</option>
                 <option value="2">Invoice</option>
-            </select>  <input class="form-control walkthrough-1" type="text" id="example3" placeholder="Search">
-
-            <input type="submit" class="search-submit" value=" " onclick="Search();">
-        </div>
-    </div>*@
-
-    <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item d-md-down-none">
+                <option value="3">Service</option>
+            </select>
+            <div class="hide-autocomplete-dropdown">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="example3">
+                @*<button class="btn btn-outline-success my-2 my-sm-0 searchBoxSubmit" type="submit">Search</button>*@
+            </div>
+        </form>
+        @*<li class="nav-item d-md-down-none">
             <a asp-area="" asp-controller="Home" asp-action="About">@userContext.ClinicName</a>
         </li>
 
-        <partial name="_UserNav" />
+        <partial name="_UserNav" />*@
     </ul>
 
 

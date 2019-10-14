@@ -7,9 +7,9 @@
 
 <div class="animated fadeIn">
     <form method="post" class="form-horizontal" id="myForm">
-        <div id="invoice" class="row invoice-row">
-            <div class="col-sm-12 invoice-col">
-                <div class="card center-block" style="max-width:800px; display:block; margin-left:auto;margin-right:auto;">
+        <div id="invoice" class="row invoice-row justify-content-center">
+            <div class="col-lg-8 col-sm-12 invoice-col ">
+                <div class="card">
                     <section class="primary-invoice-section invoice">
                         <div class="card-header">
                             <strong>@ViewData["Title"]</strong>
@@ -20,57 +20,103 @@
 
                             <section class="invoice-basic-section">
                                 <div class="row">
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label asp-for="PatientName"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <select asp-for="PatientId" id="selectPatient" name="selectPatient"
-                                                    class="form-control"
-                                                    asp-items="@(new SelectList(@ViewBag.ListofPatient,"Id", "Name"))"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="InvoiceId"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            @Html.DisplayFor(item => item.InvoiceId)
-
-                                            <span asp-validation-for="InvoiceId" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="SendToName"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <div class="send-to-name float-sm-left">
-                                                <span title="@Model.PatientName"> @Html.DisplayFor(item => item.PatientName) </span>
-                                                <i class="fa fa-close fa-lg float-right"></i>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        Patient
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="FirstName LastName Phone">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="InvoiceDate"></label>
+                                    @*<div class="form-group">
+                                                <label asp-for="PatientName" class="shadow border  rounded"></label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group invoice-date">
-                                            @Html.DisplayFor(item => item.InvoiceDate)
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <select asp-for="PatientId" id="selectPatient" name="selectPatient"
+                                                        class="form-control"
+                                                        asp-items="@(new SelectList(@ViewBag.ListofPatient,"Id", "Name"))"></select>
+                                            </div>*@
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="badge badge-primary text-wrap" style="width: 100%;font-size:15px; padding:10px 0 ;">
+                                                Invoice Number:     @Html.DisplayFor(item => item.InvoiceId)
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        Physician
+                                                    </div>
+                                                </div>
+                                                <select asp-for="DoctorId" id="selectDoctor" name="selectDoctor"
+                                                        class="form-control"
+                                                        asp-items="@(new SelectList(@ViewBag.ListofDoctor,"Id", "Name"))"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        Date
+                                                    </div>
+                                                </div>
+                                                @Html.EditorFor(m => m.InvoiceDate, "{0:MM/dd/yyyy}",
+               new {htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                @*<input asp-for="InvoiceDate" id="invoice-input" asp-format="{0:dd/MM/yyyy}" class="form-control" />*@
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label asp-for="DoctorName"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+
+                                            </div>
+                                        </div>*@
+                                    @*<div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label asp-for="SendToName"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="send-to-name float-sm-left">
+                                                    <span title="@Model.PatientName"> @Html.DisplayFor(item => item.PatientName) </span>
+                                                    <i class="fa fa-close fa-lg float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    @*<div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label asp-for="InvoiceDate"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group invoice-date">
+                                                @Html.DisplayFor(item => item.InvoiceDate)
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="row d-none">
                                     <div class="col-sm-2">
                                         <div class="form-group">
                                             <label asp-for="Address"></label>
@@ -82,36 +128,25 @@
                                             {
                                                 @foreach (var patient in Model.Patients)
                                                 {
-                                            <div class="patient-address d-none">
-                                                <input type="hidden" asp-for="@patient.PatientId" id="AddressPatientIdHidden" />
-                                                <div>
-                                                    @Html.DisplayFor(modelItem => patient.Address.Address1) -
-                                                    @Html.DisplayFor(modelItem => patient.Address.Address2)
-                                                </div>
-                                                <div>
-                                                    @Html.DisplayFor(modelItem => patient.Address.City),
-                                                    @Html.DisplayFor(modelItem => patient.Address.RegionName) &nbsp;
-                                                    @Html.DisplayFor(modelItem => patient.Address.CountryName)
-                                                </div>
-                                            </div>
+                                                    <div class="patient-address d-none">
+                                                        <input type="hidden" asp-for="@patient.PatientId" id="AddressPatientIdHidden" />
+                                                        <div>
+                                                            @Html.DisplayFor(modelItem => patient.Address.Address1) -
+                                                            @Html.DisplayFor(modelItem => patient.Address.Address2)
+                                                        </div>
+                                                        <div>
+                                                            @Html.DisplayFor(modelItem => patient.Address.City),
+                                                            @Html.DisplayFor(modelItem => patient.Address.RegionName) &nbsp;
+                                                            @Html.DisplayFor(modelItem => patient.Address.CountryName)
+                                                        </div>
+                                                    </div>
                                                 }
                                             }
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label asp-for="DoctorName"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <select asp-for="DoctorId" id="selectDoctor" name="selectDoctor"
-                                                    class="form-control"
-                                                    asp-items="@(new SelectList(@ViewBag.ListofDoctor,"Id", "Name"))"></select>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <div class="row">
+                                <div class="row d-none">
                                     <div class="col-sm-2">
                                         <div class="form-group">
                                             <label asp-for="ReOccouring"></label>
