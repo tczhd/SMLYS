@@ -11257,12 +11257,12 @@ base-chart.chart {
         }
 
             .sidebar .nav-link.active i, .sidebar .navbar .active.dropdown-toggle i, .navbar .sidebar .active.dropdown-toggle i {
-                color: #20a8d8;
+                color: #87B4DE;
             }
 
         .sidebar .nav-link:hover, .sidebar .navbar .dropdown-toggle:hover, .navbar .sidebar .dropdown-toggle:hover {
             color: #fff;
-            background: #20a8d8;
+            background: #87B4DE;
         }
 
             .sidebar .nav-link:hover i, .sidebar .navbar .dropdown-toggle:hover i, .navbar .sidebar .dropdown-toggle:hover i {
@@ -11274,7 +11274,7 @@ base-chart.chart {
             }
 
         .sidebar .nav-link.nav-link-primary, .sidebar .navbar .nav-link-primary.dropdown-toggle, .navbar .sidebar .nav-link-primary.dropdown-toggle {
-            background: #20a8d8;
+            background: #87B4DE;
         }
 
             .sidebar .nav-link.nav-link-primary i, .sidebar .navbar .nav-link-primary.dropdown-toggle i, .navbar .sidebar .nav-link-primary.dropdown-toggle i {
@@ -11424,7 +11424,8 @@ base-chart.chart {
         }
 
     .sidebar .nav-dropdown.open {
-        background: rgba(0, 0, 0, 0.2);
+        /*background: rgba(0, 0, 0, 0.2);*/
+        background: #C2DAF0;
     }
 
         .sidebar .nav-dropdown.open > .nav-dropdown-items {

@@ -70,4 +70,12 @@ namespace SMLYS.ApplicationCore.Enums
         [Description("service-index")]
         Service = 3
     }
+
+    public enum InvoiceStatusType
+    {
+        [Description("new-invoice")]
+        NewInvoice = 1,
+        [Description("draft")]
+        Draft = 2
+    }
 }

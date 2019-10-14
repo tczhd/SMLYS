@@ -9,5 +9,6 @@ namespace SMLYS.ApplicationCore.Interfaces.Services.Utiliites
     {
         List<ListItemModel> GetCountries();
         List<ListItemModel> GetRegions();
+        List<ListItemModel> GetServiceGroups();
     }
 }

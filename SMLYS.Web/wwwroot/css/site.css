@@ -3,6 +3,27 @@
     padding-bottom: 20px;
 }*/
 
+.app-header.navbar .navbar-brand {
+    width:200px;
+    background-color:#87CDFF;
+}
+
+.app-body .sidebar {
+    background-color: #D4EDFF;
+}
+
+    .app-body .sidebar .nav .nav-item a.nav-link {
+        font-family: Arimo;
+        font-size: 16px;
+        color:#454F5B;
+    }
+
+.sidebar .nav-link.active,
+.sidebar .navbar .active.dropdown-toggle,
+.navbar .sidebar .active.dropdown-toggle {
+    background-color: #87B4DE;
+}
+
 h2 {
     margin-top: 10px;
 }

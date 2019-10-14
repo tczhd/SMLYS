@@ -1,4 +1,5 @@
 ﻿using SMLYS.ApplicationCore.DTOs.Common;
+using SMLYS.ApplicationCore.Entities;
 using SMLYS.ApplicationCore.Entities.SettingsAggregate;
 using SMLYS.ApplicationCore.Interfaces.Repository;
 using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
@@ -12,11 +13,13 @@ namespace SMLYS.ApplicationCore.Services.Utiliites
     {
         private readonly IRepository<Country> _countryRepository;
         private readonly IRepository<Region> _regionRepository;
+        private readonly IRepository<ServiceGroup> _serviceGroupRepository;
 
-        public UtilityService(IRepository<Country> countryRepository, IRepository<Region> regionRepository)
+        public UtilityService(IRepository<Country> countryRepository, IRepository<Region> regionRepository, IRepository<ServiceGroup> serviceGroupRepository)
         {
             _countryRepository = countryRepository;
             _regionRepository = regionRepository;
+            _serviceGroupRepository = serviceGroupRepository;
         }
         public List<ListItemModel> GetCountries()
         {
@@ -31,6 +34,17 @@ namespace SMLYS.ApplicationCore.Services.Utiliites
         public List<ListItemModel> GetRegions()
         {
             var data = _regionRepository.ListAll().Select(p => new ListItemModel
+            {
+                Id = p.Id,
+                Name = p.Name
+            }).ToList();
+
+            return data;
+        }
+
+        public List<ListItemModel> GetServiceGroups()
+        {
+            var data = _serviceGroupRepository.ListAll().Select(p => new ListItemModel
             {
                 Id = p.Id,
                 Name = p.Name

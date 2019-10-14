@@ -44,6 +44,7 @@ namespace SMLYS.Infrastructure.Data
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<InvoicePayment> InvoicePayment { get; set; }
         public virtual DbSet<PatientCardOnFile> PatientCardOnFile { get; set; }
+        public virtual DbSet<ServiceGroup> ServiceGroup { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
@@ -401,10 +402,23 @@ namespace SMLYS.Infrastructure.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Item_Clinic");
 
+                entity.HasOne(d => d.ServiceGroup)
+                 .WithMany(p => p.Items)
+                 .HasForeignKey(d => d.ServiceGroupId)
+                 .OnDelete(DeleteBehavior.ClientSetNull)
+                 .HasConstraintName("FK_Item_ServiceGroup");
+
                 entity.HasOne(d => d.UpdatedByNavigation)
                     .WithMany(p => p.Item)
                     .HasForeignKey(d => d.UpdatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.Property(e => e.ShortCode)
+                    .HasMaxLength(150);
+                entity.Property(e => e.IndustryCode)
+                    .HasMaxLength(150);
+                entity.Property(e => e.Subscription)
+                    .HasDefaultValue(false);
             });
 
             modelBuilder.Entity<Patient>(entity =>
@@ -629,6 +643,15 @@ namespace SMLYS.Infrastructure.Data
                  .HasForeignKey(d => d.UpdatedBy)
                  .OnDelete(DeleteBehavior.ClientSetNull)
                  .HasConstraintName("FK_PatientCardOnFile_SiteUser_UpdatedBy");
+            });
+
+            modelBuilder.Entity<ServiceGroup>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(150);
             });
         }
     }

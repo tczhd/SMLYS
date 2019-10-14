@@ -7,8 +7,8 @@
 
 <div class="animated fadeIn">
     <form asp-controller="Item" method="post" class="form-horizontal" id="myForm" asp-action="AddItem">
-        <div class="row item">
-            <div class="col-sm-12 item">
+        <div class="row justify-content-center item">
+            <div class="col-lg-8 col-sm-12 item">
                 <div class="card">
                     <section class="primary-item-section item">
                         <div class="card-header">
@@ -19,36 +19,67 @@
 
                             <section class="item-basic-section">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-7">
                                         <div class="form-group">
-                                            <input asp-for="ItemName" class="form-control" placeholder="Item Name" />
+                                            <input asp-for="ItemName" class="form-control" placeholder="Service Name" />
                                             <span asp-validation-for="ItemName" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-5">
                                         <div class="form-group">
-                                            <input asp-for="Cost" class="form-control" placeholder="Item Cost" />
-                                            <span asp-validation-for="Cost" class="text-danger"></span>
+                                            <select asp-for="ServiceGroupId" id="selectServiceGroupId" name="selectServiceGroup"
+                                                    class="form-control"
+                                                    asp-items="@(new SelectList(@ViewBag.ServiceGroups,"Id", "Name"))"></select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <input asp-for="Description" class="form-control" placeholder="Item Description" />
+                                            <textarea asp-for="Description" class="form-control" placeholder="Service Description" rows="4" cols="40"></textarea>
+
                                             <span asp-validation-for="Description" class="text-danger"></span>
                                         </div>
                                     </div>
-
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="ShortCode" class="form-control" placeholder="Short Code" />
+                                            <span asp-validation-for="ShortCode" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="IndustryCode" class="form-control" placeholder="Industory Code" />
+                                            <span asp-validation-for="IndustryCode" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input asp-for="Cost" class="form-control" placeholder="Service Cost" />
+                                            <span asp-validation-for="Cost" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </section>
 
 
                     <div class="card-footer add-patient-buttons">
-                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-sm btn-dark">Create Service</button>
 
                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>Reset</button>
                     </div>

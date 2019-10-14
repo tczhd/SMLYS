@@ -16,6 +16,14 @@ namespace SMLYS.Web.ViewModels.Items
         public string Description { get; set; }
         [Display(Name = "Cost")]
         public decimal Cost { get; set; }
-       
+        [Display(Name = "ServiceGroupId")]
+        public int? ServiceGroupId { get; set; }
+        [Display(Name = "ShortCode")]
+        public string ShortCode { get; set; }
+        [Display(Name = "IndustryCode")]
+        public string IndustryCode { get; set; }
+        [Display(Name = "Subscription")]
+        public bool Subscription { get; set; }
+
     }
 }

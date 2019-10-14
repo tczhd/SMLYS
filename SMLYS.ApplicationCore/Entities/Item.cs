@@ -20,9 +20,13 @@ namespace SMLYS.ApplicationCore.Entities
         public DateTime UpdatedDateUtc { get; set; }
         public int UpdatedBy { get; set; }
         public int ClinicId { get; set; }
-
+        public int? ServiceGroupId {get;set;}
+        public string ShortCode { get; set; }
+        public string IndustryCode { get; set; }
+        public bool Subscription { get; set; }
         public virtual Clinic Clinic { get; set; }
         public virtual SiteUser UpdatedByNavigation { get; set; }
+        public virtual ServiceGroup ServiceGroup { get; set; }
         public virtual ICollection<InvoiceItem> InvoiceItem { get; set; }
     }
 }

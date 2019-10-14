@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SMLYS.ApplicationCore.DTOs.Common;
 using SMLYS.ApplicationCore.DTOs.Items;
 using SMLYS.ApplicationCore.Interfaces.Services.Items;
+using SMLYS.ApplicationCore.Interfaces.Services.Utiliites;
 using SMLYS.Web.ViewModels.Base;
 using SMLYS.Web.ViewModels.Items;
 
@@ -19,9 +21,11 @@ namespace SMLYS.Web.Controllers
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
+        private readonly IUtilityService _utilityService;
 
-        public ItemController(IItemService itemService)
+        public ItemController(IUtilityService utilityService,IItemService itemService)
         {
+            _utilityService = utilityService;
             _itemService = itemService;
         }
 
@@ -36,6 +40,14 @@ namespace SMLYS.Web.Controllers
                 {
                     ViewData["Title"] = $"New Item";
                     ViewData["FormType"] = $"New Item";
+
+                    var serviceGroups = _utilityService.GetServiceGroups();
+
+                    ViewBag.ServiceGroups = serviceGroups.Select(p => new ListItemModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    }).ToList();
                 }
                 else
                 {
