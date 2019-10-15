@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-sm-5">
                                         <div class="form-group">
-                                            <select asp-for="ServiceGroupId" id="selectServiceGroupId" name="selectServiceGroup"
+                                            <select asp-for="ServiceGroupId" id="selectServiceGroupId" name="ServiceGroupId"
                                                     class="form-control"
                                                     asp-items="@(new SelectList(@ViewBag.ServiceGroups,"Id", "Name"))"></select>
                                         </div>
@@ -58,7 +58,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="switch switch-text switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input">
+                                                <input type="checkbox" class="switch-input" asp-for="Subscription" name="Subscription">
                                                 <span class="switch-label" data-on="On" data-off="Off"></span>
                                                 <span class="switch-handle"></span>
                                             </label>
