@@ -62,6 +62,7 @@ namespace SMLYS.Web
                     SearchMode = SearchMode.Any,
                     Top = 10,
                     Skip = currentPage - 1,
+                    SearchFields = SearchIndexFields.GetSearchFields(indexNameType),
                     // Limit results
                     Select = SearchIndexFields.GetSelectFields(indexNameType),
                     //new List<String>() {"Id", "FirstName", "LastName", "Title", "Gender",

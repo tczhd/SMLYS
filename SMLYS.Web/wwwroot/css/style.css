@@ -11253,7 +11253,8 @@ base-chart.chart {
 
         .sidebar .nav-link.active, .sidebar .navbar .active.dropdown-toggle, .navbar .sidebar .active.dropdown-toggle {
             color: #fff;
-            background: #33444c;
+            /*background: #33444c;*/
+            background: #87B4DE;
         }
 
             .sidebar .nav-link.active i, .sidebar .navbar .active.dropdown-toggle i, .navbar .sidebar .active.dropdown-toggle i {

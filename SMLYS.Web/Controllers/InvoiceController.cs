@@ -39,6 +39,14 @@ namespace SMLYS.Web.Controllers
             _userHandler = userHandler;
         }
 
+        public IActionResult Quick()
+        {
+            var userContext = _userHandler.GetUserContext();
+           
+            return View();
+        }
+
+
         [Route("{view=Index}")]
         public IActionResult Index(int id, string view, int patientId, int invoiceId
             , int page, string firstName, string lastName, string invoiceFromDate, string invoiceToDate)

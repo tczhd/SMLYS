@@ -28,6 +28,27 @@ namespace SMLYS.ApplicationCore.DTOs.SearchIndex
             return fields;
         }
 
+        public static List<string> GetSearchFields(IndexNameType indexNameType)
+        {
+            List<string> fields = new List<string>();
+            switch (indexNameType)
+            {
+                case IndexNameType.Patient:
+                    fields = new List<String>() { "FirstName", "LastName", "Title", 
+                        "Phone", "Email", "Address1","City", "Region", "PostalCode", "DoctorFirstName", "DoctorLastName"};
+                    break;
+                case IndexNameType.Invoice:
+                    fields = new List<String>() {"InvoiceDate","UserFirstName","UserLastName",  "FirstName", "LastName",
+                        "Phone", "Email","Address1","City","Region", "PostalCode", "DoctorFirstName", "DoctorLastName"};
+                    break;
+                case IndexNameType.Service:
+                    fields = new List<String>() { "Name", "Description" };
+                    break;
+            }
+
+            return fields;
+        }
+
         public static List<string> GetHighlightFields(IndexNameType indexNameType)
         {
             List<string> fields = new List<string>();

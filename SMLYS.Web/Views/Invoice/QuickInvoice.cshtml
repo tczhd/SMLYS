@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Quick Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="animated fadeIn">
+    <form method="post" class="form-horizontal" id="myForm">
+        <div id="invoice" class="row invoice-row justify-content-center">
+            <div class="col-lg-8 col-sm-12 invoice-col ">
+                <div class="card">
+                    <section class="primary-invoice-section invoice">
+                        <div class="card-header">
+                            <strong>@ViewData["Title"]</strong>
+                        </div>
+                        <div class="card-body invoice-body">
+
+                            <!-- Both Suggestions and Autocomplete -->
+                            <div class="example">
+                                <h2 class="exampleTitle">Both Suggestions and Autocomplete</h2>
+                                <div class="exampleText">
+                                    Autocomplete and suggestions can work together to enhance the user's search experience.  The search box completes the word currently typed using the first autocomplete recommendation returned and suggestions appear in a dropdown below the search box.
+                                    This example uses both the Suggest and Autocomplete method in the Azure Search .Net SDK.<br /><br />
+                                    Example: Give "const" a try in the box below to see what the Suggest and Autocomplete APIs return.
+                                </div>
+                                <br />
+                                <div class="searchBoxForm hide-autocomplete-dropdown">
+                                    <input class="searchBox" type="text" id="example3" placeholder="search">
+                                    <input type="submit" class="searchBoxSubmit">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+
+@*<script>
+    $(function () {
+        // using modified jQuery Autocomplete plugin v1.2.6 http://xdsoft.net/jqplugins/autocomplete/
+        // $.autocomplete -> $.autocompleteInline
+        $("#example3").autocompleteInline({
+            appendMethod: "replace",
+            source: [
+                function (text, add) {
+                    if (!text) {
+                        return;
+                    }
+
+                    $.getJSON("/home/autocomplete?searchType=1&term=" + text, function (data) {
+                        if (data && data.length > 0) {
+                            currentSuggestion3 = data[0];
+                            add(data);
+                        }
+                    });
+                }
+            ]
+        });
+
+        // complete on TAB and clear on ESC
+        $("#example3").keydown(function (evt) {
+            if (evt.keyCode === 9 /* TAB */ && currentSuggestion3) {
+                $("#example3").val(currentSuggestion3);
+                return false;
+            } else if (evt.keyCode === 27 /* ESC */) {
+                currentSuggestion3 = "";
+                $("#example3").val("");
+            }
+        });
+
+        $("#example3").autocomplete({
+            html: true,
+            source: "/home/suggest?searchType=1&highlights=false&fuzzy=false&",
+            minLength: 2,
+            position: {
+                my: "left top",
+                at: "left-23 bottom+10"
+            }
+        });
+    });
+</script>*@

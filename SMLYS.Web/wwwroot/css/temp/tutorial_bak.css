@@ -1,4 +1,28 @@
-﻿.tutorialBody {
+﻿.input-group.md-form.form-sm.form-1 input {
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+    .input-group.md-form.form-sm.form-2 input.red-border {
+        border: 1px solid #ef9a9a;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.lime-border {
+        border: 1px solid #cddc39;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.amber-border {
+        border: 1px solid #ffca28;
+    }
+
+.tutorialBody {
     font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
     color: #292f33;
     max-width: 750px;
@@ -22,7 +46,7 @@
 }
 
 .searchBoxForm {
-    width: 400px;
+   
     box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 0 rgba(0,0,0,.16);
     background-color: #fff;
     display: inline-block;
@@ -30,13 +54,13 @@
     border-spacing: 0;
     list-style: none;
     color: #666;
-    margin-right: 10px;
+    margin-right:20px;
 }
 
 .searchBox {
-    width: 80%;
+  
     font-size: 16px;
-    margin: 0px 0 1px 20px;
+    margin: 5px 0 1px 20px;
     padding: 0 10px 0 0;
     border: 0;
     max-height: 30px;
@@ -46,7 +70,7 @@
     vertical-align: top;
 }
 
-.searchBoxSubmit {
+/*.searchBoxSubmit {
     background-color: #fff;
     border-color: #fff;
     background-image: url(/images/search.png);
@@ -56,22 +80,13 @@
     text-indent: -99em;
     border-width: 0;
     border-style: solid;
-    margin: 10px;
     outline: 0;
-}
-
-ul.ui-autocomplete.ui-menu {
-    max-width: 400px;
-    max-height: 300px;
-    overflow: scroll;
-    z-index: 2000;
-    font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
-}
+}*/
 
 .ui-menu {
-  
-    /*position: relative;*/
-    /*width: 648px;*/
+    font: 18px/normal 'Segoe UI',Arial,Helvetica,Sans-Serif;
+    position: relative;
+    width: 648px;
 }
 
 .ui-autocomplete-category {
@@ -86,12 +101,12 @@ ul.ui-autocomplete.ui-menu {
 .xdsoft_autocomplete_dropdown {
     margin-left: -18px !important;
     margin-top: 5px !important;
-    width: 300px !important;
+    width: 648px !important;
 }
 
-    .xdsoft_autocomplete_dropdown > div {
-        padding-left: 5px !important;
-    }
+.xdsoft_autocomplete_dropdown > div {
+    padding-left: 5px !important;
+}
 
 .xdsoft_autocomplete input {
     margin: 3px 5px !important;
@@ -105,6 +120,6 @@ ul.ui-autocomplete.ui-menu {
     text-fill-color: #ccc !important;
     overflow: hidden !important;
     white-space: pre !important;
-    width: 200px !important;
+    width: 500px !important;
 }
 

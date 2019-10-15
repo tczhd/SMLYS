@@ -71,10 +71,15 @@
                 <option value="2">Invoice</option>
                 <option value="3">Service</option>
             </select>
-            <div class="hide-autocomplete-dropdown">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="example3">
-                @*<button class="btn btn-outline-success my-2 my-sm-0 searchBoxSubmit" type="submit">Search</button>*@
+
+            <div class="searchBoxForm hide-autocomplete-dropdown">
+                <input class="searchBox" type="text" id="main-search-input" placeholder="search" >
+                <input type="submit" class="searchBoxSubmit">
             </div>
+            @*<div class="hide-autocomplete-dropdown">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="example3">
+            @*<button class="btn btn-outline-success my-2 my-sm-0 searchBoxSubmit" type="submit">Search</button>
+        </div>*@
         </form>
         @*<li class="nav-item d-md-down-none">
             <a asp-area="" asp-controller="Home" asp-action="About">@userContext.ClinicName</a>

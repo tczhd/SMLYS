@@ -18,11 +18,13 @@
         color:#454F5B;
     }
 
-.sidebar .nav-link.active,
+/*.sidebar .nav-link.active,
 .sidebar .navbar .active.dropdown-toggle,
 .navbar .sidebar .active.dropdown-toggle {
     background-color: #87B4DE;
-}
+}*/
+
+
 
 h2 {
     margin-top: 10px;
@@ -87,4 +89,9 @@ h2 {
 
 .cursor-move {
     cursor: move;
+}
+
+#SearchTypeSelect {
+    height: 42px;
+    /*box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 0px 1px 0 rgba(0,0,0,.16);*/
 }

@@ -13,7 +13,6 @@
     <link href="~/vendors/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/vendors/css/simple-line-icons.min.css" rel="stylesheet">
     <link href="~/css/temp/jquery-ui.css" rel="stylesheet" />
-    <link href="~/css/temp/tutorial.css" rel="stylesheet" />
     <link href="~/css/temp/jquery.autocompleteInline.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Main styles for this application -->
@@ -25,6 +24,7 @@
         <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
+    <link href="~/css/MainSearch.css" rel="stylesheet" />
     <!-- Styles required by this view -->
     @RenderSection("Styles", required: false)
 </head>
@@ -79,10 +79,10 @@
     </div>
 
     <footer class="app-footer">
-        <span><a href="http://www.smlys.com"></a> © 2019 SMLYS.</span>
+        <span><a href="http://admin.smyls.world"></a> © 2019 SMLYS.</span>
     </footer>
     <!-- Bootstrap and necessary plugins -->
-    @*<script src="~/vendors/js/jquery.min.js"></script>*@
+    @*<script src="~/lib/temp/jquery-1.10.2.js"></script>*@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="~/vendors/js/popper.min.js"></script>
     <script src="~/lib/temp/jquery-ui.js"></script>
@@ -97,7 +97,7 @@
     <!-- Custom scripts required by this view -->
     <script src="~/js/common/SMLYS.js"></script>
     @*<script src="~/js/views/Invoices/invoiceDetail.js"></script>*@
-    <script src="~/js/indexTest.js" ></script>
+    <script src="~/js/main-search.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

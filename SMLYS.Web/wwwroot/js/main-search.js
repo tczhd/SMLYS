@@ -84,7 +84,7 @@
 
     // using modified jQuery Autocomplete plugin v1.2.6 http://xdsoft.net/jqplugins/autocomplete/
     // $.autocomplete -> $.autocompleteInline
-    //$("#example3").autocompleteInline({
+    //$("#main-search-input").autocompleteInline({
     //    appendMethod: "replace",
     //    source: [
     //        function (text, add) {
@@ -103,17 +103,17 @@
     //});
 
     // complete on TAB and clear on ESC
-    $("#example3").keydown(function (evt) {
+    $("#main-search-input").keydown(function (evt) {
         if (evt.keyCode === 9 /* TAB */ && currentSuggestion3) {
-            $("#example3").val(currentSuggestion3);
+            $("#main-search-input").val(currentSuggestion3);
             return false;
         } else if (evt.keyCode === 27 /* ESC */) {
             currentSuggestion3 = "";
-            $("#example3").val("");
+            $("#main-search-input").val("");
         }
     });
 
-    $("#example3").autocomplete({
+    $("#main-search-input").autocomplete({
         html: true,
         source: "/home/suggest?searchType=" + $('#SearchTypeSelect').val() + "&highlights=false&fuzzy=false&",
         minLength: 2,
@@ -136,7 +136,7 @@
         // $("#job_details_div").html("Loading...");
         var searchType = $('#SearchTypeSelect').val();
 
-        var q = $("#example3").val();
+        var q = $("#main-search-input").val();
         if (q.length <= 2) {
             alert('Please input at least two characters. ');
             return;
@@ -242,9 +242,9 @@
             patientDetailsHTML += '<div class="col-sm-12 ">';
             patientDetailsHTML += '<div class="row patient-detail-row-up">';
             patientDetailsHTML += '<div class="col-sm-2 ml-auto">';
-            patientDetailsHTML += data.results[i].document.FirstName +  '</div>';
+            patientDetailsHTML += data.results[i].document.FirstName + '</div>';
             patientDetailsHTML += '<div class="col-sm-2 ml-auto">';
-            patientDetailsHTML +=  data.results[i].document.LastName + '</div>';
+            patientDetailsHTML += data.results[i].document.LastName + '</div>';
 
             patientDetailsHTML += '<div class="col-sm-1 ml-auto">';
             patientDetailsHTML += data.results[i].document.Title + '</div>';
