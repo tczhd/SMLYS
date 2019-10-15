@@ -33,8 +33,13 @@ SMLYS.Patient = {
 
         var searchItem = $('<div class="search-filter float-sm-left"></div>');
         var searchTypeSpan = $('<span class="search_type ' + selectedType + '">' + selectedTypeName + ': </span>');
-        var searchContentSpan = $('<span class="search_content ' + selectedType + '" title="' + selectedType + '">' + inputValue + ' </span>');
+        var searchContentSpan = $('<span class="search_content ' + selectedType + '" title="' + selectedType + '">' + inputValue + '</span>');
         var closeIcon = $('<i class="fa fa-close fa-lg"></i>');
+
+        if (inputValue.length < 3) {
+            alert('Please input at least three characters. ');
+            return;
+        }
 
         $(closeIcon).click(function () {
             $(searchItem).remove();

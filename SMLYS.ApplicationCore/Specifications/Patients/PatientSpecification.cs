@@ -30,12 +30,12 @@ namespace SMLYS.ApplicationCore.Specifications.Patients
 
         public void AddFirstName(string firstName)
         {
-            AddCriteria(q => q.FirstName == firstName);
+            AddCriteria(q => q.FirstName.Contains(firstName));
         }
 
         public void AddLastName(string lastName)
         {
-            AddCriteria(q => q.LastName == lastName);
+            AddCriteria(q => q.LastName.Contains(lastName));
         }
     }
 }
