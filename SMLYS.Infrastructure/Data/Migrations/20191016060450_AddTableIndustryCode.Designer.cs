@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SMLYS.Infrastructure.Data;
 
 namespace SMLYS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SMLYSContext))]
-    partial class SMLYSContextModelSnapshot : ModelSnapshot
+    [Migration("20191016060450_AddTableIndustryCode")]
+    partial class AddTableIndustryCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

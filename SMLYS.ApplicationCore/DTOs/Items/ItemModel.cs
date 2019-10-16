@@ -13,7 +13,7 @@ namespace SMLYS.ApplicationCore.DTOs.Items
         public decimal Cost { get; set; }
         public int? ServiceGroupId { get; set; }
         public string ShortCode { get; set; }
-        public string IndustryCode { get; set; }
+        public int? IndustryCodeId { get; set; }
         public bool Subscription { get; set; }
     }
 }

@@ -14,12 +14,16 @@ namespace SMLYS.ApplicationCore.Services.Utiliites
         private readonly IRepository<Country> _countryRepository;
         private readonly IRepository<Region> _regionRepository;
         private readonly IRepository<ServiceGroup> _serviceGroupRepository;
-
-        public UtilityService(IRepository<Country> countryRepository, IRepository<Region> regionRepository, IRepository<ServiceGroup> serviceGroupRepository)
+        private readonly IRepository<IndustryCode> _inventoryCodeRepository;
+        public UtilityService(IRepository<Country> countryRepository
+            , IRepository<Region> regionRepository
+            , IRepository<ServiceGroup> serviceGroupRepository
+            , IRepository<IndustryCode> inventoryCodeRepository)
         {
             _countryRepository = countryRepository;
             _regionRepository = regionRepository;
             _serviceGroupRepository = serviceGroupRepository;
+            _inventoryCodeRepository = inventoryCodeRepository;
         }
         public List<ListItemModel> GetCountries()
         {
@@ -45,6 +49,17 @@ namespace SMLYS.ApplicationCore.Services.Utiliites
         public List<ListItemModel> GetServiceGroups()
         {
             var data = _serviceGroupRepository.ListAll().Select(p => new ListItemModel
+            {
+                Id = p.Id,
+                Name = p.Name
+            }).ToList();
+
+            return data;
+        }
+
+        public List<ListItemModel> GetIndustryCodes()
+        {
+            var data = _inventoryCodeRepository.ListAll().Select(p => new ListItemModel
             {
                 Id = p.Id,
                 Name = p.Name

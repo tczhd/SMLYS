@@ -20,6 +20,8 @@ SMLYS.Invoice = {
             var invoiceDetailSection = $('section.invoice-detail-section');
             var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
             var itemRow = $(SMLYS.Invoice.GetInvoiceRow());
+            //var dropMenu = itemRow.find('div.dropdown-menu');
+            //$(dropMenu).mdbDropSearch();
 
             var selectItemList = itemRow.find('select[id*=selectItemList]');
             $(selectItemList).change(function () {
@@ -169,6 +171,21 @@ SMLYS.Invoice = {
                 sendTo.remove();
             });
         });
+    },
+
+    GetItemListNew: function () {
+        var selectList = "<div class='dropdown'>";
+
+        selectList += "<button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenu1-1'  data-toggle='dropdown' >Select Service </button >";
+        selectList += "<div class='dropdown-menu dropdown-primary' >";
+        selectList += "<input class='form-control' type='text' placeholder='Search' aria-label='Search'>";
+        $.each(SMLYS.Invoice.Items, function (key, value) {
+            selectList += "<a class='dropdown-item mdb-dropdownLink-1' href='#" + value.itemId + "'>" + value.itemName + "</a>";
+        });
+
+        selectList += "</div></div>";
+
+        return selectList;
     },
 
     GetItemList: function() {

@@ -62,7 +62,12 @@ namespace SMLYS.Web.Controllers
                             Cost = data.Cost,
                             Description = data.Description,
                             ItemId = data.ItemId,
-                            ItemName = data.ItemName
+                            ItemName = data.ItemName,
+                            IndustryCodeId = data.IndustryCodeId,
+                            ServiceGroupId = data.ServiceGroupId,
+                            ShortCode = data.ShortCode,
+                            Subscription = data.Subscription,
+                            SubscriptionDisplay = data.Subscription ? "YES" : "NO"
                         };
                         return View(view, viewData);
                     }
@@ -81,7 +86,13 @@ namespace SMLYS.Web.Controllers
                     Cost = p.Cost,
                     Description = p.Description,
                     ItemId = p.ItemId,
-                    ItemName = p.ItemName
+                    ItemName = p.ItemName,
+                    IndustryCodeId = p.IndustryCodeId,
+                    ServiceGroupId = p.ServiceGroupId,
+                    ShortCode = p.ShortCode,
+                    Subscription = p.Subscription,
+                    SubscriptionDisplay = p.Subscription?"YES":"NO"
+
                 });
                 return View(view, viewData);
             }
@@ -101,7 +112,11 @@ namespace SMLYS.Web.Controllers
                     ItemId = itemViewModel.ItemId??0,
                     Cost = itemViewModel.Cost,
                     Description = itemViewModel.Description,
-                    ItemName = itemViewModel.ItemName
+                    ItemName = itemViewModel.ItemName,
+                    IndustryCodeId = itemViewModel.IndustryCodeId,
+                    ServiceGroupId = itemViewModel.ServiceGroupId,
+                    ShortCode = itemViewModel.ShortCode,
+                    Subscription = itemViewModel.Subscription
                 };
 
                 var itemResult = _itemService.SaveItem(model);

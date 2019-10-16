@@ -20,10 +20,12 @@ namespace SMLYS.Web.ViewModels.Items
         public int? ServiceGroupId { get; set; }
         [Display(Name = "ShortCode")]
         public string ShortCode { get; set; }
-        [Display(Name = "IndustryCode")]
-        public string IndustryCode { get; set; }
+        [Display(Name = "IndustryCodeId")]
+        public int? IndustryCodeId { get; set; }
         [Display(Name = "Subscription")]
         public bool Subscription { get; set; }
+        [Display(Name = "Subscription")]
+        public string SubscriptionDisplay { get; set; }
 
     }
 }

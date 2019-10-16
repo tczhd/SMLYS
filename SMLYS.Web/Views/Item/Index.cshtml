@@ -21,8 +21,10 @@
                             <thead>
                                 <tr>
                                     <th>ITEM NAME</th>
+                                    <th>SHORT CODE</th>
                                     <th>DESCRIPTION</th>
                                     <th>COST</th>
+                                    <th>SUBSCRIPTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,13 +32,15 @@
                                 {
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                <a href="/Item/ItemForm?id=@item.ItemId">@Html.DisplayFor(modelItem => item.ItemName) </a>
-                                            </td>
-                                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Cost)</td>
-                                        </tr>
+                                <tr>
+                                    <td>
+                                        <a href="/Item/ItemForm?id=@item.ItemId">@Html.DisplayFor(modelItem => item.ItemName) </a>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.ShortCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SubscriptionDisplay)</td>
+                                </tr>
                                     }
                                 }
 

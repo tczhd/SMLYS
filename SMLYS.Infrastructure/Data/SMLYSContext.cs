@@ -45,6 +45,7 @@ namespace SMLYS.Infrastructure.Data
         public virtual DbSet<InvoicePayment> InvoicePayment { get; set; }
         public virtual DbSet<PatientCardOnFile> PatientCardOnFile { get; set; }
         public virtual DbSet<ServiceGroup> ServiceGroup { get; set; }
+        public virtual DbSet<IndustryCode> IndustryCode { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 //            if (!optionsBuilder.IsConfigured)
@@ -408,14 +409,18 @@ namespace SMLYS.Infrastructure.Data
                  .OnDelete(DeleteBehavior.ClientSetNull)
                  .HasConstraintName("FK_Item_ServiceGroup");
 
+                entity.HasOne(d => d.IndustryCode)
+                .WithMany(p => p.Items)
+                .HasForeignKey(d => d.IndustryCodeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Item_IndustryCode");
+
                 entity.HasOne(d => d.UpdatedByNavigation)
                     .WithMany(p => p.Item)
                     .HasForeignKey(d => d.UpdatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.Property(e => e.ShortCode)
-                    .HasMaxLength(150);
-                entity.Property(e => e.IndustryCode)
                     .HasMaxLength(150);
                 entity.Property(e => e.Subscription)
                     .HasDefaultValue(false);
@@ -646,6 +651,15 @@ namespace SMLYS.Infrastructure.Data
             });
 
             modelBuilder.Entity<ServiceGroup>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<IndustryCode>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();

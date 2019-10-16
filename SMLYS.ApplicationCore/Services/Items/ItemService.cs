@@ -42,12 +42,17 @@ namespace SMLYS.ApplicationCore.Services.Items
                         item.Cost = itemModel.Cost;
                         item.Name = itemModel.ItemName;
                         item.Description = itemModel.Description;
+                        item.ShortCode = itemModel.ShortCode;
+                        item.ServiceGroupId = itemModel.ServiceGroupId;
+                        item.IndustryCodeId = itemModel.IndustryCodeId;
+                        item.Subscription = itemModel.Subscription;
 
                         _itemRepository.Update(item);
                         result.Message = "Update item success. ";
                         result.Success = true;
                     }
-                    else {
+                    else
+                    {
                         result.Message = "Update item failed ";
                     }
                 }
@@ -61,7 +66,11 @@ namespace SMLYS.ApplicationCore.Services.Items
                         Description = itemModel.Description,
                         Name = itemModel.ItemName,
                         UpdatedBy = userContext.SiteUserId,
-                        UpdatedDateUtc = DateTime.UtcNow
+                        UpdatedDateUtc = DateTime.UtcNow,
+                        ShortCode = itemModel.ShortCode,
+                        ServiceGroupId = itemModel.ServiceGroupId,
+                        IndustryCodeId = itemModel.IndustryCodeId,
+                        Subscription = itemModel.Subscription
                     };
 
                     _itemRepository.Add(item);
@@ -79,11 +88,16 @@ namespace SMLYS.ApplicationCore.Services.Items
 
         public ItemModel SearchItem(int id)
         {
-            var item =  _itemRepository.GetById(id);
+            var item = _itemRepository.GetById(id);
 
             if (item != null)
             {
-                return new ItemModel { Cost = item.Cost, ItemId = item.Id, ItemName = item.Name, Description = item.Description };
+                return new ItemModel { Cost = item.Cost, ItemId = item.Id, ItemName = item.Name, Description = item.Description,
+                    IndustryCodeId = item.IndustryCodeId,
+                    ServiceGroupId = item.ServiceGroupId,
+                    ShortCode = item.ShortCode,
+                    Subscription = item.Subscription
+                };
             }
 
             return null;
@@ -94,10 +108,15 @@ namespace SMLYS.ApplicationCore.Services.Items
             var data = _itemRepository.ListAll().ToList();
             var result = data.Select(p => new ItemModel
             {
-                Cost =  p.Cost,
+                Cost = p.Cost,
                 Description = p.Description,
                 ItemId = p.Id,
-                ItemName = p.Name
+                ItemName = p.Name,
+                IndustryCodeId = p.IndustryCodeId,
+                ServiceGroupId = p.ServiceGroupId,
+                ShortCode = p.ShortCode,
+                Subscription = p.Subscription
+                
 
             }).ToList();
 
