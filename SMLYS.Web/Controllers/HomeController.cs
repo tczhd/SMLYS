@@ -107,7 +107,11 @@ namespace SMLYS.Web.Controllers
             //var suggestResult = _indexClient.Documents.Suggest(term, "sg", sp);
             var suggestResult = _jobsSearch.Suggest(GetIndexNameType(searchType), highlights, fuzzy, term);
             // Convert the suggest query results to a list that can be displayed in the client.
-            List<string> suggestions = suggestResult.Results.Select(x => x.Text).ToList();
+            //var suggestions = suggestResult.Results.Select(x => x.Text).ToList();
+            var suggestions = suggestResult.Results.Select(x => new { label = $"{x.Document["FirstName"]},{x.Document["LastName"]},{x.Document["Phone"]}"
+                , value = x.Document["Id"]
+            }).ToList();
+            //var data = suggestions.Select(p => new { label = p, value = "1" });
             return new JsonResult(suggestions);
             //return new JsonResult(new
             //{

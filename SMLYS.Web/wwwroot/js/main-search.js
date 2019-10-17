@@ -3,6 +3,16 @@
     var currentPage = 1;
     var searchBoxUl = $('#head-search-box-ul');
 
+    $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+        var re = new RegExp($.trim(this.term.toLowerCase()));
+        var t = item.label.replace(re, "<span style='font-weight:600;color:red;'>" + $.trim(this.term.toLowerCase()) +
+            "</span>");
+        return $("<li></li>")
+            .data("item.autocomplete", item)
+            .append("<a>" + t + "</a>")
+            .appendTo(ul);
+    };
+
     function AddNewPatientModal() {
 
         var isvalid = $("#myForm").valid();  // Tells whether the form is valid

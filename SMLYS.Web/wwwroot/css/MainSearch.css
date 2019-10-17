@@ -5,6 +5,16 @@
     margin: 0 auto;
 }
 
+@media (max-width: 480px) {
+    #head-search-box-ul {
+        margin-top:13px;
+    }
+
+    .sidebar {
+        margin-top:82px;
+    }
+}
+
 .example {
     padding: 30px 0;
     text-align: center;

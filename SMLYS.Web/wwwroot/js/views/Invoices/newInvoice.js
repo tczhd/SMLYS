@@ -11,6 +11,30 @@ SMLYS.Invoice = {
 
     Init: function () {
 
+        // complete on TAB and clear on ESC
+        $("#invoice-patient-search-input").keydown(function (evt) {
+            if (evt.keyCode === 9 /* TAB */ && currentSuggestion3) {
+                $("#invoice-patient-search-input").val(currentSuggestion3);
+                return false;
+            } else if (evt.keyCode === 27 /* ESC */) {
+                currentSuggestion3 = "";
+                $("#invoice-patient-search-input").val("");
+            }
+        });
+
+        $("#invoice-patient-search-input").autocomplete({
+            html: true,
+            source: "/home/suggest?searchType=1&highlights=false&fuzzy=false&",
+            minLength: 2,
+            position: {
+                my: "left top",
+                at: "left-23 bottom+10"
+            },
+            select: function (event, ui) {
+                alert($("#invoice-patient-search-input").val());
+            }
+        });
+
         var primaryInvoiceSection = $('section.primary-invoice-section');
         var familyId = primaryInvoiceSection.find('input[id*=FamilyId]').val();
         var patientId = primaryInvoiceSection.find('input[id*=PatientId]').val();
@@ -62,6 +86,50 @@ SMLYS.Invoice = {
         SMLYS.Invoice.ChangePatient(patientId);
     },
 
+    SearchPatient: function () {
+        // $("#job_details_div").html("Loading...");
+        var searchType = "1";
+
+        var q = $("#invoice-patient-search-input").val();
+        if (q.length <= 2) {
+            alert('Please input at least two characters. ');
+            return;
+        }
+
+        $.post('/home/search',
+            {
+                searchType: searchType,
+                q: q,
+                currentPage: currentPage
+            },
+            function (data) {
+                var content = GetPatientDetailsHtml(data);
+                modalBody.html(content);
+
+                var patientRows = modalBody.find('div.patient-detail-row');
+                patientRows.each(function () {
+
+                    var patientRow = $(this);
+                    var patientId = patientRow.find("div.patient-id").text();
+                    var createInvoiceDiv = patientRow.find("div.create-invoice");
+                    var editPatientDiv = patientRow.find("div.edit-patient");
+                    var createInvoiceButton = SMLYS.getButton('create-invoice-btn', 'Create Invoice', 'btn btn-info btn-sm', '', 'false');
+                    var editPatientButton = SMLYS.getButton('edit-patient-btn', 'Edit Patient', 'btn btn-secondary btn-sm', '', 'false');
+                    $(createInvoiceButton).click(function () {
+                        window.location.href = '/Invoice/InvoiceForm?patientId=' + patientId;
+                    });
+                    createInvoiceDiv.html(createInvoiceButton);
+                    $(editPatientButton).click(function () {
+                        window.location.href = '/Patient/PatientForm?id=' + patientId;
+                    });
+                    editPatientDiv.html(editPatientButton);
+                });
+
+                //UpdatePagination(data.Count);
+            });
+
+    },
+
     UpdateItemRow: function (selectItemList, itemRow) {
         var itemId = $(selectItemList).children("option:selected").val();
         var quantityText = itemRow.find('input.item-quantity').val();
@@ -101,7 +169,7 @@ SMLYS.Invoice = {
     UpdateTotal: function () {
 
         var invoiceDetailSection = $('section.invoice-detail-section');
-              var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
+        var invoiceItemsTbody = invoiceDetailSection.find('tbody.invoice-items');
         var invoiceItemsTrs = invoiceItemsTbody.find('tr.invoice-item');
 
         var invoiceTotalSection = $('section.invoice-total');
@@ -140,7 +208,7 @@ SMLYS.Invoice = {
         invoiceTotal.text(total.toFixed(2));
     },
 
-    InitData: function(familyId) {
+    InitData: function (familyId) {
         var dataType = 'application/json; charset=utf-8';
         $.ajax({
             type: "GET",
@@ -188,7 +256,7 @@ SMLYS.Invoice = {
         return selectList;
     },
 
-    GetItemList: function() {
+    GetItemList: function () {
         var selectList = "<select id='selectItemList' name='selectItemList' class='form-control'>";
 
         selectList += "<option value='0'>Select a service</option>";
@@ -252,7 +320,7 @@ SMLYS.Invoice = {
         //    "</tr>";
 
         return tr;
-    },      
+    },
 
     AddInvoiceModal: function () {
 
@@ -274,7 +342,7 @@ SMLYS.Invoice = {
 
             var button = SMLYS.getModalFooterButton('view-invoice-btn', 'Go to invoice detail');
 
-            var jsonInvoice = { invoice_items:[]};
+            var jsonInvoice = { invoice_items: [] };
 
             var primaryInvoiceSection = $('section.primary-invoice-section');
             var selectPatient = primaryInvoiceSection.find('select[id*=selectPatient]');
